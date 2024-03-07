@@ -16,7 +16,7 @@ import pt.gladlyGivenApi.GladlyGiven.Models.PhoneNumber;
  * @param <T concrete child class >
  */
 @MappedSuperclass
-public abstract class AppUser<T, DTO> implements IDTOable<DTO> {
+public abstract class AppUser<T extends AppUser> implements IDTOable<T> {
     @Id
     @Min(1)
     @GeneratedValue(strategy = GenerationType.IDENTITY)

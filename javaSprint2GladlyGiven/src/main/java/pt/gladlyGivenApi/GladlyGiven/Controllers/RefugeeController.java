@@ -21,23 +21,23 @@ public class RefugeeController {
 
     // Refugee
     // --------------------------------------------------------------------------------------
-    @GetMapping("/id")
-    public Refugee getRefugee(@RequestParam Long id) {
+    @GetMapping("/{id}")
+    public Refugee getRefugee(@PathVariable("id") Long id) {
         return refugeeService.findRefugeeById(id);
     }
 
-    @GetMapping("/firstname")
-    public Refugee getRefugeeByFirstName(@RequestParam String name) {
+    @GetMapping("/firstname/{name}")
+    public Refugee getRefugeeByFirstName(@PathVariable("name") String name) {
         return refugeeService.findRefugeeByFirstName(name);
     }
 
-    @GetMapping("/lastname")
-    public Refugee getRefugeeByLastName(@RequestParam String lastName) {
+    @GetMapping("/lastname/{name}")
+    public Refugee getRefugeeByLastName(@PathVariable("name") String lastName) {
         return refugeeService.findRefugeeByLastName(lastName);
     }
 
-    @GetMapping("/email")
-    public Refugee getRefugeeByEmail(@RequestParam String email) {
+    @GetMapping("/email/{email}")
+    public Refugee getRefugeeByEmail(@PathVariable("email") String email) {
         return refugeeService.findRefugeeByEmail(email);
     }
 

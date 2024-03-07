@@ -37,7 +37,7 @@ public class GeographicController {
     }
 
     @GetMapping("/language/param")
-    public Language getLanguageByLanguage(@RequestParam String language) {
+    public Language getLanguageByString(@RequestParam String language) {
         return languageRepository.findByLanguageIgnoreCase(language).orElse(null);
     }
 
@@ -56,7 +56,7 @@ public class GeographicController {
     }
 
     @GetMapping("/country/param")
-    public Country getCountryByCountry(@RequestParam String country) {
+    public Country getCountryByString(@RequestParam String country) {
         return countryRepository.findByCountryIgnoreCase(country).orElse(null);
     }
 

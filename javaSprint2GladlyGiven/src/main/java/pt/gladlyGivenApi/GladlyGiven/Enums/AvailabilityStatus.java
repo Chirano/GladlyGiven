@@ -1,7 +1,7 @@
 // Author: Tiago Barracha
 // ti.barracha@gmail.com
 
-package pt.gladlyGivenApi.GladlyGiven.Models;
+package pt.gladlyGivenApi.GladlyGiven.Enums;
 
 public enum AvailabilityStatus {
     Free,

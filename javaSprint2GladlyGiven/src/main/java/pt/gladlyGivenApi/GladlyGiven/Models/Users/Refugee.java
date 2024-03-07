@@ -12,7 +12,7 @@ import pt.gladlyGivenApi.GladlyGiven.Models.Language;
 import pt.gladlyGivenApi.GladlyGiven.Models.PhoneNumber;
 
 @Entity
-public class Refugee extends AppUser<Refugee, RefugeeDTO> {
+public class Refugee extends AppUser<Refugee> {
     @Max(16)
     public String protocolId;
 
@@ -46,19 +46,7 @@ public class Refugee extends AppUser<Refugee, RefugeeDTO> {
     }
 
     @Override
-    public RefugeeDTO toDTO() {
-        return new RefugeeDTO(
-                firstName,
-                lastName,
-                email.email,
-                gender,
-                photoURL,
-                mainLanguage.language,
-                mainPhoneNumber.number,
-                protocolId,
-                snsNumber,
-                nationality,
-                country.country
-        );
+    public Refugee toDTO() {
+        return this;
     }
 }

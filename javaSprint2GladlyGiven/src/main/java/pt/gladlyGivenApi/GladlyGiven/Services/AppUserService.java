@@ -11,7 +11,6 @@ import pt.gladlyGivenApi.GladlyGiven.Models.PhoneNumber;
 import pt.gladlyGivenApi.GladlyGiven.Models.Country;
 import pt.gladlyGivenApi.GladlyGiven.Models.Language;
 import pt.gladlyGivenApi.GladlyGiven.Models.Users.AppUser;
-import pt.gladlyGivenApi.GladlyGiven.Models.Users.ServiceProvider;
 import pt.gladlyGivenApi.GladlyGiven.Repositories.CountryRepository;
 import pt.gladlyGivenApi.GladlyGiven.Repositories.EmailRepository;
 import pt.gladlyGivenApi.GladlyGiven.Repositories.LanguageRepository;
@@ -177,19 +176,19 @@ public abstract class AppUserService {
         return countryRepository.findById(id).orElse(null);
     }
 
-    public Country findCountryByLanguage(String language) {
-        return countryRepository.findByCountryIgnoreCase(language).orElse(null);
+    public Country findCountryByString(String country) {
+        return countryRepository.findByCountryIgnoreCase(country).orElse(null);
     }
 
     public Country findOrCreateCountry(String country) {
-        Country lang = findCountryByLanguage(country);
+        Country existing = findCountryByString(country);
 
-        if (lang == null) {
-            lang = new Country(country);
-            lang = countryRepository.save(lang);
+        if (existing == null) {
+            existing = new Country(country);
+            existing = countryRepository.save(existing);
         }
 
-        return lang;
+        return existing;
     }
 
 

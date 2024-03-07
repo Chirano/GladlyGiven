@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class ServiceProvider extends MonetaryUser<ServiceProvider, ServiceProviderDTO> {
+public class ServiceProvider extends MonetaryUser<ServiceProvider> {
 
     @Column(unique = true)
     @Max(16)
@@ -34,17 +34,13 @@ public class ServiceProvider extends MonetaryUser<ServiceProvider, ServiceProvid
     public float reviewAverage; // fetched from Entity Framework API reviewObject
 
     public ServiceProvider() {
-        //this.reviewIds = new ArrayList<>();
-        //this.serviceIds = new ArrayList<>();
+
     }
 
     public ServiceProvider(String firstName, String lastName, Email email, String gender, String password, Language language, PhoneNumber phoneNumber, String nif, String licenseNumber, long categoryId) {
         super(firstName, lastName, email, gender, password, language, phoneNumber, nif);
         this.licenseNumber = licenseNumber;
         this.categoryId = categoryId;
-
-        //this.reviewIds = new ArrayList<>();
-        //this.serviceIds = new ArrayList<>();
     }
 
     public ServiceProvider(String firstName, String lastName, Email email, String gender, String password, Language language, PhoneNumber phoneNumber, String nif, String licenseNumber, long categoryId, List<Long> serviceIds, List<Long> reviewIds) {
@@ -57,20 +53,7 @@ public class ServiceProvider extends MonetaryUser<ServiceProvider, ServiceProvid
     }
 
     @Override
-    public ServiceProviderDTO toDTO() {
-        return new ServiceProviderDTO(
-                firstName,
-                lastName,
-                email.email,
-                gender,
-                photoURL,
-                mainLanguage.language,
-                mainPhoneNumber.number,
-                licenseNumber,
-                categoryId,
-                serviceIds,
-                reviewIds,
-                reviewAverage
-        );
+    public ServiceProvider toDTO() {
+        return this;
     }
 }

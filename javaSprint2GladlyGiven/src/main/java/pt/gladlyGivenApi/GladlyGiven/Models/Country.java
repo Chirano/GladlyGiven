@@ -3,19 +3,19 @@
 
 package pt.gladlyGivenApi.GladlyGiven.Models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Country {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
     @Column(unique = true)
     public String country;
 
     public Country() {
+
     }
 
     public Country(String country) {

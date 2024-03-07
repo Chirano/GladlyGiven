@@ -3,6 +3,7 @@
 
 package pt.gladlyGivenApi.GladlyGiven.Models.Users;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.validation.constraints.Max;
 import pt.gladlyGivenApi.GladlyGiven.Models.Email;
@@ -10,8 +11,9 @@ import pt.gladlyGivenApi.GladlyGiven.Models.PhoneNumber;
 import pt.gladlyGivenApi.GladlyGiven.Models.Language;
 
 @MappedSuperclass
-public abstract class MonetaryUser<T extends MonetaryUser, DTO extends AppUserDTO> extends AppUser<T, DTO> {
+public abstract class MonetaryUser<T extends MonetaryUser> extends AppUser<T> {
     @Max(16)
+    @Column(unique = true)
     public String nif;
 
     @Max(32)

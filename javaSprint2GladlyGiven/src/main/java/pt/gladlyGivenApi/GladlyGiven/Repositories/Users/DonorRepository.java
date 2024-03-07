@@ -5,6 +5,8 @@ package pt.gladlyGivenApi.GladlyGiven.Repositories.Users;
 
 import pt.gladlyGivenApi.GladlyGiven.Models.Users.Donor;
 
-public interface DonorRepository extends AppUserRepository<Donor> {
+import java.util.Optional;
+
+public interface DonorRepository extends MonetaryUserRepository<Donor> {
 
 }
