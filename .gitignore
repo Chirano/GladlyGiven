@@ -736,3 +736,5 @@ replay_pid*
 *.props
 *.cache
 
+*.csproj
+dotNetSprint2GladyGivenWebAPI/GladlyGiven/Properties/launchSettings.json
