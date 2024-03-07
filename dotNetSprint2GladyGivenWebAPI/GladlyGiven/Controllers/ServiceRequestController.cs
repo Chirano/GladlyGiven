@@ -3,6 +3,7 @@
 
 
 using GladyGivenWebAPI.Data;
+using GladyGivenWebAPI.Models;
 using GladyGivenWebAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,11 +13,11 @@ namespace GladyGivenWebAPI.Controllers
     [Route("api/v1/[controller]")]
     public class ServiceRequestController : ControllerBase
     {
-        private readonly ServiceRequestService service;
+        private readonly ServiceRequestService serviceRequestServ;
 
         public ServiceRequestController(ApplicationContextDb context)
         {
-            service = new ServiceRequestService(context);
+            serviceRequestServ = new ServiceRequestService(context);
         }
 
         [HttpGet("~/api/health")] // landing
@@ -25,26 +26,41 @@ namespace GladyGivenWebAPI.Controllers
             return Ok("Entity API is working fine!");
         }
 
-        //[HttpGet]
-        //public async Task<ActionResult<List<ExampleModel>>> GetAllExampleModels()
-        //{
-        //    List<ExampleModel> models = await service.GetAllModels();
+        [HttpGet("/servicerequests")]
+        public async Task<ActionResult<List<ServiceRequestDTO>>> GetAllServiceRequest()
+        {
+            List<ServiceRequestDTO> serviceRequests = await serviceRequestServ.FindAllServiceRequest();
 
-        //    if (models != null && models.Count > 0)
-        //        return Ok(models);
+            if (serviceRequests != null && serviceRequests.Count > 0)
+                return Ok(serviceRequests);
 
-        //    return NoContent();
-        //}
+            return NoContent();
 
-        //[HttpPost]
-        //public async Task<ActionResult<ExampleModel>> CreateExampleModel(string name)
-        //{
-        //    ExampleModel model = await service.CreateExampleModel(name);
 
-        //    if (model != null)
-        //        return Ok(model);
+        }
 
-        //    return NoContent();
-        //}
+        [HttpGet("/servicerequest/id")]
+        public async Task<ActionResult<ServiceRequestDTO>> FindServiceRequest(int id)
+        {
+            ServiceRequestDTO serviceRequest = await serviceRequestServ.FindServiceRequest(id);
+
+            if (serviceRequest != null)
+                return Ok(serviceRequest);
+
+            return NoContent();
+
+        }
+
+        [HttpPost("/servicerequest")]
+        public async Task<ActionResult<ServiceRequestDTO>> CreateServiceRequest(ServiceRequestDTO serv)
+        {
+            ServiceRequestDTO serviceRequest = await serviceRequestServ.CreateServiceRequest(serv);
+
+            if (serviceRequest != null)
+                return Ok(serviceRequest);
+
+            return NoContent();
+
+        }
     }
 }

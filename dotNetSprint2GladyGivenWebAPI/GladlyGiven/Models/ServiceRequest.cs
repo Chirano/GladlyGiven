@@ -2,16 +2,13 @@
 //hugoleo74@gmail.com
 
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
 
 namespace GladyGivenWebAPI.Models
 {
     public class ServiceRequest
     {
-
         [Key]
-
         public long Id { get; set; }
         public string DateRequest { get; set; }
         public long IdServices { get; set; }
