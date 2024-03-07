@@ -14,7 +14,7 @@ namespace GladyGivenWebAPI.Controllers
     {
         private readonly ServiceRequestService service;
 
-        public ServiceRequestController(ServiceRequestDBContext context)
+        public ServiceRequestController(ApplicationContextDb context)
         {
             service = new ServiceRequestService(context);
         }

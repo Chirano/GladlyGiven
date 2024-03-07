@@ -1,6 +1,6 @@
 
-using GladyGivenWebAPI;
 using GladyGivenWebAPI.Data;
+using GladyGivenWebAPI;
 using Microsoft.EntityFrameworkCore;
 
 namespace GladlyGiven

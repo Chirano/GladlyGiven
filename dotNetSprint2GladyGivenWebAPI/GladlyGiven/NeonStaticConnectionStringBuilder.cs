@@ -17,5 +17,15 @@ namespace GladyGivenWebAPI
 
             return neonBuilder.ConnectionString;
         }
+        public static string GetNpgsqlConnectionStringHugo()
+        {
+            var neonBuilder = new NpgsqlConnectionStringBuilder();
+            neonBuilder.Host = "ep-solitary-dew-a5hx4jt0.us-east-2.aws.neon.tech";
+            neonBuilder.Database = "testedb";
+            neonBuilder.Username = "hugoleo74";
+            neonBuilder.Password = "sPlvoVYa4Ed5";
+
+            return neonBuilder.ConnectionString;
+        }
     }
 }

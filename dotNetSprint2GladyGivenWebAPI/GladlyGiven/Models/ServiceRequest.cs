@@ -12,19 +12,10 @@ namespace GladyGivenWebAPI.Models
 
         [Key]
 
-        [JsonPropertyName("id")]
         public long Id { get; set; }
-
-        [JsonPropertyName("date_request")]
-        public DateTime DateRequest { get; set; }
-
-        [JsonPropertyName("id_services")]
+        public string DateRequest { get; set; }
         public long IdServices { get; set; }
-
-        [JsonPropertyName("description")]
         public string Description { get; set; }
-
-        [JsonPropertyName("status")]
         public string Status { get; set; }
 
     }

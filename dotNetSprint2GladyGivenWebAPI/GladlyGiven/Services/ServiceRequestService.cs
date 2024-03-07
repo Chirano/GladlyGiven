@@ -1,21 +1,14 @@
 ﻿// Author: Hugo Lopes
 
-
-
-
-// Author: Hugo Lopes
-
-
-
 using GladyGivenWebAPI.Data;
 
 namespace GladyGivenWebAPI.Services
 {
     internal class ServiceRequestService
     {
-        private ServiceRequestDBContext context;
+        private ApplicationContextDb context;
 
-        public ServiceRequestService(ServiceRequestDBContext context)
+        public ServiceRequestService(ApplicationContextDb context)
         {
             this.context = context;
         }

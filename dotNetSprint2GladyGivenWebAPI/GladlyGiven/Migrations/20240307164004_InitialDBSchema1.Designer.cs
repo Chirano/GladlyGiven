@@ -2,6 +2,7 @@
 using GladyGivenWebAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GladlyGiven.Migrations
 {
     [DbContext(typeof(ApplicationContextDb))]
-    partial class ApplicationContextDbModelSnapshot : ModelSnapshot
+    [Migration("20240307164004_InitialDBSchema1")]
+    partial class InitialDBSchema1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,38 +24,6 @@ namespace GladlyGiven.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-<<<<<<< Updated upstream
-            modelBuilder.Entity("GladlyGiven.Models.CostSupport", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<double>("Amount")
-                        .HasColumnType("double precision");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<long>("ServiceProviderId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CostSupports");
-                });
-
-=======
->>>>>>> Stashed changes
             modelBuilder.Entity("GladyGivenWebAPI.Models.Category", b =>
                 {
                     b.Property<long>("Id")
@@ -93,8 +64,6 @@ namespace GladlyGiven.Migrations
                     b.ToTable("Service");
                 });
 
-<<<<<<< Updated upstream
-=======
             modelBuilder.Entity("GladyGivenWebAPI.Models.ServiceRequest", b =>
                 {
                     b.Property<long>("Id")
@@ -123,7 +92,6 @@ namespace GladlyGiven.Migrations
                     b.ToTable("ServiceRequest");
                 });
 
->>>>>>> Stashed changes
             modelBuilder.Entity("GladyGivenWebAPI.Models.Service", b =>
                 {
                     b.HasOne("GladyGivenWebAPI.Models.Category", "Category")
