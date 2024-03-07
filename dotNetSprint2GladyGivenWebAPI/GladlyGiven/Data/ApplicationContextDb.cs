@@ -1,4 +1,5 @@
-﻿using GladyGivenWebAPI.Models;
+﻿using GladlyGiven.Models;
+using GladyGivenWebAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace GladyGivenWebAPI.Data
@@ -13,5 +14,7 @@ namespace GladyGivenWebAPI.Data
         public DbSet<Category> Category { get; set; }
 
         public DbSet<Service> Service { get; set; }
+
+        public DbSet<CostSupport> CostSupports { get; set; }
     }
 }

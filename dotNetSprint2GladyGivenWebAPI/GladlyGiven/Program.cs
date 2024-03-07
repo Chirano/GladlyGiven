@@ -1,4 +1,8 @@
 
+using GladyGivenWebAPI;
+using GladyGivenWebAPI.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace GladlyGiven
 {
     public class Program
@@ -8,6 +12,9 @@ namespace GladlyGiven
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            string connectionString = NeonStaticConnectionStringBuilder.GetNpgsqlConnectionString();
+            builder.Services.AddDbContext<ApplicationContextDb>(options =>
+                options.UseNpgsql(connectionString));
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
