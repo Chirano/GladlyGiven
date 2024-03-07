@@ -10,7 +10,7 @@ namespace GladyGivenWebAPI.Data
 {
     public class ServiceRequestDBContext : DbContext
     {
-        public DbSet<ServiceRequest> ServiceRequests { get; set; } // repository in Java Spring
+        public DbSet<ServiceRequest> ServiceRequest { get; set; } // repository in Java Spring
 
         public ServiceRequestDBContext(DbContextOptions options) : base(options)
         {
