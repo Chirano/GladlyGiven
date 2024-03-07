@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pt.gladlyGivenApi.GladlyGiven.Models.Availability;
 import pt.gladlyGivenApi.GladlyGiven.Models.Users.ServiceProvider;
-import pt.gladlyGivenApi.GladlyGiven.Services.ServiceProviderService;
+import pt.gladlyGivenApi.GladlyGiven.Services.Users.ServiceProviderService;
 
 import java.util.List;
 
@@ -24,32 +24,35 @@ public class ServiceProviderController {
 
     // Service Provider
     // --------------------------------------------------------------------------------------
-    @GetMapping("/id")
-    public ServiceProvider getServiceProvider(@RequestParam Long id) {
+    // --- get ---
+    @GetMapping("/{id}")
+    public ServiceProvider getServiceProvider(@PathVariable("id") Long id) {
         return serviceProviderService.findServiceProviderById(id);
     }
 
-    @GetMapping("/email")
-    public ServiceProvider getServiceProviderByEmail(@RequestParam String email) {
+    @GetMapping("/{email}")
+    public ServiceProvider getServiceProviderByEmail(@PathVariable("email") String email) {
         return serviceProviderService.findServiceProviderByEmail(email);
     }
 
-    @GetMapping("/firstname")
-    public ServiceProvider getServiceProviderByFirstName(@RequestParam String firstName) {
+    @GetMapping("/firstname/{name}")
+    public ServiceProvider getServiceProviderByFirstName(@PathVariable("name") String firstName) {
         return serviceProviderService.findServiceProviderByFirstName(firstName);
     }
 
-    @GetMapping("/lastname")
-    public ServiceProvider getServiceProviderByLastName(@RequestParam String lastName) {
+    @GetMapping("/lastname/{name}")
+    public ServiceProvider getServiceProviderByLastName(@PathVariable("name") String lastName) {
         return serviceProviderService.findServiceProviderByLastName(lastName);
     }
 
-    @GetMapping("/licensenumber")
-    public ServiceProvider getServiceProviderByLicenseNumber(@RequestParam String licenseNumber) {
+    @GetMapping("/{licensenumber}")
+    public ServiceProvider getServiceProviderByLicenseNumber(@PathVariable("licensenumber") String licenseNumber) {
         return serviceProviderService.findServiceProviderByLicenseNumber(licenseNumber);
     }
 
-    @PostMapping("/fromParams")
+
+    // --- create ---
+    @PostMapping("/params")
     public ServiceProvider createServiceProviderViaRequestParams(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String gender, @RequestParam String password, @RequestParam String language, @RequestParam String phoneNumber, @RequestParam String nif, @RequestParam String licenseNumber, @RequestParam long categoryId) {
         return serviceProviderService.createServiceProvider(
                 firstName,
@@ -65,18 +68,20 @@ public class ServiceProviderController {
         );
     }
 
-    @PostMapping("/fromBody")
+    @PostMapping("/body")
     public ServiceProvider createServiceProviderViaRequestBody(@RequestBody ServiceProvider serviceProvider) {
         return serviceProviderService.createServiceProvider(serviceProvider, false);
     }
 
+
+    // --- update ---
     @PutMapping
     public ServiceProvider updateServiceProvider(@RequestBody ServiceProvider serviceProvider) {
         return serviceProviderService.updateServiceProvider(serviceProvider);
     }
 
-    @PutMapping("/addServices")
-    public ServiceProvider addServicesToServiceProvider(@RequestParam Long serviceProviderId, @RequestBody List<Long> serviceIds) {
+    @PutMapping("/services/add")
+    public ServiceProvider addServiceListToServiceProvider(@RequestParam Long serviceProviderId, @RequestBody List<Long> serviceIds) {
         return serviceProviderService.addServicesToServiceProvider(serviceProviderId, serviceIds);
     }
 
@@ -84,8 +89,8 @@ public class ServiceProviderController {
 
     // Service Provider Availability
     // --------------------------------------------------------------------------------------
-    @PostMapping("/availability/add")
-    public Availability createAvailability(@RequestParam Long serviceProviderId, @RequestBody Availability availability) {
+    @PostMapping("/availability/{id}")
+    public Availability createAvailability(@PathVariable("id") Long serviceProviderId, @RequestBody Availability availability) {
         return null; // TODO
     }
 
@@ -93,19 +98,15 @@ public class ServiceProviderController {
 
     // Service Reviews
     // --------------------------------------------------------------------------------------
-    @PostMapping("/review/id")
-    public ServiceProvider addServiceReview(@RequestParam Long serviceProviderId, @RequestParam Long reviewId) {
+    @PostMapping("/review/{id}")
+    public ServiceProvider addServiceReview(@PathVariable("id") Long serviceProviderId, @RequestParam Long reviewId) {
         return serviceProviderService.addServiceReview(serviceProviderId, reviewId);
     }
 
-    @PostMapping("/review/licensenumber")
-    public ServiceProvider addServiceReview(@RequestParam String licenseNumber, @RequestParam Long reviewId) {
+    @PostMapping("/review/{licensenumber}")
+    public ServiceProvider addServiceReview(@PathVariable("licensenumber") String licenseNumber, @RequestParam Long reviewId) {
         return serviceProviderService.addServiceReview(licenseNumber, reviewId);
     }
 
-    @PutMapping("/review/average")
-    public ServiceProvider calculateServiceProviderReviewAverage(@RequestParam Long serviceProviderId, @RequestParam float average) {
-        // TODO - link something with Entity Framework
-        return null;
-    }
+    // TODO: Add Average
 }

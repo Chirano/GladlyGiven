@@ -6,7 +6,7 @@ package pt.gladlyGivenApi.GladlyGiven.Controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pt.gladlyGivenApi.GladlyGiven.Models.Users.Refugee;
-import pt.gladlyGivenApi.GladlyGiven.Services.RefugeeService;
+import pt.gladlyGivenApi.GladlyGiven.Services.Users.RefugeeService;
 
 @RestController
 @RequestMapping("/api/refugee")
@@ -21,6 +21,7 @@ public class RefugeeController {
 
     // Refugee
     // --------------------------------------------------------------------------------------
+    // --- get ---
     @GetMapping("/{id}")
     public Refugee getRefugee(@PathVariable("id") Long id) {
         return refugeeService.findRefugeeById(id);
@@ -42,6 +43,7 @@ public class RefugeeController {
     }
 
 
+    // --- create ---
     @PostMapping("/fromParams")
     public Refugee createRefugeeViaRequestParams(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String gender, @RequestParam String password, @RequestParam String protocolId, @RequestParam String snsNumber, @RequestParam String nationality, @RequestParam String country, @RequestParam String language, @RequestParam String phoneNumber) {
         return refugeeService.createRefugee(firstName, lastName, email, gender, password, protocolId, snsNumber, nationality, country, language, phoneNumber);
@@ -52,6 +54,8 @@ public class RefugeeController {
         return refugeeService.createRefugee(refugee, false);
     }
 
+
+    // --- update ---
     @PutMapping
     public Refugee updateRefugee(@RequestBody Refugee refugee) {
         return refugeeService.updateRefugee(refugee);

@@ -1,4 +1,4 @@
-package pt.gladlyGivenApi.GladlyGiven.Services;
+package pt.gladlyGivenApi.GladlyGiven.Services.Users;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
