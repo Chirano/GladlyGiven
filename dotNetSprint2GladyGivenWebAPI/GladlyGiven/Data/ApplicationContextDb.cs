@@ -15,10 +15,10 @@ namespace GladyGivenWebAPI.Data
 
         public DbSet<Service> Service { get; set; }
 
-<<<<<<< Updated upstream
+
         public DbSet<CostSupport> CostSupports { get; set; }
-=======
+
         public DbSet<ServiceRequest> ServiceRequest { get; set; }
->>>>>>> Stashed changes
+
     }
 }

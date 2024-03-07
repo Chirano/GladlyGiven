@@ -21,7 +21,7 @@ namespace GladlyGiven.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-<<<<<<< Updated upstream
+
             modelBuilder.Entity("GladlyGiven.Models.CostSupport", b =>
                 {
                     b.Property<long>("Id")
@@ -51,8 +51,7 @@ namespace GladlyGiven.Migrations
                     b.ToTable("CostSupports");
                 });
 
-=======
->>>>>>> Stashed changes
+
             modelBuilder.Entity("GladyGivenWebAPI.Models.Category", b =>
                 {
                     b.Property<long>("Id")
@@ -93,8 +92,7 @@ namespace GladlyGiven.Migrations
                     b.ToTable("Service");
                 });
 
-<<<<<<< Updated upstream
-=======
+
             modelBuilder.Entity("GladyGivenWebAPI.Models.ServiceRequest", b =>
                 {
                     b.Property<long>("Id")
@@ -123,7 +121,7 @@ namespace GladlyGiven.Migrations
                     b.ToTable("ServiceRequest");
                 });
 
->>>>>>> Stashed changes
+
             modelBuilder.Entity("GladyGivenWebAPI.Models.Service", b =>
                 {
                     b.HasOne("GladyGivenWebAPI.Models.Category", "Category")
