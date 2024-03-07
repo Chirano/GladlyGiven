@@ -33,9 +33,10 @@ public class HealthServiceService {
             Category newCategory;
             newCategory = new Category(category.description);
         }
-        HealthService newHealthService = new HealthService(healthService.id, healthService.description, category);
+        //HealthService newHealthService = new HealthService(healthService.id, healthService.description, category);
 
-        return healthServiceRepository.save(newHealthService);
+        //return healthServiceRepository.save(newHealthService);
+        return null;
     }
 
     public HealthService deleteHealthService(Long id)

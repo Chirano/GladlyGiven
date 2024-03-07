@@ -21,4 +21,5 @@ public class HealthService {
 
     @ManyToOne
     public Category category;
+
 }
