@@ -27,8 +27,6 @@ dotNetSprint2GladyGivenWebAPI/GladyGiven/NeonStaticConnectionStringBuilder.cs
 dotNetSprint2GladyGivenWebAPI/GladyGiven/Migrations
 dotNetSprint2GladyGivenWebAPI/GladyGiven/obj
 dotNetSprint2GladyGivenWebAPI/GladyGiven/bin
-dotNetSprint2GladyGivenWebAPI/GladlyGiven/NeonStaticConnectionStringBuilder.cs
-dotNetSprint2GladyGivenWebAPI/GladlyGiven/Program.cs
 
 *.vsidx
 *.suo
@@ -738,3 +736,7 @@ replay_pid*
 *.props
 *.cache
 
+*.csproj
+dotNetSprint2GladyGivenWebAPI/GladlyGiven/Properties/launchSettings.json
+dotNetSprint2GladyGivenWebAPI/GladlyGiven/NeonStaticConnectionStringBuilder.cs
+dotNetSprint2GladyGivenWebAPI/GladlyGiven/Program.cs
