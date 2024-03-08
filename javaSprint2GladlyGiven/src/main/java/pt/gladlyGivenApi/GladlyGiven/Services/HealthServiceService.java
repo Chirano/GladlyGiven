@@ -59,7 +59,6 @@ public class HealthServiceService {
     }
 
     public Category createCategory(Category category){
-        Category newCategory =  categoryRepository.save(category);
-        return newCategory;
+        return  categoryRepository.save(category);
     }
 }

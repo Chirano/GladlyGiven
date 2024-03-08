@@ -6,6 +6,8 @@ package pt.gladlyGivenApi.GladlyGiven.Models.Users;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import lombok.Getter;
+import lombok.Setter;
 import pt.gladlyGivenApi.GladlyGiven.Interfaces.IDTOable;
 import pt.gladlyGivenApi.GladlyGiven.Models.Email;
 import pt.gladlyGivenApi.GladlyGiven.Models.Language;
@@ -15,6 +17,8 @@ import pt.gladlyGivenApi.GladlyGiven.Models.PhoneNumber;
  * Base abstract class for all AppUser Types
  * @param <T concrete child class >
  */
+@Getter
+@Setter
 @MappedSuperclass
 public abstract class AppUser<T extends AppUser> implements IDTOable<T> {
     @Id

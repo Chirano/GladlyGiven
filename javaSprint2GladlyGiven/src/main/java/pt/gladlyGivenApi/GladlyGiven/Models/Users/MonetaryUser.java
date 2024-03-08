@@ -6,10 +6,14 @@ package pt.gladlyGivenApi.GladlyGiven.Models.Users;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.validation.constraints.Max;
+import lombok.Getter;
+import lombok.Setter;
 import pt.gladlyGivenApi.GladlyGiven.Models.Email;
 import pt.gladlyGivenApi.GladlyGiven.Models.PhoneNumber;
 import pt.gladlyGivenApi.GladlyGiven.Models.Language;
 
+@Getter
+@Setter
 @MappedSuperclass
 public abstract class MonetaryUser<T extends MonetaryUser> extends AppUser<T> {
     @Max(16)
@@ -36,5 +40,12 @@ public abstract class MonetaryUser<T extends MonetaryUser> extends AppUser<T> {
         this.nif = nif;
         this.paymentInfoId = paymentInfoId;
         this.invoiceInfoId = invoiceInfoId;
+    }
+
+    public PhoneNumber getPhoneNumber(){
+        return this.mainPhoneNumber;
+    }
+    public void setPhoneNumber(PhoneNumber mainPhoneNumber) {
+        super.setMainPhoneNumber(mainPhoneNumber);
     }
 }

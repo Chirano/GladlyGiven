@@ -4,6 +4,8 @@
 package pt.gladlyGivenApi.GladlyGiven.Services.Users;
 
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import pt.gladlyGivenApi.GladlyGiven.DateTimeUtils;
 import pt.gladlyGivenApi.GladlyGiven.Models.Email;
@@ -20,6 +22,9 @@ import pt.gladlyGivenApi.GladlyGiven.Repositories.Users.AppUserRepository;
 /**
  * Base class for all Service classes related to AppUsers and its child classes
  */
+
+@Getter
+@Setter
 public abstract class AppUserService {
 
     // Repositories
