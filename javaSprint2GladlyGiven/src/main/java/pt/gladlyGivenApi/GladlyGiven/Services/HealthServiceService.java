@@ -1,8 +1,8 @@
 package pt.gladlyGivenApi.GladlyGiven.Services;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import pt.gladlyGivenApi.GladlyGiven.Models.Email;
 import pt.gladlyGivenApi.GladlyGiven.Models.HealthServices.Category;
 import pt.gladlyGivenApi.GladlyGiven.Models.HealthServices.HealthService;
 import pt.gladlyGivenApi.GladlyGiven.Repositories.CategoryRepository;
@@ -28,7 +28,19 @@ public class HealthServiceService {
         return healthServiceRepository.findById(id).orElse(null);
     }
 
-    @Transactional
+    /*
+    Author:Sónia Ribeiro
+     */
+    public Page<HealthService> findAllHealthServicesByProviderId(long serviceProviderId, int page, int size){
+
+        Page<HealthService> healthServicesByProviderId= healthServiceRepository.findAllHealthServicesByProvider(serviceProviderId, Pageable.unpaged());
+
+        if(!healthServicesByProviderId.hasContent()){
+            throw new IllegalArgumentException("There are no health services for this id:" + serviceProviderId);
+        }
+        return healthServicesByProviderId;
+    }
+
     public HealthService createHealthService(String description, String categoryStr) {
 
         Category category = findOrCreateCategory(categoryStr);

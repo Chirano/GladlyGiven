@@ -28,6 +28,18 @@ public class ReviewController {
     @Autowired
     AppointmentService appointmentService;
 
+    @GetMapping(value = "/review/{reviewId}")
+    public ResponseEntity<Review> findReviewById(@PathVariable("reviewId") long reviewId){
+
+        Review review = reviewService.findReviewById(reviewId);
+
+        if(review == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(review, HttpStatus.OK);
+    }
+
+
     @PostMapping(value= "/review", consumes = "application/json", produces = "application/json")
         public ResponseEntity<Review> createReview(@RequestBody Review review){
             Review newReview = reviewService.createReview(review);
@@ -55,9 +67,11 @@ public class ReviewController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+
+
     @GetMapping(value = "review/appointment/{id}", produces = "application/json")
     public ResponseEntity<Review> findReviewByAppointmentId(@PathVariable("id") long id){
-        Review review = reviewService.findReviewByAppointment(id);
+        Review review = reviewService.findReviewByAppointmentId(id);
         if(review == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -74,7 +88,7 @@ public class ReviewController {
         List<Review> reviews = new ArrayList<>();
         for(Appointment appointment : appointments)
         {
-            Review review = reviewService.findReviewByAppointment(appointment.getId());
+            Review review = reviewService.findReviewByAppointmentId(appointment.getId());
             reviews.add(review);
         }
 

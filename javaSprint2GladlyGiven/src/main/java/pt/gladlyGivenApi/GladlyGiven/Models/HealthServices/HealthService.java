@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pt.gladlyGivenApi.GladlyGiven.Models.Users.ServiceProvider;
+
+import java.util.List;
 
 
 @Getter
@@ -18,6 +21,9 @@ public class HealthService {
     public Long id;
 
     public String description;
+
+    @ManyToMany
+    List<ServiceProvider> serviceProviderList;
 
     @ManyToOne
     public Category category;

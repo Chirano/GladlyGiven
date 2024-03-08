@@ -36,9 +36,7 @@ public class Donor extends MonetaryUser<Donor> {
         this.donationIds = new ArrayList<>();
     }
 
-    public Donor(String firstName, String lastName, Email email, String gender, String password, Language language,
-                 PhoneNumber phoneNumber, String nif, String paymentInfoId, String invoiceInfoId,
-                 FiscalIdentity fiscalIdentity, List<String> donationIds) {
+    public Donor(String firstName, String lastName, Email email, String gender, String password, Language language, PhoneNumber phoneNumber, String nif, String paymentInfoId, String invoiceInfoId, FiscalIdentity fiscalIdentity, List<String> donationIds) {
         super(firstName, lastName, email, gender, password, language, phoneNumber, nif, paymentInfoId, invoiceInfoId);
         this.fiscalIdentity = fiscalIdentity;
         this.donationIds = donationIds;

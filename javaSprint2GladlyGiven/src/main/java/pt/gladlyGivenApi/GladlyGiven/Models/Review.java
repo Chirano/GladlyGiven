@@ -14,6 +14,7 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long reviewId;
 
+
     public long appointmentId;
 
     @Min(1)

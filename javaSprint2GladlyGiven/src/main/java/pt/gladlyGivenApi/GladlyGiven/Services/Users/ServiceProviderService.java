@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import pt.gladlyGivenApi.GladlyGiven.Models.HealthServices.HealthService;
 import pt.gladlyGivenApi.GladlyGiven.PageUtils;
 import pt.gladlyGivenApi.GladlyGiven.Models.Availability;
 import pt.gladlyGivenApi.GladlyGiven.Models.Email;
