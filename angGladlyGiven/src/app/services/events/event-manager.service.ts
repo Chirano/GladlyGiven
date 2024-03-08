@@ -1,7 +1,11 @@
 // Author: Tiago Barracha ti.barracha@gmail.com
 
 import { Injectable, EventEmitter } from '@angular/core';
-import { AuthDetails } from 'src/app/classes/AuthDetails';
+import { RouteEnum } from 'src/app/enums/RouteEnum';
+import { SignInDetails as SignInDetails } from 'src/app/classes/authentication/SignInDetails';
+import { SignUpDetails } from 'src/app/classes/authentication/SignUpDetails';
+import { RoutingService } from '../routes/routing.service';
+import { AuthService } from '../authentication/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +13,18 @@ import { AuthDetails } from 'src/app/classes/AuthDetails';
 
 export class EventManagerService {
 
-  // static events
-  static OnAuthEvent: EventEmitter<AuthDetails> = new EventEmitter<AuthDetails>();
+  // route Events
+  static OnRouteEvent: EventEmitter<RouteEnum> = new EventEmitter<RouteEnum>();
 
-  constructor() {
+  // Auth Events
+  static OnSignInEvent: EventEmitter<SignInDetails> = new EventEmitter<SignInDetails>();
+  static OnSingUpEvent: EventEmitter<SignUpDetails> = new EventEmitter<SignUpDetails>();
+
+  // add services that have events
+  constructor(
+      private authManager : AuthService,
+      private routeService: RoutingService,
+    ) {
     
   }
 }

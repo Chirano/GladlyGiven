@@ -2,8 +2,8 @@
 
 import { Injectable } from '@angular/core';
 import { EventManagerService } from '../events/event-manager.service';
-import { AuthDetails } from 'src/app/classes/AuthDetails';
-import { RouteEnum } from 'src/app/Enums/RouteEnum';
+import { SignInDetails } from 'src/app/classes/authentication/SignInDetails';
+import { RouteEnum } from 'src/app/enums/RouteEnum';
 
 @Injectable({
   providedIn: 'root'
@@ -12,52 +12,59 @@ import { RouteEnum } from 'src/app/Enums/RouteEnum';
 export class AuthService {
 
   // auth details
-  authAdmin: AuthDetails = {
+  authAdmin: SignInDetails = {
     email: "admin",
     password: "admin"
   }
 
-  authServiceProvider: AuthDetails = {
+  authServiceProvider: SignInDetails = {
     email: "service",
     password: "service"
   }
 
-  refugeeAuth: AuthDetails = {
+  authRefugee: SignInDetails = {
     email: "refugee",
     password: "refugee"
   }
 
-  donorAuth: AuthDetails = {
+  authDonor: SignInDetails = {
     email: "donor",
     password: "donor"
   }
 
   constructor() {
-    EventManagerService.OnAuthEvent.subscribe(this.AuthFilter.bind(this));
+    EventManagerService.OnSignInEvent.subscribe(this.SignInFilter.bind(this));
+    //EventManagerService.OnSingUpEvent.subscribe();
   }
 
-  private AuthFilter(authDetails: AuthDetails) {
+  private SignInFilter(signInDetails: SignInDetails) {
 
+    console.log("sign in recieved")
     var targetRoute: RouteEnum = RouteEnum.Home;
 
-    switch(authDetails.email) {
+    switch(signInDetails.email) {
       case this.authAdmin.email:
-        targetRoute = RouteEnum.ViewAdmin;
+        targetRoute = RouteEnum.Admin;
         break;
       
-      case this.authAdmin.email:
-        targetRoute = RouteEnum.ViewAdmin;
+      case this.authServiceProvider.email:
+        targetRoute = RouteEnum.ServiceProvider;
         break;
         
-      case this.authAdmin.email:
-        targetRoute = RouteEnum.ViewAdmin;
+      case this.authRefugee.email:
+        targetRoute = RouteEnum.Refugee;
         break;
         
-      case this.authAdmin.email:
-        targetRoute = RouteEnum.ViewAdmin;
+      case this.authDonor.email:
+        targetRoute = RouteEnum.Donor;
         break;
     }
 
     console.log("Target route:", targetRoute);
+    EventManagerService.OnRouteEvent.emit(targetRoute);
+  }
+
+  private SignUpFilter() {
+
   }
 }

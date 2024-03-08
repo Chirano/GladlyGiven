@@ -1,6 +1,6 @@
 // Author: Tiago Barracha ti.barracha@gmail.com
 
-export interface AuthDetails {
+export interface SignInDetails {
     email: string;
     password: string;
 }

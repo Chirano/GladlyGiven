@@ -6,15 +6,16 @@ import { ViewRefugeeComponent } from './components/view/view-refugee/view-refuge
 import { ViewServiceProviderComponent } from './components/view/view-service-provider/view-service-provider.component';
 import { ViewSignInComponent } from './components/view/view-sign-in/view-sign-in.component';
 import { ViewSignUpComponent } from './components/view/view-sign-up/view-sign-up.component';
+import { RoutePaths } from './classes/RoutePaths';
 
 const routes: Routes = [
   { path: '', redirectTo: '/signin', pathMatch: 'full' },
-  { path: 'signin', component: ViewSignInComponent },
-  { path: 'signup', component: ViewSignUpComponent },
-  { path: 'admin', component: ViewAdminComponent },                       // canActivate: [AuthGuard]
-  { path: 'service-provider', component: ViewServiceProviderComponent },  // canActivate: [AuthGuard]
-  { path: 'refugee', component: ViewRefugeeComponent },                   // canActivate: [AuthGuard]
-  { path: 'donor', component: ViewDonorComponent },                       // canActivate: [AuthGuard]
+  { path: RoutePaths.SignIn, component: ViewSignInComponent  },
+  { path: RoutePaths.SignUp, component: ViewSignUpComponent },
+  { path: RoutePaths.Admin, component: ViewAdminComponent },                       // canActivate: [AuthGuard]
+  { path: RoutePaths.ServiceProvider, component: ViewServiceProviderComponent },  // canActivate: [AuthGuard]
+  { path: RoutePaths.Refugee, component: ViewRefugeeComponent },                   // canActivate: [AuthGuard]
+  { path: RoutePaths.Donor, component: ViewDonorComponent },                       // canActivate: [AuthGuard]
   { path: '**', redirectTo: '/signin' }
 ];
 

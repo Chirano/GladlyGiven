@@ -1,8 +1,8 @@
 // Author: Tiago Barracha ti.barracha@gmail.com
 
 import { Component } from '@angular/core';
-import { AuthDetails } from 'src/app/classes/AuthDetails';
-import { AuthService } from 'src/app/services/authentication/auth.service';
+import { SignInDetails } from 'src/app/classes/authentication/SignInDetails';
+import { RouteEnum } from 'src/app/enums/RouteEnum';
 import { EventManagerService } from 'src/app/services/events/event-manager.service';
 
 @Component({
@@ -13,20 +13,25 @@ import { EventManagerService } from 'src/app/services/events/event-manager.servi
 
 export class ViewSignInComponent {
 
-  constructor(private authService : AuthService) {
+  constructor(
+      private eventManager : EventManagerService,
+    ) {
 
   }
 
   // could also send form data as parameters for this method
   // instead of fetching from DOM
   signIn() {
-    const authDetails : AuthDetails = {
+    const signInDetails : SignInDetails = {
       email: (document.getElementById('email') as HTMLInputElement).value,
       password: (document.getElementById('password') as HTMLInputElement).value
     }
 
-    //console.log("Auth component ran:", authDetails);
-    EventManagerService.OnAuthEvent.emit(authDetails);
-    //this.authService.FilterAuthentication(authDetails);
+    //console.log("Sign In Component:", signInDetails);
+    EventManagerService.OnSignInEvent.emit(signInDetails);
+  }
+
+  toSignUp() {
+    EventManagerService.OnRouteEvent.emit(RouteEnum.SignUp);
   }
 }
