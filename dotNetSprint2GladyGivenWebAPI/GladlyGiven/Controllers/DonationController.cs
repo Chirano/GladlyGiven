@@ -11,11 +11,12 @@ namespace GladlyGiven.Controllers
     public class DonationController : ControllerBase
     {
         private DonationService _donationService;
-        
+        JavaUserClient _userClient;
 
-        public DonationController(ApplicationContextDb donationContext)
+        public DonationController(ApplicationContextDb donationContext, JavaUserClient userClient)
         {
-            _donationService = new DonationService(donationContext);
+            _donationService = new DonationService(donationContext, userClient);
+            _userClient = userClient;
         }
 
         [HttpGet("/donations/userId")]
