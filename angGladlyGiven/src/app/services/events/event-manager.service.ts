@@ -14,6 +14,7 @@ export class EventManagerService {
 
   // route Events
   static OnRouteEvent: EventEmitter<string> = new EventEmitter<string>();
+  static OnBackEvent: EventEmitter<void> = new EventEmitter<void>();
 
   // Auth Events
   static OnSignInEvent: EventEmitter<SignInDetails> = new EventEmitter<SignInDetails>();

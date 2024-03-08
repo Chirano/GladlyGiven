@@ -39,6 +39,7 @@ export class ViewSignUpComponent {
 
     //console.log("Signed Up:", signUpDetails);
     EventManagerService.OnSingUpEvent.emit(signUpDetails);
+    EventManagerService.OnRouteEvent.emit(RoutePaths.SignUpHelpIntention);
   }
 
   toSignIn() {
