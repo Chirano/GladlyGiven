@@ -31,15 +31,15 @@ public class HealthServiceService {
     /*
     Author:Sónia Ribeiro
      */
-    public Page<HealthService> findAllHealthServicesByProviderId(long serviceProviderId, int page, int size){
-
-        Page<HealthService> healthServicesByProviderId= healthServiceRepository.findAllHealthServicesByProvider(serviceProviderId, Pageable.unpaged());
-
-        if(!healthServicesByProviderId.hasContent()){
-            throw new IllegalArgumentException("There are no health services for this id:" + serviceProviderId);
-        }
-        return healthServicesByProviderId;
-    }
+//    public Page<HealthService> findAllHealthServicesByProviderId(long serviceProviderId, int page, int size){
+//
+//        Page<HealthService> healthServicesByProviderId= healthServiceRepository.findAllHealthServicesByProvider(serviceProviderId, Pageable.unpaged());
+//
+//        if(!healthServicesByProviderId.hasContent()){
+//            throw new IllegalArgumentException("There are no health services for this id:" + serviceProviderId);
+//        }
+//        return healthServicesByProviderId;
+//    }
 
     public HealthService createHealthService(String description, String categoryStr) {
 

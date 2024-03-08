@@ -4,9 +4,13 @@
 package pt.gladlyGivenApi.GladlyGiven.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pt.gladlyGivenApi.GladlyGiven.Models.Availability;
+import pt.gladlyGivenApi.GladlyGiven.Models.HealthServices.HealthService;
 import pt.gladlyGivenApi.GladlyGiven.Models.Users.ServiceProvider;
+import pt.gladlyGivenApi.GladlyGiven.Services.HealthServiceService;
 import pt.gladlyGivenApi.GladlyGiven.Services.Users.ServiceProviderService;
 
 import java.util.List;
@@ -20,6 +24,8 @@ public class ServiceProviderController {
     @Autowired
     private ServiceProviderService serviceProviderService;
 
+    @Autowired
+    private HealthServiceService healthServiceService;
 
 
     // Service Provider
@@ -30,7 +36,7 @@ public class ServiceProviderController {
         return serviceProviderService.findServiceProviderById(id);
     }
 
-    @GetMapping("/{email}")
+    @GetMapping("/email/{email}")
     public ServiceProvider getServiceProviderByEmail(@PathVariable("email") String email) {
         return serviceProviderService.findServiceProviderByEmail(email);
     }
@@ -45,7 +51,7 @@ public class ServiceProviderController {
         return serviceProviderService.findServiceProviderByLastName(lastName);
     }
 
-    @GetMapping("/{licensenumber}")
+    @GetMapping("/licensenumber/{licensenumber}")
     public ServiceProvider getServiceProviderByLicenseNumber(@PathVariable("licensenumber") String licenseNumber) {
         return serviceProviderService.findServiceProviderByLicenseNumber(licenseNumber);
     }
@@ -80,9 +86,19 @@ public class ServiceProviderController {
         return serviceProviderService.updateServiceProvider(serviceProvider);
     }
 
-    @PutMapping("/services/add")
-    public ServiceProvider addServiceListToServiceProvider(@RequestParam Long serviceProviderId, @RequestBody List<Long> serviceIds) {
-        return serviceProviderService.addServicesToServiceProvider(serviceProviderId, serviceIds);
+    @PutMapping("/{serviceProviderId}/addservice/{healthServiceId}")
+    public ResponseEntity<ServiceProvider> addServiceToServiceProvider(@PathVariable("serviceProviderId") Long serviceProviderId,
+                                                      @PathVariable ("healthServiceId") Long serviceId) {
+
+        ServiceProvider serviceProvider = serviceProviderService.findServiceProviderById(serviceProviderId);
+        HealthService healthService = healthServiceService.findHealthServiceById(serviceId);
+
+        if(serviceProvider == null || healthService == null ){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        ServiceProvider updateserviceProvider =serviceProviderService.addServicesToServiceProvider(serviceProvider, healthService);
+        return new ResponseEntity<>(updateserviceProvider, HttpStatus.OK);
     }
 
 

@@ -14,7 +14,9 @@ import pt.gladlyGivenApi.GladlyGiven.Models.Language;
 import pt.gladlyGivenApi.GladlyGiven.Models.PhoneNumber;
 import pt.gladlyGivenApi.GladlyGiven.Models.Users.ServiceProvider;
 import pt.gladlyGivenApi.GladlyGiven.Repositories.AvailabilityRepository;
+import pt.gladlyGivenApi.GladlyGiven.Repositories.HealthServiceRepository;
 import pt.gladlyGivenApi.GladlyGiven.Repositories.Users.ServiceProviderRepository;
+import pt.gladlyGivenApi.GladlyGiven.Services.HealthServiceService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +31,9 @@ public class ServiceProviderService extends AppUserService {
 
     @Autowired
     private AvailabilityRepository availabilityRepository;
+
+    @Autowired
+    private HealthServiceRepository healthServiceRepository;
 
 
 
@@ -107,26 +112,16 @@ public class ServiceProviderService extends AppUserService {
         return existing;
     }
 
-    public ServiceProvider addServicesToServiceProvider(Long serviceProviderId, List<Long> serviceIds) {
-        ServiceProvider serviceProvider = findServiceProviderById(serviceProviderId);
+    public ServiceProvider addServicesToServiceProvider(ServiceProvider serviceProvider, HealthService service) {
 
-        if (serviceProvider != null) {
-            if (serviceProvider.serviceIds == null)
-                serviceProvider.serviceIds = new ArrayList<>();
-
-            for (Long serviceId : serviceIds) {
-                if (!serviceProvider.serviceIds.contains(serviceId)) {
-                    serviceProvider.serviceIds.add(serviceId);
-                }
-            }
-
-            serviceProvider = serviceProviderRepository.save(serviceProvider);
+        if(serviceProvider.healthServiceList.contains(service)){
+            return null;
         }
 
+        serviceProvider.healthServiceList.add(service);
+        serviceProvider = serviceProviderRepository.save(serviceProvider);
         return serviceProvider;
     }
-
-
 
     // Service Provider Availability
     // ---------------------------------------------------------------------

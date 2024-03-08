@@ -12,6 +12,6 @@ public interface HealthServiceRepository extends JpaRepository<HealthService, Lo
     /*
     Author:Sónia Ribeiro
      */
-    @Query("SELECT h FROM HealthService h WHERE h.serviceProvider.id = :serviceProviderId ")
-    Page<HealthService> findAllHealthServicesByProvider(Long serviceProviderId, Pageable page);
+//    @Query("SELECT h FROM HealthService h WHERE h.serviceProvider.id = :serviceProviderId ")
+//    Page<HealthService> findAllHealthServicesByProvider(Long serviceProviderId, Pageable page);
 }

@@ -35,20 +35,20 @@ public class HealthServicesController {
     /*
     Author:Sónia Ribeiro
      */
-    @GetMapping(value= "/healthservices/serviceProvider/{serviceProviderId}", produces = "application/json")
-    public ResponseEntity<CollectionModel<HealthService>> getAllServicesByProviderId(@PathVariable long serviceProviderId, @RequestParam(name="page")Optional<Integer>page, @RequestParam(name = "size")Optional<Integer>size){
-
-        int _page=page.orElse(0);
-        int _size=size.orElse(10);
-
-        Page<HealthService> healthServiceListByProvidersId = service.findAllHealthServicesByProviderId(serviceProviderId, _page, _size);
-
-        if(healthServiceListByProvidersId == null){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        CollectionModel<HealthService> response = CollectionModel.of(healthServiceListByProvidersId);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
+//    @GetMapping(value= "/healthservices/serviceProvider/{serviceProviderId}", produces = "application/json")
+//    public ResponseEntity<CollectionModel<HealthService>> getAllServicesByProviderId(@PathVariable long serviceProviderId, @RequestParam(name="page")Optional<Integer>page, @RequestParam(name = "size")Optional<Integer>size){
+//
+//        int _page=page.orElse(0);
+//        int _size=size.orElse(10);
+//
+//        Page<HealthService> healthServiceListByProvidersId = service.findAllHealthServicesByProviderId(serviceProviderId, _page, _size);
+//
+//        if(healthServiceListByProvidersId == null){
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        }
+//        CollectionModel<HealthService> response = CollectionModel.of(healthServiceListByProvidersId);
+//        return new ResponseEntity<>(response, HttpStatus.OK);
+//    }
 
     @GetMapping(value = "/healthservice/{id}")
     public ResponseEntity<HealthService> getHealthServiceById(@PathVariable long id){

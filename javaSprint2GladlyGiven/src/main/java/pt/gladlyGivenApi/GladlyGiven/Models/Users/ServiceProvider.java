@@ -45,11 +45,10 @@ public class ServiceProvider extends MonetaryUser<ServiceProvider> {
         this.categoryId = categoryId;
     }
 
-    public ServiceProvider(String firstName, String lastName, Email email, String gender, String password, Language language, PhoneNumber phoneNumber, String nif, String licenseNumber, long categoryId, List<HealthService> healthServiceList, List<Long> serviceIds,List<Long> reviewIds) {
+    public ServiceProvider(String firstName, String lastName, Email email, String gender, String password, Language language, PhoneNumber phoneNumber, String nif, String licenseNumber, long categoryId, List<Long> serviceIds,List<Long> reviewIds) {
         super(firstName, lastName, email, gender, password, language, phoneNumber, nif);
         this.licenseNumber = licenseNumber;
         this.categoryId = categoryId;
-        this.healthServiceList = healthServiceList;
         this.serviceIds = serviceIds;
         this.reviewIds = reviewIds;
     }
