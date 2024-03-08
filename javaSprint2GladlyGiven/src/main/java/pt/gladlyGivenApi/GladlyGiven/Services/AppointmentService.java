@@ -11,6 +11,8 @@ import pt.gladlyGivenApi.GladlyGiven.Models.Users.ServiceProvider;
 import pt.gladlyGivenApi.GladlyGiven.Repositories.AppointmentRepository;
 import pt.gladlyGivenApi.GladlyGiven.Repositories.Users.ServiceProviderRepository;
 
+import java.util.List;
+
 
 @Service
 public class AppointmentService {
@@ -81,6 +83,11 @@ public class AppointmentService {
         }
         return appointmentPage;
     }
+
+    public List<Appointment> findAllAppointmentsByServiceProviderId(long serviceProviderId){
+        return this.appointmentRepository.findAllAppointmentsByServiceProviderId(serviceProviderId);
+    }
+
 
     /**
      * Creates a new appointment and saves it to the repository with the status set to waiting validation

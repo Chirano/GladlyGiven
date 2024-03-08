@@ -7,4 +7,5 @@ public interface ReviewService {
     public Review createReview(Review review);
 
     Page<Review> findAllReviews(int page, int size, String sort);
+
 }

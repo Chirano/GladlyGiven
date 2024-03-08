@@ -39,12 +39,13 @@ public class HealthServicesController {
     }
 
     @PostMapping("/healthservice")
-    public ResponseEntity<HealthService> addHealthService(@RequestBody HealthService healthService){
-        if(healthService == null){
+    public ResponseEntity<HealthService> addHealthService(@RequestParam String description, String category){
+        if(description == null || category == null){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        HealthService newHealthService = service.createHealthService(healthService);
+
+        HealthService newHealthService = service.createHealthService(description, category);
         if(newHealthService == null){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

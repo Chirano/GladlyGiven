@@ -47,8 +47,6 @@ public abstract class AppUser<T extends AppUser> implements IDTOable<T> {
     @ManyToOne
     public Language mainLanguage;
 
-    //List<Language> languages = new ArrayList<>();
-
     @ManyToOne
     public PhoneNumber mainPhoneNumber;
 

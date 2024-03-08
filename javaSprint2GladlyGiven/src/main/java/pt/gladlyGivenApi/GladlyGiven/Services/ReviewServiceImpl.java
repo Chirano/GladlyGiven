@@ -36,5 +36,8 @@ public class ReviewServiceImpl implements ReviewService {
         return reviewRepository.findAll(PageRequest.of(page, size, Sort.by(sort)));
     }
 
+    public Review findReviewByAppointment(long appointmentId){
+        return reviewRepository.findReviewByAppointmentId(appointmentId);
+    }
 
 }

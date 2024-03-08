@@ -22,4 +22,9 @@ public class HealthService {
     @ManyToOne
     public Category category;
 
+    public HealthService(String description, Category category){
+        this.description = description;
+        this.category = category;
+    }
+
 }
