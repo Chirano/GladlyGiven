@@ -16,6 +16,7 @@ import { ViewAdminComponent } from './components/view/view-admin/view-admin.comp
 import { ViewServiceProviderComponent } from './components/view/view-service-provider/view-service-provider.component';
 import { ViewRefugeeComponent } from './components/view/view-refugee/view-refugee.component';
 import { ViewDonorComponent } from './components/view/view-donor/view-donor.component';
+import { ServiceInitializerComponent } from './components/utils/service-initializer/service-initializer.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ViewDonorComponent } from './components/view/view-donor/view-donor.comp
     ViewServiceProviderComponent,
     ViewRefugeeComponent,
     ViewDonorComponent,
+    ServiceInitializerComponent,
   ],
   imports: [
     BrowserModule,

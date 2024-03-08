@@ -25,7 +25,8 @@ export class ViewSignInComponent {
       password: (document.getElementById('password') as HTMLInputElement).value
     }
 
-    console.log("Auth component ran:", authDetails);
+    //console.log("Auth component ran:", authDetails);
     EventManagerService.OnAuthEvent.emit(authDetails);
+    //this.authService.FilterAuthentication(authDetails);
   }
 }

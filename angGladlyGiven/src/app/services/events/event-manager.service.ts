@@ -12,5 +12,7 @@ export class EventManagerService {
   // static events
   static OnAuthEvent: EventEmitter<AuthDetails> = new EventEmitter<AuthDetails>();
 
-  constructor() { }
+  constructor() {
+    
+  }
 }
