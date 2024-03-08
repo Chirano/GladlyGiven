@@ -95,5 +95,16 @@ namespace GladyGivenWebAPI.Controllers
             return Ok(serviceRequest);
 
         }
+
+        [HttpGet("/servicerequest/professional")]
+        public async Task<ActionResult<List<ServiceRequestDTO>>> FindServiceRequestProfessionalDescription(string Description)
+        {
+            List<ServiceRequestDTO> serviceRequests = await serviceRequestServ.FindServiceRequestProfessionalDescription(Description);
+
+            if (serviceRequests != null && serviceRequests.Any())
+                return Ok(serviceRequests);
+
+            return NoContent();
+        }
     }
 }

@@ -99,5 +99,27 @@ namespace GladyGivenWebAPI.Services
             context.SaveChanges();
             return serviceRequest;
         }
+
+        public async Task<List<ServiceRequestDTO>> FindServiceRequestProfessionalDescription(string description)
+        {
+            var serviceRequests = await context.ServiceRequest
+                                               .Where(sr => sr.Description == description && sr.Status == "APPROVED")
+                                               .ToListAsync();
+
+            if (serviceRequests == null || !serviceRequests.Any())
+            {
+                throw new Exception($"No service requests found with Description {description}");
+            }
+
+            List<ServiceRequestDTO> serviceRequestDTOs = serviceRequests
+                .Select(sr => new ServiceRequestDTO(sr))
+                .ToList();
+
+            return serviceRequestDTOs;
+        }
+
+
+
+
     }
 }
