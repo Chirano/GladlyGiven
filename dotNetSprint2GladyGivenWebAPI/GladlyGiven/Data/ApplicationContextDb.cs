@@ -20,5 +20,7 @@ namespace GladyGivenWebAPI.Data
 
         public DbSet<ServiceRequest> ServiceRequest { get; set; }
 
+        public DbSet<Donation> Donations { get; set; }
+
     }
 }

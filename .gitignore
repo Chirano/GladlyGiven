@@ -759,3 +759,4 @@ dotNetSprint2GladyGivenWebAPI/GladlyGiven/Program.cs
 *.lock
 *.bin
 *.properties
+dotNetSprint2GladyGivenWebAPI/GladlyGiven/GladlyGiven.csproj
