@@ -756,3 +756,6 @@ javaSprint2GladlyGiven\.gradle\buildOutputCleanup\outputFiles.bin
 javaSprint2GladlyGiven\.gradle\vcs-1\gc.properties
 dotNetSprint2GladyGivenWebAPI/GladlyGiven/NeonStaticConnectionStringBuilder.cs
 dotNetSprint2GladyGivenWebAPI/GladlyGiven/Program.cs
+*.lock
+*.bin
+*.properties

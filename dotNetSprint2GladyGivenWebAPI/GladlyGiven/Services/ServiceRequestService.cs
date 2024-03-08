@@ -49,6 +49,8 @@ namespace GladyGivenWebAPI.Services
             return serviceRequestDTO;
         }
 
+
+
         public async Task<ServiceRequestDTO> CreateServiceRequest(ServiceRequestDTO serv)
         {
             var serviceRequest = await context.ServiceRequest.FirstOrDefaultAsync(s => s.Id == serv.Id);
@@ -69,6 +71,33 @@ namespace GladyGivenWebAPI.Services
             ServiceRequestDTO servDTO = new ServiceRequestDTO(serviceRequest);
 
             return servDTO;
+        }
+
+        public async Task<ServiceRequest> UpdateServiceRequest(ServiceRequest serviceRequest)
+        {
+            if (!context.ServiceRequest.Any(m => m.Id == serviceRequest.Id))
+            {
+                throw new Exception("Customer does not exist");
+            }
+
+            context.ServiceRequest.Entry(serviceRequest).State = EntityState.Modified;
+            await context.SaveChangesAsync();
+            return serviceRequest;
+        }
+
+
+        public async Task<ServiceRequest> DeleteServiceRequest(long id)
+        {
+            var serviceRequest = await context.ServiceRequest.SingleOrDefaultAsync(x => x.Id == id);
+
+            if (serviceRequest == null)
+            {
+                throw new Exception($"Service with id {id} does not exist");
+            }
+
+            context.ServiceRequest.Remove(serviceRequest);
+            context.SaveChanges();
+            return serviceRequest;
         }
     }
 }

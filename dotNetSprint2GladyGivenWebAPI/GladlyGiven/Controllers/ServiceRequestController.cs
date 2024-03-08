@@ -35,8 +35,6 @@ namespace GladyGivenWebAPI.Controllers
                 return Ok(serviceRequests);
 
             return NoContent();
-
-
         }
 
         [HttpGet("/servicerequest/id")]
@@ -48,7 +46,6 @@ namespace GladyGivenWebAPI.Controllers
                 return Ok(serviceRequest);
 
             return NoContent();
-
         }
 
         [HttpPost("/servicerequest")]
@@ -60,6 +57,42 @@ namespace GladyGivenWebAPI.Controllers
                 return Ok(serviceRequest);
 
             return NoContent();
+        }
+
+        [HttpPut("/servicerequest/{id}")]
+        public async Task<ActionResult<Service>> UpdateServiceRequest(long id, ServiceRequest serviceRequest)
+        {
+            if (serviceRequest.Id != id)
+            {
+                return BadRequest();
+            }
+
+            ServiceRequest updatedServiceRequest;
+
+            try
+            {
+                updatedServiceRequest = await serviceRequestServ.UpdateServiceRequest(serviceRequest);
+            }
+            catch (Exception e)
+            {
+                return NotFound($"Service if id {id} not found");
+            }
+
+            return Ok(updatedServiceRequest);
+        }
+
+        [HttpDelete("/servicerequest/{id}")]
+        public async Task<IActionResult> DeleteServiceRequest(int id)
+        {
+            var serviceRequest = await serviceRequestServ.FindServiceRequest(id);
+
+            if (serviceRequest == null)
+            {
+                return BadRequest();
+            }
+
+            await serviceRequestServ.DeleteServiceRequest(id);
+            return Ok(serviceRequest);
 
         }
     }
