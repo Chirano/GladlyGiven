@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pt.gladlyGivenApi.GladlyGiven.Models.HealthServices.Category;
 import pt.gladlyGivenApi.GladlyGiven.Models.HealthServices.HealthService;
+import pt.gladlyGivenApi.GladlyGiven.Models.Users.ServiceProvider;
 import pt.gladlyGivenApi.GladlyGiven.Services.HealthServiceService;
+import pt.gladlyGivenApi.GladlyGiven.Services.Users.ServiceProviderService;
 
 import java.util.Collection;
 import java.util.List;
@@ -20,6 +22,9 @@ public class HealthServicesController {
 
     @Autowired
     private HealthServiceService service;
+
+    @Autowired
+    private ServiceProviderService spService;
 
 
     @GetMapping("/healthservices")
@@ -35,20 +40,23 @@ public class HealthServicesController {
     /*
     Author:Sónia Ribeiro
      */
-//    @GetMapping(value= "/healthservices/serviceProvider/{serviceProviderId}", produces = "application/json")
-//    public ResponseEntity<CollectionModel<HealthService>> getAllServicesByProviderId(@PathVariable long serviceProviderId, @RequestParam(name="page")Optional<Integer>page, @RequestParam(name = "size")Optional<Integer>size){
-//
-//        int _page=page.orElse(0);
-//        int _size=size.orElse(10);
-//
-//        Page<HealthService> healthServiceListByProvidersId = service.findAllHealthServicesByProviderId(serviceProviderId, _page, _size);
-//
-//        if(healthServiceListByProvidersId == null){
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-//        CollectionModel<HealthService> response = CollectionModel.of(healthServiceListByProvidersId);
-//        return new ResponseEntity<>(response, HttpStatus.OK);
-//    }
+    @GetMapping(value= "/healthservices/serviceProvider/{serviceProviderId}", produces = "application/json")
+    public ResponseEntity<List<HealthService>> getAllServicesByProviderId(@PathVariable("serviceProviderId") long serviceProviderId)
+    {
+        ServiceProvider serviceProvider = spService.findServiceProviderById(serviceProviderId);
+        if(serviceProvider == null){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        List<HealthService> healthServices = service.findAllHealthServicesByProviderId(serviceProviderId);
+
+        if(healthServices.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+       return new ResponseEntity<>(healthServices, HttpStatus.OK);
+   }
+
 
     @GetMapping(value = "/healthservice/{id}")
     public ResponseEntity<HealthService> getHealthServiceById(@PathVariable long id){
@@ -72,6 +80,8 @@ public class HealthServicesController {
         if(newHealthService == null){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
+
+        
 
         return new ResponseEntity<>(newHealthService, HttpStatus.CREATED);
     }

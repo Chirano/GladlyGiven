@@ -5,8 +5,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pt.gladlyGivenApi.GladlyGiven.Models.HealthServices.Category;
 import pt.gladlyGivenApi.GladlyGiven.Models.HealthServices.HealthService;
+import pt.gladlyGivenApi.GladlyGiven.Models.Users.ServiceProvider;
 import pt.gladlyGivenApi.GladlyGiven.Repositories.CategoryRepository;
 import pt.gladlyGivenApi.GladlyGiven.Repositories.HealthServiceRepository;
+import pt.gladlyGivenApi.GladlyGiven.Repositories.Users.ServiceProviderRepository;
 
 import java.util.List;
 
@@ -18,6 +20,9 @@ public class HealthServiceService {
 
     @Autowired
     CategoryRepository categoryRepository;
+
+    @Autowired
+    ServiceProviderRepository serviceProviderRepository;
 
     public List<HealthService> findAllHealthServices() {
         return healthServiceRepository.findAll();
@@ -31,15 +36,10 @@ public class HealthServiceService {
     /*
     Author:Sónia Ribeiro
      */
-//    public Page<HealthService> findAllHealthServicesByProviderId(long serviceProviderId, int page, int size){
-//
-//        Page<HealthService> healthServicesByProviderId= healthServiceRepository.findAllHealthServicesByProvider(serviceProviderId, Pageable.unpaged());
-//
-//        if(!healthServicesByProviderId.hasContent()){
-//            throw new IllegalArgumentException("There are no health services for this id:" + serviceProviderId);
-//        }
-//        return healthServicesByProviderId;
-//    }
+    public List<HealthService> findAllHealthServicesByProviderId(long serviceProviderId){
+
+        return healthServiceRepository.findByServiceProviderId(serviceProviderId);
+    }
 
     public HealthService createHealthService(String description, String categoryStr) {
 

@@ -56,6 +56,22 @@ public class ServiceProviderController {
         return serviceProviderService.findServiceProviderByLicenseNumber(licenseNumber);
     }
 
+    @GetMapping(value = "/healthservice/{id}", produces = "application/json")
+    public ResponseEntity<List<ServiceProvider>> getServiceProvidersByHealthService(@PathVariable("id") long id)
+    {
+        HealthService healthService = healthServiceService.findHealthServiceById(id);
+        if(healthService == null){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        List<ServiceProvider> serviceProviders = serviceProviderService.findServicesProvidersByHealthService(id);
+        if(serviceProviders.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(serviceProviders, HttpStatus.OK);
+    }
+
+
 
     // --- create ---
     @PostMapping("/params")

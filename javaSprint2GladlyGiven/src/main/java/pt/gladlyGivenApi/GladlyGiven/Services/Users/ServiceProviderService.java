@@ -60,7 +60,9 @@ public class ServiceProviderService extends AppUserService {
         return serviceProviderRepository.findByLicenseNumber(licenseNumber).orElse(null);
     }
 
-
+    public List<ServiceProvider> findServicesProvidersByHealthService(long id){
+        return serviceProviderRepository.findByHealthServiceId(id);
+    }
     // create ---
     public ServiceProvider createServiceProvider(ServiceProvider serviceProvider, boolean isServiceOriginated) {
         return createUser(serviceProvider, serviceProviderRepository, isServiceOriginated);
@@ -120,6 +122,7 @@ public class ServiceProviderService extends AppUserService {
 
         serviceProvider.healthServiceList.add(service);
         serviceProvider = serviceProviderRepository.save(serviceProvider);
+
         return serviceProvider;
     }
 
