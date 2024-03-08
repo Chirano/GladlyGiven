@@ -1,8 +1,7 @@
 ﻿//Author: Hugo Lopes
 //hugoleo74@gmail.com
 
-using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
+using GladlyGiven.Enums;
 
 namespace GladyGivenWebAPI.Models
 {
@@ -12,7 +11,7 @@ namespace GladyGivenWebAPI.Models
         public string DateRequest { get; set; }
         public long IdCategory { get; set; }
         public string Description { get; set; }
-        public string Status { get; set; }
+        public ServiceRequestStatus Status { get; set; }
 
         public ServiceRequestDTO()
         {
@@ -27,10 +26,6 @@ namespace GladyGivenWebAPI.Models
             this.Status = serviceRequest.Status;
         }
 
-        internal Task<ServiceRequestDTO> CreateServiceRequest(ServiceRequestDTO serv)
-        {
-            throw new NotImplementedException();
-        }
     }
 
 }

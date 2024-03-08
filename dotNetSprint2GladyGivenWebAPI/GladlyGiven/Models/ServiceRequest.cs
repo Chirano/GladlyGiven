@@ -1,6 +1,7 @@
 ﻿//Author: Hugo Lopes
 //hugoleo74@gmail.com
 
+using GladlyGiven.Enums;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -11,9 +12,9 @@ namespace GladyGivenWebAPI.Models
         [Key]
         public long Id { get; set; }
         public string DateRequest { get; set; }
-        public long IdCategory { get; set; } // IdCategory
+        public long IdCategory { get; set; }
         public string Description { get; set; }
-        public string Status { get; set; }
+        public ServiceRequestStatus Status { get; set; }
 
     }
 }

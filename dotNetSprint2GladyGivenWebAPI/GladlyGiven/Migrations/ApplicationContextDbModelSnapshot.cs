@@ -21,7 +21,6 @@ namespace GladlyGiven.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-
             modelBuilder.Entity("GladlyGiven.Models.CostSupport", b =>
                 {
                     b.Property<long>("Id")
@@ -50,7 +49,6 @@ namespace GladlyGiven.Migrations
 
                     b.ToTable("CostSupports");
                 });
-
 
             modelBuilder.Entity("GladyGivenWebAPI.Models.Category", b =>
                 {
@@ -92,7 +90,6 @@ namespace GladlyGiven.Migrations
                     b.ToTable("Service");
                 });
 
-
             modelBuilder.Entity("GladyGivenWebAPI.Models.ServiceRequest", b =>
                 {
                     b.Property<long>("Id")
@@ -109,18 +106,16 @@ namespace GladlyGiven.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<long>("IdServices")
+                    b.Property<long>("IdCategory")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
                     b.ToTable("ServiceRequest");
                 });
-
 
             modelBuilder.Entity("GladyGivenWebAPI.Models.Service", b =>
                 {

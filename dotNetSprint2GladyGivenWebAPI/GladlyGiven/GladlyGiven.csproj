@@ -28,7 +28,6 @@
     <None Remove="Exceptions\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Enums\" />
     <Folder Include="Exceptions\" />
   </ItemGroup>
 </Project>

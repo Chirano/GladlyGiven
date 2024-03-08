@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GladlyGiven.Migrations
 {
     [DbContext(typeof(ApplicationContextDb))]
-    [Migration("20240307154305_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20240308162301_InitialDBSchema")]
+    partial class InitialDBSchema
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -91,6 +91,33 @@ namespace GladlyGiven.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Service");
+                });
+
+            modelBuilder.Entity("GladyGivenWebAPI.Models.ServiceRequest", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("DateRequest")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<long>("IdCategory")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ServiceRequest");
                 });
 
             modelBuilder.Entity("GladyGivenWebAPI.Models.Service", b =>

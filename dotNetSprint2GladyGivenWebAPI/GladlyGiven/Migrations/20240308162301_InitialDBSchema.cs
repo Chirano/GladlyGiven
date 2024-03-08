@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GladlyGiven.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class InitialDBSchema : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -39,6 +39,22 @@ namespace GladlyGiven.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CostSupports", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ServiceRequest",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    DateRequest = table.Column<string>(type: "text", nullable: false),
+                    IdCategory = table.Column<long>(type: "bigint", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false),
+                    Status = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ServiceRequest", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -75,6 +91,9 @@ namespace GladlyGiven.Migrations
 
             migrationBuilder.DropTable(
                 name: "Service");
+
+            migrationBuilder.DropTable(
+                name: "ServiceRequest");
 
             migrationBuilder.DropTable(
                 name: "Category");
