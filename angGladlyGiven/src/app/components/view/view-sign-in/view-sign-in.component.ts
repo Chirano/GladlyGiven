@@ -2,7 +2,7 @@
 
 import { Component } from '@angular/core';
 import { SignInDetails } from 'src/app/classes/authentication/SignInDetails';
-import { RouteEnum } from 'src/app/enums/RouteEnum';
+import { RouterPaths } from 'src/app/classes/routing/RoutePaths';
 import { EventManagerService } from 'src/app/services/events/event-manager.service';
 
 @Component({
@@ -32,6 +32,6 @@ export class ViewSignInComponent {
   }
 
   toSignUp() {
-    EventManagerService.OnRouteEvent.emit(RouteEnum.SignUp);
+    EventManagerService.OnRouteEvent.emit(RouterPaths.SignUp);
   }
 }

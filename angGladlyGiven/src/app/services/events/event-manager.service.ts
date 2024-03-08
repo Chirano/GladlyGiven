@@ -1,7 +1,6 @@
 // Author: Tiago Barracha ti.barracha@gmail.com
 
 import { Injectable, EventEmitter } from '@angular/core';
-import { RouteEnum } from 'src/app/enums/RouteEnum';
 import { SignInDetails as SignInDetails } from 'src/app/classes/authentication/SignInDetails';
 import { SignUpDetails } from 'src/app/classes/authentication/SignUpDetails';
 import { RoutingService } from '../routes/routing.service';
@@ -14,7 +13,7 @@ import { AuthService } from '../authentication/auth.service';
 export class EventManagerService {
 
   // route Events
-  static OnRouteEvent: EventEmitter<RouteEnum> = new EventEmitter<RouteEnum>();
+  static OnRouteEvent: EventEmitter<string> = new EventEmitter<string>();
 
   // Auth Events
   static OnSignInEvent: EventEmitter<SignInDetails> = new EventEmitter<SignInDetails>();

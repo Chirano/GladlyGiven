@@ -9,8 +9,14 @@ import { HeaderComponent } from './components/main/header/header.component';
 import { BodyComponent } from './components/main/body/body.component';
 import { FooterComponent } from './components/main/footer/footer.component';
 
-import { ViewSignUpComponent } from './components/view/view-sign-up/view-sign-up.component';
 import { ViewSignInComponent } from './components/view/view-sign-in/view-sign-in.component';
+import { ViewSignUpComponent } from './components/view/view-sign-up/view-sign-up.component';
+import { ViewSignUpFilterHelpIntentionComponent } from './components/view/view-sign-up-filter-help-intention/view-sign-up-filter-help-intention.component';
+import { ViewSignUpFilterHelpTypeComponent } from './components/view/view-sign-up-filter-help-type/view-sign-up-filter-help-type.component';
+
+import { ViewSignUpRefugeeComponent } from './components/view/view-sign-up-refugee/view-sign-up-refugee.component';
+import { ViewSignUpServiceProviderComponent } from './components/view/view-sign-up-service-provider/view-sign-up-service-provider.component';
+import { ViewSignUpDonorComponent } from './components/view/view-sign-up-donor/view-sign-up-donor.component';
 
 import { ViewAdminComponent } from './components/view/view-admin/view-admin.component';
 import { ViewServiceProviderComponent } from './components/view/view-service-provider/view-service-provider.component';
@@ -27,6 +33,12 @@ import { ViewDonorComponent } from './components/view/view-donor/view-donor.comp
     
     ViewSignUpComponent,
     ViewSignInComponent,
+    ViewSignUpFilterHelpIntentionComponent,
+    ViewSignUpFilterHelpTypeComponent,
+
+    ViewSignUpRefugeeComponent,
+    ViewSignUpServiceProviderComponent,
+    ViewSignUpDonorComponent,
     
     ViewAdminComponent,
     ViewServiceProviderComponent,

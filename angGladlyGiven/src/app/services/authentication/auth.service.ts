@@ -3,7 +3,7 @@
 import { Injectable } from '@angular/core';
 import { EventManagerService } from '../events/event-manager.service';
 import { SignInDetails } from 'src/app/classes/authentication/SignInDetails';
-import { RouteEnum } from 'src/app/enums/RouteEnum';
+import { RouterPaths } from 'src/app/classes/routing/RoutePaths';
 
 @Injectable({
   providedIn: 'root'
@@ -40,23 +40,27 @@ export class AuthService {
   private SignInFilter(signInDetails: SignInDetails) {
 
     console.log("sign in recieved")
-    var targetRoute: RouteEnum = RouteEnum.Home;
+    var targetRoute: string = RouterPaths.SignIn;
 
     switch(signInDetails.email) {
       case this.authAdmin.email:
-        targetRoute = RouteEnum.Admin;
+        targetRoute = RouterPaths.ViewAdmin;
         break;
       
       case this.authServiceProvider.email:
-        targetRoute = RouteEnum.ServiceProvider;
+        targetRoute = RouterPaths.ViewServiceProvider;
         break;
         
       case this.authRefugee.email:
-        targetRoute = RouteEnum.Refugee;
+        targetRoute = RouterPaths.ViewRefugee;
         break;
         
       case this.authDonor.email:
-        targetRoute = RouteEnum.Donor;
+        targetRoute = RouterPaths.ViewDonor;
+        break;
+
+      default:
+        targetRoute = RouterPaths.SignIn;
         break;
     }
 
