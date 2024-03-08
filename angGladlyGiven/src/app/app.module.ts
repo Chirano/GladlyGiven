@@ -22,6 +22,7 @@ import { ViewAdminComponent } from './components/view/view-admin/view-admin.comp
 import { ViewServiceProviderComponent } from './components/view/view-service-provider/view-service-provider.component';
 import { ViewRefugeeComponent } from './components/view/view-refugee/view-refugee.component';
 import { ViewDonorComponent } from './components/view/view-donor/view-donor.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { ViewDonorComponent } from './components/view/view-donor/view-donor.comp
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,8 +3,8 @@ export const RouterPaths = {
     SignIn: "SignIn",
     SignUp: "SignUp",
 
-    SignUpHelpIntention: "SignInHelpIntention",
-    SignUpHelpType: "SignInHelpType",
+    SignUpHelpIntention: "SignUpHelpIntention",
+    SignUpHelpType: "SignUpHelpType",
 
     SignUpRefugee: "SignUpRefugee",
     SignUpServiceProvider: "SignUpServiceProvider",
