@@ -102,15 +102,15 @@ namespace GladyGivenWebAPI.Services
             return serviceRequest;
         }
 
-        public async Task<List<ServiceRequestDTO>> FindServiceRequestProfessionalDescription(string description)
+        public async Task<List<ServiceRequestDTO>> FindServiceRequestProfessionalDescription(long idCategory)
         {
             var serviceRequests = await context.ServiceRequest
-                                               .Where(sr => sr.Description == description)
+                                               .Where(sr => sr.IdCategory == idCategory)
                                                .ToListAsync();
 
             if (serviceRequests == null || !serviceRequests.Any())
             {
-                throw new Exception($"No service requests found with Description {description}");
+                throw new Exception($"No service requests found with Description {idCategory}");
             }
 
             List<ServiceRequestDTO> serviceRequestDTOs = serviceRequests
