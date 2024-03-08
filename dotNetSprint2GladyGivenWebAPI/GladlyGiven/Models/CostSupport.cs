@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Author: Lia Araruna
+
+using System;
 using System.ComponentModel.DataAnnotations;
 using GladlyGiven.Enums;
 
