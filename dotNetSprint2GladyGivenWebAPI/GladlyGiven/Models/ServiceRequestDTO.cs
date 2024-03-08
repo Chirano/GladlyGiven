@@ -10,7 +10,7 @@ namespace GladyGivenWebAPI.Models
     {
         public long Id { get; set; }
         public string DateRequest { get; set; }
-        public long IdServices { get; set; }
+        public long IdCategory { get; set; }
         public string Description { get; set; }
         public string Status { get; set; }
 
@@ -22,7 +22,7 @@ namespace GladyGivenWebAPI.Models
         {
             this.Id = serviceRequest.Id;
             this.DateRequest = serviceRequest.DateRequest;
-            this.IdServices = serviceRequest.IdServices;
+            this.IdCategory = serviceRequest.IdCategory;
             this.Description = serviceRequest.Description;
             this.Status = serviceRequest.Status;
         }

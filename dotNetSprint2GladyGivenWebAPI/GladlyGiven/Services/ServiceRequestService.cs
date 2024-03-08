@@ -60,7 +60,7 @@ namespace GladyGivenWebAPI.Services
                 serviceRequest = new ServiceRequest
                 {
                     DateRequest = serv.DateRequest,
-                    IdServices = serv.IdServices,
+                    IdCategory = serv.IdCategory,
                     Description = serv.Description,
                     Status = serv.Status
                 };
