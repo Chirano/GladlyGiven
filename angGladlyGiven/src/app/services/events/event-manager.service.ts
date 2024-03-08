@@ -20,7 +20,8 @@ export class EventManagerService {
   static OnSignInEvent: EventEmitter<SignInDetails> = new EventEmitter<SignInDetails>();
   static OnSingUpEvent: EventEmitter<SignUpDetails> = new EventEmitter<SignUpDetails>();
 
-  // add services that have events
+  // add services that have events here
+  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   constructor(
       private authManager : AuthService,
       private routeService: RoutingService,
