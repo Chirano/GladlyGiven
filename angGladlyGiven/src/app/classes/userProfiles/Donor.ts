@@ -4,5 +4,5 @@ import { MonetaryUser } from "./baseUsers/MonetaryUser";
 
 export interface Donor extends MonetaryUser {
     fiscalIdentity : number,
-    donationIds : number[],
+    donationIds : number[] | null,
 }

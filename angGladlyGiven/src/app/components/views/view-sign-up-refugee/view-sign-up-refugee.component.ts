@@ -15,7 +15,7 @@ export class ViewSignUpRefugeeComponent {
   constructor() {
   }
 
-  registerRefugee(refugeeForm: any) {
+  registerNewRefugee(refugeeForm: any) {
   
     if (refugeeForm.valid) {
       // Access form controls using refugeeForm.controls
