@@ -155,7 +155,12 @@ public class ServiceProviderService extends AppUserService {
         return newAv;
     }
 
-    
+    //TODO:
+    public List<Availability> findAvailabilitiesByStatus(int pageNumber, int pageSize, String availabilityStatus) {
+
+
+        return null;
+    }
 
     // Service Reviews
     // ---------------------------------------------------------------------
