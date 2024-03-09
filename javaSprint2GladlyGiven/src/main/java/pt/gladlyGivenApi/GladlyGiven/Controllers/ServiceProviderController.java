@@ -121,8 +121,31 @@ public class ServiceProviderController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        ServiceProvider updateserviceProvider =serviceProviderService.addServicesToServiceProvider(serviceProvider, healthService);
-        return new ResponseEntity<>(updateserviceProvider, HttpStatus.OK);
+        ServiceProvider updatedServiceProvider = serviceProviderService.addServicesToServiceProvider(serviceProvider,
+                                                    healthService);
+
+        return new ResponseEntity<>(updatedServiceProvider, HttpStatus.OK);
+    }
+
+    @PutMapping("/{serviceProviderId}/removeservice/{healthServiceId}")
+    public ResponseEntity<ServiceProvider> removeServiceofServiceProvider(
+                                        @PathVariable("serviceProviderId") Long serviceProviderId,
+                                        @PathVariable ("healthServiceId") Long serviceId)
+    {
+        ServiceProvider serviceProvider = serviceProviderService.findServiceProviderById(serviceProviderId);
+        HealthService healthService = healthServiceService.findHealthServiceById(serviceId);
+
+        if(serviceProvider == null || healthService == null ){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        if(!serviceProvider.healthServices.contains(healthService)){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        ServiceProvider updatedServiceProvider = serviceProviderService.removeHealthService(serviceProvider, healthService);
+
+        return new ResponseEntity<>(updatedServiceProvider, HttpStatus.OK);
     }
 
 

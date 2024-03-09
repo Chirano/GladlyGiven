@@ -129,6 +129,18 @@ public class ServiceProviderService extends AppUserService {
         return serviceProvider;
     }
 
+    public ServiceProvider removeHealthService(ServiceProvider serviceProvider, HealthService service)
+    {
+        if (!serviceProvider.healthServices.contains(service)){
+            return null;
+        }
+
+        serviceProvider.healthServices.remove(service);
+        serviceProvider = serviceProviderRepository.save(serviceProvider);
+
+        return serviceProvider;
+    }
+
     // Service Provider Availability
     // ---------------------------------------------------------------------
     public Availability findAvailability(Long id) {
