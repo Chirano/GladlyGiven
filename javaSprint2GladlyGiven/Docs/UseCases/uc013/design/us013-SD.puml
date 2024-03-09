@@ -3,57 +3,62 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title Sequence Diagram (SD) - US013 - Provide date and time for scheduling
+title Sequence Diagram (SD) - US013 - Service Provider registers date and time for scheduling
 
 
 autonumber
 
-actor Professional
-participant ":CreateSlotDateTimeUI" as ui
-participant ":CreateSlotDateTimeController" as ctrl
+actor ServiceProvider as sp
+participant ":CreateAvailabilityUI" as ui
+participant ":ServiceProviderController" as ctrl
 participant Repositories
-participant "slotDataTimeRepo : SlotDataTimeRepository" as SlotDataTimeRepo
+participant "availabilityRepo : AvailabilityRepository" as avRepo
+participant "availability : Availability" as av
 
 
-activate Professional
-    Professional -> ui : starts the process of creating a new date and time slot in the system
+activate sp
+    sp -> ui : starts the process of registering a new date and time for scheduling
+    activate ui
+        ui --> sp : requests data (start datetime and end datetime)
+    deactivate ui
+    sp -> ui : fills requested data (start datetime and end datetime)
     activate ui
         ui -> ctrl** : create()
-        ui -> ctrl : GetCalendarDateTime()
         activate ctrl
-            ctrl --> ui : CalendarDateTimeList
-            deactivate ctrl
-            ui --> Professional : shows date time and  available and requests data
-    deactivate ui
-
-    Professional -> ui : fills in the date and time when he is available.
-    activate ui
-        ui -> ctrl : createSlotDataTime(idSlotDateTime, dateSlotAvailable, timeSlotAvailable, idProfAvailable, typeServiceProfAvailable)
-        activate ctrl
-            ctrl -> Repositories : create()
+            ctrl -> Repositories : getAvailabilityRepo( )
             activate Repositories
-                Repositories -> Repositories : localValidation()
-                Repositories --> ctrl : SlotDataTime
+                Repositories -> Repositories : getAvailabilityRepo( )
+                Repositories --> ctrl : availabilityRepo
             deactivate Repositories
-            ctrl --> ui : SlotDataTime
+            ctrl --> avRepo : createAvailability(serviceProviderId, start dateTime, endDateTime)
         deactivate ctrl
-        ui --> Professional : validates and asks for confirmation
-    deactivate ui
-
-    Professional -> ui : confirms
-    activate ui
-        ui -> ctrl : save()
+        activate avRepo
+            avRepo -> av** : create( )
+            activate av
+                av -> av : localValidation( )
+                av --> avRepo : availability
+            deactivate av
+            avRepo -> avRepo : globalValidation(availability)
+            avRepo --> ctrl : availability
+        deactivate avRepo
         activate ctrl
-            ctrl -> SlotDataTimeRepo : save(SlotDataTime)
-            activate SlotDataTimeRepo
-                SlotDataTimeRepo -> SlotDataTimeRepo : globalValidation(SlotDataTime)
-                SlotDataTimeRepo -> SlotDataTimeRepo : add(SlotDataTime)
-                SlotDataTimeRepo --> ctrl : success
-            deactivate SlotDataTimeRepo
+            ctrl --> ui : availability
+        deactivate ctrl
+        ui --> sp : validates and asks for confirmation
+    deactivate ui
+    sp -> ui : confirms
+    activate ui
+        ui -> ctrl : save( )
+        activate ctrl
+            ctrl -> avRepo : save( )
+            activate avRepo
+                avRepo -> avRepo : add(availability)
+                avRepo --> ctrl : success
+            deactivate avRepo
             ctrl --> ui : success
         deactivate ctrl
-        ui --> Professional : records the information and notifies the success of the operation
+        ui --> sp : records the information and notifies the success of the operation
     deactivate ui
-deactivate Professional
+deactivate sp
 
 @enduml

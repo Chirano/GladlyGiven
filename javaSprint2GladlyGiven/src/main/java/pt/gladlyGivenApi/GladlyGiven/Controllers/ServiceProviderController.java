@@ -123,7 +123,7 @@ public class ServiceProviderController {
     // --------------------------------------------------------------------------------------
     @PostMapping("/availability/{id}")
     public Availability createAvailability(@PathVariable("id") Long serviceProviderId, @RequestBody Availability availability) {
-        return null; // TODO
+        return this.serviceProviderService.createAvailability(availability);
     }
 
 

@@ -1,11 +1,13 @@
 package pt.gladlyGivenApi.GladlyGiven.Services.Users;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import pt.gladlyGivenApi.GladlyGiven.Enums.AvailabilityStatus;
 import pt.gladlyGivenApi.GladlyGiven.Models.HealthServices.HealthService;
 import pt.gladlyGivenApi.GladlyGiven.PageUtils;
 import pt.gladlyGivenApi.GladlyGiven.Models.Availability;
@@ -132,20 +134,28 @@ public class ServiceProviderService extends AppUserService {
         return availabilityRepository.findById(id).orElse(null);
     }
 
-    public List<Availability> findAvailability(int pageNumber, int pageSize, String startDateTimeString) {
+    public List<Availability> findAvailabilitiesByStartDateTime(int pageNumber, int pageSize, String startDateTimeString) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("availability.startDateTimeString"));
         Page<Availability> page = availabilityRepository.findByStartDateTime(startDateTimeString, pageable);
 
         return PageUtils.pageToList(page);
     }
 
-    public Availability createAvailability(Long serviceProviderId, String startDateTimeString, String endDateTimeString) {
-        return null; // TODO
+    public Availability createAvailability(Availability availability) {
+        //Checar se já existe uma availability com o mesmo id
+        Availability av = this.availabilityRepository.findById(availability.id).orElse(null);
+
+        if(av != null) {
+            throw new NotImplementedException(); //Availability already exists
+        }
+
+        availability.availabilityStatus = AvailabilityStatus.Free;
+        Availability newAv = this.availabilityRepository.save(availability);
+
+        return newAv;
     }
 
-
-
-
+    
 
     // Service Reviews
     // ---------------------------------------------------------------------
