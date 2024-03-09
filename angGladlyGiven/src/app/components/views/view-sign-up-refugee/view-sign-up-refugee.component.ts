@@ -18,7 +18,6 @@ export class ViewSignUpRefugeeComponent {
   registerNewRefugee(refugeeForm: any) {
   
     if (refugeeForm.valid) {
-      // Access form controls using refugeeForm.controls
       this.refugee = {
         // app user:
         id : -1,

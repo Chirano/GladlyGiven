@@ -14,7 +14,6 @@ export class ViewSignUpDonorComponent {
   registerNewDonor(form: any) {
   
     if (form.valid) {
-      // Access form controls using refugeeForm.controls
       this.donor = {
         // app user:
         id : -1,
