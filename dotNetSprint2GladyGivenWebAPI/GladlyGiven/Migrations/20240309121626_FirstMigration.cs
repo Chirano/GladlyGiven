@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -6,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GladlyGiven.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialDBSchema : Migration
+    public partial class FirstMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -39,6 +40,23 @@ namespace GladlyGiven.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CostSupports", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Donations",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    DonorId = table.Column<long>(type: "bigint", nullable: false),
+                    Amount = table.Column<double>(type: "double precision", nullable: false),
+                    DonationType = table.Column<int>(type: "integer", nullable: false),
+                    FiscalIdentity = table.Column<int>(type: "integer", nullable: false),
+                    Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Donations", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -88,6 +106,9 @@ namespace GladlyGiven.Migrations
         {
             migrationBuilder.DropTable(
                 name: "CostSupports");
+
+            migrationBuilder.DropTable(
+                name: "Donations");
 
             migrationBuilder.DropTable(
                 name: "Service");

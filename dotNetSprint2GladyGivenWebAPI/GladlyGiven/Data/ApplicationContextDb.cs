@@ -20,6 +20,12 @@ namespace GladyGivenWebAPI.Data
 
         public DbSet<ServiceRequest> ServiceRequest { get; set; }
 
+        /// <summary>
+        /// Gets or sets the DbSet representing the collection of Donation entities.
+        /// This property provides access to the database table or collection
+        /// containing donation records, allowing querying, insertion, updating, and deletion
+        /// operations on donation data. 
+        /// </summary>
         public DbSet<Donation> Donations { get; set; }
 
     }
