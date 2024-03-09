@@ -12,6 +12,7 @@ import { ViewAdminComponent } from './components/views/view-admin/view-admin.com
 import { ViewRefugeeComponent } from './components/views/view-refugee/view-refugee.component';
 import { ViewServiceProviderComponent } from './components/views/view-service-provider/view-service-provider.component';
 import { ViewDonorComponent } from './components/views/view-donor/view-donor.component';
+import { RefreshSignUpGuard as RefreshSignUpGuard } from './guards/refresh/refreshSignUp.guard';
 
 
 
@@ -21,12 +22,15 @@ const routes: Routes = [
   { path: RouterPaths.SignIn, component: ViewSignInComponent },
   { path: RouterPaths.SignUp, component: ViewSignUpComponent },
 
-  { path: RouterPaths.SignUpHelpIntention, component: ViewSignUpFilterHelpIntentionComponent },
-  { path: RouterPaths.SignUpHelpType, component: ViewSignUpFilterHelpTypeComponent },
+  // when refreshed, these pages should route back Home - maybe these components should be a child of the SignUp component?
+  // refresh start
+  { path: RouterPaths.SignUpHelpIntention, component: ViewSignUpFilterHelpIntentionComponent, canActivate: [RefreshSignUpGuard] },
+  { path: RouterPaths.SignUpHelpType, component: ViewSignUpFilterHelpTypeComponent, canActivate: [RefreshSignUpGuard] },
 
-  { path: RouterPaths.SignUpRefugee, component: ViewSignUpRefugeeComponent },
-  { path: RouterPaths.SignUpServiceProvider, component: ViewSignUpServiceProviderComponent },
-  { path: RouterPaths.SignUpDonor, component: ViewSignUpDonorComponent },
+  { path: RouterPaths.SignUpRefugee, component: ViewSignUpRefugeeComponent, canActivate: [RefreshSignUpGuard] },
+  { path: RouterPaths.SignUpServiceProvider, component: ViewSignUpServiceProviderComponent, canActivate: [RefreshSignUpGuard] },
+  { path: RouterPaths.SignUpDonor, component: ViewSignUpDonorComponent, canActivate: [RefreshSignUpGuard] },
+  // refresh end
 
   { path: RouterPaths.ViewAdmin, component: ViewAdminComponent },
   { path: RouterPaths.ViewRefugee, component: ViewRefugeeComponent },

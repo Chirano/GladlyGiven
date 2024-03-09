@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { RouterPaths } from 'src/app/classes/routing/RoutePaths';
+import { EventManagerService } from 'src/app/services/events/event-manager.service';
 
 
 @Component({
@@ -10,6 +11,11 @@ import { Router } from '@angular/router';
 
 export class ViewSignUpFilterHelpIntentionComponent {
 
-  
-  
+  toSignUpRefugee() {
+    EventManagerService.OnRouteEvent.emit(RouterPaths.SignUpRefugee);
+  }
+
+  toHelpType() {
+    EventManagerService.OnRouteEvent.emit(RouterPaths.SignUpHelpType);
+  }
 }

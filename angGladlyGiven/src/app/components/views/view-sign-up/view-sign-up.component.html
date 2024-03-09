@@ -1,32 +1,29 @@
-<div>
+<div class="center-content">
     <div>
         <h2>Hey,</h2>
         <h2>Let's Sign Up</h2>
     </div>
 
-    <form (ngSubmit)="signUp()">
-        <div>
-            <label for="name">Name:</label>
-            <input type="name" id="name" #nameInput required>
-          </div>
-
+    <div>
+      <form #signUpForm="ngForm" (ngSubmit)="signUp(signUpForm)">
         <div>
           <label for="email">Email:</label>
           <input type="email" id="email" #emailInput required>
         </div>
-
+  
         <div>
           <label for="password">Password:</label>
           <input type="password" id="password" #passwordInput required>
         </div>
-
+  
         <div>
           <label for="password">Confirm Password:</label>
-          <input type="password" id="confirm-password" #passwordInput required>
+          <input type="password" id="confirm-password" #passwordConfirmInput required>
         </div>
-
-        <button type="button" (click)="signUp()">Next</button>
-    </form>
-
-    <button type="button" (click)="toSignIn()">Already have an account? Log In</button>
+        <div>
+          <button type="button" (click)="toSignIn()">Already have an account? Log In</button>
+          <button type="submit">Next</button>
+        </div>
+      </form>
+    </div>
   </div>

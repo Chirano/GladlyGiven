@@ -15,33 +15,36 @@ export class ViewSignUpComponent {
   constructor(
     private eventManager : EventManagerService,
     private authManager : AuthService
-  ) {
+  ) { }
 
-}
 
-  // could also send form data as parameters for this method
-  // instead of fetching from DOM
-  signUp() {
+  signUp(form: any) {
+    if (form.valid) {
 
-    const formPass = (document.getElementById("password") as HTMLInputElement).value;
-    const formConfirmPass = (document.getElementById("confirm-password") as HTMLInputElement).value
+      const password = form.value.password;
+      const confirmPassword = form.value.confirmPassword;
 
-    if (formPass != formConfirmPass) {
-      console.log("Passwords don't match!");
-      return;
+      if (password !== confirmPassword) {
+        console.error("Passwords don't match");
+        return;
+      }
+
+      const signUpDetails: SignUpDetails = {
+        name: "",
+        email: form.value.email,
+        password: password,
+      };
+
+      console.log("Signed Up:", signUpDetails);
+      EventManagerService.OnSingUpEvent.emit(signUpDetails);
+      EventManagerService.OnRouteEvent.emit(RoutePaths.SignUpHelpIntention);
+    } else {
+      console.error("Form is invalid");
     }
-
-    const signUpDetails : SignUpDetails = {
-      name: (document.getElementById("name") as HTMLInputElement).value,
-      email: (document.getElementById("email") as HTMLInputElement).value,
-      password: formPass,
-    }
-
-    //console.log("Signed Up:", signUpDetails);
-    EventManagerService.OnSingUpEvent.emit(signUpDetails);
-    EventManagerService.OnRouteEvent.emit(RoutePaths.SignUpHelpIntention);
   }
 
+
+  
   toSignIn() {
     EventManagerService.OnRouteEvent.emit(RoutePaths.SignIn);
   }

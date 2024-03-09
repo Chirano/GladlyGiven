@@ -1,1 +1,76 @@
-<p>view-sign-up-refugee works!</p>
+<div class="center-content">
+  <div>
+    <app-back-button></app-back-button>
+  </div>
+
+  <div>
+    <h2>Tell us</h2>
+    <h2>More about you</h2>
+  </div>
+
+  <div>
+    <form #refugeeForm="ngForm" (ngSubmit)="registerRefugee(refugeeForm)">
+      <!-- App User Information -->
+      <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" ngModel required>
+      </div>
+
+      <div>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" ngModel required>
+      </div>
+
+      <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" ngModel required>
+      </div>
+
+      <div>
+        <label for="gender">Gender:</label>
+        <input type="text" id="gender" name="gender" ngModel required>
+      </div>
+
+      <div>
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" ngModel required>
+      </div>
+
+      <!-- Refugee Information -->
+      <div>
+        <label for="protocolId">Protocol Id:</label>
+        <input type="text" id="protocolId" name="protocolId" ngModel required>
+      </div>
+
+      <div>
+        <label for="sns">SNS:</label>
+        <input type="text" id="sns" name="sns" ngModel required>
+      </div>
+
+      <div>
+        <label for="nationality">Nationality:</label>
+        <input type="text" id="nationality" name="nationality" ngModel required>
+      </div>
+
+      <div>
+        <label for="country">Country:</label>
+        <input type="text" id="country" name="country" ngModel required>
+      </div>
+
+      <div>
+        <label for="mainLanguage">Main Language:</label>
+        <input type="text" id="mainLanguage" name="mainLanguage" ngModel required>
+      </div>
+
+      <div>
+        <label for="secondLanguage">Second Language:</label>
+        <input type="text" id="secondLanguage" name="secondLanguage" ngModel>
+      </div>
+
+      <!--       
+      <button type="submit" (click)="registerRefugee(refugeeForm)">Register</button>
+       -->
+    <button type="submit">Register</button>
+    </form>
+  </div>
+</div>

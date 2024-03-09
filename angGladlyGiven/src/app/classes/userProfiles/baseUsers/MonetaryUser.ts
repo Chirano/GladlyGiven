@@ -2,8 +2,9 @@
 
 import { AppUser } from "./AppUser";
 
+
 export interface MonetaryUser extends AppUser {
-    nif : string,
-    paymentInfoId : string,
-    invoiceInfoId : string,
+    nif             : string,
+    paymentInfoId   : string,
+    invoiceInfoId   : string,
 }

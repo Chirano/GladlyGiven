@@ -5,6 +5,9 @@ import { SignInDetails as SignInDetails } from 'src/app/classes/authentication/S
 import { SignUpDetails } from 'src/app/classes/authentication/SignUpDetails';
 import { RoutingService } from '../routes/routing.service';
 import { AuthService } from '../authentication/auth.service';
+import { Refugee } from 'src/app/classes/userProfiles/Refugee';
+import { ServiceProvider } from 'src/app/classes/userProfiles/ServiceProvider';
+import { Donor } from 'src/app/classes/userProfiles/Donor';
 
 @Injectable({
   providedIn: 'root'
@@ -19,12 +22,18 @@ export class EventManagerService {
   // Auth Events
   static OnSignInEvent: EventEmitter<SignInDetails> = new EventEmitter<SignInDetails>();
   static OnSingUpEvent: EventEmitter<SignUpDetails> = new EventEmitter<SignUpDetails>();
+  
+  static OnSignUpRefugeeEvent: EventEmitter<Refugee> = new EventEmitter<Refugee>();
+  static OnSignUpServiceProviderEvent: EventEmitter<ServiceProvider> = new EventEmitter<ServiceProvider>();
+  static OnSignUpDonorEvent: EventEmitter<Donor> = new EventEmitter<Donor>();
 
-  // add services that have events here
+
+  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  // INITIALIZE SERVICES WITH EVENTS HERE
   // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   constructor(
-      private authManager : AuthService,
-      private routeService: RoutingService,
+      private authService : AuthService,
+      private routingService: RoutingService,
     ) {
     
   }

@@ -4,6 +4,13 @@ import { Injectable } from '@angular/core';
 import { EventManagerService } from '../events/event-manager.service';
 import { SignInDetails } from 'src/app/classes/authentication/SignInDetails';
 import { RouterPaths } from 'src/app/classes/routing/RoutePaths';
+import { MockSessionContexts } from 'src/app/classes/authentication/MockSessionContexts';
+import { SignUpDetails } from 'src/app/classes/authentication/SignUpDetails';
+import { SessionContext } from 'src/app/classes/authentication/SessionContext';
+import { UserType } from 'src/app/classes/userProfiles/UserType';
+import { Refugee } from 'src/app/classes/userProfiles/Refugee';
+import { ServiceProvider } from 'src/app/classes/userProfiles/ServiceProvider';
+import { Donor } from 'src/app/classes/userProfiles/Donor';
 
 @Injectable({
   providedIn: 'root'
@@ -11,31 +18,29 @@ import { RouterPaths } from 'src/app/classes/routing/RoutePaths';
 
 export class AuthService {
 
-  // auth details
-  authAdmin: SignInDetails = {
-    email: "admin",
-    password: "admin"
-  }
+  static isSigningUp : boolean = false;
 
-  authServiceProvider: SignInDetails = {
-    email: "service",
-    password: "service"
-  }
-
-  authRefugee: SignInDetails = {
-    email: "refugee",
-    password: "refugee"
-  }
-
-  authDonor: SignInDetails = {
-    email: "donor",
-    password: "donor"
-  }
-
+  private signUpDetails : SignUpDetails | null = null;
+  private sessionContext: SessionContext = 
+  {
+    userId: -1,
+    name: "",
+    email: "",
+    userType: UserType.None,
+  };
+  
   constructor() {
     EventManagerService.OnSignInEvent.subscribe(this.SignInFilter.bind(this));
-    //EventManagerService.OnSingUpEvent.subscribe();
+    EventManagerService.OnSingUpEvent.subscribe(this.SignUp.bind(this));
+
+    EventManagerService.OnSignUpRefugeeEvent.subscribe(this.SignUpRefugee.bind(this));
+    EventManagerService.OnSignUpServiceProviderEvent.subscribe(this.SignUpServiceProvider.bind(this));
+    EventManagerService.OnSignUpDonorEvent.subscribe(this.SignUpDonor.bind(this));
   }
+
+
+  // Sign IN - Login
+  // ----------------------------------------------------------------------
 
   private SignInFilter(signInDetails: SignInDetails) {
 
@@ -43,20 +48,24 @@ export class AuthService {
     var targetRoute: string = RouterPaths.SignIn;
 
     switch(signInDetails.email) {
-      case this.authAdmin.email:
+      case MockSessionContexts.AuthAdmin.email:
         targetRoute = RouterPaths.ViewAdmin;
+        this.sessionContext = MockSessionContexts.AuthAdmin;
+        break;
+        
+      case MockSessionContexts.AuthRefugee.email:
+        targetRoute = RouterPaths.ViewRefugee;
+        this.sessionContext = MockSessionContexts.AuthRefugee;
         break;
       
-      case this.authServiceProvider.email:
+      case MockSessionContexts.AuthServiceProvider.email:
         targetRoute = RouterPaths.ViewServiceProvider;
+        this.sessionContext = MockSessionContexts.AuthServiceProvider;
         break;
         
-      case this.authRefugee.email:
-        targetRoute = RouterPaths.ViewRefugee;
-        break;
-        
-      case this.authDonor.email:
+      case MockSessionContexts.AuthDonor.email:
         targetRoute = RouterPaths.ViewDonor;
+        this.sessionContext = MockSessionContexts.AuthDonor;
         break;
 
       default:
@@ -68,7 +77,27 @@ export class AuthService {
     EventManagerService.OnRouteEvent.emit(targetRoute);
   }
 
-  private SignUpFilter() {
+
+
+  // Sign UP - Register
+  // ----------------------------------------------------------------------
+  private SignUp(inputSignUpDetails: SignUpDetails) {
+    AuthService.isSigningUp = true;
+
+    this.signUpDetails = inputSignUpDetails;
+    EventManagerService.OnRouteEvent.emit(RouterPaths.SignUpHelpIntention);
+  }
+
+
+  private SignUpRefugee(refugee: Refugee) {
+
+  }
+
+  private SignUpServiceProvider(serviceProvider: ServiceProvider) {
+
+  }
+
+  private SignUpDonor(donor: Donor) {
 
   }
 }
