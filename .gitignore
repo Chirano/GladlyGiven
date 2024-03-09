@@ -760,3 +760,4 @@ dotNetSprint2GladyGivenWebAPI/GladlyGiven/Program.cs
 *.bin
 *.properties
 dotNetSprint2GladyGivenWebAPI/GladlyGiven/GladlyGiven.csproj
+package-lock.json
