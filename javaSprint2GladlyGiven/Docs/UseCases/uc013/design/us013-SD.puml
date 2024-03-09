@@ -1,0 +1,64 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Sequence Diagram (SD) - US013 - Service Provider registers date and time for scheduling
+
+
+autonumber
+
+actor ServiceProvider as sp
+participant ":CreateAvailabilityUI" as ui
+participant ":ServiceProviderController" as ctrl
+participant Repositories
+participant "availabilityRepo : AvailabilityRepository" as avRepo
+participant "availability : Availability" as av
+
+
+activate sp
+    sp -> ui : starts the process of registering a new date and time for scheduling
+    activate ui
+        ui --> sp : requests data (start datetime and end datetime)
+    deactivate ui
+    sp -> ui : fills requested data (start datetime and end datetime)
+    activate ui
+        ui -> ctrl** : create()
+        activate ctrl
+            ctrl -> Repositories : getAvailabilityRepo( )
+            activate Repositories
+                Repositories -> Repositories : getAvailabilityRepo( )
+                Repositories --> ctrl : availabilityRepo
+            deactivate Repositories
+            ctrl --> avRepo : createAvailability(serviceProviderId, start dateTime, endDateTime)
+        deactivate ctrl
+        activate avRepo
+            avRepo -> av** : create( )
+            activate av
+                av -> av : localValidation( )
+                av --> avRepo : availability
+            deactivate av
+            avRepo -> avRepo : globalValidation(availability)
+            avRepo --> ctrl : availability
+        deactivate avRepo
+        activate ctrl
+            ctrl --> ui : availability
+        deactivate ctrl
+        ui --> sp : validates and asks for confirmation
+    deactivate ui
+    sp -> ui : confirms
+    activate ui
+        ui -> ctrl : save( )
+        activate ctrl
+            ctrl -> avRepo : save( )
+            activate avRepo
+                avRepo -> avRepo : add(availability)
+                avRepo --> ctrl : success
+            deactivate avRepo
+            ctrl --> ui : success
+        deactivate ctrl
+        ui --> sp : records the information and notifies the success of the operation
+    deactivate ui
+deactivate sp
+
+@enduml
