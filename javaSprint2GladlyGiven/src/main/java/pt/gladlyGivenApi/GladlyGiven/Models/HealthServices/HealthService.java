@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pt.gladlyGivenApi.GladlyGiven.Models.Users.ServiceProvider;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
-@Getter
-@Setter
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -22,8 +22,8 @@ public class HealthService {
 
     public String description;
 
-    @ManyToMany
-    List<ServiceProvider> serviceProviderList;
+    @ManyToMany(mappedBy = "healthServices")
+    List<ServiceProvider> serviceProviders = new ArrayList<>();
 
     @ManyToOne
     public Category category;

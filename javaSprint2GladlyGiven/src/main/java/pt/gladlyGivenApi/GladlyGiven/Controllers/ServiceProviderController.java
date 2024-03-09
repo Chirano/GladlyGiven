@@ -8,11 +8,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pt.gladlyGivenApi.GladlyGiven.Models.Availability;
+import pt.gladlyGivenApi.GladlyGiven.Models.DTO.ServiceProviderDTO;
 import pt.gladlyGivenApi.GladlyGiven.Models.HealthServices.HealthService;
 import pt.gladlyGivenApi.GladlyGiven.Models.Users.ServiceProvider;
 import pt.gladlyGivenApi.GladlyGiven.Services.HealthServiceService;
 import pt.gladlyGivenApi.GladlyGiven.Services.Users.ServiceProviderService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -57,7 +59,7 @@ public class ServiceProviderController {
     }
 
     @GetMapping(value = "/healthservice/{id}", produces = "application/json")
-    public ResponseEntity<List<ServiceProvider>> getServiceProvidersByHealthService(@PathVariable("id") long id)
+    public ResponseEntity<List<ServiceProviderDTO>> getServiceProvidersByHealthService(@PathVariable("id") long id)
     {
         HealthService healthService = healthServiceService.findHealthServiceById(id);
         if(healthService == null){
@@ -68,7 +70,13 @@ public class ServiceProviderController {
         if(serviceProviders.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(serviceProviders, HttpStatus.OK);
+
+        List<ServiceProviderDTO> serviceProviderDTOS = new ArrayList<>();
+        for(ServiceProvider serviceProvider : serviceProviders){
+            ServiceProviderDTO serviceProviderDTO = new ServiceProviderDTO(serviceProvider);
+            serviceProviderDTOS.add(serviceProviderDTO);
+        }
+        return new ResponseEntity<>(serviceProviderDTOS, HttpStatus.OK);
     }
 
 

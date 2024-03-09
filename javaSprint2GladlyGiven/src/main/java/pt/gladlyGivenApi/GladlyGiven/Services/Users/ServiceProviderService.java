@@ -1,5 +1,6 @@
 package pt.gladlyGivenApi.GladlyGiven.Services.Users;
 
+import jakarta.transaction.Transactional;
 import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,7 +19,6 @@ import pt.gladlyGivenApi.GladlyGiven.Models.Users.ServiceProvider;
 import pt.gladlyGivenApi.GladlyGiven.Repositories.AvailabilityRepository;
 import pt.gladlyGivenApi.GladlyGiven.Repositories.HealthServiceRepository;
 import pt.gladlyGivenApi.GladlyGiven.Repositories.Users.ServiceProviderRepository;
-import pt.gladlyGivenApi.GladlyGiven.Services.HealthServiceService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +70,7 @@ public class ServiceProviderService extends AppUserService {
         return createUser(serviceProvider, serviceProviderRepository, isServiceOriginated);
     }
 
+    @Transactional
     public ServiceProvider createServiceProvider(String firstName, String lastName, String emailAddress, String gender, String password, String language, String phoneNumber, String nif, String licenseNumber, long categoryId) {
         ServiceProvider serviceProvider = findServiceProviderByFirstName(firstName);
 
@@ -118,11 +119,11 @@ public class ServiceProviderService extends AppUserService {
 
     public ServiceProvider addServicesToServiceProvider(ServiceProvider serviceProvider, HealthService service) {
 
-        if(serviceProvider.healthServiceList.contains(service)){
+        if(serviceProvider.healthServices.contains(service)){
             return null;
         }
 
-        serviceProvider.healthServiceList.add(service);
+        serviceProvider.healthServices.add(service);
         serviceProvider = serviceProviderRepository.save(serviceProvider);
 
         return serviceProvider;

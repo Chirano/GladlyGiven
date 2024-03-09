@@ -4,6 +4,7 @@
 package pt.gladlyGivenApi.GladlyGiven.Services.Users;
 
 
+import jakarta.transaction.Transactional;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,6 +94,7 @@ public abstract class AppUserService {
     }
 
 
+    @Transactional
     protected <T extends AppUser> T createUser(T user, AppUserRepository<T> repository, boolean isServiceOriginated) {
         if (user == null)
             return null;

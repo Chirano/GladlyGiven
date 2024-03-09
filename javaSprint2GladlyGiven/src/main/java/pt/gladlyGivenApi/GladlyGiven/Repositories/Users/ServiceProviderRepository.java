@@ -16,7 +16,7 @@ import java.util.Optional;
 public interface ServiceProviderRepository extends AppUserRepository<ServiceProvider> {
     Optional<ServiceProvider> findByLicenseNumber(String licenseNumber);
 
-    @Query(value = "SELECT sp FROM ServiceProvider sp JOIN sp.healthServiceList hs WHERE hs.id = :healthServiceId")
+    @Query(value = "SELECT sp FROM ServiceProvider sp JOIN sp.healthServices hs WHERE hs.id = :healthServiceId")
     List<ServiceProvider> findByHealthServiceId(@Param("healthServiceId") Long healthServiceId);
 
 }

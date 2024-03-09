@@ -15,6 +15,6 @@ public interface HealthServiceRepository extends JpaRepository<HealthService, Lo
     /*
     Author:Sónia Ribeiro
      */
-    @Query(value = "SELECT hs FROM HealthService hs JOIN hs.serviceProviderList sp WHERE sp.id = :serviceProviderId")
+    @Query(value = "SELECT hs FROM HealthService hs JOIN hs.serviceProviders sp WHERE sp.id = :serviceProviderId")
     List<HealthService> findByServiceProviderId(@Param("serviceProviderId") Long serviceProviderId);
 }
