@@ -1,14 +1,14 @@
 <div class="center-content">
-    <div>
-        <app-back-button></app-back-button>
-    </div>
-
-    <div>
-        <h1>I am...</h1>
-    </div>
-
-    <div>
-        <button type="button" (click)="toSignUpRefugee()">Looking for Help</button>
-        <button type="button" (click)="toHelpType()">Offering Help</button>
+    <div class="width-custom" style="--width: 80%;">
+        
+        <div>
+            <h1>I am...</h1>
+        </div>
+        
+        <div class="d-flex flex-column align-items-start justify-content-between">
+            <button type="button" (click)="toSignUpRefugee()" class="btn btn-primary mb-2">Looking for Help</button>
+            <button type="button" (click)="toHelpType()" class="btn btn-primary mb-2">Offering Help</button>
+            <app-back-button></app-back-button>
+        </div>
     </div>
 </div>

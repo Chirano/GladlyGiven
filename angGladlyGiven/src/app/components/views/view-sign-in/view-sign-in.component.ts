@@ -21,7 +21,7 @@ export class ViewSignInComponent {
 
   // could also send form data as parameters for this method
   // instead of fetching from DOM
-  signIn() {
+  signIn(form : any) {
     const signInDetails : SignInDetails = {
       email: (document.getElementById('email') as HTMLInputElement).value,
       password: (document.getElementById('password') as HTMLInputElement).value

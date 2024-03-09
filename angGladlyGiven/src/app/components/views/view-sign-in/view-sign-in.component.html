@@ -1,26 +1,28 @@
 <div class="center-content">
+  <div class="width-custom" style="--width: 80%;">
     <div>
-        <h2>Hey,</h2>
-        <h2>Let's Sign In</h2>
+      <h2>Hey,</h2>
+      <h2>Let's Sign In</h2>
     </div>
-
-    <div>
-      <form (ngSubmit)="signIn()">
-        <div>
-          <label for="email">Email:</label>
-          <input type="email" id="email" #emailInput required>
-        </div>
   
-        <div>
-          <label for="password">Password:</label>
-          <input type="password" id="password" #passwordInput required>
+    <div>
+      <form #signInForm="ngForm" (ngSubmit)="signIn(signInForm)">
+        
+        <div class="input-group mb-2">
+          <span class="input-group-text" id="basic-addon1">Email</span>
+          <input type="email" id="email" placeholder="email" class="form-control" ngModel name="email" required>
+        </div>
+      
+        <div class="input-group mb-2">
+          <span class="input-group-text" id="basic-addon2">Pass</span>
+          <input type="password" id="password" placeholder="password" class="form-control" ngModel name="password" required>
         </div>
       </form>
-    </div>
     
-    
-    <div>
-      <button type="button" (click)="toSignUp()">Register an account</button>
-      <button type="button" (click)="signIn()">Sign In</button>
+      <div class="mb-2 d-flex justify-content-between">
+        <button type="button" (click)="toSignUp()" class="btn btn-light">Register an account</button>
+        <button type="submit" class="btn btn-primary">Sign In</button>
+      </div>
     </div>
   </div>
+</div>

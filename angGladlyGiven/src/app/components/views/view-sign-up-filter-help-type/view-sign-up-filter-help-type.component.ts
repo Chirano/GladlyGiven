@@ -5,6 +5,13 @@ import { Component } from '@angular/core';
   templateUrl: './view-sign-up-filter-help-type.component.html',
   styleUrls: ['./view-sign-up-filter-help-type.component.scss']
 })
-export class ViewSignUpFilterHelpTypeComponent {
 
+export class ViewSignUpFilterHelpTypeComponent {
+  toSignUpServiceProvider() {
+
+  }
+
+  toSignUpDonor() {
+    
+  }
 }

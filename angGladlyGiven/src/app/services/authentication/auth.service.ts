@@ -90,14 +90,17 @@ export class AuthService {
 
 
   private SignUpRefugee(refugee: Refugee) {
-
+    console.log("Registered refugee: ", refugee);
+    EventManagerService.OnRouteEvent.emit(RouterPaths.ViewRefugee);
   }
-
+  
   private SignUpServiceProvider(serviceProvider: ServiceProvider) {
-
+    console.log("Registered Service Provider: ", serviceProvider);
+    EventManagerService.OnRouteEvent.emit(RouterPaths.ViewServiceProvider);
   }
-
+  
   private SignUpDonor(donor: Donor) {
-
+    console.log("Registered Donor: ", donor);
+    EventManagerService.OnRouteEvent.emit(RouterPaths.ViewDonor);
   }
 }
