@@ -1,0 +1,20 @@
+// add router path names here:
+// this will be: http://www.domain.com/sign-in or http://www.domain.com/view-admin, you get the idea
+
+export const RouterPaths = {
+    Home: "sign-in",
+    SignIn: "sign-in",
+    SignUp: "sign-up",
+
+    SignUpHelpIntention: "sign-up-help-intention",
+    SignUpHelpType: "sign-up-help-type",
+
+    SignUpRefugee: "sign-up-refugee",
+    SignUpServiceProvider: "sign-up-service-provider",
+    SignUpDonor: "sign-up-donor",
+
+    ViewAdmin: "view-admin",
+    ViewRefugee: "view-refugee",
+    ViewServiceProvider: "view-service-provider",
+    ViewDonor: "view-donor",
+}

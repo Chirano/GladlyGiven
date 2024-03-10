@@ -1,0 +1,32 @@
+<div class="center-content">
+  <div class="width-custom" style="--width: 80%;">
+    <div>
+      <h2>Hey,</h2>
+      <h2>Let's Sign Up</h2>
+    </div>
+
+    <div>
+      <form #signUpForm="ngForm" (ngSubmit)="signUp(signUpForm)">
+        <div class="input-group mb-2">
+          <span class="input-group-text" id="basic-addon1">Email</span>
+          <input type="email" id="email" class="form-control" placeholder="Email" required>
+        </div>
+
+        <div class="input-group mb-2">
+          <span class="input-group-text" id="basic-addon2">Password</span>
+          <input type="password" id="password" class="form-control" placeholder="Password" required>
+        </div>
+
+        <div class="input-group mb-2">
+          <span class="input-group-text" id="basic-addon3">Confirm Password</span>
+          <input type="password" id="confirm-password" class="form-control" placeholder="Confirm Password" required>
+        </div>
+
+        <div class="mb-2 d-flex justify-content-between"> <!-- occupy full width -->
+          <button type="button" (click)="toSignIn()" class="btn btn-light">Already registered?</button>
+          <button type="submit" class="btn btn-primary">Next</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
