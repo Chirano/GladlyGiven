@@ -66,6 +66,11 @@ public class ServiceProviderService extends AppUserService {
     public List<ServiceProvider> findServicesProvidersByHealthService(long id){
         return serviceProviderRepository.findByHealthServiceId(id);
     }
+
+    public List<ServiceProvider> findServicesProvidersByCity(String cityName){
+        return serviceProviderRepository.findAllByCityName(cityName);
+    }
+
     // create ---
     public ServiceProvider createServiceProvider(ServiceProvider serviceProvider, boolean isServiceOriginated) {
         return createUser(serviceProvider, serviceProviderRepository, isServiceOriginated);
