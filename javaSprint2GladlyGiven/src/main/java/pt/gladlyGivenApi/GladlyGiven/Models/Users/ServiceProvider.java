@@ -18,6 +18,18 @@ import java.util.List;
 @Entity
 public class ServiceProvider extends MonetaryUser<ServiceProvider> {
 
+    @Max(20)
+    public String cityName;
+
+    @Max(30)
+    public String streetName;
+
+    @Max(10)
+    public String doorNumber;
+
+    @Max(8)
+    public String postalCode;
+
     @Column(unique = true)
     @Max(16)
     public String licenseNumber;
@@ -36,12 +48,7 @@ public class ServiceProvider extends MonetaryUser<ServiceProvider> {
     @Min(0)
     public float reviewAverage; // fetched from Entity Framework API reviewObject
 
-    @ManyToOne
-    public Availability availabilities;
 
-    // ManyToOne não pode ser uma lista!!!
-    // Usar @ElementCollection para listas
-    // public List<Availability> availabilities;
 
     public ServiceProvider() {
 
@@ -49,8 +56,13 @@ public class ServiceProvider extends MonetaryUser<ServiceProvider> {
 
     public ServiceProvider(String firstName, String lastName, Email email, String gender,
                            String password, Language language, PhoneNumber phoneNumber, String nif,
+                           String cityName, String streetName, String doorNumber, String postalCode,
                            String licenseNumber, long categoryId) {
         super(firstName, lastName, email, gender, password, language, phoneNumber, nif);
+        this.cityName = cityName;
+        this.streetName = streetName;
+        this.doorNumber = doorNumber;
+        this.postalCode = postalCode;
         this.licenseNumber = licenseNumber;
         this.categoryId = categoryId;
     }
