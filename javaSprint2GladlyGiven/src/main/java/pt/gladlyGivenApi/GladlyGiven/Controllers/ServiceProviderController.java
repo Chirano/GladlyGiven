@@ -79,7 +79,21 @@ public class ServiceProviderController {
         return new ResponseEntity<>(serviceProviderDTOS, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/{cityName}", produces = "application/json")
+    public ResponseEntity<List<ServiceProviderDTO>> getServiceProviderByLocation(@PathVariable("cityName") String cityName)
+    {
+        List<ServiceProvider> serviceProviders = serviceProviderService.findServicesProvidersByCity(cityName);
+        if(serviceProviders.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
 
+        List<ServiceProviderDTO> serviceProviderDTOS = new ArrayList<>();
+        for(ServiceProvider serviceProvider : serviceProviders){
+            ServiceProviderDTO serviceProviderDTO = new ServiceProviderDTO(serviceProvider);
+            serviceProviderDTOS.add(serviceProviderDTO);
+        }
+        return new ResponseEntity<>(serviceProviderDTOS, HttpStatus.OK);
+    }
 
     // --- create ---
     @PostMapping("/params")
