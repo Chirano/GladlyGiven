@@ -37,7 +37,11 @@ public class ServiceProvider extends MonetaryUser<ServiceProvider> {
     public float reviewAverage; // fetched from Entity Framework API reviewObject
 
     @ManyToOne
-    public List<Availability> availabilities;
+    public Availability availabilities;
+
+    // ManyToOne não pode ser uma lista!!!
+    // Usar @ElementCollection para listas
+    // public List<Availability> availabilities;
 
     public ServiceProvider() {
 

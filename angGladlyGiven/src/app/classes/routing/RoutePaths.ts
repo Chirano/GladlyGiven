@@ -1,5 +1,5 @@
 // add router path names here:
-// this will be: http://localhost:4200/SignIn or http://localhost:4200/ViewAdmin, you get the idea
+// this will be: http://www.domain.com/sign-in or http://www.domain.com/view-admin, you get the idea
 
 export const RouterPaths = {
     Home: "sign-in",
