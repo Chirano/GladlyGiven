@@ -58,7 +58,7 @@ namespace GladlyGiven.Controllers
         [HttpGet("mycostsupports/{id}")]
         public async Task<ActionResult<IEnumerable<CostSupportDTO>>> GetAllCostSupportsByUserId(int userId, int page = 1, int pageSize = 5)
         {
-            List<CostSupportDTO> costSupports = await costSupportService.FindAllCostSupports();
+            List<CostSupportDTO> costSupports = await costSupportService.FindAllCostSupportsByUserId(userId);
 
             if (costSupports != null && costSupports.Count > 0)
                 return Ok(costSupports.Skip((page - 1) * pageSize)

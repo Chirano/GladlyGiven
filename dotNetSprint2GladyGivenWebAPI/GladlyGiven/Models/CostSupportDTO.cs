@@ -8,6 +8,7 @@ namespace GladlyGiven.Models
         public long Id { get; set; }
 
         public double Amount { get; set; }
+        public long AppointmentId { get; set; }
 
         public string Description { get; set; }
 
@@ -23,6 +24,7 @@ namespace GladlyGiven.Models
         {
             this.Id = costSupport.Id;
             this.Amount = costSupport.Amount;
+            this.AppointmentId = costSupport.AppointmentId;
             this.Description = costSupport.Description;
             this.ServiceProviderId = costSupport.ServiceProviderId;
             this.Type = costSupport.Type;

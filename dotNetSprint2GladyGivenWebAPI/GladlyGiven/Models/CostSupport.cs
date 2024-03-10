@@ -13,6 +13,8 @@ namespace GladlyGiven.Models
 
         public double Amount { get; set; }
 
+        public long AppointmentId { get; set; }
+
         public long ServiceProviderId { get; set; }
 
         public string Description { get; set; }
