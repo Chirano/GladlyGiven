@@ -740,3 +740,4 @@ replay_pid*
 dotNetSprint2GladyGivenWebAPI/GladlyGiven/Properties/launchSettings.json
 dotNetSprint2GladyGivenWebAPI/GladlyGiven/NeonStaticConnectionStringBuilder.cs
 dotNetSprint2GladyGivenWebAPI/GladlyGiven/Program.cs
+package-lock.json
