@@ -19,15 +19,34 @@ import java.util.Optional;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+/**
+ * Author: Sónia Ribeiro
+ */
+
+/**
+ * Controller class for managing reviews.
+ */
 @RestController
 public class ReviewController {
 
+    /**
+     * Service for managing reviews.
+     */
     @Autowired
     ReviewServiceImpl reviewService;
 
+    /**
+     * Service for managing appointments.
+     */
     @Autowired
     AppointmentService appointmentService;
 
+
+    /**
+     * Retrieves a review by its ID
+     * @param reviewId The ID of the review to retrieve
+     * @return ResponseEntity with the retrieved review if found, or HTTP status NOT_FOUND if not found.
+     */
     @GetMapping(value = "/review/{reviewId}")
     public ResponseEntity<Review> findReviewById(@PathVariable("reviewId") long reviewId){
 
@@ -40,6 +59,12 @@ public class ReviewController {
     }
 
 
+    /**
+     * Creates a new review
+     * @param review  The review to be created
+     * @return ResponseEntity with the created review if successful, or HTTP status BAD_REQUEST if unsuccessful
+     */
+
     @PostMapping(value= "/review", consumes = "application/json", produces = "application/json")
         public ResponseEntity<Review> createReview(@RequestBody Review review){
             Review newReview = reviewService.createReview(review);
@@ -51,6 +76,14 @@ public class ReviewController {
             return new ResponseEntity(newReview, HttpStatus.CREATED);
         }
 
+
+    /**
+     * Retrieves all reviews
+     * @param page Page number for pagination
+     * @param size Number of items per page
+     * @param sort Sorting parameter for reviews
+     * @return ResponseEntity with a collection of reviews if found, or HTTP status NO_CONTENT if not found.
+     */
     @GetMapping(value="/reviews", produces = "application/json")
     public ResponseEntity<CollectionModel<Review>> findAllReviews(@RequestParam(name="page") Optional<Integer> page, @RequestParam(name="size")Optional<Integer>size, @RequestParam(name="sort")Optional<String> sort){
 
@@ -68,6 +101,11 @@ public class ReviewController {
     }
 
 
+    /**
+     * Retrieves a review by appointment ID
+     * @param id The ID of the appointment
+     * @return ResponseEntity with the retrieved review if found, or HTTP status NOT_FOUND if not found
+     */
 
     @GetMapping(value = "review/appointment/{id}", produces = "application/json")
     public ResponseEntity<Review> findReviewByAppointmentId(@PathVariable("id") long id){
@@ -77,6 +115,12 @@ public class ReviewController {
         }
         return new ResponseEntity<>(review, HttpStatus.OK);
     }
+
+    /**
+     * Retrieves all reviews by service provider
+     * @param id The ID of the service provider
+     * @return ResponseEntity with a list of reviews if found, or HTTP status NO_CONTENT if not found
+     */
 
     @GetMapping(value = "review/serviceprovider/{id}", produces = "application/json")
     public ResponseEntity<List<Review>> findAllReviewsByServiceProvider(@PathVariable("id") long id)
