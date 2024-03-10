@@ -3,8 +3,6 @@ package pt.gladlyGivenApi.GladlyGiven.Models.DTO;
 
 import pt.gladlyGivenApi.GladlyGiven.Models.Users.ServiceProvider;
 
-import java.util.List;
-
 public class ServiceProviderDTO {
     public long id;
 

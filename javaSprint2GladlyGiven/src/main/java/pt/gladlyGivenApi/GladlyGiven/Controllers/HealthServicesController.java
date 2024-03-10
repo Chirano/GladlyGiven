@@ -75,13 +75,10 @@ public class HealthServicesController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-
         HealthService newHealthService = service.createHealthService(description, category);
         if(newHealthService == null){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-
-        
 
         return new ResponseEntity<>(newHealthService, HttpStatus.CREATED);
     }

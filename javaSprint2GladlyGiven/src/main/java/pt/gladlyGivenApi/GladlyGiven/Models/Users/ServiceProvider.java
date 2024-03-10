@@ -6,6 +6,7 @@ package pt.gladlyGivenApi.GladlyGiven.Models.Users;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import pt.gladlyGivenApi.GladlyGiven.Models.Availability;
 import pt.gladlyGivenApi.GladlyGiven.Models.DTO.ServiceProviderDTO;
 import pt.gladlyGivenApi.GladlyGiven.Models.Email;
 import pt.gladlyGivenApi.GladlyGiven.Models.HealthServices.HealthService;
@@ -34,6 +35,9 @@ public class ServiceProvider extends MonetaryUser<ServiceProvider> {
 
     @Min(0)
     public float reviewAverage; // fetched from Entity Framework API reviewObject
+
+    @ManyToOne
+    public List<Availability> availabilities;
 
     public ServiceProvider() {
 
