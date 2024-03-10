@@ -22,6 +22,7 @@ import pt.gladlyGivenApi.GladlyGiven.Repositories.Users.ServiceProviderRepositor
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class ServiceProviderService extends AppUserService {
@@ -71,7 +72,10 @@ public class ServiceProviderService extends AppUserService {
     }
 
     @Transactional
-    public ServiceProvider createServiceProvider(String firstName, String lastName, String emailAddress, String gender, String password, String language, String phoneNumber, String nif, String licenseNumber, long categoryId) {
+    public ServiceProvider createServiceProvider(String firstName, String lastName, String emailAddress, String gender,
+                                                 String password, String language, String phoneNumber, String nif,
+                                                 String cityName, String streetName, String doorNumber, String postalCode,
+                                                 String licenseNumber, long categoryId) {
         ServiceProvider serviceProvider = findServiceProviderByFirstName(firstName);
 
         if (serviceProvider == null) {
@@ -88,6 +92,10 @@ public class ServiceProviderService extends AppUserService {
                     userLanguage,
                     userPhoneNumber,
                     nif,
+                    cityName,
+                    streetName,
+                    doorNumber,
+                    postalCode,
                     licenseNumber,
                     categoryId
             );

@@ -83,7 +83,13 @@ public class ServiceProviderController {
 
     // --- create ---
     @PostMapping("/params")
-    public ServiceProvider createServiceProviderViaRequestParams(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String gender, @RequestParam String password, @RequestParam String language, @RequestParam String phoneNumber, @RequestParam String nif, @RequestParam String licenseNumber, @RequestParam long categoryId) {
+    public ServiceProvider createServiceProviderViaRequestParams(@RequestParam String firstName, @RequestParam String lastName,
+                                                                 @RequestParam String email, @RequestParam String gender,
+                                                                 @RequestParam String password, @RequestParam String language,
+                                                                 @RequestParam String phoneNumber, @RequestParam String nif,
+                                                                 @RequestParam  String cityName, @RequestParam String streetName,
+                                                                 @RequestParam String doorNumber, @RequestParam String postalCode,
+                                                                 @RequestParam String licenseNumber, @RequestParam long categoryId) {
         return serviceProviderService.createServiceProvider(
                 firstName,
                 lastName,
@@ -93,6 +99,10 @@ public class ServiceProviderController {
                 language,
                 phoneNumber,
                 nif,
+                cityName,
+                streetName,
+                doorNumber,
+                postalCode,
                 licenseNumber,
                 categoryId
         );
