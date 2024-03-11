@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GladlyGiven.Controllers
 {
-    //Insert CORS here
     [ApiController]
     [Route("api/v1/[controller]")]
     [EnableCors]

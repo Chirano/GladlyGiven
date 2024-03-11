@@ -131,9 +131,11 @@ namespace GladlyGiven.Services
                    {
                        Amount = cost.Amount,
                        Description = cost.Description,
+                       AppointmentId = cost.AppointmentId,
                        ServiceProviderId = cost.ServiceProviderId,
+                       Type = cost.Type,
+                       DateRequest = cost.DateRequest,
                        Status = Enums.CostSupportStatus.PENDING,
-                       Type = cost.Type
                    };
                    context.CostSupports.Add(costSupport);
                    context.SaveChanges();

@@ -11,9 +11,13 @@ namespace GladlyGiven.Models
 
         public string Description { get; set; }
 
+        public long AppointmentId { get; set; }
+
         public long ServiceProviderId { get; set; }
 
         public CostSupportType Type { get; set; }
+
+        public string DateRequest { get; set; }
 
         public CostSupportDTO()
         {
@@ -24,8 +28,10 @@ namespace GladlyGiven.Models
             this.Id = costSupport.Id;
             this.Amount = costSupport.Amount;
             this.Description = costSupport.Description;
+            this.AppointmentId = costSupport.AppointmentId;
             this.ServiceProviderId = costSupport.ServiceProviderId;
             this.Type = costSupport.Type;
+            this.DateRequest = costSupport.DateRequest;
         }
     }
 }
