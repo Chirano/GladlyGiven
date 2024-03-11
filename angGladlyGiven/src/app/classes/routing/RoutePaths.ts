@@ -19,4 +19,6 @@ export const RouterPaths = {
     ViewDonor: "view-donor",
 
     ViewFaq: "view-faq",
+    
+    ViewCostSupport : "view-service-provider/costsupport"
 }

@@ -1,7 +1,5 @@
 export interface CostSupport{
-    dateOfAppointment : string,
-    refugeeFirstName : string,
-    refugeeLastName : string,
+    appointmentId: number, 
     type : number //checar!
     amount : number,
     description : string, 

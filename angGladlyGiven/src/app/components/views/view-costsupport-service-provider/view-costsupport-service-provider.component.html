@@ -1,34 +1,61 @@
+<h1 class="costsupport-title" style="text-align: center">
+  Cost Support Request
+</h1>
+
 <div class="cost-support-form">
   <form class="form">
     <!--Appointment Info-->
-    <h3>Select the date of related appointment:</h3>
-    <input type="date" [(ngModel)]="costSupport.dateOfAppointment" required>
-
-    <!--Patient Info-->
-    <h3>Type patient name:</h3>
-    <span class="input-group-text">Patient First Name</span>
-    <input type="text" id="firstName" placeholder="Patient first name" name="firstName" class="form-control" [(ngModel)]="costSupport.refugeeFirstName" required>
-    <span class="input-group-text">Patient Last Name</span>
-    <input type="text" id="firstName" placeholder="Patient last name" name="lastName" class="form-control" [(ngModel)]="costSupport.refugeeLastName" required>
-    
+    <div class="app-info">
+      <h5>Insert the appointment identifier related to this request:</h5>
+      <input
+        type="number"
+        [(ngModel)]="costSupport.appointmentId"
+        name="appointmentId"
+        required
+      />
+    </div>
     <!--Type of Cost Support-->
-    <h3>Select a type:</h3>
-    <label>
-      <input type="radio" [(ngModel)]="costSupport.type" value="Commute" /> Commute
-    </label>
-    <label>
-      <input type="radio" [(ngModel)]="costSupport.type" value="Material" /> Material
-    </label>
+    <div class="type-info">
+      <h5>Select a type:</h5>
+      <label>
+        <input
+          type="radio"
+          [(ngModel)]="costSupport.type"
+          name="type"
+          value="Commute"
+        />
+        Commute
+      </label>
+      <label>
+        <input
+          type="radio"
+          [(ngModel)]="costSupport.type"
+          name="type"
+          value="Material"
+        />
+        Material
+      </label>
+    </div>
 
-  <h3>Enter the amount requested:</h3>
-  <div class="input-group">
-    <span class="input-group-text">€</span>
-    <input type="number" [(ngModel)]="costSupport.amount" name="amount" class="form-control" step="0.01" required>
+    <div class="amount">
+    <h5>Enter the amount requested:</h5>
+    <div class="input-group">
+      <span class="input-group-text">€</span>
+      <input
+        type="number"
+        [(ngModel)]="costSupport.amount"
+        name="amount"
+        class="form-control"
+        step="0.01"
+        required
+      />
+    </div>
   </div>
 
     <!--Description of Cost Support-->
+    <div class="description">
     <div class="input-group mb-2">
-      <h3>Type cost support description:</h3>
+      <h5>Type cost support description:</h5>
       <textarea
         id="description"
         placeholder="Insert your Description"
@@ -38,10 +65,24 @@
         required
       ></textarea>
     </div>
-
+  </div>
     <div class="mb-2 d-flex justify-content-between">
       <app-back-button></app-back-button>
-      <!--<button type="submit" class="btn btn-primary" (click)="addCostSupport(costSupport.dateOfAppointment, costSupport.refugeeFirstName, costSupport.refugeeLastName, costSupport.type, costSupport.amount, costSupport.description, costSupport.serviceProviderId)">Submit</button>-->
+      <button
+        type="submit"
+        class="btn btn-primary"
+        (click)="
+          addCostSupport(
+            costSupport.appointmentId,
+            costSupport.type,
+            costSupport.amount,
+            costSupport.description,
+            costSupport.serviceProviderId
+          )
+        "
+      >
+        Submit
+      </button>
     </div>
   </form>
 </div>
