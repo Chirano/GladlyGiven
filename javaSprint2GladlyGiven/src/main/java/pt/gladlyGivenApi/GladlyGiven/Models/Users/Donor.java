@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
 import pt.gladlyGivenApi.GladlyGiven.Enums.FiscalIdentity;
+import pt.gladlyGivenApi.GladlyGiven.Interfaces.IDTOable;
+import pt.gladlyGivenApi.GladlyGiven.Models.DTO.DonorDTO;
 import pt.gladlyGivenApi.GladlyGiven.Models.Email;
 import pt.gladlyGivenApi.GladlyGiven.Models.Language;
 import pt.gladlyGivenApi.GladlyGiven.Models.PhoneNumber;
@@ -18,7 +20,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Donor extends MonetaryUser<Donor> {
+public class Donor extends MonetaryUser<Donor> implements IDTOable<DonorDTO> {
 
     public FiscalIdentity fiscalIdentity;
 
@@ -43,8 +45,21 @@ public class Donor extends MonetaryUser<Donor> {
     }
 
     @Override
-    public Donor toDTO() {
-        return this;
+    public DonorDTO toDTO() {
+        DonorDTO donorDTO = new DonorDTO();
+        donorDTO.id = this.id;
+        donorDTO.firstName = this.firstName;
+        donorDTO.lastName = this.lastName;
+        donorDTO.email = this.email.email;
+        donorDTO.gender = this.gender;
+        donorDTO.photoURL = this.photoURL;
+        donorDTO.mainLanguage = this.mainLanguage.language;
+        donorDTO.mainPhoneNumber = this.mainPhoneNumber.number;
+        donorDTO.nif = this.nif;
+        donorDTO.paymentInfoId = this.paymentInfoId;
+        donorDTO.invoiceInfoId = this.invoiceInfoId;
+        donorDTO.fiscalIdentity = this.fiscalIdentity;
+        donorDTO.donationIds = this.donationIds;
+        return donorDTO;
     }
-
 }

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, tap, throwError } from 'rxjs';
-import { Refugee } from 'src/app/classes/userProfiles/Refugee';
+import { RefugeeDTO } from 'src/app/classes/userProfiles/Refugee';
+import { MockRefugees } from 'src/app/classes/userProfiles/mockUsers/MockRefugees';
 
 @Injectable({
   providedIn: 'root'
@@ -29,28 +30,20 @@ export class RefugeeService  {
     return this.http.post(`${this.baseUrl}/refugee/fromParams`, data);
   }
 
-  /*
-  postExample(data: any): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<any>(`${this.apiUrl}/endpoint`, data, { headers });
-  }
-  */
-
   // POST /api/refugee/fromBody
+  postRefugeeFromBody(data: RefugeeDTO): Observable<RefugeeDTO> {
+    this.logEndpoint(`${this.baseUrl}/refugee/fromBody`);
+    return this.http.post<RefugeeDTO>(`${this.baseUrl}/refugee/fromBody`, data);
+  }
+  
+  /* OLD
   postRefugeeFromBody(data: Refugee): Observable<any> {
 
     this.logEndpoint(`${this.baseUrl}/refugee/fromBody`);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<any>(`${this.baseUrl}/refugee/fromBody`, data, { headers}).pipe(
-      
-      tap(data => console.log(data)),
-
-      catchError(error => {
-        console.error('Error creating refugee:', error);
-          throw 'Error .';
-      })
-    );
+    return this.http.post<any>(`${this.baseUrl}/refugee/fromBody`, data, { headers})
   }
+  */
 
   // GET /api/refugee/{lastname}
   getRefugeeByLastName(lastName: string): Observable<any> {
@@ -70,5 +63,37 @@ export class RefugeeService  {
   // GET /api/refugee/{email}
   getRefugeeByEmail(email: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/refugee/${email}`);
+  }
+
+
+  static MapToRefugee(data: any): RefugeeDTO {
+    // Map the response data to RefugeeDTO interface
+    return {
+      id: data.id || -1,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      gender: data.gender,
+      photoURL: data.photoURL,
+      mainLanguage: data.mainLanguage,
+      mainPhoneNumber: data.phone,
+      protocolId: data.protocolId,
+      snsNumber: data.sns,
+      nationality: data.nationality,
+      country: data.country
+    };
+  }
+  
+
+  // chat gpt generated
+  static GetRandomRefugee(): RefugeeDTO {
+    const mockRefugees: { [key: string]: RefugeeDTO } = MockRefugees; // Explicit typing here
+
+    // Get an array of refugee keys
+    const refugeeKeys = Object.keys(mockRefugees);
+    // Choose a random key from the array
+    const randomKey = refugeeKeys[Math.floor(Math.random() * refugeeKeys.length)];
+    // Return the refugee object corresponding to the random key
+    return mockRefugees[randomKey];
   }
 }

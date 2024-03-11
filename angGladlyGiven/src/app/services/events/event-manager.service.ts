@@ -5,7 +5,7 @@ import { SignInDetails as SignInDetails } from 'src/app/classes/authentication/S
 import { SignUpDetails } from 'src/app/classes/authentication/SignUpDetails';
 import { RoutingService } from '../routes/routing.service';
 import { AuthService } from '../authentication/auth.service';
-import { Refugee } from 'src/app/classes/userProfiles/Refugee';
+import { RefugeeDTO } from 'src/app/classes/userProfiles/Refugee';
 import { ServiceProvider } from 'src/app/classes/userProfiles/ServiceProvider';
 import { Donor } from 'src/app/classes/userProfiles/Donor';
 import { RefugeeService } from '../data/javaSpring/refugee/refugee.service';
@@ -30,7 +30,7 @@ export class EventManagerService {
   static OnSignInEvent: EventEmitter<SignInDetails> = new EventEmitter<SignInDetails>();
   static OnSingUpEvent: EventEmitter<SignUpDetails> = new EventEmitter<SignUpDetails>();
   
-  static OnSignUpRefugeeEvent: EventEmitter<Refugee> = new EventEmitter<Refugee>();
+  static OnSignUpRefugeeEvent: EventEmitter<RefugeeDTO> = new EventEmitter<RefugeeDTO>();
   static OnSignUpServiceProviderEvent: EventEmitter<ServiceProvider> = new EventEmitter<ServiceProvider>();
   static OnSignUpDonorEvent: EventEmitter<Donor> = new EventEmitter<Donor>();
 

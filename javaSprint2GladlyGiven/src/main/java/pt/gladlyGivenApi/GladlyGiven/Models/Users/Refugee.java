@@ -6,13 +6,15 @@ package pt.gladlyGivenApi.GladlyGiven.Models.Users;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Max;
+import pt.gladlyGivenApi.GladlyGiven.Interfaces.IDTOable;
+import pt.gladlyGivenApi.GladlyGiven.Models.DTO.RefugeeDTO;
 import pt.gladlyGivenApi.GladlyGiven.Models.Email;
 import pt.gladlyGivenApi.GladlyGiven.Models.Country;
 import pt.gladlyGivenApi.GladlyGiven.Models.Language;
 import pt.gladlyGivenApi.GladlyGiven.Models.PhoneNumber;
 
 @Entity
-public class Refugee extends AppUser<Refugee> {
+public class Refugee extends AppUser<Refugee> implements IDTOable<RefugeeDTO> {
     @Max(16)
     public String protocolId;
 
@@ -46,7 +48,51 @@ public class Refugee extends AppUser<Refugee> {
     }
 
     @Override
-    public Refugee toDTO() {
-        return this;
+    public RefugeeDTO toDTO() {
+        RefugeeDTO refugeeDTO = new RefugeeDTO();
+        refugeeDTO.id = this.id;
+        refugeeDTO.firstName = this.firstName;
+        refugeeDTO.lastName = this.lastName;
+        refugeeDTO.email = this.email.email;
+        refugeeDTO.gender = this.gender;
+        refugeeDTO.photoURL = this.photoURL;
+        refugeeDTO.mainLanguage = this.mainLanguage.language;
+        refugeeDTO.mainPhoneNumber = this.mainPhoneNumber.number;
+        refugeeDTO.protocolId = this.protocolId;
+        refugeeDTO.snsNumber = this.snsNumber;
+        refugeeDTO.nationality = this.nationality;
+        refugeeDTO.country = this.country.country;
+        return refugeeDTO;
     }
+
+    public static Refugee fromDTO(RefugeeDTO dto) {
+        Email email = new Email();
+        email.email = dto.email;
+
+        Language language = new Language();
+        language.language = dto.mainLanguage;
+
+        PhoneNumber phoneNumber = new PhoneNumber();
+        phoneNumber.number = dto.mainPhoneNumber;
+
+        Country country = new Country();
+        country.country = dto.country;
+
+        Refugee refugee = new Refugee();
+        refugee.id = dto.id;
+        refugee.firstName = dto.firstName;
+        refugee.lastName = dto.lastName;
+        refugee.email = email;
+        refugee.gender = dto.gender;
+        refugee.photoURL = dto.photoURL;
+        refugee.mainLanguage = language;
+        refugee.mainPhoneNumber = phoneNumber;
+        refugee.protocolId = dto.protocolId;
+        refugee.snsNumber = dto.snsNumber;
+        refugee.nationality = dto.nationality;
+        refugee.country = country;
+
+        return refugee;
+    }
+
 }

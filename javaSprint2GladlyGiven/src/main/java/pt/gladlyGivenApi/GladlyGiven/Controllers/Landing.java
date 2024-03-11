@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/hello")
+@RequestMapping("/api/landing")
 public class Landing {
     @GetMapping
     public ResponseEntity<String> GetHello() {

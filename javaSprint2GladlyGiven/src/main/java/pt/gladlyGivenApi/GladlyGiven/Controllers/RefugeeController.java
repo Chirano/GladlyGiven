@@ -6,6 +6,7 @@ package pt.gladlyGivenApi.GladlyGiven.Controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import pt.gladlyGivenApi.GladlyGiven.Models.DTO.RefugeeDTO;
 import pt.gladlyGivenApi.GladlyGiven.Models.Users.Refugee;
 import pt.gladlyGivenApi.GladlyGiven.Services.Users.RefugeeService;
 
@@ -47,14 +48,24 @@ public class RefugeeController {
 
     // --- create ---
     @PostMapping("/fromParams")
-    public Refugee createRefugeeViaRequestParams(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String gender, @RequestParam String password, @RequestParam String protocolId, @RequestParam String snsNumber, @RequestParam String nationality, @RequestParam String country, @RequestParam String language, @RequestParam String phoneNumber) {
-        return refugeeService.createRefugee(firstName, lastName, email, gender, password, protocolId, snsNumber, nationality, country, language, phoneNumber);
+    public RefugeeDTO createRefugeeViaRequestParams(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String gender, @RequestParam String password, @RequestParam String protocolId, @RequestParam String snsNumber, @RequestParam String nationality, @RequestParam String country, @RequestParam String language, @RequestParam String phoneNumber) {
+        Refugee refugee = refugeeService.createRefugee(firstName, lastName, email, gender, password, protocolId, snsNumber, nationality, country, language, phoneNumber);
+        return refugee.toDTO();
     }
 
-    @PostMapping(value = "/fromBody", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Refugee createRefugeeViaRequestBody(@RequestBody Refugee refugee) {
-        System.out.println("Recieved request!");
-        return refugeeService.createRefugee(refugee, false);
+    @PostMapping(value = "/fromBody")
+    public RefugeeDTO createRefugeeViaRequestBody(@RequestBody RefugeeDTO refugee) {
+        System.out.println("\n\nRefugee:\n" + refugee.toString());
+
+        Refugee ref = refugeeService.createRefugee(refugee, false);
+
+        if (ref != null) {
+            System.out.println("Created successfully!");
+            return ref.toDTO();
+        } else {
+            System.out.println("Object is null!");
+            return null;
+        }
     }
 
 

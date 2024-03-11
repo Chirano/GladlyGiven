@@ -1,10 +1,16 @@
 // Author: Tiago Barracha ti.barracha@gmail.com
 
-import { AppUser } from "./baseUsers/AppUser";
-
-export interface Refugee extends AppUser {
-    protocolId      : string,
-    sns             : string,
-    nationality     : string,
-    country         : string,
+export interface RefugeeDTO {
+    id: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    gender: string;
+    photoURL: string;
+    mainLanguage: string;
+    mainPhoneNumber: string;
+    protocolId: string;
+    snsNumber: string;
+    nationality: string;
+    country: string;
 }

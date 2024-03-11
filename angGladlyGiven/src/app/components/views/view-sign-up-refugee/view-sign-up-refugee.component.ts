@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Refugee } from 'src/app/classes/userProfiles/Refugee';
+import { RefugeeDTO as RefugeeDTO } from 'src/app/classes/userProfiles/Refugee';
+import { RefugeeService } from 'src/app/services/data/javaSpring/refugee/refugee.service';
 import { EventManagerService } from 'src/app/services/events/event-manager.service';
 
 @Component({
@@ -10,37 +11,37 @@ import { EventManagerService } from 'src/app/services/events/event-manager.servi
 
 export class ViewSignUpRefugeeComponent {
 
-  private refugee: Refugee | null = null;
+  private refugee: RefugeeDTO | null = null;
 
   constructor() {
   }
 
   registerNewRefugee(refugeeForm: any) {
-  
+    var refugee: RefugeeDTO | null = null;
+
     if (refugeeForm.valid) {
-      this.refugee = {
-        // app user:
-        id : -1,
-        firstName         : refugeeForm.value.firstName,
-        lastName          : refugeeForm.value.lastName,
-        email             : refugeeForm.value.email,
-        gender            : refugeeForm.value.gender,
-        phone             : refugeeForm.value.phone,
-        photoURL          : "",
-        mainLanguage      : refugeeForm.value.mainLanguage,
-        secondLanguage    : refugeeForm.value.secondLanguage,
-  
-        // refugee:
-        protocolId        : refugeeForm.value.protocolId,
-        sns               : refugeeForm.value.sns,
-        nationality       : refugeeForm.value.nationality,
-        country           : refugeeForm.value.country,
+      refugee = {
+        id: -1,
+        firstName: refugeeForm.value.firstName,
+        lastName: refugeeForm.value.lastName,
+        email: refugeeForm.value.email,
+        gender: refugeeForm.value.gender,
+        photoURL: "",
+        mainLanguage: refugeeForm.value.mainLanguage,
+        mainPhoneNumber: refugeeForm.value.phone, // Assuming phone number is stored in mainPhoneNumber
+        protocolId: refugeeForm.value.protocolId,
+        snsNumber: refugeeForm.value.sns, // Assuming snsNumber is used for sns
+        nationality: refugeeForm.value.nationality,
+        country: refugeeForm.value.country,
       };
-      
-      // console.log(this.refugee);
-      EventManagerService.OnSignUpRefugeeEvent.emit(this.refugee);
     } else {
-      console.log("Form is invalid");
+      refugee = RefugeeService.GetRandomRefugee();
+      console.log("Form is invalid, creating mock user: ", this.refugee);    
+    }
+
+    if (refugee) {
+      EventManagerService.OnSignUpRefugeeEvent.emit(refugee);
     }
   }
+
 }

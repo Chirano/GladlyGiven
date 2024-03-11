@@ -91,5 +91,4 @@ public class DonorService extends AppUserService{
         existingDonor.setFiscalIdentity(donor.getFiscalIdentity());
         return donorRepository.save(existingDonor);
     }
-
 }

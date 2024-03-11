@@ -9,7 +9,7 @@ import { SignUpDetails } from 'src/app/classes/authentication/SignUpDetails';
 import { SessionContext } from 'src/app/classes/authentication/SessionContext';
 
 import { UserType } from 'src/app/classes/userProfiles/UserType';
-import { Refugee } from 'src/app/classes/userProfiles/Refugee';
+import { RefugeeDTO } from 'src/app/classes/userProfiles/Refugee';
 import { ServiceProvider } from 'src/app/classes/userProfiles/ServiceProvider';
 import { Donor } from 'src/app/classes/userProfiles/Donor';
 
@@ -25,10 +25,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 
 export class AuthService {
-  
-  private helloJavaURL = "http://localhost:8080/api/hello";
-  private helloDotNetURL = "https://localhost:7280/api/landing";
-
   static authState: AuthState = AuthState.None;
 
   private signUpDetails : SignUpDetails | null = null;
@@ -47,29 +43,12 @@ export class AuthService {
     private donorService: DonorService
   ) {
 
-    EventManagerService.OnJavaHello.subscribe(() => this.getHelloFromJava().subscribe());
-    EventManagerService.OnDotNetHello.subscribe(() => this.getHelloFromDotNet().subscribe());
-
     EventManagerService.OnSignInEvent.subscribe(this.SignInFilter.bind(this));
     EventManagerService.OnSingUpEvent.subscribe(this.SignUp.bind(this));
 
     EventManagerService.OnSignUpRefugeeEvent.subscribe(this.SignUpRefugee.bind(this));
     EventManagerService.OnSignUpServiceProviderEvent.subscribe(this.SignUpServiceProvider.bind(this));
     EventManagerService.OnSignUpDonorEvent.subscribe(this.SignUpDonor.bind(this));
-  }
-
-
-  // API Hello
-  // -------------------------
-  getHelloFromJava() : Observable<string> {
-    const hello = this.http.get<string>(this.helloJavaURL);
-    return hello;
-  }
-
-  getHelloFromDotNet() : Observable<string> {
-    const hello = this.http.get<string>(this.helloDotNetURL);
-    
-    return hello;
   }
 
 
@@ -124,25 +103,19 @@ export class AuthService {
   }
 
 
-  private SignUpRefugee(refugee: Refugee) {
+  private SignUpRefugee(refugee: RefugeeDTO) {
     this.refugeeService.postRefugeeFromBody(refugee).subscribe({
       next: (response: any) => {
-        /*
-        if (response.status === 200) {
-          console.log("Refugee account created successfully: ", response);
-          EventManagerService.OnRouteEvent.emit(RouterPaths.ViewRefugee);
-        } else {
-          console.log("Tried to Register Refugee: ", refugee);
-        }
-        */
-        // Emit an event or execute a callback function with the response
-        console.log(response);
-
-        //EventManagerService.OnSignUpRefugeeResponse.emit(response);
+        // if (200 OK) =>
+        // map to refugee
+        // change to refugee view
+        var refugee: RefugeeDTO = RefugeeService.MapToRefugee(response);
+        console.log("Sign Up Refugee:", response);
+        console.log("Refugee:", refugee);
       },
+
       error: (error: any) => {
         console.error("Error creating refugee account: ", error);
-        // Handle the error (e.g., display an error message to the user)
       }
     });
   }
