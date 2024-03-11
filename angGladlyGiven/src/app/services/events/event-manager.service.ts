@@ -8,6 +8,7 @@ import { AuthService } from '../authentication/auth.service';
 import { Refugee } from 'src/app/classes/userProfiles/Refugee';
 import { ServiceProvider } from 'src/app/classes/userProfiles/ServiceProvider';
 import { Donor } from 'src/app/classes/userProfiles/Donor';
+import { Contact } from 'src/app/classes/userProfiles/Contact';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,7 @@ export class EventManagerService {
   static OnSignUpServiceProviderEvent: EventEmitter<ServiceProvider> = new EventEmitter<ServiceProvider>();
   static OnSignUpDonorEvent: EventEmitter<Donor> = new EventEmitter<Donor>();
 
+  static OnContactEvent: EventEmitter<Contact> = new EventEmitter<Contact>();
 
   // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   // INITIALIZE SERVICES WITH EVENTS HERE

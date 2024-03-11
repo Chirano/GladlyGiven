@@ -15,6 +15,7 @@ import { ViewDonorComponent } from './components/views/view-donor/view-donor.com
 import { RefreshSignUpGuard as RefreshSignUpGuard } from './guards/refresh/refreshSignUp.guard';
 import { ViewFaqComponent } from './components/views/view-faq/view-faq.component';
 import { ViewCostsupportServiceProviderComponent } from './components/views/view-costsupport-service-provider/view-costsupport-service-provider.component';
+import { ViewContactComponent } from './components/views/view-contact/view-contact.component';
 
 
 
@@ -42,6 +43,10 @@ const routes: Routes = [
 
   // Faq
   { path: RouterPaths.ViewFaq, component: ViewFaqComponent, canActivate: [RefreshSignUpGuard] },
+
+  // Contact
+  { path: RouterPaths.ViewContact, component: ViewContactComponent, canActivate: [RefreshSignUpGuard] },
+
 
   { path: '**', redirectTo: RouterPaths.SignIn }
 ];
