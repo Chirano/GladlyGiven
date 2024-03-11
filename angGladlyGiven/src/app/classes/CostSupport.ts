@@ -1,8 +1,9 @@
 export interface CostSupport{
-    appointmentId: number, 
-    type : number //checar!
+    id : number,
     amount : number,
     description : string, 
+    appointmentId: number, 
+    serviceProviderId : number,
+    type : number, 
     dateRequest : string,
-    serviceProviderId : number
 }

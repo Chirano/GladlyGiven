@@ -18,22 +18,12 @@
     <div class="type-info">
       <h5>Select a type:</h5>
       <label>
-        <input
-          type="radio"
-          [(ngModel)]="costSupport.type"
-          name="type"
-          value="Commute"
-        />
-        Commute
-      </label>
-      <label>
-        <input
-          type="radio"
-          [(ngModel)]="costSupport.type"
-          name="type"
-          value="Material"
-        />
-        Material
+        <select 
+        [(ngModel)]="costSupport.type"
+        name="type">
+        <option value="0">Commute</option>
+        <option value="1">Material</option>
+      </select>
       </label>
     </div>
 
@@ -73,11 +63,13 @@
         class="btn btn-primary"
         (click)="
           addCostSupport(
-            costSupport.appointmentId,
-            costSupport.type,
+            0,
             costSupport.amount,
             costSupport.description,
-            costSupport.serviceProviderId
+            costSupport.appointmentId,
+            costSupport.serviceProviderId,
+            costSupport.type,
+            ' '
           )
         "
       >

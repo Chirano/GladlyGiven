@@ -13,13 +13,17 @@ namespace GladlyGiven.Models
 
         public double Amount { get; set; }
 
-        public long ServiceProviderId { get; set; }
-
         public string Description { get; set; }
 
-        public CostSupportStatus Status { get; set; }
+        public long AppointmentId { get; set; }
+
+        public long ServiceProviderId { get; set; }
 
         public CostSupportType Type { get; set; }
+
+        public string DateRequest { get; set; }
+
+        public CostSupportStatus Status { get; set; }
 
         public CostSupport()
         {

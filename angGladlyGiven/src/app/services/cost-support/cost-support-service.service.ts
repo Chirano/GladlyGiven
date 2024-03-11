@@ -11,7 +11,8 @@ export class CostSupportServiceService {
   private dotNet = 'https://localhost:7280';
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    headers: new HttpHeaders({ 'Content-Type': 'application/json',
+    'Accept': 'application/json' }),
   };
 
   constructor(private http: HttpClient) {}
@@ -21,23 +22,26 @@ export class CostSupportServiceService {
     //   console.log('Lista de Cost Supports:', costSupports);
     // });
     // console.log(v);
-    return this.http.get<CostSupport[]>(this.dotNet);
+    return this.http.get<CostSupport[]>(this.dotNet + '/costsupports');
   }
 
   /*POST: add a new costSupport request to the database*/
   addCostSupport(costSupport: CostSupport): Observable<CostSupport> {
+    console.log("IN " + costSupport.type);
+  
     const newCostSupport: CostSupport = {
-      appointmentId: costSupport.appointmentId,
-      type: costSupport.type,
+      id : costSupport.id,
       amount: costSupport.amount,
       description: costSupport.description,
-      dateRequest: this.formatDate(new Date()), //Data atual.
+      appointmentId: costSupport.appointmentId,
       serviceProviderId: costSupport.serviceProviderId,
+      type: costSupport.type,
+      dateRequest: this.formatDate(new Date()), //Data atual.
     };
-
+console.log(newCostSupport);
     return this.http.post<any>(
       this.dotNet + "/costsupport", // https://localhost:7280/costsupport
-      newCostSupport//, this.httpOptions
+      newCostSupport, this.httpOptions
     );
   }
 
