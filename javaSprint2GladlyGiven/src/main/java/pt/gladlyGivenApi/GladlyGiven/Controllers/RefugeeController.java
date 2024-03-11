@@ -4,10 +4,12 @@
 package pt.gladlyGivenApi.GladlyGiven.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import pt.gladlyGivenApi.GladlyGiven.Models.Users.Refugee;
 import pt.gladlyGivenApi.GladlyGiven.Services.Users.RefugeeService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/refugee")
 public class RefugeeController {
@@ -27,17 +29,17 @@ public class RefugeeController {
         return refugeeService.findRefugeeById(id);
     }
 
-    @GetMapping("/firstname/{name}")
-    public Refugee getRefugeeByFirstName(@PathVariable("name") String name) {
+    @GetMapping("/{firstname}")
+    public Refugee getRefugeeByFirstName(@PathVariable("firstname") String name) {
         return refugeeService.findRefugeeByFirstName(name);
     }
 
-    @GetMapping("/lastname/{name}")
-    public Refugee getRefugeeByLastName(@PathVariable("name") String lastName) {
+    @GetMapping("/{lastname}")
+    public Refugee getRefugeeByLastName(@PathVariable("lastname") String lastName) {
         return refugeeService.findRefugeeByLastName(lastName);
     }
 
-    @GetMapping("/email/{email}")
+    @GetMapping("/{email}")
     public Refugee getRefugeeByEmail(@PathVariable("email") String email) {
         return refugeeService.findRefugeeByEmail(email);
     }
@@ -49,8 +51,9 @@ public class RefugeeController {
         return refugeeService.createRefugee(firstName, lastName, email, gender, password, protocolId, snsNumber, nationality, country, language, phoneNumber);
     }
 
-    @PostMapping("/fromBody")
+    @PostMapping(value = "/fromBody", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Refugee createRefugeeViaRequestBody(@RequestBody Refugee refugee) {
+        System.out.println("Recieved request!");
         return refugeeService.createRefugee(refugee, false);
     }
 

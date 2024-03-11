@@ -13,6 +13,10 @@ import { EventManagerService } from 'src/app/services/events/event-manager.servi
 
 export class ViewSignInComponent {
 
+  getHello() {
+    EventManagerService.OnJavaHello.emit();
+  }
+
   constructor(
       private eventManager : EventManagerService,
     ) {
@@ -22,6 +26,8 @@ export class ViewSignInComponent {
   // could also send form data as parameters for this method
   // instead of fetching from DOM
   signIn(form : any) {
+    EventManagerService.OnJavaHello.emit();
+
     const signInDetails : SignInDetails = {
       email: (document.getElementById('email') as HTMLInputElement).value,
       password: (document.getElementById('password') as HTMLInputElement).value

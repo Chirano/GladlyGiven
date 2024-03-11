@@ -29,7 +29,6 @@ export class ViewSignUpRefugeeComponent {
         photoURL          : "",
         mainLanguage      : refugeeForm.value.mainLanguage,
         secondLanguage    : refugeeForm.value.secondLanguage,
-        phoneNumber       : refugeeForm.value.phoneNumber,
   
         // refugee:
         protocolId        : refugeeForm.value.protocolId,
