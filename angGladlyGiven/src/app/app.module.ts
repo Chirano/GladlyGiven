@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,12 +19,15 @@ import { ViewSignUpRefugeeComponent } from './components/views/view-sign-up-refu
 import { ViewSignUpServiceProviderComponent } from './components/views/view-sign-up-service-provider/view-sign-up-service-provider.component';
 import { ViewSignUpDonorComponent } from './components/views/view-sign-up-donor/view-sign-up-donor.component';
 
+import { ViewCostsupportServiceProviderComponent } from './components/views/view-costsupport-service-provider/view-costsupport-service-provider.component';
+
 import { ViewAdminComponent } from './components/views/view-admin/view-admin.component';
 import { ViewServiceProviderComponent } from './components/views/view-service-provider/view-service-provider.component';
 import { ViewRefugeeComponent } from './components/views/view-refugee/view-refugee.component';
 import { ViewDonorComponent } from './components/views/view-donor/view-donor.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BackButtonComponent } from './components/buttons/back-button/back-button.component';
+import { ViewFaqComponent } from './components/views/view-faq/view-faq.component';
 
 @NgModule({
   declarations: [
@@ -42,11 +46,15 @@ import { BackButtonComponent } from './components/buttons/back-button/back-butto
     ViewSignUpServiceProviderComponent,
     ViewSignUpDonorComponent,
     
+    ViewCostsupportServiceProviderComponent,
+
     ViewAdminComponent,
     ViewServiceProviderComponent,
     ViewRefugeeComponent,
     ViewDonorComponent,
     BackButtonComponent,
+
+    ViewFaqComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +62,7 @@ import { BackButtonComponent } from './components/buttons/back-button/back-butto
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

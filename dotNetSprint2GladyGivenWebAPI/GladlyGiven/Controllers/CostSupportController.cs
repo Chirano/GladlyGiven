@@ -5,11 +5,14 @@ using System.Threading.Tasks;
 using GladlyGiven.Models;
 using GladlyGiven.Services;
 using GladyGivenWebAPI.Data;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 
 namespace GladlyGiven.Controllers
 {
+    //Insert CORS here
+    [EnableCors("AllowSpecificOrigin")]
     [ApiController]
     [Route("api/v1/[controller]")]
     public class CostSupportController : ControllerBase

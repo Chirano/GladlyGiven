@@ -17,4 +17,8 @@ export const RouterPaths = {
     ViewRefugee: "view-refugee",
     ViewServiceProvider: "view-service-provider",
     ViewDonor: "view-donor",
+
+    ViewFaq: "view-faq",
+    
+    ViewCostSupport : "view-service-provider/costsupport"
 }

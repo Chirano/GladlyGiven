@@ -2,6 +2,7 @@
 using GladyGivenWebAPI.Data;
 using GladyGivenWebAPI;
 using Microsoft.EntityFrameworkCore;
+using GladyGivenWebAPI.Models;
 
 namespace GladlyGiven
 {
@@ -11,12 +12,25 @@ namespace GladlyGiven
         {
             var builder = WebApplication.CreateBuilder(args);
 
+
             // Add services to the container.
             string connectionString = NeonStaticConnectionStringBuilder.GetNpgsqlConnectionString();
             builder.Services.AddDbContext<ApplicationContextDb>(options =>
                 options.UseNpgsql(connectionString));
 
+            // Add CORS
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin", builder =>
+                {
+                    builder.WithOrigins("http://localhost:4200") // Replace with your actual frontend URL
+                           .AllowAnyHeader()
+                           .AllowAnyMethod();
+                });
+            });
+
             builder.Services.AddControllers();
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

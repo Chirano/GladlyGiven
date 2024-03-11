@@ -1,0 +1,88 @@
+<h1 class="costsupport-title" style="text-align: center">
+  Cost Support Request
+</h1>
+
+<div class="cost-support-form">
+  <form class="form">
+    <!--Appointment Info-->
+    <div class="app-info">
+      <h5>Insert the appointment identifier related to this request:</h5>
+      <input
+        type="number"
+        [(ngModel)]="costSupport.appointmentId"
+        name="appointmentId"
+        required
+      />
+    </div>
+    <!--Type of Cost Support-->
+    <div class="type-info">
+      <h5>Select a type:</h5>
+      <label>
+        <input
+          type="radio"
+          [(ngModel)]="costSupport.type"
+          name="type"
+          value="Commute"
+        />
+        Commute
+      </label>
+      <label>
+        <input
+          type="radio"
+          [(ngModel)]="costSupport.type"
+          name="type"
+          value="Material"
+        />
+        Material
+      </label>
+    </div>
+
+    <div class="amount">
+    <h5>Enter the amount requested:</h5>
+    <div class="input-group">
+      <span class="input-group-text">€</span>
+      <input
+        type="number"
+        [(ngModel)]="costSupport.amount"
+        name="amount"
+        class="form-control"
+        step="0.01"
+        required
+      />
+    </div>
+  </div>
+
+    <!--Description of Cost Support-->
+    <div class="description">
+    <div class="input-group mb-2">
+      <h5>Type cost support description:</h5>
+      <textarea
+        id="description"
+        placeholder="Insert your Description"
+        name="description"
+        class="form-control"
+        [(ngModel)]="costSupport.description"
+        required
+      ></textarea>
+    </div>
+  </div>
+    <div class="mb-2 d-flex justify-content-between">
+      <app-back-button></app-back-button>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        (click)="
+          addCostSupport(
+            costSupport.appointmentId,
+            costSupport.type,
+            costSupport.amount,
+            costSupport.description,
+            costSupport.serviceProviderId
+          )
+        "
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
