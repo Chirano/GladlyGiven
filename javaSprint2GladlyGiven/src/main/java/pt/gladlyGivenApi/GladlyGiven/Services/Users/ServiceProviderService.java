@@ -22,6 +22,7 @@ import pt.gladlyGivenApi.GladlyGiven.Repositories.Users.ServiceProviderRepositor
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class ServiceProviderService extends AppUserService {
@@ -65,13 +66,21 @@ public class ServiceProviderService extends AppUserService {
     public List<ServiceProvider> findServicesProvidersByHealthService(long id){
         return serviceProviderRepository.findByHealthServiceId(id);
     }
+
+    public List<ServiceProvider> findServicesProvidersByCity(String cityName){
+        return serviceProviderRepository.findAllByCityName(cityName);
+    }
+
     // create ---
     public ServiceProvider createServiceProvider(ServiceProvider serviceProvider, boolean isServiceOriginated) {
         return createUser(serviceProvider, serviceProviderRepository, isServiceOriginated);
     }
 
     @Transactional
-    public ServiceProvider createServiceProvider(String firstName, String lastName, String emailAddress, String gender, String password, String language, String phoneNumber, String nif, String licenseNumber, long categoryId) {
+    public ServiceProvider createServiceProvider(String firstName, String lastName, String emailAddress, String gender,
+                                                 String password, String language, String phoneNumber, String nif,
+                                                 String cityName, String streetName, String doorNumber, String postalCode,
+                                                 String licenseNumber, long categoryId) {
         ServiceProvider serviceProvider = findServiceProviderByFirstName(firstName);
 
         if (serviceProvider == null) {
@@ -88,6 +97,10 @@ public class ServiceProviderService extends AppUserService {
                     userLanguage,
                     userPhoneNumber,
                     nif,
+                    cityName,
+                    streetName,
+                    doorNumber,
+                    postalCode,
                     licenseNumber,
                     categoryId
             );
@@ -124,6 +137,18 @@ public class ServiceProviderService extends AppUserService {
         }
 
         serviceProvider.healthServices.add(service);
+        serviceProvider = serviceProviderRepository.save(serviceProvider);
+
+        return serviceProvider;
+    }
+
+    public ServiceProvider removeHealthService(ServiceProvider serviceProvider, HealthService service)
+    {
+        if (!serviceProvider.healthServices.contains(service)){
+            return null;
+        }
+
+        serviceProvider.healthServices.remove(service);
         serviceProvider = serviceProviderRepository.save(serviceProvider);
 
         return serviceProvider;

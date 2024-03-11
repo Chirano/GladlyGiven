@@ -1,3 +1,7 @@
+# other branches
+dotNetSprint2GladyGivenWebAPI/
+javaSprint2GladlyGiven/
+
 # Compiled class file
 *.class
 
@@ -760,3 +764,4 @@ dotNetSprint2GladyGivenWebAPI/GladlyGiven/Program.cs
 *.bin
 *.properties
 dotNetSprint2GladyGivenWebAPI/GladlyGiven/GladlyGiven.csproj
+package-lock.json

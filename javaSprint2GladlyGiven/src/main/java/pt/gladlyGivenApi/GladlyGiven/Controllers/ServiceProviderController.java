@@ -79,11 +79,31 @@ public class ServiceProviderController {
         return new ResponseEntity<>(serviceProviderDTOS, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/{cityName}", produces = "application/json")
+    public ResponseEntity<List<ServiceProviderDTO>> getServiceProviderByLocation(@PathVariable("cityName") String cityName)
+    {
+        List<ServiceProvider> serviceProviders = serviceProviderService.findServicesProvidersByCity(cityName);
+        if(serviceProviders.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
 
+        List<ServiceProviderDTO> serviceProviderDTOS = new ArrayList<>();
+        for(ServiceProvider serviceProvider : serviceProviders){
+            ServiceProviderDTO serviceProviderDTO = new ServiceProviderDTO(serviceProvider);
+            serviceProviderDTOS.add(serviceProviderDTO);
+        }
+        return new ResponseEntity<>(serviceProviderDTOS, HttpStatus.OK);
+    }
 
     // --- create ---
     @PostMapping("/params")
-    public ServiceProvider createServiceProviderViaRequestParams(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String gender, @RequestParam String password, @RequestParam String language, @RequestParam String phoneNumber, @RequestParam String nif, @RequestParam String licenseNumber, @RequestParam long categoryId) {
+    public ServiceProvider createServiceProviderViaRequestParams(@RequestParam String firstName, @RequestParam String lastName,
+                                                                 @RequestParam String email, @RequestParam String gender,
+                                                                 @RequestParam String password, @RequestParam String language,
+                                                                 @RequestParam String phoneNumber, @RequestParam String nif,
+                                                                 @RequestParam  String cityName, @RequestParam String streetName,
+                                                                 @RequestParam String doorNumber, @RequestParam String postalCode,
+                                                                 @RequestParam String licenseNumber, @RequestParam long categoryId) {
         return serviceProviderService.createServiceProvider(
                 firstName,
                 lastName,
@@ -93,6 +113,10 @@ public class ServiceProviderController {
                 language,
                 phoneNumber,
                 nif,
+                cityName,
+                streetName,
+                doorNumber,
+                postalCode,
                 licenseNumber,
                 categoryId
         );
@@ -121,8 +145,31 @@ public class ServiceProviderController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        ServiceProvider updateserviceProvider =serviceProviderService.addServicesToServiceProvider(serviceProvider, healthService);
-        return new ResponseEntity<>(updateserviceProvider, HttpStatus.OK);
+        ServiceProvider updatedServiceProvider = serviceProviderService.addServicesToServiceProvider(serviceProvider,
+                                                    healthService);
+
+        return new ResponseEntity<>(updatedServiceProvider, HttpStatus.OK);
+    }
+
+    @PutMapping("/{serviceProviderId}/removeservice/{healthServiceId}")
+    public ResponseEntity<ServiceProvider> removeServiceofServiceProvider(
+                                        @PathVariable("serviceProviderId") Long serviceProviderId,
+                                        @PathVariable ("healthServiceId") Long serviceId)
+    {
+        ServiceProvider serviceProvider = serviceProviderService.findServiceProviderById(serviceProviderId);
+        HealthService healthService = healthServiceService.findHealthServiceById(serviceId);
+
+        if(serviceProvider == null || healthService == null ){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        if(!serviceProvider.healthServices.contains(healthService)){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        ServiceProvider updatedServiceProvider = serviceProviderService.removeHealthService(serviceProvider, healthService);
+
+        return new ResponseEntity<>(updatedServiceProvider, HttpStatus.OK);
     }
 
 
