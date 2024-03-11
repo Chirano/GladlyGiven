@@ -7,7 +7,6 @@ import { CostSupport } from 'src/app/classes/CostSupport';
   providedIn: 'root',
 })
 export class CostSupportServiceService {
-  //Preencher!!!
   private dotNet = 'https://localhost:7280';
 
   httpOptions = {
@@ -17,18 +16,17 @@ export class CostSupportServiceService {
 
   constructor(private http: HttpClient) {}
 
+  /* GET : */
   getCostSupports(): Observable<CostSupport[]> {
     // let v = this.http.get<CostSupport[]>(this.dotNet).subscribe((costSupports: CostSupport[]) => {
     //   console.log('Lista de Cost Supports:', costSupports);
     // });
     // console.log(v);
-    return this.http.get<CostSupport[]>(this.dotNet + '/costsupports');
+    return this.http.get<CostSupport[]>(this.dotNet + "/costsupports");
   }
 
-  /*POST: add a new costSupport request to the database*/
+  /* POST: add a new costSupport request to the database */
   addCostSupport(costSupport: CostSupport): Observable<CostSupport> {
-    console.log("IN " + costSupport.type);
-  
     const newCostSupport: CostSupport = {
       id : costSupport.id,
       amount: costSupport.amount,

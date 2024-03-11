@@ -15,6 +15,7 @@ import { ViewDonorComponent } from './components/views/view-donor/view-donor.com
 import { RefreshSignUpGuard as RefreshSignUpGuard } from './guards/refresh/refreshSignUp.guard';
 import { ViewFaqComponent } from './components/views/view-faq/view-faq.component';
 import { ViewCostsupportServiceProviderComponent } from './components/views/view-costsupport-service-provider/view-costsupport-service-provider.component';
+import { ViewListCostsupportComponent } from './components/views/view-list-costsupport/view-list-costsupport.component';
 
 
 
@@ -38,9 +39,10 @@ const routes: Routes = [
   { path: RouterPaths.ViewRefugee, component: ViewRefugeeComponent },
   { path: RouterPaths.ViewServiceProvider, component: ViewServiceProviderComponent },
   { path: RouterPaths.ViewDonor, component: ViewDonorComponent },
-  { path: RouterPaths.ViewCostSupport, component: ViewCostsupportServiceProviderComponent},
+  { path: RouterPaths.ViewCostSupport, component: ViewCostsupportServiceProviderComponent },
+  { path: RouterPaths.ViewListCostsupport, component: ViewListCostsupportComponent },
 
-  // Faq
+  // FAQ
   { path: RouterPaths.ViewFaq, component: ViewFaqComponent, canActivate: [RefreshSignUpGuard] },
 
   { path: '**', redirectTo: RouterPaths.SignIn }

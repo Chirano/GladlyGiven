@@ -29,10 +29,6 @@ export class ViewCostsupportServiceProviderComponent {
     private costSupportService: CostSupportServiceService
   ) {}
 
-  getCostSupports() : void {
-    this.costSupportService.getCostSupports().subscribe(costSupports => this.costSupports = costSupports);
-  }
-
   //VERIFICAR SE O SERVICEPROVIDERID FICA COMO PARÂMETRO.
   addCostSupport(
     id: number,
@@ -52,9 +48,7 @@ export class ViewCostsupportServiceProviderComponent {
         type,
         dateRequest
       } as CostSupport)
-      .subscribe();
-        
-        /*{
+      .subscribe({
         next: (addedCostSupport) => {
           this.costSupport = addedCostSupport;
           this.success = true;
@@ -63,7 +57,6 @@ export class ViewCostsupportServiceProviderComponent {
         error: (error) => {
           console.error('Failed to send cost support request:', error);
         },
-      }
-      );*/
+      });
   }
 }

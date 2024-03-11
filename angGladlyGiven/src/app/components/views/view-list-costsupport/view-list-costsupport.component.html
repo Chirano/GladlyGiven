@@ -1,0 +1,15 @@
+<h2>List of all cost support requests</h2>
+<div *ngFor="let costSupport of costSupports">
+  <div class="list-group">
+    <a href="#" class="list-group-item list-group-item-action">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">
+          {{ costSupport.dateRequest }} - {{ costSupport.amount }}
+        </h5>
+        <small>3 days ago</small>
+      </div>
+      <p class="mb-1">{{ costSupport.description }}</p>
+      <small>And some small print.</small>
+    </a>
+  </div>
+</div>

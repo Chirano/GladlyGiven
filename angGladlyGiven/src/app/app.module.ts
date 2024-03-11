@@ -28,6 +28,7 @@ import { ViewDonorComponent } from './components/views/view-donor/view-donor.com
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BackButtonComponent } from './components/buttons/back-button/back-button.component';
 import { ViewFaqComponent } from './components/views/view-faq/view-faq.component';
+import { ViewListCostsupportComponent } from './components/views/view-list-costsupport/view-list-costsupport.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { ViewFaqComponent } from './components/views/view-faq/view-faq.component
     ViewSignUpDonorComponent,
     
     ViewCostsupportServiceProviderComponent,
+    ViewListCostsupportComponent,
 
     ViewAdminComponent,
     ViewServiceProviderComponent,
