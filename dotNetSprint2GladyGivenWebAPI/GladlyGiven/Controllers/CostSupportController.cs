@@ -12,9 +12,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace GladlyGiven.Controllers
 {
     //Insert CORS here
-    [EnableCors("AllowSpecificOrigin")]
     [ApiController]
     [Route("api/v1/[controller]")]
+    [EnableCors]
     public class CostSupportController : ControllerBase
     {
         private readonly CostSupportService costSupportService;

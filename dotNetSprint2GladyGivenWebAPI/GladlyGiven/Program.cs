@@ -1,4 +1,3 @@
-
 using GladyGivenWebAPI.Data;
 using GladyGivenWebAPI;
 using Microsoft.EntityFrameworkCore;
@@ -12,20 +11,19 @@ namespace GladlyGiven
         {
             var builder = WebApplication.CreateBuilder(args);
 
-
             // Add services to the container.
             string connectionString = NeonStaticConnectionStringBuilder.GetNpgsqlConnectionString();
             builder.Services.AddDbContext<ApplicationContextDb>(options =>
                 options.UseNpgsql(connectionString));
 
-            // Add CORS
+            // Add CORS services
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("AllowSpecificOrigin", builder =>
+                options.AddDefaultPolicy(builder =>
                 {
-                    builder.WithOrigins("http://localhost:4200") // Replace with your actual frontend URL
-                           .AllowAnyHeader()
-                           .AllowAnyMethod();
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
                 });
             });
 
@@ -44,6 +42,7 @@ namespace GladlyGiven
                 app.UseSwaggerUI();
             }
 
+            app.UseCors();
             app.UseHttpsRedirection();
 
             app.UseAuthorization();

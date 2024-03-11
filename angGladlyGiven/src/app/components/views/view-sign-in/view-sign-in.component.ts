@@ -13,8 +13,12 @@ import { EventManagerService } from 'src/app/services/events/event-manager.servi
 
 export class ViewSignInComponent {
 
-  getHello() {
+  getHelloJava() {
     EventManagerService.OnJavaHello.emit();
+  }
+
+  getHelloDotNet() {
+    EventManagerService.OnDotNetHello.emit();
   }
 
   constructor(

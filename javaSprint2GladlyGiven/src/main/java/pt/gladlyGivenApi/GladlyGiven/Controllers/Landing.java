@@ -1,5 +1,6 @@
 package pt.gladlyGivenApi.GladlyGiven.Controllers;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/hello")
 public class Landing {
     @GetMapping
-    public String GetHello() {
+    public ResponseEntity<String> GetHello() {
         System.out.println("Hello was reached!");
-        return "Hello from API";
+        return ResponseEntity.ok("Hello from API");
     }
 }

@@ -18,7 +18,7 @@ import { ServiceProviderService } from '../data/javaSpring/serviceProvider/servi
 import { DonorService } from '../data/javaSpring/donor/donor.service';
 import { AuthState } from 'src/app/classes/authentication/AuthState';
 import { Observable, catchError, filter, tap } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +27,8 @@ import { HttpClient } from '@angular/common/http';
 export class AuthService {
   
   private helloJavaURL = "http://localhost:8080/api/hello";
+  private helloDotNetURL = "https://localhost:7280/api/landing";
+
   static authState: AuthState = AuthState.None;
 
   private signUpDetails : SignUpDetails | null = null;
@@ -44,7 +46,9 @@ export class AuthService {
     private serviceProviderService: ServiceProviderService,
     private donorService: DonorService
   ) {
+
     EventManagerService.OnJavaHello.subscribe(() => this.getHelloFromJava().subscribe());
+    EventManagerService.OnDotNetHello.subscribe(() => this.getHelloFromDotNet().subscribe());
 
     EventManagerService.OnSignInEvent.subscribe(this.SignInFilter.bind(this));
     EventManagerService.OnSingUpEvent.subscribe(this.SignUp.bind(this));
@@ -57,8 +61,14 @@ export class AuthService {
 
   // API Hello
   // -------------------------
-  getHelloFromJava() : Observable<any> {
-    const hello = this.http.get(this.helloJavaURL);
+  getHelloFromJava() : Observable<string> {
+    const hello = this.http.get<string>(this.helloJavaURL);
+    return hello;
+  }
+
+  getHelloFromDotNet() : Observable<string> {
+    const hello = this.http.get<string>(this.helloDotNetURL);
+    
     return hello;
   }
 

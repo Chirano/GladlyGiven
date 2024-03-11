@@ -35,10 +35,9 @@ export class CostSupportServiceService {
       serviceProviderId: costSupport.serviceProviderId,
     };
 
-    return this.http.post<CostSupport>(
+    return this.http.post<any>(
       this.dotNet + "/costsupport", // https://localhost:7280/costsupport
-      newCostSupport,
-      this.httpOptions
+      newCostSupport//, this.httpOptions
     );
   }
 
