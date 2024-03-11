@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot, NavigationStart } from '@angular/router';
+import { AuthState } from 'src/app/classes/authentication/AuthState';
 import { RouterPaths } from 'src/app/classes/routing/RoutePaths';
 import { AuthService } from 'src/app/services/authentication/auth.service';
 
@@ -13,7 +14,7 @@ export class RefreshSignUpGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
 
     // check if user is signing up
-    if (AuthService.isSigningUp) {
+    if (AuthService.authState == AuthState.SignUp) {
       return true;
     }
 

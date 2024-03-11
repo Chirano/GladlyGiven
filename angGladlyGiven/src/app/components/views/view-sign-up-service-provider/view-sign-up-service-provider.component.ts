@@ -25,7 +25,6 @@ export class ViewSignUpServiceProviderComponent {
         photoURL          : "",
         mainLanguage      : form.value.mainLanguage,
         secondLanguage    : form.value.secondLanguage,
-        phoneNumber       : form.value.phoneNumber,
   
         // monetary user:
         nif               : form.value.mainLanguage,

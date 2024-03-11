@@ -8,12 +8,19 @@ import { AuthService } from '../authentication/auth.service';
 import { Refugee } from 'src/app/classes/userProfiles/Refugee';
 import { ServiceProvider } from 'src/app/classes/userProfiles/ServiceProvider';
 import { Donor } from 'src/app/classes/userProfiles/Donor';
+import { RefugeeService } from '../data/javaSpring/refugee/refugee.service';
+import { ServiceProviderService } from '../data/javaSpring/serviceProvider/service-provider.service';
+import { DonorService } from '../data/javaSpring/donor/donor.service';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class EventManagerService {
+
+  // hello Events
+  static OnJavaHello: EventEmitter<void> = new EventEmitter<void>();
+  static OnDotNetHello: EventEmitter<void> = new EventEmitter<void>();
 
   // route Events
   static OnRouteEvent: EventEmitter<string> = new EventEmitter<string>();
@@ -34,6 +41,9 @@ export class EventManagerService {
   constructor(
       private authService : AuthService,
       private routingService: RoutingService,
+      private refugeeService: RefugeeService,
+      private serviceProviderService: ServiceProviderService,
+      private donorService: DonorService,
     ) {
     
   }

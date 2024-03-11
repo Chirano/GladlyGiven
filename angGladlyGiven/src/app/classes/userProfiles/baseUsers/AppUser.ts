@@ -10,5 +10,4 @@ export interface AppUser {
     photoURL        : string
     mainLanguage    : string
     secondLanguage  : string
-    phoneNumber     : string
 }
