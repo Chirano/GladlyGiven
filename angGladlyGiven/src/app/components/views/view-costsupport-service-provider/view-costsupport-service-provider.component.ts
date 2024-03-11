@@ -27,8 +27,8 @@ export class ViewCostsupportServiceProviderComponent {
     private costSupportService: CostSupportServiceService
   ) {}
 
-  getCostSupports(userId : number) : void {
-    this.costSupportService.getCostSupports(userId).subscribe(costSupports => this.costSupports = costSupports);
+  getCostSupports() : void {
+    this.costSupportService.getCostSupports().subscribe(costSupports => this.costSupports = costSupports);
   }
 
   //VERIFICAR SE O SERVICEPROVIDERID FICA COMO PARÂMETRO.
