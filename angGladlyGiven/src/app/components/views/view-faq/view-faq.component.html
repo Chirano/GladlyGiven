@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ sobre Refugiados</title>
+  <link rel="stylesheet" href="view-faq.component.scss">
+</head>
+<body>
+  <div class="language-selector">
+    <label for="language-select">Select Language:</label>
+    <select id="language-select" onchange="changeLanguage()">
+      <option value="pt">Português</option>
+      <option value="en">English</option>
+      <option value="uk">Українська</option>
+    </select>
+  </div>
+  <script src="view-faq.component.ts"></script>
+  <div class="container">
+    <h1 id="faq-title">Perguntas Frequentes sobre Refugiados</h1>
+    <div class="faq-item">
+      <h2 id="q1">1. O que é um refugiado?</h2>
+      <p id="a1">Um refugiado é alguém que foge de seu país de origem devido a perseguição, conflito armado, violência ou violação de direitos humanos e busca proteção em outro país.</p>
+    </div>
+    <div class="faq-item">
+      <h2 id="q2">2. Qual é a diferença entre um refugiado e um imigrante?</h2>
+      <p id="a2">A principal diferença é que os refugiados fogem de suas casas devido a circunstâncias extremas, como guerra ou perseguição, enquanto os imigrantes geralmente buscam melhores condições de vida, oportunidades de trabalho ou educação em outros países.</p>
+    </div>
+
+  </div>
+  <app-back-button></app-back-button>
+</body>
+</html>

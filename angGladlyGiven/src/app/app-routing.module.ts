@@ -13,6 +13,7 @@ import { ViewRefugeeComponent } from './components/views/view-refugee/view-refug
 import { ViewServiceProviderComponent } from './components/views/view-service-provider/view-service-provider.component';
 import { ViewDonorComponent } from './components/views/view-donor/view-donor.component';
 import { RefreshSignUpGuard as RefreshSignUpGuard } from './guards/refresh/refreshSignUp.guard';
+import { ViewFaqComponent } from './components/views/view-faq/view-faq.component';
 
 
 
@@ -36,6 +37,9 @@ const routes: Routes = [
   { path: RouterPaths.ViewRefugee, component: ViewRefugeeComponent },
   { path: RouterPaths.ViewServiceProvider, component: ViewServiceProviderComponent },
   { path: RouterPaths.ViewDonor, component: ViewDonorComponent },
+
+  // Faq
+  { path: RouterPaths.ViewFaq, component: ViewFaqComponent, canActivate: [RefreshSignUpGuard] },
 
   { path: '**', redirectTo: RouterPaths.SignIn }
 ];
