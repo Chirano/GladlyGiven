@@ -8,9 +8,9 @@ namespace GladlyGiven.Controllers
     public class Landing : Controller
     {
         [HttpGet]
-        public IActionResult GetHello()
+        public ActionResult<string> GetHello()
         {
-            return Ok("{ Hello from Dot Net }");
+            return Ok(new { msg = "Hello from Dot Net" });
         }
 
         [HttpPost]

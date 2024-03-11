@@ -13,6 +13,6 @@ public class Landing {
     @GetMapping
     public ResponseEntity<String> GetHello() {
         System.out.println("Hello was reached!");
-        return ResponseEntity.ok("Hello from API");
+        return ResponseEntity.ok("Hello from API"); // will return an error in Angular because it is not in a JSON format
     }
 }
