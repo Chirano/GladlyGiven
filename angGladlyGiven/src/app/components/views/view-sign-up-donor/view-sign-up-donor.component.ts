@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Donor } from 'src/app/classes/userProfiles/Donor';
+import { DonorDTO } from 'src/app/classes/userProfiles/DonorDTO';
 import { EventManagerService } from 'src/app/services/events/event-manager.service';
 
 @Component({
@@ -9,22 +9,21 @@ import { EventManagerService } from 'src/app/services/events/event-manager.servi
 })
 
 export class ViewSignUpDonorComponent {
-  private donor: Donor | null = null;
+  private donor: DonorDTO | null = null;
 
   registerNewDonor(form: any) {
   
     if (form.valid) {
       this.donor = {
         // app user:
-        id : -1,
-        firstName         : form.value.firstName,
-        lastName          : form.value.lastName,
-        email             : form.value.email,
-        gender            : form.value.gender,
-        phone             : form.value.phone,
-        photoURL          : "",
-        mainLanguage      : form.value.mainLanguage,
-        secondLanguage    : form.value.secondLanguage,
+        id: -1,
+        firstName: form.value.firstName,
+        lastName: form.value.lastName,
+        email: form.value.email,
+        gender: form.value.gender,
+        photoURL: "",
+        mainLanguage: form.value.mainLanguage,
+        mainPhoneNumber: form.value.phone,
   
         // monetary user:
         nif               : form.value.nif,
@@ -37,7 +36,6 @@ export class ViewSignUpDonorComponent {
       };
       
       // console.log(this.refugee);
-      EventManagerService.OnSignUpDonorEvent.emit(this.donor);
     } else {
       console.log("Form is invalid");
     }

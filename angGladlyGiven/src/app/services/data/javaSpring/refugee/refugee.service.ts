@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, tap, throwError } from 'rxjs';
-import { RefugeeDTO } from 'src/app/classes/userProfiles/Refugee';
+import { RefugeeDTO } from 'src/app/classes/userProfiles/RefugeeDTO';
 import { MockRefugees } from 'src/app/classes/userProfiles/mockUsers/MockRefugees';
 
 @Injectable({
@@ -59,11 +59,10 @@ export class RefugeeService  {
 
   static MapToRefugee(data: any): RefugeeDTO | null {
     if (data == null) {
-      console.log("Tried to map null refugee data...");
+      console.log("Tried to map null Refugee data...");
       return null;
     }
 
-    // Map the response data to RefugeeDTO interface
     return {
       id: data.id != null ? data.id : -1,
       firstName: data.firstName || '',
@@ -86,11 +85,8 @@ export class RefugeeService  {
   static GetRandomRefugee(): RefugeeDTO {
     const mockRefugees: { [key: string]: RefugeeDTO } = MockRefugees; // Explicit typing here
 
-    // Get an array of refugee keys
     const refugeeKeys = Object.keys(mockRefugees);
-    // Choose a random key from the array
     const randomKey = refugeeKeys[Math.floor(Math.random() * refugeeKeys.length)];
-    // Return the refugee object corresponding to the random key
     return mockRefugees[randomKey];
   }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RefugeeDTO as RefugeeDTO } from 'src/app/classes/userProfiles/Refugee';
+import { RefugeeDTO as RefugeeDTO } from 'src/app/classes/userProfiles/RefugeeDTO';
 import { RefugeeService } from 'src/app/services/data/javaSpring/refugee/refugee.service';
 import { EventManagerService } from 'src/app/services/events/event-manager.service';
 
@@ -11,35 +11,34 @@ import { EventManagerService } from 'src/app/services/events/event-manager.servi
 
 export class ViewSignUpRefugeeComponent {
 
-  private refugee: RefugeeDTO | null = null;
-
   constructor() {
   }
 
-  registerNewRefugee(refugeeForm: any) {
+  registerNewRefugee(form: any) {
     var refugee: RefugeeDTO | null = null;
 
-    if (refugeeForm.valid) {
+    if (form.valid) {
       refugee = {
         id: -1,
-        firstName: refugeeForm.value.firstName,
-        lastName: refugeeForm.value.lastName,
-        email: refugeeForm.value.email,
-        gender: refugeeForm.value.gender,
+        firstName: form.value.firstName,
+        lastName: form.value.lastName,
+        email: form.value.email,
+        gender: form.value.gender,
         photoURL: "",
-        mainLanguage: refugeeForm.value.mainLanguage,
-        mainPhoneNumber: refugeeForm.value.phone, // Assuming phone number is stored in mainPhoneNumber
-        protocolId: refugeeForm.value.protocolId,
-        snsNumber: refugeeForm.value.sns, // Assuming snsNumber is used for sns
-        nationality: refugeeForm.value.nationality,
-        country: refugeeForm.value.country,
+        mainLanguage: form.value.mainLanguage,
+        mainPhoneNumber: form.value.phone,
+
+        protocolId: form.value.protocolId,
+        snsNumber: form.value.sns,
+        nationality: form.value.nationality,
+        country: form.value.country,
       };
     } else {
       do {
           refugee = RefugeeService.GetRandomRefugee();
       } while(refugee == null);
       
-      console.log("Form is invalid, creating mock user: ", this.refugee);    
+      console.log("Form is invalid, creating mock user: ", refugee);    
     }
 
     if (refugee) {

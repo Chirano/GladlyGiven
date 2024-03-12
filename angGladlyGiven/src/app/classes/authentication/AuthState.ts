@@ -1,5 +1,5 @@
 export enum AuthState {
     None,
-    SignUp,
+    SigningUp,
     SignedIn,
 }

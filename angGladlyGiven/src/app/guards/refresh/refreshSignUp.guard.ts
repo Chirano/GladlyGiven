@@ -14,7 +14,7 @@ export class RefreshSignUpGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
 
     // check if user is signing up
-    if (AuthService.authState == AuthState.SignUp) {
+    if (AuthService.AuthState == AuthState.SigningUp) {
       return true;
     }
 

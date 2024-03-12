@@ -1,6 +1,7 @@
 // Author: Tiago Barracha ti.barracha@gmail.com
 
-export interface AppUser {
+export interface RefugeeDTO {
+    // app user
     id:                 number;
     firstName:          string;
     lastName:           string;
@@ -9,4 +10,10 @@ export interface AppUser {
     photoURL:           string;
     mainLanguage:       string;
     mainPhoneNumber:    string;
+
+    // refugee
+    protocolId:         string;
+    snsNumber:          string;
+    nationality:        string;
+    country:            string;
 }

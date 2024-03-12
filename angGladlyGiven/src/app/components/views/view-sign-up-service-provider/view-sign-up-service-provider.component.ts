@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ServiceProvider } from 'src/app/classes/userProfiles/ServiceProvider';
+import { ServiceProviderDTO } from 'src/app/classes/userProfiles/ServiceProviderDTO';
+import { ServiceProviderService } from 'src/app/services/data/javaSpring/serviceProvider/service-provider.service';
 import { EventManagerService } from 'src/app/services/events/event-manager.service';
 
 @Component({
@@ -9,40 +10,43 @@ import { EventManagerService } from 'src/app/services/events/event-manager.servi
 })
 export class ViewSignUpServiceProviderComponent {
 
-  private serviceProvider: ServiceProvider | null = null;
-
   registerNewServiceProvider(form: any) {
-  
-    if (form.valid) {
-      this.serviceProvider = {
-        // app user:
-        id : -1,
-        firstName         : form.value.firstName,
-        lastName          : form.value.lastName,
-        email             : form.value.email,
-        gender            : form.value.gender,
-        phone             : form.value.phone,
-        photoURL          : "",
-        mainLanguage      : form.value.mainLanguage,
-        secondLanguage    : form.value.secondLanguage,
-  
-        // monetary user:
-        nif               : form.value.mainLanguage,
-        paymentInfoId     : form.value.mainLanguage,
-        invoiceInfoId     : form.value.mainLanguage,
+    var serviceProvider: ServiceProviderDTO | null = null;
 
-        // service provider:
-        licenseNumber     : form.value.phoneNumber,
-        categoryId        : form.value.phoneNumber,
-        servicesIds       : [],
-        reviewIds         : [],
-        reviewAverage     : form.value.phoneNumber,
+    if (form.valid) {
+      serviceProvider = {
+        // app user
+        id: -1,
+        firstName: form.value.firstName,
+        lastName: form.value.lastName,
+        email: form.value.email,
+        gender: form.value.gender,
+        photoURL: "",
+        mainLanguage: form.value.mainLanguage,
+        mainPhoneNumber: form.value.phone,
+
+        // monetary user
+        nif: form.value.nif,
+        paymentInfoId: form.value.paymentInfoId,
+        invoiceInfoId: form.value.invoiceInfoId,
+
+        // service provider
+        licenseNumber: form.value.licenseNumber,
+        categoryId: form.value.categoryId,
+        servicesIds: [],
+        reviewIds: [],
+        reviewAverage: form.value.reviewAverage,
       };
-      
-      // console.log(this.refugee);
-      EventManagerService.OnSignUpServiceProviderEvent.emit(this.serviceProvider);
     } else {
-      console.log("Form is invalid");
+      do {
+        serviceProvider = ServiceProviderService.GetRandomServiceProvider();
+      } while(serviceProvider == null);
+      
+      console.log("Form is invalid, creating mock user: ", serviceProvider);    
+    }
+
+    if (serviceProvider) {
+      EventManagerService.OnSignUpServiceProviderEvent.emit(serviceProvider);
     }
   }
 }

@@ -9,9 +9,11 @@ export const MockDonors = {
         photoURL: "",
         mainLanguage: "Portuguese",
         secondLanguage: "English",
+
         nif: "987654321",
         paymentInfoId: "",
         invoiceInfoId: "",
+
         fiscalIdentity: 0, // Portuguese fiscal identity
         donationIds: ["donation1", "donation2"],
     },
@@ -26,9 +28,11 @@ export const MockDonors = {
         photoURL: "",
         mainLanguage: "Spanish",
         secondLanguage: "English",
+
         nif: "123456789",
         paymentInfoId: "",
         invoiceInfoId: "",
+
         fiscalIdentity: 1, // Spanish fiscal identity
         donationIds: ["donation3", "donation4"],
     },
@@ -43,9 +47,11 @@ export const MockDonors = {
         photoURL: "",
         mainLanguage: "German",
         secondLanguage: "English",
+
         nif: "987654321",
         paymentInfoId: "",
         invoiceInfoId: "",
+        
         fiscalIdentity: 2, // German fiscal identity
         donationIds: ["donation5", "donation6"],
     }

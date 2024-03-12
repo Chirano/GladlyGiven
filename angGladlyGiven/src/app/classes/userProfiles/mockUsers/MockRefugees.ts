@@ -8,6 +8,7 @@ export const MockRefugees = {
       photoURL: "",
       mainLanguage: "Arabic",
       mainPhoneNumber: "+963987654321",
+
       protocolId: "654321",
       snsNumber: "987654321",
       nationality: "Syrian",
@@ -23,6 +24,7 @@ export const MockRefugees = {
       photoURL: "",
       mainLanguage: "Nepali",
       mainPhoneNumber: "+977987654321",
+
       protocolId: "456789",
       snsNumber: "123987654",
       nationality: "Nepali",
@@ -38,6 +40,7 @@ export const MockRefugees = {
       photoURL: "",
       mainLanguage: "Urdu",
       mainPhoneNumber: "+923456789012",
+      
       protocolId: "987654",
       snsNumber: "654789123",
       nationality: "Pakistani",

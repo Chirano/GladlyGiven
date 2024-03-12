@@ -9,9 +9,9 @@ import { SignUpDetails } from 'src/app/classes/authentication/SignUpDetails';
 import { SessionContext } from 'src/app/classes/authentication/SessionContext';
 
 import { UserType } from 'src/app/classes/userProfiles/UserType';
-import { RefugeeDTO } from 'src/app/classes/userProfiles/Refugee';
-import { ServiceProvider } from 'src/app/classes/userProfiles/ServiceProvider';
-import { Donor } from 'src/app/classes/userProfiles/Donor';
+import { RefugeeDTO } from 'src/app/classes/userProfiles/RefugeeDTO';
+import { ServiceProviderDTO } from 'src/app/classes/userProfiles/ServiceProviderDTO';
+import { DonorDTO } from 'src/app/classes/userProfiles/DonorDTO';
 
 import { RefugeeService } from '../data/javaSpring/refugee/refugee.service';
 import { ServiceProviderService } from '../data/javaSpring/serviceProvider/service-provider.service';
@@ -25,7 +25,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 
 export class AuthService {
-  static authState: AuthState = AuthState.None;
+  static AuthState: AuthState = AuthState.None;
+  static SessionContext: SessionContext | null = null;
 
   private signUpDetails : SignUpDetails | null = null;
   private sessionContext: SessionContext = 
@@ -51,6 +52,32 @@ export class AuthService {
     EventManagerService.OnSignUpDonorEvent.subscribe(this.SignUpDonor.bind(this));
   }
 
+  
+
+  private SetSessionContext(userId: number, name: string, email: string, userType: UserType) : SessionContext {
+    this.sessionContext.userId = userId;
+    this.sessionContext.name = name;
+    this.sessionContext.email = email;
+    this.sessionContext.userType = userType;
+
+    AuthService.SessionContext = this.sessionContext;
+    return this.sessionContext;
+  }
+
+  private SetSessionContextByObject(context: SessionContext) : SessionContext {
+    this.sessionContext.userId = context.userId;
+    this.sessionContext.name = context.name;
+    this.sessionContext.email = context.email;
+    this.sessionContext.userType = context.userType;
+
+    AuthService.SessionContext = this.sessionContext;
+    return this.sessionContext;
+  }
+
+  GetSessionContext() : SessionContext {
+    return this.sessionContext;
+  }
+
 
 
   // Sign IN - Login
@@ -64,22 +91,22 @@ export class AuthService {
     switch(signInDetails.email) {
       case MockSessionContexts.AuthAdmin.email:
         targetRoute = RouterPaths.ViewAdmin;
-        this.sessionContext = MockSessionContexts.AuthAdmin;
+        this.SetSessionContextByObject(MockSessionContexts.AuthAdmin);
         break;
         
       case MockSessionContexts.AuthRefugee.email:
         targetRoute = RouterPaths.ViewRefugee;
-        this.sessionContext = MockSessionContexts.AuthRefugee;
+        this.SetSessionContextByObject(MockSessionContexts.AuthRefugee);
         break;
       
       case MockSessionContexts.AuthServiceProvider.email:
         targetRoute = RouterPaths.ViewServiceProvider;
-        this.sessionContext = MockSessionContexts.AuthServiceProvider;
+        this.SetSessionContextByObject(MockSessionContexts.AuthServiceProvider);
         break;
         
       case MockSessionContexts.AuthDonor.email:
         targetRoute = RouterPaths.ViewDonor;
-        this.sessionContext = MockSessionContexts.AuthDonor;
+        this.SetSessionContextByObject(MockSessionContexts.AuthDonor);
         break;
 
       default:
@@ -96,7 +123,7 @@ export class AuthService {
   // Sign UP - Register
   // ----------------------------------------------------------------------
   private SignUp(inputSignUpDetails: SignUpDetails) {
-    AuthService.authState = AuthState.SignUp;
+    AuthService.AuthState = AuthState.SigningUp;
 
     this.signUpDetails = inputSignUpDetails;
     EventManagerService.OnRouteEvent.emit(RouterPaths.SignUpHelpIntention);
@@ -106,13 +133,14 @@ export class AuthService {
   private SignUpRefugee(refugee: RefugeeDTO) {
     this.refugeeService.postRefugeeFromBody(refugee).subscribe({
       next: (response: any) => {
-        var refugee: RefugeeDTO | null = RefugeeService.MapToRefugee(response);
+        var mappedRefugee: RefugeeDTO | null = RefugeeService.MapToRefugee(response);
 
-        if (refugee == null || refugee.id < 1) {
+        if (mappedRefugee == null || mappedRefugee.id < 1) {
           console.log("Refugee came empty");
         } else {
-          console.log("Sign Up Refugee:", response);
+          console.log("Registered Refugee:", mappedRefugee);
           EventManagerService.OnRouteEvent.emit(RouterPaths.ViewRefugee);
+          this.SetSessionContext(mappedRefugee.id, mappedRefugee.firstName, mappedRefugee.email, UserType.Refugee);
         }
       },
 
@@ -122,12 +150,27 @@ export class AuthService {
     });
   }
   
-  private SignUpServiceProvider(serviceProvider: ServiceProvider) {
-    console.log("Registered Service Provider: ", serviceProvider);
-    EventManagerService.OnRouteEvent.emit(RouterPaths.ViewServiceProvider);
+  private SignUpServiceProvider(serviceProvider: ServiceProviderDTO) {
+    this.serviceProviderService.postServiceProviderBody(serviceProvider).subscribe({
+      next: (response: any) => {
+        var mappedServiceProvider: ServiceProviderDTO | null = ServiceProviderService.MapToServiceProvider(response);
+
+        if (mappedServiceProvider == null || mappedServiceProvider.id < 1) {
+          console.log("Service Provider came empty");
+        } else {
+          console.log("Registered Service Provider:", mappedServiceProvider);
+          EventManagerService.OnRouteEvent.emit(RouterPaths.ViewServiceProvider);
+          this.SetSessionContext(mappedServiceProvider.id, mappedServiceProvider.firstName, mappedServiceProvider.email, UserType.ServiceProvider);
+        }
+      },
+
+      error: (error: any) => {
+        console.error("Error creating Service Provider account: ", error);
+      }
+    });
   }
   
-  private SignUpDonor(donor: Donor) {
+  private SignUpDonor(donor: DonorDTO) {
     console.log("Registered Donor: ", donor);
     EventManagerService.OnRouteEvent.emit(RouterPaths.ViewDonor);
   }

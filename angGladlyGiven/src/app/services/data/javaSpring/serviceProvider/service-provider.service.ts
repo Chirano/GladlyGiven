@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ServiceProviderDTO } from 'src/app/classes/userProfiles/ServiceProviderDTO';
+import { MockServiceProviders } from 'src/app/classes/userProfiles/mockUsers/MockServiceProviders';
 
 @Injectable({
   providedIn: 'root'
@@ -82,4 +84,40 @@ export class ServiceProviderService  {
   getServiceProviderByEmail(email: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/serviceProvider/email/${email}`);
   }
+
+  static MapToServiceProvider(data: any): ServiceProviderDTO | null {
+    if (data == null) {
+      console.log("Tried to map null Service Provider data...");
+      return null;
+    }
+
+    return {
+      id: data.id || -1,
+      firstName: data.firstName || '',
+      lastName: data.lastName || '',
+      email: data.email || '',
+      gender: data.gender || '',
+      photoURL: data.photoURL || '',
+      mainLanguage: data.mainLanguage || '',
+      mainPhoneNumber: data.phone || '',
+      nif: data.nif || '',
+      paymentInfoId: data.paymentInfoId || '',
+      invoiceInfoId: data.invoiceInfoId || '',
+      licenseNumber: data.licenseNumber || '',
+      categoryId: data.categoryId || '',
+      servicesIds: data.servicesIds || [],
+      reviewIds: data.reviewIds || [],
+      reviewAverage: data.reviewAverage || ''
+    };
+  }
+
+  // chat gtp generated
+  static GetRandomServiceProvider(): ServiceProviderDTO {
+    // Explicit typing for mock service providers
+    const mockServiceProviders: { [key: string]: ServiceProviderDTO } = MockServiceProviders;
+
+    const serviceProviderKeys = Object.keys(mockServiceProviders);
+    const randomKey = serviceProviderKeys[Math.floor(Math.random() * serviceProviderKeys.length)];
+    return mockServiceProviders[randomKey];
+}
 }
