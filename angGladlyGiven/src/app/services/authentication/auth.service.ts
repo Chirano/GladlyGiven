@@ -171,7 +171,22 @@ export class AuthService {
   }
   
   private SignUpDonor(donor: DonorDTO) {
-    console.log("Registered Donor: ", donor);
-    EventManagerService.OnRouteEvent.emit(RouterPaths.ViewDonor);
+    this.donorService.postDonor(donor).subscribe({
+      next: (response: any) => {
+        var mappedDonor: DonorDTO | null = DonorService.MapToDonor(response);
+
+        if (mappedDonor == null || mappedDonor.id < 1) {
+          console.log("Donor came empty");
+        } else {
+          console.log("Registered Donor:", mappedDonor);
+          EventManagerService.OnRouteEvent.emit(RouterPaths.ViewDonor);
+          this.SetSessionContext(mappedDonor.id, mappedDonor.firstName, mappedDonor.email, UserType.ServiceProvider);
+        }
+      },
+
+      error: (error: any) => {
+        console.error("Error creating Donor account: ", error);
+      }
+    });
   }
 }

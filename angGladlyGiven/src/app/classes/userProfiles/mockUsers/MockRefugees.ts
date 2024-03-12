@@ -7,6 +7,7 @@ export const MockRefugees = {
       gender: "Male",
       photoURL: "",
       mainLanguage: "Arabic",
+      secondLanguage: "English",
       mainPhoneNumber: "+963987654321",
 
       protocolId: "654321",
@@ -23,6 +24,7 @@ export const MockRefugees = {
       gender: "Female",
       photoURL: "",
       mainLanguage: "Nepali",
+      secondLanguage: "English",
       mainPhoneNumber: "+977987654321",
 
       protocolId: "456789",
@@ -39,6 +41,7 @@ export const MockRefugees = {
       gender: "Male",
       photoURL: "",
       mainLanguage: "Urdu",
+      secondLanguage: "English",
       mainPhoneNumber: "+923456789012",
       
       protocolId: "987654",

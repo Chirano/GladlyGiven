@@ -5,10 +5,16 @@ import { Component } from '@angular/core';
   templateUrl: './view-faq.component.html',
   styleUrls: ['./view-faq.component.scss']
 })
-export class ViewFaqComponent {
 
+export class ViewFaqComponent {
+  language : string = "pt";
+  
+  changeLanguage() {
+    console.log("Clicked on change language div");
+  }
 }
 
+/*
 document.addEventListener('DOMContentLoaded', function () {
   const languageSelect = document.getElementById('language-select') as HTMLSelectElement;
 
@@ -68,3 +74,4 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 });
+*/

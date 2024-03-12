@@ -9,6 +9,7 @@ export interface RefugeeDTO {
     gender:             string;
     photoURL:           string;
     mainLanguage:       string;
+    secondLanguage:     string;
     mainPhoneNumber:    string;
 
     // refugee

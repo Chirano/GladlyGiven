@@ -30,15 +30,17 @@ export class ViewSignInComponent {
   // could also send form data as parameters for this method
   // instead of fetching from DOM
   signIn(form : any) {
-    EventManagerService.OnJavaHello.emit();
-
-    const signInDetails : SignInDetails = {
-      email: (document.getElementById('email') as HTMLInputElement).value,
-      password: (document.getElementById('password') as HTMLInputElement).value
+    if (form.valid) {
+      const signInDetails : SignInDetails = {
+        email: form.value.email,
+        password: form.value.password
+      }
+  
+      console.log("Sign In Component:", signInDetails);
+      EventManagerService.OnSignInEvent.emit(signInDetails);
+    } else {
+      console.log("Form is invalid!");
     }
-
-    //console.log("Sign In Component:", signInDetails);
-    EventManagerService.OnSignInEvent.emit(signInDetails);
   }
 
   toSignUp() {

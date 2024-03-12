@@ -47,6 +47,15 @@ public abstract class AppUserService {
     // AppUser
     // - probably better ways to do this, but this one works great!
     // ---------------------------------------------------------------------
+    protected <T extends AppUser> T saveUserToRepository(T user, AppUserRepository<T> repository) {
+        try {
+            return repository.save(user);
+        } catch (Exception e) {
+            System.out.println("Failed to save user. Error:\n" + e.getMessage());
+            return null;
+        }
+    }
+
     protected <T extends AppUser> T addCreationDateToUser(T user) {
         user.creationDate = DateTimeUtils.getDateTimeNowAsString();
         return user;
@@ -57,12 +66,12 @@ public abstract class AppUserService {
     }
 
     protected <T extends AppUser> T findUserByEmail(String email, AppUserRepository<T>  repository) {
-        Email em = findOrCreateEmail(email);
+        Email em = findEmailByEmail(email);
         return repository.findByEmail(em).orElse(null);
     }
 
     protected <T extends AppUser> T findUserByEmail(Email email, AppUserRepository<T>  repository) {
-        Email em = findOrCreateEmail(email.email);
+        Email em = findEmailByEmail(email.email);
         return repository.findByEmail(em).orElse(null);
     }
 
@@ -99,19 +108,19 @@ public abstract class AppUserService {
         if (user == null)
             return null;
 
-        T provider = null;
+        T appUser = null;
 
         // If the serviceProvider did not come from this service, try to find if it already exists
         if (!isServiceOriginated) {
-            provider = findUserByDTO(user, repository);
+            appUser = findUserByDTO(user, repository);
         }
 
-        if (provider == null) {
-            provider = addCreationDateToUser(user);
-            provider = repository.save(provider);
+        if (appUser == null) {
+            appUser = addCreationDateToUser(user);
+            appUser = repository.save(appUser);
         }
 
-        return provider;
+        return appUser;
     }
 
 
@@ -157,7 +166,7 @@ public abstract class AppUserService {
     }
 
     private void printCreatingNew(String classType) {
-        System.out.printf("\n%s, was not found. Creating one%n", classType);
+        System.out.printf("%s, was not found. Creating one%n", classType);
     }
 
 

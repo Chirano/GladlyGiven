@@ -97,22 +97,22 @@ public class Refugee extends AppUser<Refugee> implements IDTOable<RefugeeDTO> {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Refugee{");
-        sb.append("protocolId='").append(protocolId).append('\'');
-        sb.append(", snsNumber='").append(snsNumber).append('\'');
-        sb.append(", nationality='").append(nationality).append('\'');
-        sb.append(", country=").append(country);
-        sb.append(", id=").append(id);
-        sb.append(", firstName='").append(firstName).append('\'');
-        sb.append(", lastName='").append(lastName).append('\'');
-        sb.append(", email=").append(email);
-        sb.append(", gender='").append(gender).append('\'');
-        sb.append(", password='").append(password).append('\'');
-        sb.append(", photoURL='").append(photoURL).append('\'');
-        sb.append(", creationDate='").append(creationDate).append('\'');
-        sb.append(", mainLanguage=").append(mainLanguage);
-        sb.append(", mainPhoneNumber=").append(mainPhoneNumber);
-        sb.append('}');
+        StringBuilder sb = new StringBuilder();
+        sb.append("-----------------------------------\n");
+        sb.append("|           Refugee Card           |\n");
+        sb.append("-----------------------------------\n");
+        sb.append("| ID: ").append(id).append("\n");
+        sb.append("| Name: ").append(firstName).append(" ").append(lastName).append("\n");
+        sb.append("| Email: ").append(email.email).append("\n");
+        sb.append("| Gender: ").append(gender).append("\n");
+        sb.append("| Protocol ID: ").append(protocolId).append("\n");
+        sb.append("| SNS Number: ").append(snsNumber).append("\n");
+        sb.append("| Nationality: ").append(nationality).append("\n");
+        sb.append("| Country: ").append(country.country).append("\n");
+        sb.append("| Main Language: ").append(mainLanguage.language).append("\n");
+        sb.append("| Second Language: ").append(secondLanguage.language).append("\n");
+        sb.append("| Main Phone Number: ").append(mainPhoneNumber.number).append("\n");
+        sb.append("-----------------------------------\n");
         return sb.toString();
     }
 }

@@ -10,7 +10,6 @@ import { MockRefugees } from 'src/app/classes/userProfiles/mockUsers/MockRefugee
 export class RefugeeService  {
 
   private baseUrl = "http://localhost:8080/api";
-  private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(private http: HttpClient) { }
 
@@ -71,7 +70,9 @@ export class RefugeeService  {
       gender: data.gender || '',
       photoURL: data.photoURL || '',
       mainLanguage: data.mainLanguage || '',
+      secondLanguage: data.secondLanguage || '',
       mainPhoneNumber: data.phone || '',
+      
       protocolId: data.protocolId || '',
       snsNumber: data.snsNumber || '',
       nationality: data.nationality || '',

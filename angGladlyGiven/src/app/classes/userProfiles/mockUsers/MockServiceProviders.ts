@@ -7,6 +7,7 @@ export const MockServiceProviders = {
         gender: "Female",
         photoURL: "",
         mainLanguage: "Portuguese",
+        secondLanguage: "English",
         mainPhoneNumber: "+351912345678",
         
         nif: "123456789",
@@ -28,6 +29,7 @@ export const MockServiceProviders = {
         gender: "Male",
         photoURL: "",
         mainLanguage: "Spanish",
+        secondLanguage: "English",
         mainPhoneNumber: "+34678901234",
 
         nif: "654321987",
@@ -49,6 +51,7 @@ export const MockServiceProviders = {
         gender: "Female",
         photoURL: "",
         mainLanguage: "German",
+        secondLanguage: "English",
         mainPhoneNumber: "+491234567890",
 
         nif: "987654321",

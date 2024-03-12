@@ -9,7 +9,7 @@ import { MockServiceProviders } from 'src/app/classes/userProfiles/mockUsers/Moc
 })
 export class ServiceProviderService  {
 
-  private baseUrl = "/api/serviceProvider";
+  private baseUrl = "http://localhost:8080/api";
 
   constructor(private http: HttpClient) { }
 
@@ -99,10 +99,13 @@ export class ServiceProviderService  {
       gender: data.gender || '',
       photoURL: data.photoURL || '',
       mainLanguage: data.mainLanguage || '',
+      secondLanguage: data.secondLanguage || '',
       mainPhoneNumber: data.phone || '',
+
       nif: data.nif || '',
       paymentInfoId: data.paymentInfoId || '',
       invoiceInfoId: data.invoiceInfoId || '',
+      
       licenseNumber: data.licenseNumber || '',
       categoryId: data.categoryId || '',
       servicesIds: data.servicesIds || [],

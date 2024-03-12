@@ -17,6 +17,7 @@ import pt.gladlyGivenApi.GladlyGiven.Services.Users.ServiceProviderService;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/serviceProvider")
 public class ServiceProviderController {
@@ -99,7 +100,7 @@ public class ServiceProviderController {
     }
 
     @PostMapping("/body")
-    public ServiceProvider createServiceProviderViaRequestBody(@RequestBody ServiceProvider serviceProvider) {
+    public ServiceProvider createServiceProviderViaRequestBody(@RequestBody ServiceProviderDTO serviceProvider) {
         return serviceProviderService.createServiceProvider(serviceProvider, false);
     }
 

@@ -41,11 +41,4 @@ public abstract class MonetaryUser<T extends MonetaryUser> extends AppUser<T> {
         this.paymentInfoId = paymentInfoId;
         this.invoiceInfoId = invoiceInfoId;
     }
-
-    public PhoneNumber getPhoneNumber(){
-        return this.mainPhoneNumber;
-    }
-    public void setPhoneNumber(PhoneNumber mainPhoneNumber) {
-        super.setMainPhoneNumber(mainPhoneNumber);
-    }
 }

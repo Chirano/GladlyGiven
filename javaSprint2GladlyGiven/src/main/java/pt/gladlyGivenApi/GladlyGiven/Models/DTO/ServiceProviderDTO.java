@@ -1,43 +1,95 @@
 package pt.gladlyGivenApi.GladlyGiven.Models.DTO;
 
-
 import pt.gladlyGivenApi.GladlyGiven.Models.Users.ServiceProvider;
 
-public class ServiceProviderDTO {
-    public long id;
+import java.util.Arrays;
 
-    public String firstName;
+public class ServiceProviderDTO extends AppUserDTO {
 
-    public String lastName;
+    // Monetary user
+    public String nif;
+    public String paymentInfoId;
+    public String invoiceInfoId;
 
-    public String email;
+    // Service provider
+    public String licenseNumber;
+    public long categoryId;
+    public Long[] servicesIds;
+    public Long[] reviewIds;
+    public float reviewAverage;
 
-    public String gender;
+    public ServiceProviderDTO() {}
 
-    public String language;
-
-    public String phoneNumber;
-
-
-    public ServiceProviderDTO(long id, String firstName, String lastName, String email, String gender, String language,
-                              String phoneNumber)
-    {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.gender = gender;
-        this.language = language;
-        this.phoneNumber = phoneNumber;
-    }
-
-    public ServiceProviderDTO(ServiceProvider serviceProvider){
+    public ServiceProviderDTO(ServiceProvider serviceProvider) {
         this.id = serviceProvider.id;
         this.firstName = serviceProvider.firstName;
         this.lastName = serviceProvider.lastName;
         this.email = serviceProvider.email.email;
         this.gender = serviceProvider.gender;
-        this.language = serviceProvider.mainLanguage.language;
-        this.phoneNumber = serviceProvider.mainPhoneNumber.number;
+        this.mainLanguage = serviceProvider.mainLanguage.language;
+        this.mainPhoneNumber = serviceProvider.mainPhoneNumber.number;
+        this.nif = serviceProvider.nif;
+        this.paymentInfoId = serviceProvider.paymentInfoId;
+        this.invoiceInfoId = serviceProvider.invoiceInfoId;
+        this.licenseNumber = serviceProvider.licenseNumber;
+        this.categoryId = serviceProvider.categoryId;
+        this.servicesIds = serviceProvider.healthServices != null ? serviceProvider.healthServices.toArray(new Long[0]) : null;
+        this.reviewIds = serviceProvider.reviewIds != null ? serviceProvider.reviewIds.toArray(new Long[0]) : null;
+        this.reviewAverage = serviceProvider.reviewAverage;
     }
+
+    public ServiceProviderDTO(long id, String firstName, String lastName, String email, String gender, String language, String phoneNumber,
+                              String nif, String paymentInfoId, String invoiceInfoId,
+                              String licenseNumber, long categoryId, Long[] servicesIds,
+                              Long[] reviewIds, float reviewAverage) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.gender = gender;
+        this.mainLanguage = language;
+        this.mainPhoneNumber = phoneNumber;
+        this.nif = nif;
+        this.paymentInfoId = paymentInfoId;
+        this.invoiceInfoId = invoiceInfoId;
+        this.licenseNumber = licenseNumber;
+        this.categoryId = categoryId;
+        this.servicesIds = servicesIds;
+        this.reviewIds = reviewIds;
+        this.reviewAverage = reviewAverage;
+    }
+
+    @Override
+    public boolean isValid() {
+        return super.isValid() &&
+                nif != null && !nif.isEmpty() &&
+                paymentInfoId != null && !paymentInfoId.isEmpty() &&
+                invoiceInfoId != null && !invoiceInfoId.isEmpty();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("-----------------------------------\n");
+        sb.append("|       Service Provider Card      |\n");
+        sb.append("-----------------------------------\n");
+        sb.append("| ID: ").append(id).append("\n");
+        sb.append("| Name: ").append(firstName).append(" ").append(lastName).append("\n");
+        sb.append("| Email: ").append(email).append("\n");
+        sb.append("| Gender: ").append(gender).append("\n");
+        sb.append("| Main Language: ").append(mainLanguage).append("\n");
+        sb.append("| Second Language: ").append(secondLanguage).append("\n");
+        sb.append("| Main Phone Number: ").append(mainPhoneNumber).append("\n");
+        sb.append("| NIF: ").append(nif).append("\n");
+        sb.append("| Payment Info ID: ").append(paymentInfoId).append("\n");
+        sb.append("| Invoice Info ID: ").append(invoiceInfoId).append("\n");
+        sb.append("| License Number: ").append(licenseNumber).append("\n");
+        sb.append("| Category ID: ").append(categoryId).append("\n");
+        sb.append("| Service IDs: ").append(Arrays.toString(servicesIds)).append("\n");
+        sb.append("| Review IDs: ").append(Arrays.toString(reviewIds)).append("\n");
+        sb.append("| Review Average: ").append(reviewAverage).append("\n");
+        sb.append("-----------------------------------\n");
+        return sb.toString();
+    }
+
 }

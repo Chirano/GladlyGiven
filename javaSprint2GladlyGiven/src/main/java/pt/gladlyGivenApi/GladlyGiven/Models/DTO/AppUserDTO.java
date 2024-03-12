@@ -16,6 +16,7 @@ public abstract class AppUserDTO implements IValidateable {
     public String photoURL;
 
     public String mainLanguage;
+    public String secondLanguage;
 
     public String mainPhoneNumber;
 
@@ -29,12 +30,13 @@ public abstract class AppUserDTO implements IValidateable {
         this.gender = gender;
     }
 
-    public AppUserDTO(String firstName, String lastName, String email, String gender, String mainLanguage, String mainPhoneNumber) {
+    public AppUserDTO(String firstName, String lastName, String email, String gender, String mainLanguage, String secondLanguage, String mainPhoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.gender = gender;
         this.mainLanguage = mainLanguage;
+        this.secondLanguage = secondLanguage;
         this.mainPhoneNumber = mainPhoneNumber;
     }
 
@@ -46,6 +48,7 @@ public abstract class AppUserDTO implements IValidateable {
                 email != null && !email.isEmpty() &&
                 gender != null && !gender.isEmpty() &&
                 mainLanguage != null && !mainLanguage.isEmpty() &&
+                secondLanguage != null && !secondLanguage.isEmpty() &&
                 mainPhoneNumber != null && !mainPhoneNumber.isEmpty();
     }
 }

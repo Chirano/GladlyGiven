@@ -8,7 +8,6 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.Getter;
 import lombok.Setter;
-import pt.gladlyGivenApi.GladlyGiven.Interfaces.IDTOable;
 import pt.gladlyGivenApi.GladlyGiven.Models.Email;
 import pt.gladlyGivenApi.GladlyGiven.Models.Language;
 import pt.gladlyGivenApi.GladlyGiven.Models.PhoneNumber;
@@ -48,7 +47,7 @@ public abstract class AppUser<T extends AppUser> {
     public Language mainLanguage;
 
     @ManyToOne
-    public Language secondayLanguage;
+    public Language secondLanguage;
 
     @ManyToOne
     public PhoneNumber mainPhoneNumber;

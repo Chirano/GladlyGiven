@@ -9,13 +9,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import pt.gladlyGivenApi.GladlyGiven.Enums.AvailabilityStatus;
+import pt.gladlyGivenApi.GladlyGiven.Models.DTO.RefugeeDTO;
 import pt.gladlyGivenApi.GladlyGiven.Models.HealthServices.HealthService;
+import pt.gladlyGivenApi.GladlyGiven.Models.Users.Refugee;
 import pt.gladlyGivenApi.GladlyGiven.PageUtils;
 import pt.gladlyGivenApi.GladlyGiven.Models.Availability;
 import pt.gladlyGivenApi.GladlyGiven.Models.Email;
 import pt.gladlyGivenApi.GladlyGiven.Models.Language;
 import pt.gladlyGivenApi.GladlyGiven.Models.PhoneNumber;
 import pt.gladlyGivenApi.GladlyGiven.Models.Users.ServiceProvider;
+import pt.gladlyGivenApi.GladlyGiven.Models.DTO.ServiceProviderDTO;
 import pt.gladlyGivenApi.GladlyGiven.Repositories.AvailabilityRepository;
 import pt.gladlyGivenApi.GladlyGiven.Repositories.HealthServiceRepository;
 import pt.gladlyGivenApi.GladlyGiven.Repositories.Users.ServiceProviderRepository;
@@ -41,6 +44,10 @@ public class ServiceProviderService extends AppUserService {
 
     // Service Provider
     // ---------------------------------------------------------------------
+    private ServiceProvider saveServiceProvider(ServiceProvider serviceProvider) {
+        return saveUserToRepository(serviceProvider, serviceProviderRepository);
+    }
+
     // find ---
     public ServiceProvider findServiceProviderById(Long id) {
         return findUserById(id, serviceProviderRepository);
@@ -65,38 +72,73 @@ public class ServiceProviderService extends AppUserService {
     public List<ServiceProvider> findServicesProvidersByHealthService(long id){
         return serviceProviderRepository.findByHealthServiceId(id);
     }
+
     // create ---
-    public ServiceProvider createServiceProvider(ServiceProvider serviceProvider, boolean isServiceOriginated) {
-        return createUser(serviceProvider, serviceProviderRepository, isServiceOriginated);
+    public ServiceProvider createServiceProvider(ServiceProviderDTO serviceProviderDTO, boolean isServiceOriginated) {
+        try {
+            if (serviceProviderDTO == null) {
+                System.out.println("Received ServiceProviderDTO is null!");
+                return null;
+            }
+
+            System.out.printf("\nTrying to create ServiceProvider: \n%s", serviceProviderDTO.toString());
+            ServiceProvider serviceProvider = null;
+
+            // If not service-originated, try to find if it already exists
+            if (!isServiceOriginated) {
+                try {
+                    serviceProvider = findServiceProviderByEmail(serviceProviderDTO.email);
+                } catch (Exception e) {
+                    System.out.println("Didn't find service provider. Creating.");
+                    System.out.println(e.getMessage());
+                }
+            }
+
+            if (serviceProvider == null) {
+                System.out.println("Creating New ServiceProvider!");
+
+                serviceProvider = ServiceProvider.fromDTO(serviceProviderDTO);
+
+                // find or create AppUser class variables
+                serviceProvider.email = findOrCreateEmail(serviceProviderDTO.email);
+                serviceProvider.mainLanguage = findOrCreateLanguage(serviceProviderDTO.mainLanguage);
+                serviceProvider.mainPhoneNumber = findOrCreatePhoneNumber(serviceProviderDTO.mainPhoneNumber);
+
+                // find or create ServiceProvider class variables
+                // TODO add or create healthServices
+
+                serviceProvider = addCreationDateToUser(serviceProvider);
+                serviceProvider = saveServiceProvider(serviceProvider);
+
+                System.out.println("New ServiceProvider:\n" + serviceProvider.toString());
+            }
+
+            return serviceProvider;
+        } catch (Exception e) {
+            System.out.println("\nSomething went wrong, returning Empty Service Provider. Error message:");
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
     @Transactional
     public ServiceProvider createServiceProvider(String firstName, String lastName, String emailAddress, String gender, String password, String language, String phoneNumber, String nif, String licenseNumber, long categoryId) {
-        ServiceProvider serviceProvider = findServiceProviderByFirstName(firstName);
+        // Create a ServiceProviderDTO using the provided parameters
+        ServiceProviderDTO serviceProviderDTO = new ServiceProviderDTO();
+        serviceProviderDTO.firstName = firstName;
+        serviceProviderDTO.lastName = lastName;
+        serviceProviderDTO.email = emailAddress;
+        serviceProviderDTO.gender = gender;
+        serviceProviderDTO.mainLanguage = language;
+        serviceProviderDTO.mainPhoneNumber = phoneNumber;
+        serviceProviderDTO.nif = nif;
+        serviceProviderDTO.licenseNumber = licenseNumber;
+        serviceProviderDTO.categoryId = categoryId;
 
-        if (serviceProvider == null) {
-            Email email = findOrCreateEmail(emailAddress);
-            Language userLanguage = findOrCreateLanguage(language);
-            PhoneNumber userPhoneNumber = findOrCreatePhoneNumber(phoneNumber);
-
-            serviceProvider = new ServiceProvider(
-                    firstName,
-                    lastName,
-                    email,
-                    gender,
-                    password,
-                    userLanguage,
-                    userPhoneNumber,
-                    nif,
-                    licenseNumber,
-                    categoryId
-            );
-
-            serviceProvider = createServiceProvider(serviceProvider, true);
-        }
-
-        return serviceProvider;
+        // Return the method call on top
+        return createServiceProvider(serviceProviderDTO, true);
     }
+
 
 
     // update ---

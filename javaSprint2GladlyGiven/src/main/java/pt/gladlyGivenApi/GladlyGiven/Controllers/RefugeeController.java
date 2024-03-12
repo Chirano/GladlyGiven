@@ -48,8 +48,8 @@ public class RefugeeController {
 
     // --- create ---
     @PostMapping("/fromParams")
-    public RefugeeDTO createRefugeeViaRequestParams(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String gender, @RequestParam String password, @RequestParam String protocolId, @RequestParam String snsNumber, @RequestParam String nationality, @RequestParam String country, @RequestParam String language, @RequestParam String phoneNumber) {
-        Refugee refugee = refugeeService.createRefugee(firstName, lastName, email, gender, password, protocolId, snsNumber, nationality, country, language, phoneNumber);
+    public RefugeeDTO createRefugeeViaRequestParams(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String gender, @RequestParam String password, @RequestParam String protocolId, @RequestParam String snsNumber, @RequestParam String nationality, @RequestParam String country, @RequestParam String mainLanguage, @RequestParam String secondLanguage, @RequestParam String phoneNumber) {
+        Refugee refugee = refugeeService.createRefugee(firstName, lastName, email, gender, password, protocolId, snsNumber, nationality, country, mainLanguage, secondLanguage, phoneNumber);
         return refugee.toDTO();
     }
 

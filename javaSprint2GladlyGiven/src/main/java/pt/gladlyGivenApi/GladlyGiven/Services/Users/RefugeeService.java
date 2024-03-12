@@ -27,6 +27,10 @@ public class RefugeeService extends AppUserService {
 
     // Refugee
     // ---------------------------------------------------------------------
+    private Refugee saveRefugee(Refugee refugee) {
+        return saveUserToRepository(refugee, refugeeRepository);
+    }
+
     // find ---
     public Refugee findRefugeeById(Long id) {
         return findUserById(id, refugeeRepository);
@@ -63,24 +67,6 @@ public class RefugeeService extends AppUserService {
 
 
     // create ---
-    private Refugee saveRefugee(Refugee refugee) {
-        try {
-            return refugeeRepository.save(refugee);
-        } catch (Exception e) {
-            System.out.println("Failed to save refugee. Error:\n" + e.getMessage());
-            return null;
-        }
-    }
-
-    private Refugee saveRefugee(RefugeeDTO refugeeDTO) {
-        try {
-            Refugee refugee = Refugee.fromDTO(refugeeDTO);
-            return refugeeRepository.save(refugee);
-        } catch (Exception e) {
-            System.out.println("Failed to save Refugee from DTO. . Error:\n" + e.getMessage());
-            return null;
-        }
-    }
 
     // does the refugee come from this service?
     public Refugee createRefugee(RefugeeDTO refugeeDTO, boolean isServiceOriginated) {
@@ -108,10 +94,14 @@ public class RefugeeService extends AppUserService {
 
                 refugee = Refugee.fromDTO(refugeeDTO);
 
+                // find or create AppUser class variables
                 refugee.email = findOrCreateEmail(refugeeDTO.email);
-                refugee.country = findOrCreateCountry(refugeeDTO.country);
                 refugee.mainLanguage = findOrCreateLanguage(refugeeDTO.mainLanguage);
+                refugee.secondLanguage = findOrCreateLanguage(refugeeDTO.secondLanguage);
                 refugee.mainPhoneNumber = findOrCreatePhoneNumber(refugeeDTO.mainPhoneNumber);
+
+                // find or create Refugee class Variables
+                refugee.country = findOrCreateCountry(refugeeDTO.country);
 
                 refugee = addCreationDateToUser(refugee);
                 refugee = saveRefugee(refugee);
@@ -121,15 +111,15 @@ public class RefugeeService extends AppUserService {
 
             return refugee;
         } catch (Exception e) {
-            System.out.println("Something went wrong, returning empty refugee. Error message:");
+            System.out.println("\nSomething went wrong, returning Empty Refugee. Error message:");
             System.out.println(e.getMessage());
             return null;
         }
     }
 
     // create refugee with language & phone number
-    public Refugee createRefugee(String firstName, String lastName, String emailAddress, String gender, String password, String protocolId, String snsNumber, String nationality, String country, String language, String phoneNumber) {
-        RefugeeDTO refugeeDTO = new RefugeeDTO(firstName, lastName, emailAddress, gender, protocolId, snsNumber, nationality, country, language, phoneNumber);
+    public Refugee createRefugee(String firstName, String lastName, String emailAddress, String gender, String password, String protocolId, String snsNumber, String nationality, String country, String mainLanguage, String secondLanguage, String phoneNumber) {
+        RefugeeDTO refugeeDTO = new RefugeeDTO(firstName, lastName, emailAddress, gender, protocolId, snsNumber, nationality, country, mainLanguage, secondLanguage, phoneNumber);
         return createRefugee(refugeeDTO, false);
     }
 

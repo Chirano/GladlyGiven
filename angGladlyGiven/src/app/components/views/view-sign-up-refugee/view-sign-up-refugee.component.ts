@@ -26,6 +26,7 @@ export class ViewSignUpRefugeeComponent {
         gender: form.value.gender,
         photoURL: "",
         mainLanguage: form.value.mainLanguage,
+        secondLanguage: form.value.secondLanguage,
         mainPhoneNumber: form.value.phone,
 
         protocolId: form.value.protocolId,

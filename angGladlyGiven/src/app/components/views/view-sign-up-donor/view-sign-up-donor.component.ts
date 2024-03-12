@@ -23,6 +23,7 @@ export class ViewSignUpDonorComponent {
         gender: form.value.gender,
         photoURL: "",
         mainLanguage: form.value.mainLanguage,
+        secondLanguage: form.value.secondLanguage,
         mainPhoneNumber: form.value.phone,
   
         // monetary user:

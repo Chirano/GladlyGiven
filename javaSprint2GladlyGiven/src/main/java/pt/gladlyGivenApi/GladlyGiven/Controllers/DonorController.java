@@ -6,12 +6,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pt.gladlyGivenApi.GladlyGiven.Models.Appointment;
+import pt.gladlyGivenApi.GladlyGiven.Models.DTO.DonorDTO;
 import pt.gladlyGivenApi.GladlyGiven.Models.Users.Donor;
 import pt.gladlyGivenApi.GladlyGiven.Services.Users.DonorService;
 
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class DonorController {
@@ -46,7 +48,7 @@ public class DonorController {
     }
 
     @PostMapping(value = "/donor", produces = "application/json")
-    public ResponseEntity<Donor> createDonor(@RequestBody Donor donor){
+    public ResponseEntity<Donor> createDonor(@RequestBody DonorDTO donor){
         Donor newDonor = service.createDonor(donor);
 
         if(newDonor == null){
