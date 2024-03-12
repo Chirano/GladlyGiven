@@ -23,6 +23,7 @@ import java.util.Optional;
 /**
  * Controller class for managing reviews.
  */
+@CrossOrigin
 @RestController
 public class ReviewController {
 
@@ -64,6 +65,7 @@ public class ReviewController {
 
     @PostMapping(value= "/review", consumes = "application/json", produces = "application/json")
         public ResponseEntity<Review> createReview(@RequestBody Review review){
+        System.out.println("teste");
             Review newReview = reviewService.createReview(review);
 
             if(newReview == null){

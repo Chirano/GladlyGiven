@@ -9,10 +9,11 @@ import { Observable, of } from 'rxjs';
 })
 export class ReviewService {
 
-  private url = 'https://localhost:8080';
+  private url = 'http://localhost:8080';
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' ,
+    'Accept': 'application/json' })
   };
 
   constructor(private http : HttpClient) { }

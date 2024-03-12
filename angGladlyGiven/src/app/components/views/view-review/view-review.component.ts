@@ -13,14 +13,16 @@ export class ViewReviewComponent {
     reviewId:0,
     appointmentId: 0,
     rating: 0,
-    description: '',
-    date: '',
+    description: ' ',
+    date: ' ',
   };
 
   constructor(private reviewService : ReviewService){}
 
-  createReview(reviewId:number,appointmentId: number, rating: number, description:string, date:string): void {
-    
+  createReview(reviewId:number, appointmentId: number, rating: number, description:string, date:string): void {
+    //O atributo rating está sendo criado como string. O código abaixo converte em number.
+    //const numericRating = +rating;
+
     
     // Call the review service to create the review
     this.reviewService.createReview({reviewId, appointmentId, rating, description, date

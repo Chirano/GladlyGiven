@@ -38,7 +38,7 @@ export class CostSupportServiceService {
   getCostSupportsByUserId(userId : number): Observable<CostSupport[]> {
     let page = 1;
     let size = 5;
-    //api/v1/CostSupport/mycostsupports/1?page=1&pageSize=5
+
     return this.http.get<CostSupport[]>(this.dotNet + "/CostSupport/mycostsupports/"+userId+"?page="+page+"&pageSize="+ size);
   }
 
