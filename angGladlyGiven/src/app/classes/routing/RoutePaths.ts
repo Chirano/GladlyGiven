@@ -20,7 +20,9 @@ export const RouterPaths = {
 
     ViewFaq: "view-faq",
     
+    //Request a new cost support
     ViewCostSupport : "view-service-provider/costsupport",
+    //View a list of cost supports requested by serviceProviderId 
     ViewListCostsupport : "view-service-provider/costsupportlist",
 
     ViewContact: "view-contact",

@@ -26,7 +26,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 export class AuthService {
   static AuthState: AuthState = AuthState.None;
-  static SessionContext: SessionContext | null = null;
+  static SessionContext: SessionContext;
 
   private signUpDetails : SignUpDetails | null = null;
   private sessionContext: SessionContext = 

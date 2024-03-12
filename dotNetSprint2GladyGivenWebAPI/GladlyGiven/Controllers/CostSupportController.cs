@@ -57,10 +57,10 @@ namespace GladlyGiven.Controllers
         /// If cost supports are found, it returns a response with HTTP 200 (OK) status code and the paginated list of cost supports.
         /// If no cost supports are found, it returns a response with HTTP 204 (No Content) status code.
         /// </returns>
-        [HttpGet("mycostsupports/{id}")]
+        [HttpGet("mycostsupports/{userId}")]
         public async Task<ActionResult<IEnumerable<CostSupportDTO>>> GetAllCostSupportsByUserId(int userId, int page = 1, int pageSize = 5)
         {
-            List<CostSupportDTO> costSupports = await costSupportService.FindAllCostSupports();
+            List<CostSupportDTO> costSupports = await costSupportService.FindAllCostSupportsByUserId(userId);
 
             if (costSupports != null && costSupports.Count > 0)
                 return Ok(costSupports.Skip((page - 1) * pageSize)

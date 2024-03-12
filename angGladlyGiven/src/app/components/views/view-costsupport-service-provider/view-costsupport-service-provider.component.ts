@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { CostSupport } from 'src/app/classes/CostSupport';
 import { CostSupportServiceService } from 'src/app/services/cost-support/cost-support-service.service';
+import { SessionContext } from 'src/app/classes/authentication/SessionContext';
+import { AuthService } from 'src/app/services/authentication/auth.service';
 
 
 @Component({
@@ -10,6 +12,9 @@ import { CostSupportServiceService } from 'src/app/services/cost-support/cost-su
 })
 
 export class ViewCostsupportServiceProviderComponent {
+
+  sessionContext: SessionContext | null = AuthService.SessionContext;
+
   costSupport: CostSupport = {
     id : 0,
     amount: 0,
@@ -29,6 +34,12 @@ export class ViewCostsupportServiceProviderComponent {
     private costSupportService: CostSupportServiceService
   ) {}
 
+
+  getCostSupportsByUserId() : void {
+    this.costSupportService.getCostSupportsByUserId(AuthService.SessionContext.userId).subscribe(costSupports => this.costSupports = costSupports);
+  }
+
+  //GET all costs supports in database.
   getCostSupports() : void {
     this.costSupportService.getCostSupports().subscribe(costSupports => this.costSupports = costSupports);
   }

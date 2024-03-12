@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { CostSupport } from 'src/app/classes/CostSupport';
+import { SessionContext } from 'src/app/classes/authentication/SessionContext';
+import { AuthService } from '../authentication/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,12 +11,20 @@ import { CostSupport } from 'src/app/classes/CostSupport';
 export class CostSupportServiceService {
   private dotNet = 'https://localhost:7280';
 
+  userId: number | null = null;
+  sessionContext: SessionContext | null = AuthService.SessionContext;
+
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json',
     'Accept': 'application/json' }),
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService
+  ) { 
+  }
+
 
   /* GET all cost suports in database.  */
   getCostSupports(): Observable<CostSupport[]> {
@@ -25,9 +35,12 @@ export class CostSupportServiceService {
   }
 
   /* GET all cost suports by service provider id.  */
-  /*getCostSupportsByUserId(userId : number): Observable<CostSupport[]> {
-    return this.http.get<CostSupport[]>(this.dotNet + "/costsupports/"+userId);
-  }*/
+  getCostSupportsByUserId(userId : number): Observable<CostSupport[]> {
+    let page = 1;
+    let size = 5;
+    //api/v1/CostSupport/mycostsupports/1?page=1&pageSize=5
+    return this.http.get<CostSupport[]>(this.dotNet + "/api/v1/CostSupport/mycostsupports/"+userId+"?page="+page+"&pageSize="+ size);
+  }
 
   /* POST: add a new costSupport request to the database */
   addCostSupport(costSupport: CostSupport): Observable<CostSupport> {

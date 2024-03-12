@@ -3,6 +3,7 @@
 import { Component } from '@angular/core';
 import { CostSupport } from 'src/app/classes/CostSupport';
 import { CostSupportServiceService } from 'src/app/services/cost-support/cost-support-service.service';
+import { AuthService } from 'src/app/services/authentication/auth.service';
 
 @Component({
   selector: 'app-view-list-costsupport',
@@ -17,12 +18,13 @@ export class ViewListCostsupportComponent {
     private costSupportService : CostSupportServiceService
   ) { }
 
-  /*ngOnInit(): void {
-    this.getCostSupports(userId : number); // Chama o método ao iniciar o componente
+  ngOnInit(): void {
+    this.getCostSupportsByUserId(); // Chama o método ao iniciar o componente
   }
 
-  getCostSupports() : void {
-    this.costSupportService.getCostSupports(userId : number).subscribe(costSupports => this.costSupports = costSupports);
-  }*/
+  getCostSupportsByUserId() : void {
+    console.log(AuthService.SessionContext.userId);
+    this.costSupportService.getCostSupportsByUserId(AuthService.SessionContext.userId).subscribe(costSupports => this.costSupports = costSupports);
+  }
 
 }

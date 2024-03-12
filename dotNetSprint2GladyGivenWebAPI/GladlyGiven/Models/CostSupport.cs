@@ -2,6 +2,7 @@
 
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using GladlyGiven.Enums;
 
 namespace GladlyGiven.Models
@@ -17,6 +18,7 @@ namespace GladlyGiven.Models
 
         public long AppointmentId { get; set; }
 
+        [JsonPropertyName("userId")]
         public long ServiceProviderId { get; set; }
 
         public CostSupportType Type { get; set; }
