@@ -19,14 +19,11 @@ import { ViewListCostsupportComponent } from './components/views/view-list-costs
 import { ViewContactComponent } from './components/views/view-contact/view-contact.component';
 import { ViewServiceRequestComponent } from './components/views/view-service-request/view-service-request.component';
 import { ViewDonationComponent } from './components/views/view-donation/view-donation.component';
-<<<<<<< Updated upstream
 import { ViewAdminListCostsupportComponent } from './components/views/view-admin-list-costsupport/view-admin-list-costsupport.component';
 
 import { ViewListServicerequestComponent } from './components/views/view-list-servicerequest/view-list-servicerequest.component';
-=======
 import { ViewListDonationsComponent } from './components/views/view-list-donations/view-list-donations.component';
 import { ViewReviewComponent } from './components/views/view-review/view-review.component';
->>>>>>> Stashed changes
 
 
 const routes: Routes = [

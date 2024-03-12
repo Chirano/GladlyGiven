@@ -28,12 +28,9 @@ export const RouterPaths = {
     ViewServiceRequest: "view-service-request",
 
     ViewDonation: "view-donation",
-<<<<<<< Updated upstream
     ViewAdminListCostsupport : "view-admin/costsupportlist",
 
-    ViewListServiceRequest: "view-list-servicerequest"
-=======
+    ViewListServiceRequest: "view-list-servicerequest",
     ViewListDonations: "view-list-donations",
     ViewReview: "view-review"
->>>>>>> Stashed changes
 }
