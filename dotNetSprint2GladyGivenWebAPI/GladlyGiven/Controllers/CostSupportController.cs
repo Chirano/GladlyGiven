@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace GladlyGiven.Controllers
 {
     [ApiController]
-    [Route("api/v1/[controller]")]
+    [Route("[Controller]")]
     [EnableCors]
     public class CostSupportController : ControllerBase
     {

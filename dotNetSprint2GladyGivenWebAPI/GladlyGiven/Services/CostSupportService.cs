@@ -48,7 +48,7 @@ namespace GladlyGiven.Services
        public async Task<List<CostSupportDTO>> FindAllCostSupportsByUserId(int userId)
        {
                List<CostSupport> costSupports = await context.CostSupports
-                   .Where(sp => sp.Id == userId)
+                   .Where(sp => sp.ServiceProviderId == userId)
                    .ToListAsync();
 
                if (costSupports == null)

@@ -23,7 +23,7 @@ export class ViewListCostsupportComponent {
   }
 
   getCostSupportsByUserId() : void {
-    console.log(AuthService.SessionContext.userId);
+    //console.log(AuthService.SessionContext.userId);
     this.costSupportService.getCostSupportsByUserId(AuthService.SessionContext.userId).subscribe(costSupports => this.costSupports = costSupports);
   }
 

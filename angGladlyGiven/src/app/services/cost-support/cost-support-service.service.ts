@@ -39,7 +39,7 @@ export class CostSupportServiceService {
     let page = 1;
     let size = 5;
     //api/v1/CostSupport/mycostsupports/1?page=1&pageSize=5
-    return this.http.get<CostSupport[]>(this.dotNet + "/api/v1/CostSupport/mycostsupports/"+userId+"?page="+page+"&pageSize="+ size);
+    return this.http.get<CostSupport[]>(this.dotNet + "/CostSupport/mycostsupports/"+userId+"?page="+page+"&pageSize="+ size);
   }
 
   /* POST: add a new costSupport request to the database */

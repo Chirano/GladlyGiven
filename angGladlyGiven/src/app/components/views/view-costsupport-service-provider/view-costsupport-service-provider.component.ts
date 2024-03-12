@@ -34,11 +34,6 @@ export class ViewCostsupportServiceProviderComponent {
     private costSupportService: CostSupportServiceService
   ) {}
 
-
-  getCostSupportsByUserId() : void {
-    this.costSupportService.getCostSupportsByUserId(AuthService.SessionContext.userId).subscribe(costSupports => this.costSupports = costSupports);
-  }
-
   //GET all costs supports in database.
   getCostSupports() : void {
     this.costSupportService.getCostSupports().subscribe(costSupports => this.costSupports = costSupports);
