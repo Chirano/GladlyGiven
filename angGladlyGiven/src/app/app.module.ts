@@ -29,6 +29,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BackButtonComponent } from './components/buttons/back-button/back-button.component';
 import { ViewFaqComponent } from './components/views/view-faq/view-faq.component';
 import { ViewContactComponent } from './components/views/view-contact/view-contact.component';
+import { ViewServiceRequestComponent } from './components/views/view-service-request/view-service-request.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,8 @@ import { ViewContactComponent } from './components/views/view-contact/view-conta
 
     ViewFaqComponent,
     ViewContactComponent,
+    ViewServiceRequestComponent,
+
   ],
   imports: [
     BrowserModule,

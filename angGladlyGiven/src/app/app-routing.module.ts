@@ -16,7 +16,7 @@ import { RefreshSignUpGuard as RefreshSignUpGuard } from './guards/refresh/refre
 import { ViewFaqComponent } from './components/views/view-faq/view-faq.component';
 import { ViewCostsupportServiceProviderComponent } from './components/views/view-costsupport-service-provider/view-costsupport-service-provider.component';
 import { ViewContactComponent } from './components/views/view-contact/view-contact.component';
-
+import { ViewServiceRequestComponent } from './components/views/view-service-request/view-service-request.component';
 
 
 const routes: Routes = [
@@ -46,6 +46,8 @@ const routes: Routes = [
 
   // Contact
   { path: RouterPaths.ViewContact, component: ViewContactComponent, canActivate: [RefreshSignUpGuard] },
+
+  { path: RouterPaths.ViewServiceRequest, component: ViewServiceRequestComponent, canActivate: [RefreshSignUpGuard] },
 
 
   { path: '**', redirectTo: RouterPaths.SignIn }

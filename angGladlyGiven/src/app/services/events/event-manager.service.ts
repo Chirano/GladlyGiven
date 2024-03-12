@@ -9,6 +9,7 @@ import { Refugee } from 'src/app/classes/userProfiles/Refugee';
 import { ServiceProvider } from 'src/app/classes/userProfiles/ServiceProvider';
 import { Donor } from 'src/app/classes/userProfiles/Donor';
 import { Contact } from 'src/app/classes/userProfiles/Contact';
+import { ServiceRequest } from 'src/app/classes/ServiceRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,8 @@ export class EventManagerService {
   static OnSignUpRefugeeEvent: EventEmitter<Refugee> = new EventEmitter<Refugee>();
   static OnSignUpServiceProviderEvent: EventEmitter<ServiceProvider> = new EventEmitter<ServiceProvider>();
   static OnSignUpDonorEvent: EventEmitter<Donor> = new EventEmitter<Donor>();
+
+  static OnSignUpServiceRequestEvent: EventEmitter<ServiceRequest> = new EventEmitter<ServiceRequest>();
 
   static OnContactEvent: EventEmitter<Contact> = new EventEmitter<Contact>();
 

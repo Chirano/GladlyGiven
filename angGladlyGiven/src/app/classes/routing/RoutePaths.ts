@@ -23,4 +23,6 @@ export const RouterPaths = {
     ViewCostSupport : "view-service-provider/costsupport",
 
     ViewContact: "view-contact",
+
+    ViewServiceRequest: "view-service-request"
 }

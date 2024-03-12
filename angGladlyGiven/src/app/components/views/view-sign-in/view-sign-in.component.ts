@@ -42,4 +42,8 @@ export class ViewSignInComponent {
   toFaq() {
     EventManagerService.OnRouteEvent.emit(RouterPaths.ViewFaq);
   }
+
+  toServiceRequest() {
+    EventManagerService.OnRouteEvent.emit(RouterPaths.ViewServiceRequest);
+  }
 }
