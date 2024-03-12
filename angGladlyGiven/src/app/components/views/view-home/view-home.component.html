@@ -57,8 +57,7 @@
 </div>
 
 <div class="d-grid gap-2 col-6 mx-auto mt-3">
-    <!---inserir o link de doacao-->
-  <button class="btn btn-warning" type="button" [routerLink]="'sign-in'">DONATE</button>
+  <button class="btn btn-warning" type="button" [routerLink]="'/view-donation'">DONATE</button>
 </div>
 
 <div class="row p-3">
@@ -86,8 +85,7 @@
       <div class="card-body">
         <h5 class="card-title">Help us donating</h5>
         <p class="card-text">Make a donation and help the project sustain itself and reach more people.</p>
-        <!---inserir o link de doacao-->
-        <a href="#" class="btn btn-outline-info">Donate</a>
+        <a href="#" class="btn btn-outline-info" [routerLink]="'/view-donation'">Donate</a>
       </div>
     </div>
   </div>
