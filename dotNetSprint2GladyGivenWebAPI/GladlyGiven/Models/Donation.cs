@@ -57,7 +57,7 @@ namespace GladlyGiven.Models
         /// The date and time when the donation was made.
         /// </summary>
 
-        public DateTime Date { get; set; }
+        public string? Date { get; set; }
         
     }
 }

@@ -25,5 +25,7 @@ export const RouterPaths = {
 
     ViewContact: "view-contact",
 
-    ViewServiceRequest: "view-service-request"
+    ViewServiceRequest: "view-service-request",
+
+    ViewDonation: "view-donation"
 }
