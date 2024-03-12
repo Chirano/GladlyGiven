@@ -2,7 +2,7 @@
 // this will be: http://localhost:4200/SignIn or http://localhost:4200/ViewAdmin, you get the idea
 
 export const RouterPaths = {
-    Home: "sign-in",
+    Home: "home",
     SignIn: "sign-in",
     SignUp: "sign-up",
 

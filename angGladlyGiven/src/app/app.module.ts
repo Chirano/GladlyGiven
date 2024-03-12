@@ -30,6 +30,7 @@ import { BackButtonComponent } from './components/buttons/back-button/back-butto
 import { ViewFaqComponent } from './components/views/view-faq/view-faq.component';
 import { ViewContactComponent } from './components/views/view-contact/view-contact.component';
 import { ViewServiceRequestComponent } from './components/views/view-service-request/view-service-request.component';
+import { ViewHomeComponent } from './components/views/view-home/view-home.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ViewServiceRequestComponent } from './components/views/view-service-req
     BodyComponent,
     FooterComponent,
     
+    ViewHomeComponent,
     ViewSignUpComponent,
     ViewSignInComponent,
     ViewSignUpFilterHelpIntentionComponent,

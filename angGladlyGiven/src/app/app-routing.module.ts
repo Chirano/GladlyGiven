@@ -17,10 +17,13 @@ import { ViewFaqComponent } from './components/views/view-faq/view-faq.component
 import { ViewCostsupportServiceProviderComponent } from './components/views/view-costsupport-service-provider/view-costsupport-service-provider.component';
 import { ViewContactComponent } from './components/views/view-contact/view-contact.component';
 import { ViewServiceRequestComponent } from './components/views/view-service-request/view-service-request.component';
+import { ViewHomeComponent } from './components/views/view-home/view-home.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: RouterPaths.SignIn, pathMatch: 'full' },
+  /// remover esse redirecionamento 
+  { path: '', redirectTo: RouterPaths.Home, pathMatch: 'full' },
+  { path: RouterPaths.Home, component: ViewHomeComponent },
   
   { path: RouterPaths.SignIn, component: ViewSignInComponent },
   { path: RouterPaths.SignUp, component: ViewSignUpComponent },
@@ -39,7 +42,7 @@ const routes: Routes = [
   { path: RouterPaths.ViewRefugee, component: ViewRefugeeComponent },
   { path: RouterPaths.ViewServiceProvider, component: ViewServiceProviderComponent },
   { path: RouterPaths.ViewDonor, component: ViewDonorComponent },
-  { path: RouterPaths.ViewCostSupport, component: ViewCostsupportServiceProviderComponent},
+{ path: RouterPaths.ViewCostSupport, component: ViewCostsupportServiceProviderComponent},
 
   // Faq
   { path: RouterPaths.ViewFaq, component: ViewFaqComponent, canActivate: [RefreshSignUpGuard] },
@@ -51,6 +54,7 @@ const routes: Routes = [
 
 
   { path: '**', redirectTo: RouterPaths.SignIn }
+  
 ];
 
 @NgModule({
