@@ -1,6 +1,8 @@
 package pt.gladlyGivenApi.GladlyGiven.Models.DTO;
 
-public class RefugeeDTO extends AppUserDTO {
+import pt.gladlyGivenApi.GladlyGiven.Interfaces.IValidateable;
+
+public class RefugeeDTO extends AppUserDTO implements IValidateable {
     public String protocolId;
 
     public String snsNumber;
@@ -27,6 +29,15 @@ public class RefugeeDTO extends AppUserDTO {
         this.snsNumber = snsNumber;
         this.nationality = nationality;
         this.country = country;
+    }
+
+    @Override
+    public boolean isValid() {
+        return super.isValid() &&
+                protocolId != null && !protocolId.isEmpty() &&
+                snsNumber != null && !snsNumber.isEmpty() &&
+                nationality != null && !nationality.isEmpty() &&
+                country != null && !country.isEmpty();
     }
 
     @Override

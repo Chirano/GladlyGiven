@@ -106,12 +106,14 @@ export class AuthService {
   private SignUpRefugee(refugee: RefugeeDTO) {
     this.refugeeService.postRefugeeFromBody(refugee).subscribe({
       next: (response: any) => {
-        // if (200 OK) =>
-        // map to refugee
-        // change to refugee view
-        var refugee: RefugeeDTO = RefugeeService.MapToRefugee(response);
-        console.log("Sign Up Refugee:", response);
-        console.log("Refugee:", refugee);
+        var refugee: RefugeeDTO | null = RefugeeService.MapToRefugee(response);
+
+        if (refugee == null || refugee.id < 1) {
+          console.log("Refugee came empty");
+        } else {
+          console.log("Sign Up Refugee:", response);
+          EventManagerService.OnRouteEvent.emit(RouterPaths.ViewRefugee);
+        }
       },
 
       error: (error: any) => {

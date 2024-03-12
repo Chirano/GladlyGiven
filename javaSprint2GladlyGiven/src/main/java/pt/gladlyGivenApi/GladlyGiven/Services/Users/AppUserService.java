@@ -156,6 +156,10 @@ public abstract class AppUserService {
         return existing;
     }
 
+    private void printCreatingNew(String classType) {
+        System.out.printf("\n%s, was not found. Creating one%n", classType);
+    }
+
 
 
     // Email
@@ -165,14 +169,19 @@ public abstract class AppUserService {
     }
 
     public Email findOrCreateEmail(String email) {
-        Email mail = findEmailByEmail(email);
+        try {
+            Email mail = findEmailByEmail(email);
+            if (mail == null) {
+                printCreatingNew("Email");
+                mail = new Email(email);
+                mail = emailRepository.save(mail);
+            }
 
-        if (mail == null) {
-            mail = new Email(email);
-            mail = emailRepository.save(mail);
+            return mail;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return new Email();
         }
-
-        return mail;
     }
 
 
@@ -188,14 +197,20 @@ public abstract class AppUserService {
     }
 
     public Country findOrCreateCountry(String country) {
-        Country existing = findCountryByString(country);
+        try {
+            Country existing = findCountryByString(country);
 
-        if (existing == null) {
-            existing = new Country(country);
-            existing = countryRepository.save(existing);
+            if (existing == null) {
+                printCreatingNew("Country");
+                existing = new Country(country);
+                existing = countryRepository.save(existing);
+            }
+
+            return existing;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return new Country();
         }
-
-        return existing;
     }
 
 
@@ -210,14 +225,19 @@ public abstract class AppUserService {
     }
 
     public Language findOrCreateLanguage(String language) {
-        Language lang = findLanguageByLanguage(language);
+        try {
+            Language lang = findLanguageByLanguage(language);
+            if (lang == null) {
+                printCreatingNew("Language");
+                lang = new Language(language);
+                lang = languageRepository.save(lang);
+            }
 
-        if (lang == null) {
-            lang = new Language(language);
-            lang = languageRepository.save(lang);
+            return lang;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return new Language();
         }
-
-        return lang;
     }
 
 
@@ -229,13 +249,20 @@ public abstract class AppUserService {
     }
 
     public PhoneNumber findOrCreatePhoneNumber(String number) {
-        PhoneNumber phoneNumber = findPhoneNumberByNumber(number);
+        try {
+            PhoneNumber phoneNumber = findPhoneNumberByNumber(number);
 
-        if (phoneNumber == null) {
-            phoneNumber = new PhoneNumber(number);
-            phoneNumber = phoneNumberRepository.save(phoneNumber);
+            if (phoneNumber == null) {
+                printCreatingNew("Phone Number");
+                phoneNumber = new PhoneNumber(number);
+                phoneNumber = phoneNumberRepository.save(phoneNumber);
+
+            }
+
+            return phoneNumber;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return new PhoneNumber();
         }
-
-        return phoneNumber;
     }
 }

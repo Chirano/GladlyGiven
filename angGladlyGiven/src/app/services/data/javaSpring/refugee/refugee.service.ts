@@ -35,15 +35,6 @@ export class RefugeeService  {
     this.logEndpoint(`${this.baseUrl}/refugee/fromBody`);
     return this.http.post<RefugeeDTO>(`${this.baseUrl}/refugee/fromBody`, data);
   }
-  
-  /* OLD
-  postRefugeeFromBody(data: Refugee): Observable<any> {
-
-    this.logEndpoint(`${this.baseUrl}/refugee/fromBody`);
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<any>(`${this.baseUrl}/refugee/fromBody`, data, { headers})
-  }
-  */
 
   // GET /api/refugee/{lastname}
   getRefugeeByLastName(lastName: string): Observable<any> {
@@ -66,23 +57,29 @@ export class RefugeeService  {
   }
 
 
-  static MapToRefugee(data: any): RefugeeDTO {
+  static MapToRefugee(data: any): RefugeeDTO | null {
+    if (data == null) {
+      console.log("Tried to map null refugee data...");
+      return null;
+    }
+
     // Map the response data to RefugeeDTO interface
     return {
-      id: data.id || -1,
-      firstName: data.firstName,
-      lastName: data.lastName,
-      email: data.email,
-      gender: data.gender,
-      photoURL: data.photoURL,
-      mainLanguage: data.mainLanguage,
-      mainPhoneNumber: data.phone,
-      protocolId: data.protocolId,
-      snsNumber: data.sns,
-      nationality: data.nationality,
-      country: data.country
+      id: data.id != null ? data.id : -1,
+      firstName: data.firstName || '',
+      lastName: data.lastName || '',
+      email: data.email || '',
+      gender: data.gender || '',
+      photoURL: data.photoURL || '',
+      mainLanguage: data.mainLanguage || '',
+      mainPhoneNumber: data.phone || '',
+      protocolId: data.protocolId || '',
+      snsNumber: data.snsNumber || '',
+      nationality: data.nationality || '',
+      country: data.country || ''
     };
   }
+
   
 
   // chat gpt generated

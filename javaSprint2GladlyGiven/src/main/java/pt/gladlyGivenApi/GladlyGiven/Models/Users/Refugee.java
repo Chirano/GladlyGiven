@@ -95,4 +95,24 @@ public class Refugee extends AppUser<Refugee> implements IDTOable<RefugeeDTO> {
         return refugee;
     }
 
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Refugee{");
+        sb.append("protocolId='").append(protocolId).append('\'');
+        sb.append(", snsNumber='").append(snsNumber).append('\'');
+        sb.append(", nationality='").append(nationality).append('\'');
+        sb.append(", country=").append(country);
+        sb.append(", id=").append(id);
+        sb.append(", firstName='").append(firstName).append('\'');
+        sb.append(", lastName='").append(lastName).append('\'');
+        sb.append(", email=").append(email);
+        sb.append(", gender='").append(gender).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append(", photoURL='").append(photoURL).append('\'');
+        sb.append(", creationDate='").append(creationDate).append('\'');
+        sb.append(", mainLanguage=").append(mainLanguage);
+        sb.append(", mainPhoneNumber=").append(mainPhoneNumber);
+        sb.append('}');
+        return sb.toString();
+    }
 }

@@ -55,16 +55,16 @@ public class RefugeeController {
 
     @PostMapping(value = "/fromBody")
     public RefugeeDTO createRefugeeViaRequestBody(@RequestBody RefugeeDTO refugee) {
-        System.out.println("\n\nRefugee:\n" + refugee.toString());
+        System.out.println("\nRefugee From Angular Forms:\n" + refugee.toString());
 
         Refugee ref = refugeeService.createRefugee(refugee, false);
 
         if (ref != null) {
-            System.out.println("Created successfully!");
+            System.out.println("Created Refugee successfully!");
             return ref.toDTO();
         } else {
-            System.out.println("Object is null!");
-            return null;
+            System.out.println("Resulting Refugee object is null!...");
+            return new RefugeeDTO();
         }
     }
 

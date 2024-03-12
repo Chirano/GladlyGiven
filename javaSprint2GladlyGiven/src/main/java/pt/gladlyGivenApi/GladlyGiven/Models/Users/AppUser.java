@@ -48,6 +48,9 @@ public abstract class AppUser<T extends AppUser> {
     public Language mainLanguage;
 
     @ManyToOne
+    public Language secondayLanguage;
+
+    @ManyToOne
     public PhoneNumber mainPhoneNumber;
 
     //List<PhoneNumber> phone;

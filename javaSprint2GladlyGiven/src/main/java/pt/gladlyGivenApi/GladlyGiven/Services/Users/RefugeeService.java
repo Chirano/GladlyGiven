@@ -13,6 +13,8 @@ import pt.gladlyGivenApi.GladlyGiven.Models.PhoneNumber;
 import pt.gladlyGivenApi.GladlyGiven.Models.Users.Refugee;
 import pt.gladlyGivenApi.GladlyGiven.Repositories.Users.*;
 
+import javax.sound.midi.Soundbank;
+
 @Service
 public class RefugeeService extends AppUserService {
 
@@ -61,30 +63,66 @@ public class RefugeeService extends AppUserService {
 
 
     // create ---
+    private Refugee saveRefugee(Refugee refugee) {
+        try {
+            return refugeeRepository.save(refugee);
+        } catch (Exception e) {
+            System.out.println("Failed to save refugee. Error:\n" + e.getMessage());
+            return null;
+        }
+    }
+
+    private Refugee saveRefugee(RefugeeDTO refugeeDTO) {
+        try {
+            Refugee refugee = Refugee.fromDTO(refugeeDTO);
+            return refugeeRepository.save(refugee);
+        } catch (Exception e) {
+            System.out.println("Failed to save Refugee from DTO. . Error:\n" + e.getMessage());
+            return null;
+        }
+    }
+
     // does the refugee come from this service?
     public Refugee createRefugee(RefugeeDTO refugeeDTO, boolean isServiceOriginated) {
         try {
             if (refugeeDTO == null) {
-                System.out.println("\n\nRefugee DTO is null!");
+                System.out.println("Recieved Refugee DTO is null!");
                 return null;
             }
 
-            System.out.println("\n\nTrying to create Refugee:\n");
+            System.out.println("\nTrying to create Refugee:");
             Refugee refugee = null;
 
             // if didn't come from service, try to find if it already exists
             if (!isServiceOriginated) {
-                refugee = findRefugeeByEmail(refugeeDTO.email);
+                try {
+                    refugee = findRefugeeByEmail(refugeeDTO.email);
+                } catch (Exception e) {
+                    System.out.println("Didn't Find refugee. Creating");
+                    System.out.println(e.getMessage());
+                }
             }
 
             if (refugee == null) {
+                System.out.println("New Refugee. Adding to Database!");
+
                 refugee = Refugee.fromDTO(refugeeDTO);
+
+                refugee.email = findOrCreateEmail(refugeeDTO.email);
+                refugee.country = findOrCreateCountry(refugeeDTO.country);
+                refugee.mainLanguage = findOrCreateLanguage(refugeeDTO.mainLanguage);
+                refugee.mainPhoneNumber = findOrCreatePhoneNumber(refugeeDTO.mainPhoneNumber);
+
                 refugee = addCreationDateToUser(refugee);
-                refugee = refugeeRepository.save(refugee);
+                refugee = saveRefugee(refugee);
+
+                System.out.println("New Refugee:\n" + refugee.toString());
             }
 
             return refugee;
         } catch (Exception e) {
+            System.out.println("Something went wrong, returning empty refugee. Error message:");
+            System.out.println(e.getMessage());
             return null;
         }
     }

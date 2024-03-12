@@ -35,7 +35,10 @@ export class ViewSignUpRefugeeComponent {
         country: refugeeForm.value.country,
       };
     } else {
-      refugee = RefugeeService.GetRandomRefugee();
+      do {
+          refugee = RefugeeService.GetRandomRefugee();
+      } while(refugee == null);
+      
       console.log("Form is invalid, creating mock user: ", this.refugee);    
     }
 

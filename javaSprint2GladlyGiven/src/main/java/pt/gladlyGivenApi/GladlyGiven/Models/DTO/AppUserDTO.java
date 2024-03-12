@@ -1,6 +1,8 @@
 package pt.gladlyGivenApi.GladlyGiven.Models.DTO;
 
-public abstract class AppUserDTO {
+import pt.gladlyGivenApi.GladlyGiven.Interfaces.IValidateable;
+
+public abstract class AppUserDTO implements IValidateable {
     public long id;
 
     public String firstName;
@@ -34,5 +36,16 @@ public abstract class AppUserDTO {
         this.gender = gender;
         this.mainLanguage = mainLanguage;
         this.mainPhoneNumber = mainPhoneNumber;
+    }
+
+    @Override
+    public boolean isValid() {
+        return id != 0 &&
+                firstName != null && !firstName.isEmpty() &&
+                lastName != null && !lastName.isEmpty() &&
+                email != null && !email.isEmpty() &&
+                gender != null && !gender.isEmpty() &&
+                mainLanguage != null && !mainLanguage.isEmpty() &&
+                mainPhoneNumber != null && !mainPhoneNumber.isEmpty();
     }
 }
