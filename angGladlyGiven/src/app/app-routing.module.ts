@@ -21,6 +21,8 @@ import { ViewServiceRequestComponent } from './components/views/view-service-req
 import { ViewDonationComponent } from './components/views/view-donation/view-donation.component';
 import { ViewAdminListCostsupportComponent } from './components/views/view-admin-list-costsupport/view-admin-list-costsupport.component';
 
+import { ViewListServicerequestComponent } from './components/views/view-list-servicerequest/view-list-servicerequest.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: RouterPaths.SignIn, pathMatch: 'full' },
@@ -57,6 +59,9 @@ const routes: Routes = [
 
   //Donation
   { path: RouterPaths.ViewDonation, component: ViewDonationComponent, canActivate: [RefreshSignUpGuard] },
+
+  { path: RouterPaths.ViewListServiceRequest, component: ViewListServicerequestComponent, canActivate: [RefreshSignUpGuard] },
+  
 
 
 

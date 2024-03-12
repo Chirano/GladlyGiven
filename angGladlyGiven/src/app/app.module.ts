@@ -32,6 +32,7 @@ import { ViewAdminListCostsupportComponent } from './components/views/view-admin
 import { ViewContactComponent } from './components/views/view-contact/view-contact.component';
 import { ViewServiceRequestComponent } from './components/views/view-service-request/view-service-request.component';
 import { ViewDonationComponent } from './components/views/view-donation/view-donation.component';
+import { ViewListServicerequestComponent } from './components/views/view-list-servicerequest/view-list-servicerequest.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { ViewDonationComponent } from './components/views/view-donation/view-don
     ViewFaqComponent,
     ViewContactComponent,
     ViewServiceRequestComponent,
-    ViewDonationComponent
+    ViewDonationComponent,
+    ViewListServicerequestComponent
 
   ],
   imports: [
