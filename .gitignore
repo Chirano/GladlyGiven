@@ -767,3 +767,6 @@ dotNetSprint2GladyGivenWebAPI/GladlyGiven/Program.cs
 dotNetSprint2GladyGivenWebAPI/GladlyGiven/GladlyGiven.csproj
 package-lock.json
 javaSprint2GladlyGiven/.gradle/file-system.probe
+javaSprint2GladlyGiven/.gradle/file-system.probe
+javaSprint2GladlyGiven/.gradle/file-system.probe
+*.probe

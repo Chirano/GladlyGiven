@@ -1,9 +1,8 @@
-﻿using System;
-using System.Runtime.CompilerServices;
+﻿using Backup.Exceptions;
+using GladlyGiven.DTOs;
 using System.Text.Json;
-using Backup.Exceptions;
-using GladlyGiven.Dtos;
-using Microsoft.AspNetCore.Mvc;
+
+
 namespace GladlyGiven.Services
 {
     //Author: Sónia Ribeiro
@@ -11,9 +10,8 @@ namespace GladlyGiven.Services
     /// <summary>
     /// This class communicates with the Java Spring Boot API for the purpouse of donor related operations
     /// </summary>
-
-	public class JavaUserClient
-	{
+    public class JavaUserClient
+    {
         /// <summary>
         /// The url of the java spring boot api
         /// </summary>
@@ -24,13 +22,13 @@ namespace GladlyGiven.Services
         /// The constructor that initializes a new instance of the JavaUserClient with the specified url
         /// </summary>
         /// <param name="url">The url of the java spring boot api</param>
+        
         public JavaUserClient(string url)
         {
 
             this.url = url;
 
         }
-
         /// <summary>
         /// Retrieves donor information by donor ID from the Java Spring Boot API.
         /// </summary>
@@ -45,7 +43,7 @@ namespace GladlyGiven.Services
 
             using HttpClient client = new HttpClient();
 
-  
+
             try
             {
                 // Send GET request to retrieve donor information
@@ -71,7 +69,8 @@ namespace GladlyGiven.Services
 
                 return donor;
 
-            }catch (Exception)
+            }
+            catch (Exception)
             {
                 throw;
             }
@@ -79,4 +78,5 @@ namespace GladlyGiven.Services
 
     }
 }
+    
 

@@ -1,0 +1,14 @@
+<div class="donation-list">
+    <h2>Donations List</h2>
+    <ul>
+      <li *ngFor="let donation of donations">
+        <strong>Donor ID:</strong> {{ donation.donorId }}<br>
+        <strong>Amount:</strong> {{ donation.amount }}<br>
+        <strong>Donation Type:</strong> {{ donation.donationType }}<br>
+        <strong>Fiscal Identity:</strong> {{ donation.fiscalIdentity }}<br>
+        <strong>Date:</strong> {{ donation.date }}
+      </li>
+    </ul>
+  </div>
+  
+  

@@ -1,9 +1,10 @@
-﻿using GladlyGiven.Dtos;
+﻿using GladlyGiven.DTOs;
 using GladlyGiven.Enums;
 using GladlyGiven.Exceptions;
 using GladlyGiven.Models;
 using GladyGivenWebAPI.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 
 namespace GladlyGiven.Services
 {
@@ -22,7 +23,6 @@ namespace GladlyGiven.Services
 
         private readonly ApplicationContextDb _context;
 
-
         /// <summary>
         /// This class is responsible for interacting with the Java Spring Boot API
         /// </summary>
@@ -30,7 +30,6 @@ namespace GladlyGiven.Services
         private readonly JavaUserClient _javaUserClient;
 
         readonly string url = "http://localhost:8080/api";
-
 
         /// <summary>
         /// DonationService constructor that initializes a new instance of this class
@@ -157,9 +156,9 @@ namespace GladlyGiven.Services
         public async Task<List<Donation>> FindAllDonationsByDonor(long donorId)
         {
 
-            // Retrieve donor information from the Java Spring Boot API
+            // Retrieve donor information 
 
-            DonorDTO donor = await _javaUserClient.GetDonorById(donorId);
+            var donor = await _context.Donations.FirstOrDefaultAsync(d => d.DonorId == donorId);
 
             // If donor information is null, throw an exception
 
@@ -202,6 +201,7 @@ namespace GladlyGiven.Services
 
         public async Task<Donation> CreateDonation(Donation donation)
         {
+
             // If the donation object is null, throw an exception
 
             if (donation == null)
@@ -213,18 +213,19 @@ namespace GladlyGiven.Services
                 throw new DonationException(classOrigin, methodOrigin, error);
             }
 
-            var donor = _javaUserClient.GetDonorById(donation.Id);
+            // Check if a donation with the same ID already exists in the database
+            var existingDonation = _context.Donations.FirstOrDefault(d => d.Id == donation.Id);
 
-            // If donor information is null, throw an exception
-
-            if (donor == null)
+            // If a donation with the same ID exists, throw an exception
+            if (existingDonation != null)
             {
                 string classOrigin = nameof(DonationService);
                 string methodOrigin = nameof(CreateDonation);
-                string error = "The donor is null";
+                string error = "A donation with the same ID already exists";
 
                 throw new DonationException(classOrigin, methodOrigin, error);
             }
+
 
             // Add the donation to the database and save changes
 

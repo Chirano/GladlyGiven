@@ -1,19 +1,19 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace GladlyGiven.Dtos
-{
+namespace GladlyGiven.DTOs
+{   
     //Author: Sónia Ribeiro
+
     /// <summary>
     /// Data transfer object class DonorDTO representing a donor
-    /// </summary>
-
+    /// </summary>
     public class DonorDTO
     {
         /// <summary>
         /// The unique identifier for the donor.
         /// </summary>
-        
+
         [Key]
         [JsonPropertyName("id")]
         public int Id { get; set; }

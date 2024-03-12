@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceRequest } from 'src/app/classes/ServiceRequest';
+import { RouterPaths } from 'src/app/classes/routing/RoutePaths';
 import { EventManagerService } from 'src/app/services/events/event-manager.service';
 
 
@@ -46,4 +47,9 @@ export class ViewServiceRequestComponent implements OnInit{
       console.log("Form is invalid");
     }
   }
+
+  toListServiceRequest() {
+    EventManagerService.OnRouteEvent.emit(RouterPaths.ViewListServiceRequest);
+  }
+
 }

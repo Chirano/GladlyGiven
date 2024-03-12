@@ -36,6 +36,12 @@ export class DonationServiceService {
     const dateOfAppointment : Intl.DateTimeFormatOptions = { day: '2-digit', month: '2-digit', year: 'numeric' };
     return date.toLocaleDateString('pt-PT', dateOfAppointment);
   }
+
+  getDonationsByDonorId(donorId: number): Observable<Donation[]> {
+    let page = 1;
+    let pageSize = 4;
+    return this.http.get<Donation[]>(this.url + "/donations/donor/" + donorId + "?page=" + page + "&pageSize=" +pageSize);
+  }
 }
 
 
