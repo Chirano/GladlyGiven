@@ -11,6 +11,8 @@ import { Donor } from 'src/app/classes/userProfiles/Donor';
 import { RefugeeService } from '../data/javaSpring/refugee/refugee.service';
 import { ServiceProviderService } from '../data/javaSpring/serviceProvider/service-provider.service';
 import { DonorService } from '../data/javaSpring/donor/donor.service';
+import { Contact } from 'src/app/classes/userProfiles/Contact';
+import { ServiceRequest } from 'src/app/classes/ServiceRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +36,9 @@ export class EventManagerService {
   static OnSignUpServiceProviderEvent: EventEmitter<ServiceProvider> = new EventEmitter<ServiceProvider>();
   static OnSignUpDonorEvent: EventEmitter<Donor> = new EventEmitter<Donor>();
 
+  static OnSignUpServiceRequestEvent: EventEmitter<ServiceRequest> = new EventEmitter<ServiceRequest>();
+
+  static OnContactEvent: EventEmitter<Contact> = new EventEmitter<Contact>();
 
   // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   // INITIALIZE SERVICES WITH EVENTS HERE
