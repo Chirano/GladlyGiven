@@ -40,7 +40,7 @@ export class DonationServiceService {
   getDonationsByDonorId(donorId: number): Observable<Donation[]> {
     let page = 1;
     let pageSize = 4;
-    return this.http.get<Donation[]>(`${this.url}/donations/donor/${donorId}?page=${page}&pageSize=${pageSize}`);
+    return this.http.get<Donation[]>(this.url + "/donations/donor/" + donorId + "?page=" + page + "&pageSize=" +pageSize);
   }
 }
 
