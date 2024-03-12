@@ -20,7 +20,6 @@ import { ViewSignUpServiceProviderComponent } from './components/views/view-sign
 import { ViewSignUpDonorComponent } from './components/views/view-sign-up-donor/view-sign-up-donor.component';
 
 import { ViewCostsupportServiceProviderComponent } from './components/views/view-costsupport-service-provider/view-costsupport-service-provider.component';
-
 import { ViewAdminComponent } from './components/views/view-admin/view-admin.component';
 import { ViewServiceProviderComponent } from './components/views/view-service-provider/view-service-provider.component';
 import { ViewRefugeeComponent } from './components/views/view-refugee/view-refugee.component';
@@ -29,6 +28,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BackButtonComponent } from './components/buttons/back-button/back-button.component';
 import { ViewFaqComponent } from './components/views/view-faq/view-faq.component';
 import { ViewListCostsupportComponent } from './components/views/view-list-costsupport/view-list-costsupport.component';
+import { ViewAdminListCostsupportComponent } from './components/views/view-admin-list-costsupport/view-admin-list-costsupport.component';
 import { ViewContactComponent } from './components/views/view-contact/view-contact.component';
 import { ViewServiceRequestComponent } from './components/views/view-service-request/view-service-request.component';
 import { ViewDonationComponent } from './components/views/view-donation/view-donation.component';
@@ -52,6 +52,7 @@ import { ViewDonationComponent } from './components/views/view-donation/view-don
     
     ViewCostsupportServiceProviderComponent,
     ViewListCostsupportComponent,
+    ViewAdminListCostsupportComponent,
 
     ViewAdminComponent,
     ViewServiceProviderComponent,

@@ -16,14 +16,18 @@ export class CostSupportServiceService {
 
   constructor(private http: HttpClient) {}
 
-  /* GET : */
+  /* GET all cost suports in database.  */
   getCostSupports(): Observable<CostSupport[]> {
-    // let v = this.http.get<CostSupport[]>(this.dotNet).subscribe((costSupports: CostSupport[]) => {
-    //   console.log('Lista de Cost Supports:', costSupports);
-    // });
-    // console.log(v);
-    return this.http.get<CostSupport[]>(this.dotNet + "/costsupports");
+    let page = 1;
+    let size = 5;
+
+    return this.http.get<CostSupport[]>(this.dotNet + "/costsupports?page="+page+"&pageSize="+size);
   }
+
+  /* GET all cost suports by service provider id.  */
+  /*getCostSupportsByUserId(userId : number): Observable<CostSupport[]> {
+    return this.http.get<CostSupport[]>(this.dotNet + "/costsupports/"+userId);
+  }*/
 
   /* POST: add a new costSupport request to the database */
   addCostSupport(costSupport: CostSupport): Observable<CostSupport> {
@@ -36,7 +40,7 @@ export class CostSupportServiceService {
       type: costSupport.type,
       dateRequest: this.formatDate(new Date()), //Data atual.
     };
-console.log(newCostSupport);
+
     return this.http.post<any>(
       this.dotNet + "/costsupport", // https://localhost:7280/costsupport
       newCostSupport, this.httpOptions
@@ -46,10 +50,11 @@ console.log(newCostSupport);
   //Método para converter a data de Date para string.
   formatDate(date: Date): string {
     const dateOfAppointment: Intl.DateTimeFormatOptions = {
-      day: '2-digit',
-      month: '2-digit',
       year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
     };
-    return date.toLocaleDateString('pt-PT', dateOfAppointment);
+    return date.toLocaleDateString('en-US', dateOfAppointment);
   }
+
 }

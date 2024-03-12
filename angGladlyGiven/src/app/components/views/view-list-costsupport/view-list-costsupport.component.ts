@@ -1,3 +1,5 @@
+//Author: Lia Araruna
+
 import { Component } from '@angular/core';
 import { CostSupport } from 'src/app/classes/CostSupport';
 import { CostSupportServiceService } from 'src/app/services/cost-support/cost-support-service.service';
@@ -15,8 +17,12 @@ export class ViewListCostsupportComponent {
     private costSupportService : CostSupportServiceService
   ) { }
 
-  getCostSupports() : void {
-    this.costSupportService.getCostSupports().subscribe(costSupports => this.costSupports = costSupports);
+  /*ngOnInit(): void {
+    this.getCostSupports(userId : number); // Chama o método ao iniciar o componente
   }
+
+  getCostSupports() : void {
+    this.costSupportService.getCostSupports(userId : number).subscribe(costSupports => this.costSupports = costSupports);
+  }*/
 
 }

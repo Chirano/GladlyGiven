@@ -16,10 +16,10 @@ import { RefreshSignUpGuard as RefreshSignUpGuard } from './guards/refresh/refre
 import { ViewFaqComponent } from './components/views/view-faq/view-faq.component';
 import { ViewCostsupportServiceProviderComponent } from './components/views/view-costsupport-service-provider/view-costsupport-service-provider.component';
 import { ViewListCostsupportComponent } from './components/views/view-list-costsupport/view-list-costsupport.component';
-
 import { ViewContactComponent } from './components/views/view-contact/view-contact.component';
 import { ViewServiceRequestComponent } from './components/views/view-service-request/view-service-request.component';
 import { ViewDonationComponent } from './components/views/view-donation/view-donation.component';
+import { ViewAdminListCostsupportComponent } from './components/views/view-admin-list-costsupport/view-admin-list-costsupport.component';
 
 
 const routes: Routes = [
@@ -42,9 +42,11 @@ const routes: Routes = [
   { path: RouterPaths.ViewRefugee, component: ViewRefugeeComponent },
   { path: RouterPaths.ViewServiceProvider, component: ViewServiceProviderComponent },
   { path: RouterPaths.ViewDonor, component: ViewDonorComponent },
+
+  //CostSupport
   { path: RouterPaths.ViewCostSupport, component: ViewCostsupportServiceProviderComponent },
   { path: RouterPaths.ViewListCostsupport, component: ViewListCostsupportComponent },
-
+  { path : RouterPaths.ViewAdminListCostsupport, component: ViewAdminListCostsupportComponent },
   // FAQ
   { path: RouterPaths.ViewFaq, component: ViewFaqComponent, canActivate: [RefreshSignUpGuard] },
 

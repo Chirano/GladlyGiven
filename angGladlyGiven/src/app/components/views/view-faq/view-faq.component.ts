@@ -27,10 +27,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const option = document.createElement('option');
     option.value = lang.value;
     option.textContent = lang.text;
-    languageSelect.appendChild(option);
+    //languageSelect.appendChild(option);
   });
 
   // Adicionar evento de mudança de idioma
+  
   languageSelect.addEventListener('change', function () {
     changeLanguage();
   });
