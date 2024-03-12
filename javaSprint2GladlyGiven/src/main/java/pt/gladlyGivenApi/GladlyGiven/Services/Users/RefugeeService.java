@@ -5,11 +5,7 @@ package pt.gladlyGivenApi.GladlyGiven.Services.Users;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pt.gladlyGivenApi.GladlyGiven.Models.Country;
 import pt.gladlyGivenApi.GladlyGiven.Models.DTO.RefugeeDTO;
-import pt.gladlyGivenApi.GladlyGiven.Models.Email;
-import pt.gladlyGivenApi.GladlyGiven.Models.Language;
-import pt.gladlyGivenApi.GladlyGiven.Models.PhoneNumber;
 import pt.gladlyGivenApi.GladlyGiven.Models.Users.Refugee;
 import pt.gladlyGivenApi.GladlyGiven.Repositories.Users.*;
 

@@ -4,17 +4,10 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import pt.gladlyGivenApi.GladlyGiven.Enums.FiscalIdentity;
 import pt.gladlyGivenApi.GladlyGiven.Models.DTO.DonorDTO;
-import pt.gladlyGivenApi.GladlyGiven.Models.Email;
-import pt.gladlyGivenApi.GladlyGiven.Models.Language;
-import pt.gladlyGivenApi.GladlyGiven.Models.PhoneNumber;
 import pt.gladlyGivenApi.GladlyGiven.Models.Users.Donor;
-import pt.gladlyGivenApi.GladlyGiven.Models.Users.Refugee;
-import pt.gladlyGivenApi.GladlyGiven.Repositories.EmailRepository;
-import pt.gladlyGivenApi.GladlyGiven.Repositories.LanguageRepository;
 import pt.gladlyGivenApi.GladlyGiven.Repositories.Users.*;
 
 @Service

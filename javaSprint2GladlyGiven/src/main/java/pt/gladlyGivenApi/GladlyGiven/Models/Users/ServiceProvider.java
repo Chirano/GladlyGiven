@@ -124,10 +124,19 @@ public class ServiceProvider extends MonetaryUser<ServiceProvider> implements ID
         sb.append("| Invoice Info ID: ").append(invoiceInfoId).append("\n");
         sb.append("| License Number: ").append(licenseNumber).append("\n");
         sb.append("| Category ID: ").append(categoryId).append("\n");
-        sb.append("| Service IDs: ").append(healthServices.toString()).append("\n");
-        sb.append("| Review IDs: ").append(reviewIds.toString()).append("\n");
+
+        // check if lists are null
+        if (healthServices != null) {
+            sb.append("| Service IDs: ").append(healthServices.toString()).append("\n");
+        }
+
+        if (reviewIds != null) {
+            sb.append("| Review IDs: ").append(reviewIds.toString()).append("\n");
+        }
+
         sb.append("| Review Average: ").append(reviewAverage).append("\n");
         sb.append("-----------------------------------\n");
         return sb.toString();
     }
+
 }

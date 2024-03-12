@@ -9,14 +9,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import pt.gladlyGivenApi.GladlyGiven.Enums.AvailabilityStatus;
-import pt.gladlyGivenApi.GladlyGiven.Models.DTO.RefugeeDTO;
 import pt.gladlyGivenApi.GladlyGiven.Models.HealthServices.HealthService;
-import pt.gladlyGivenApi.GladlyGiven.Models.Users.Refugee;
 import pt.gladlyGivenApi.GladlyGiven.PageUtils;
 import pt.gladlyGivenApi.GladlyGiven.Models.Availability;
-import pt.gladlyGivenApi.GladlyGiven.Models.Email;
-import pt.gladlyGivenApi.GladlyGiven.Models.Language;
-import pt.gladlyGivenApi.GladlyGiven.Models.PhoneNumber;
 import pt.gladlyGivenApi.GladlyGiven.Models.Users.ServiceProvider;
 import pt.gladlyGivenApi.GladlyGiven.Models.DTO.ServiceProviderDTO;
 import pt.gladlyGivenApi.GladlyGiven.Repositories.AvailabilityRepository;
@@ -74,6 +69,7 @@ public class ServiceProviderService extends AppUserService {
     }
 
     // create ---
+    @Transactional
     public ServiceProvider createServiceProvider(ServiceProviderDTO serviceProviderDTO, boolean isServiceOriginated) {
         try {
             if (serviceProviderDTO == null) {
@@ -102,6 +98,7 @@ public class ServiceProviderService extends AppUserService {
                 // find or create AppUser class variables
                 serviceProvider.email = findOrCreateEmail(serviceProviderDTO.email);
                 serviceProvider.mainLanguage = findOrCreateLanguage(serviceProviderDTO.mainLanguage);
+                serviceProvider.secondLanguage = findOrCreateLanguage(serviceProviderDTO.secondLanguage);
                 serviceProvider.mainPhoneNumber = findOrCreatePhoneNumber(serviceProviderDTO.mainPhoneNumber);
 
                 // find or create ServiceProvider class variables
@@ -142,6 +139,7 @@ public class ServiceProviderService extends AppUserService {
 
 
     // update ---
+    @Transactional
     public ServiceProvider updateServiceProvider(ServiceProvider serviceProvider) {
         if (serviceProvider == null)
             return null;
@@ -159,6 +157,7 @@ public class ServiceProviderService extends AppUserService {
         return existing;
     }
 
+    @Transactional
     public ServiceProvider addServicesToServiceProvider(ServiceProvider serviceProvider, HealthService service) {
 
         if(serviceProvider.healthServices.contains(service)){
@@ -171,6 +170,7 @@ public class ServiceProviderService extends AppUserService {
         return serviceProvider;
     }
 
+    @Transactional
     public ServiceProvider removeHealthService(ServiceProvider serviceProvider, HealthService service)
     {
         if (!serviceProvider.healthServices.contains(service)){
@@ -196,6 +196,7 @@ public class ServiceProviderService extends AppUserService {
         return PageUtils.pageToList(page);
     }
 
+    @Transactional
     public Availability createAvailability(Availability availability) {
         //Checar se já existe uma availability com o mesmo id
         Availability av = this.availabilityRepository.findById(availability.id).orElse(null);
