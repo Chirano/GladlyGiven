@@ -2,7 +2,7 @@
 // this will be: http://www.domain.com/sign-in or http://www.domain.com/view-admin, you get the idea
 
 export const RouterPaths = {
-    Home: "sign-in",
+    Home: "home",
     SignIn: "sign-in",
     SignUp: "sign-up",
 

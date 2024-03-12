@@ -36,6 +36,8 @@ import { ViewListServicerequestComponent } from './components/views/view-list-se
 import { ViewListDonationsComponent } from './components/views/view-list-donations/view-list-donations.component';
 import { ViewReviewComponent } from './components/views/view-review/view-review.component';
 import { DevHeaderComponent } from './components/dev/dev-header/dev-header.component';
+import { ViewHomeComponent } from './components/views/view-home/view-home.component';
+
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import { DevHeaderComponent } from './components/dev/dev-header/dev-header.compo
     HeaderComponent,
     BodyComponent,
     FooterComponent,
-    
+
+    ViewHomeComponent,
     ViewSignUpComponent,
     ViewSignInComponent,
     ViewSignUpFilterHelpIntentionComponent,
@@ -53,7 +56,7 @@ import { DevHeaderComponent } from './components/dev/dev-header/dev-header.compo
     ViewSignUpRefugeeComponent,
     ViewSignUpServiceProviderComponent,
     ViewSignUpDonorComponent,
-    
+
     ViewCostsupportServiceProviderComponent,
     ViewListCostsupportComponent,
     ViewAdminListCostsupportComponent,

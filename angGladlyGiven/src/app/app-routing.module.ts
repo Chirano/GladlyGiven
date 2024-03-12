@@ -20,15 +20,18 @@ import { ViewContactComponent } from './components/views/view-contact/view-conta
 import { ViewServiceRequestComponent } from './components/views/view-service-request/view-service-request.component';
 import { ViewDonationComponent } from './components/views/view-donation/view-donation.component';
 import { ViewAdminListCostsupportComponent } from './components/views/view-admin-list-costsupport/view-admin-list-costsupport.component';
-
 import { ViewListServicerequestComponent } from './components/views/view-list-servicerequest/view-list-servicerequest.component';
 import { ViewListDonationsComponent } from './components/views/view-list-donations/view-list-donations.component';
 import { ViewReviewComponent } from './components/views/view-review/view-review.component';
+import { ViewHomeComponent } from './components/views/view-home/view-home.component';
+
 
 
 const routes: Routes = [
-  { path: '', redirectTo: RouterPaths.SignIn, pathMatch: 'full' },
-  
+  /// remover esse redirecionamento
+  { path: '', redirectTo: RouterPaths.Home, pathMatch: 'full' },
+  { path: RouterPaths.Home, component: ViewHomeComponent },
+
   { path: RouterPaths.SignIn, component: ViewSignInComponent },
   { path: RouterPaths.SignUp, component: ViewSignUpComponent },
 
@@ -46,6 +49,7 @@ const routes: Routes = [
   { path: RouterPaths.ViewRefugee, component: ViewRefugeeComponent },
   { path: RouterPaths.ViewServiceProvider, component: ViewServiceProviderComponent },
   { path: RouterPaths.ViewDonor, component: ViewDonorComponent },
+  { path: RouterPaths.ViewCostSupport, component: ViewCostsupportServiceProviderComponent},
 
   //CostSupport
   { path: RouterPaths.ViewCostSupport, component: ViewCostsupportServiceProviderComponent },
@@ -69,11 +73,12 @@ const routes: Routes = [
 
 
   { path: RouterPaths.ViewListServiceRequest, component: ViewListServicerequestComponent, canActivate: [RefreshSignUpGuard] },
-  
+
 
 
 
   { path: '**', redirectTo: RouterPaths.SignIn }
+
 ];
 
 @NgModule({
