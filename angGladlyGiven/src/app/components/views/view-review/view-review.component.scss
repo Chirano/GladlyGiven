@@ -1,0 +1,38 @@
+/* view-review.component.scss */
+.review-container {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .rating {
+    font-size: 18px;
+    color: #ffc107; /* yellow color for stars */
+  }
+  
+  .stars {
+    unicode-bidi: bidi-override;
+    color: #ccc; /* default color for stars */
+    margin-right: 5px;
+  }
+  
+  .stars::before {
+    content: '★';
+  }
+  
+  .rating-value {
+    font-weight: bold;
+    margin-left: 5px;
+  }
+  
+  .description {
+    margin-top: 10px;
+  }
+  
+  .date {
+    margin-top: 5px;
+    color: #666;
+    font-style: italic;
+  }
+  

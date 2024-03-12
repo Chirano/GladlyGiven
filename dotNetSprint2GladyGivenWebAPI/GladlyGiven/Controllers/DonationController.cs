@@ -158,10 +158,9 @@ namespace GladlyGiven.Controllers
         /// An HTTP response containing a paginated list of donations.
         /// </returns>
 
-        [HttpGet("/donations/donorId")]
+        [HttpGet("/donations/donor/{donorId}")]
         public async Task<ActionResult<IEnumerable<Donation>>> FindAllDonationsByDonor(long donorId, int page = 1, int pageSize = 4)
         {
-
 
             List<Donation> donationsList = await _donationService.FindAllDonationsByDonor(donorId);
 

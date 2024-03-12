@@ -1,4 +1,4 @@
-﻿using GladlyGiven.Dtos;
+﻿using GladlyGiven.DTOs;
 using GladlyGiven.Services;
 using Microsoft.AspNetCore.Mvc;
 
