@@ -9,13 +9,13 @@
 <body>
   <div class="language-selector">
     <label for="language-select">Select Language:</label>
-    <select id="language-select" onchange="changeLanguage()">
+    <select id="language-select">
       <option value="pt">Português</option>
       <option value="en">English</option>
       <option value="uk">Українська</option>
     </select>
   </div>
-  <script src="view-faq.component.ts"></script>
+
   <div class="container">
     <h1 id="faq-title">Perguntas Frequentes sobre Refugiados</h1>
     <div class="faq-item">
@@ -28,6 +28,10 @@
     </div>
 
   </div>
+  <script>
+    changeLanguage();
+  </script>
+  <script src="view-faq.component.ts" async></script>
   <!--<app-back-button></app-back-button>-->
 </body>
 </html>

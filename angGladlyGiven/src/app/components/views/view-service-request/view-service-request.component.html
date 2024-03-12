@@ -1,0 +1,27 @@
+<h3>Request New Service Type</h3>
+<p></p>
+
+  <div class="service-request-form">
+      <form class="form">
+     
+        <p>Date of request new Service Type: {{ currentDate }}</p>
+        
+        <div class="category-selector">
+          <label for="category-select">Select Category:</label>
+          <select id="idCategory" required>
+            <option value=0>select an option</option>
+            <option value=1>MEDICAL</option>
+            <option value=2>PSYCHOLOGIST</option>
+            <option value=3>NURSE</option>
+            <option value=4>OTHER</option>
+          </select>
+        </div>
+     <p></p>
+        <div class="input-group mb-2">
+          <span class="input-group-text">Description</span>
+          <input type="text" id="description" placeholder="Enter your description of the type of service you would like to offer" name="firstName" class="form-control" ngModel required>
+        </div>
+        <div class="mb-2 d-flex justify-content-between">
+          <app-back-button></app-back-button>
+          <button type="submit" class="btn btn-primary">submit</button>
+        </div>

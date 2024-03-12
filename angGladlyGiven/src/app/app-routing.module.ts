@@ -17,6 +17,8 @@ import { ViewFaqComponent } from './components/views/view-faq/view-faq.component
 import { ViewCostsupportServiceProviderComponent } from './components/views/view-costsupport-service-provider/view-costsupport-service-provider.component';
 import { ViewListCostsupportComponent } from './components/views/view-list-costsupport/view-list-costsupport.component';
 
+import { ViewContactComponent } from './components/views/view-contact/view-contact.component';
+import { ViewServiceRequestComponent } from './components/views/view-service-request/view-service-request.component';
 
 
 const routes: Routes = [
@@ -44,6 +46,12 @@ const routes: Routes = [
 
   // FAQ
   { path: RouterPaths.ViewFaq, component: ViewFaqComponent, canActivate: [RefreshSignUpGuard] },
+
+  // Contact
+  { path: RouterPaths.ViewContact, component: ViewContactComponent, canActivate: [RefreshSignUpGuard] },
+
+  { path: RouterPaths.ViewServiceRequest, component: ViewServiceRequestComponent, canActivate: [RefreshSignUpGuard] },
+
 
   { path: '**', redirectTo: RouterPaths.SignIn }
 ];
