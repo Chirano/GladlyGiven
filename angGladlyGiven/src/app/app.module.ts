@@ -35,6 +35,7 @@ import { ViewDonationComponent } from './components/views/view-donation/view-don
 import { ViewListServicerequestComponent } from './components/views/view-list-servicerequest/view-list-servicerequest.component';
 import { ViewListDonationsComponent } from './components/views/view-list-donations/view-list-donations.component';
 import { ViewReviewComponent } from './components/views/view-review/view-review.component';
+import { DevHeaderComponent } from './components/dev/dev-header/dev-header.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { ViewReviewComponent } from './components/views/view-review/view-review.
     ViewDonationComponent,
     ViewListServicerequestComponent,
     ViewListDonationsComponent,
-    ViewReviewComponent
+    ViewReviewComponent,
+    DevHeaderComponent
 
   ],
   imports: [
