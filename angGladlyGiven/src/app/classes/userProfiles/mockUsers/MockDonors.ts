@@ -5,17 +5,17 @@ export const MockDonors = {
         lastName: "Silva",
         email: "joao.silva@example.com",
         gender: "Male",
-        phone: "+351123456789",
         photoURL: "",
         mainLanguage: "Portuguese",
         secondLanguage: "English",
+        mainPhoneNumber: "+351123456789",
 
         nif: "987654321",
         paymentInfoId: "",
         invoiceInfoId: "",
 
-        fiscalIdentity: 0, // Portuguese fiscal identity
-        donationIds: ["donation1", "donation2"],
+        fiscalIdentity: 0,
+        donationIds: [1, 3],
     },
     
     donor2: {
@@ -24,35 +24,35 @@ export const MockDonors = {
         lastName: "Gonzalez",
         email: "maria.gonzalez@example.com",
         gender: "Female",
-        phone: "+34987654321",
         photoURL: "",
         mainLanguage: "Spanish",
         secondLanguage: "English",
+        mainPhoneNumber: "+34987654321",
 
         nif: "123456789",
         paymentInfoId: "",
         invoiceInfoId: "",
 
-        fiscalIdentity: 1, // Spanish fiscal identity
-        donationIds: ["donation3", "donation4"],
+        fiscalIdentity: 0,
+        donationIds: [2, 5],
     },
     
     donor3: {
         id: -3,
         firstName: "Hans",
-        lastName: "Müller",
+        lastName: "Muller",
         email: "hans.muller@example.com",
         gender: "Male",
-        phone: "+491234567890",
         photoURL: "",
         mainLanguage: "German",
         secondLanguage: "English",
+        mainPhoneNumber: "+491234567890",
 
         nif: "987654321",
         paymentInfoId: "",
         invoiceInfoId: "",
         
-        fiscalIdentity: 2, // German fiscal identity
-        donationIds: ["donation5", "donation6"],
+        fiscalIdentity: 0,
+        donationIds: [4, 6],
     }
 };

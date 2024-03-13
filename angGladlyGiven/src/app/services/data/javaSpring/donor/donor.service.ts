@@ -3,12 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DonorDTO } from 'src/app/classes/userProfiles/DonorDTO';
 import { FiscalIdentity } from 'src/app/classes/FiscalIdentity';
+import { MockDonors } from 'src/app/classes/userProfiles/mockUsers/MockDonors';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DonorService {
-
   private baseUrl = "http://localhost:8080/api";
 
   constructor(private http: HttpClient) { }
@@ -61,13 +61,19 @@ export class DonorService {
     };
   }
 
+  static GetRandomDonor(): DonorDTO {
+    const mockDonors: { [key: string]: DonorDTO } = MockDonors; // Explicit typing here
+
+    const refugeeKeys = Object.keys(mockDonors);
+    const randomKey = refugeeKeys[Math.floor(Math.random() * refugeeKeys.length)];
+    return mockDonors[randomKey];
+  }
+
   static DetectFiscalIdentityByNIF(nif: string): FiscalIdentity {
-    /*
     if (!nif || nif.length !== 9) {
         console.log("Invalid NIF length");
         return FiscalIdentity.Individual;
     }
-    */
 
     const firstDigit = parseInt(nif.charAt(0), 10);
 

@@ -9,6 +9,10 @@ import { EventManagerService } from 'src/app/services/events/event-manager.servi
 })
 
 export class DevHeaderComponent {
+  toHome() {
+    EventManagerService.OnRouteEvent.emit(RouterPaths.Home);
+  }
+
   toSignIn() {
     EventManagerService.OnRouteEvent.emit(RouterPaths.SignIn);
   }

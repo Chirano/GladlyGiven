@@ -80,14 +80,12 @@ public class ServiceProviderService extends AppUserService {
             System.out.printf("\nTrying to create ServiceProvider: \n%s", serviceProviderDTO.toString());
             ServiceProvider serviceProvider = null;
 
-            // If not service-originated, try to find if it already exists
-            if (!isServiceOriginated) {
-                try {
-                    serviceProvider = findServiceProviderByEmail(serviceProviderDTO.email);
-                } catch (Exception e) {
-                    System.out.println("Didn't find service provider. Creating.");
-                    System.out.println(e.getMessage());
-                }
+            // try to fetch user
+            try {
+                serviceProvider = findServiceProviderByEmail(serviceProviderDTO.email);
+            } catch (Exception e) {
+                System.out.println("Error searching for Service Provider. Error:");
+                System.out.println(e.getMessage());
             }
 
             if (serviceProvider == null) {

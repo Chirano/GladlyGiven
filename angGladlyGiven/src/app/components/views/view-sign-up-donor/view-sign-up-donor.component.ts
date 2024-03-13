@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { FiscalIdentity } from 'src/app/classes/FiscalIdentity';
 import { DonorDTO } from 'src/app/classes/userProfiles/DonorDTO';
+import { DonorService } from 'src/app/services/data/javaSpring/donor/donor.service';
 import { EventManagerService } from 'src/app/services/events/event-manager.service';
 
 @Component({
@@ -12,8 +14,10 @@ export class ViewSignUpDonorComponent {
   private donor: DonorDTO | null = null;
 
   registerNewDonor(form: any) {
-  
     if (form.valid) {
+      // Identify fiscalIdentity based on NIF
+      const fiscalIdentity: FiscalIdentity = DonorService.DetectFiscalIdentityByNIF(form.value.nif);
+
       this.donor = {
         // app user:
         id: -1,
@@ -27,18 +31,24 @@ export class ViewSignUpDonorComponent {
         mainPhoneNumber: form.value.phone,
   
         // monetary user:
-        nif               : form.value.nif,
-        paymentInfoId     : "",
-        invoiceInfoId     : "",
+        nif: form.value.nif,
+        paymentInfoId: "",
+        invoiceInfoId: "",
 
-        // service provider:
-        fiscalIdentity    : 0, // TODO: based on NIF, identify
-        donationIds       : [],
+        // donor-specific:
+        fiscalIdentity: fiscalIdentity,
+        donationIds: [],
       };
       
-      // console.log(this.refugee);
+      console.log("New donor registered: ", this.donor);
+      EventManagerService.OnSignUpDonorEvent.emit(this.donor);
     } else {
-      console.log("Form is invalid");
+      do {
+        this.donor = DonorService.GetRandomDonor();
+      } while(this.donor == null);
+      
+      console.log("Form is invalid, creating mock Donor: ", this.donor);
+      EventManagerService.OnSignUpDonorEvent.emit(this.donor);
     }
   }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DonationReports } from 'src/app/classes/DonationsReport';
 import { DonationService } from 'src/app/services/donation/donation.service';
+import { EventManagerService } from 'src/app/services/events/event-manager.service';
 
 @Component({
   selector: 'app-view-home',
@@ -17,7 +18,10 @@ export class ViewHomeComponent {
     volunteers: 0,
   }
 
-  constructor(private donationService: DonationService ){}
+  constructor(
+    private donationService: DonationService,
+    private eventManager: EventManagerService,
+    ){}
 
   ngOnInit(): void{
     this.getReport();

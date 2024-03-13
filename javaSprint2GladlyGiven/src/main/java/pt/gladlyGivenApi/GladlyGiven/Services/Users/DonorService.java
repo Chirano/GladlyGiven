@@ -31,39 +31,48 @@ public class DonorService extends AppUserService{
 
     @Transactional
     public Donor createDonor(DonorDTO donorDTO) {
-        if (donorDTO == null) {
-            System.out.println("Received DonorDTO is null!");
+        try {
+            if (donorDTO == null) {
+                System.out.println("Received DonorDTO is null!");
+                return null;
+            }
+
+            System.out.printf("\nTrying to create Donor: \n%s", donorDTO.toString());
+            Donor donor = null;
+
+            // If not service-originated, try to find if it already exists
+            try {
+                donor = findDonorByNif(donorDTO.nif);
+            } catch (Exception e) {
+                System.out.println("Didn't find donor. Creating.");
+                System.out.println(e.getMessage());
+            }
+
+            if (donor == null) {
+                System.out.println("Creating New Donor!");
+
+                donor = Donor.fromDTO(donorDTO);
+
+                // find or create AppUser class variables
+                donor.email = findOrCreateEmail(donorDTO.email);
+                donor.mainLanguage = findOrCreateLanguage(donorDTO.mainLanguage);
+                donor.secondLanguage = findOrCreateLanguage(donorDTO.secondLanguage);
+                donor.mainPhoneNumber = findOrCreatePhoneNumber(donorDTO.mainPhoneNumber);
+
+                // Other donor-specific operations can be added here if needed
+
+                donor = addCreationDateToUser(donor);
+                donor = donorRepository.save(donor);
+
+                System.out.println("New Donor:\n" + donor.toString());
+            }
+
+            return donor;
+        } catch (Exception e) {
+            System.out.println("\nSomething went wrong, returning Empty Donor. Error message:");
+            System.out.println(e.getMessage());
             return null;
         }
-
-        System.out.printf("\nTrying to create Donor: %s", donorDTO.toString());
-        Donor donor = null;
-
-        try {
-            // Try to find if it already exists
-            donor = findDonorByNif(donorDTO.nif);
-        } catch (Exception e) {
-            System.out.println("Didn't find donor. Creating.");
-            System.out.println(e.getMessage());
-        }
-
-        if (donor == null) {
-            System.out.println("Creating New Donor!");
-
-            donor = Donor.fromDTO(donorDTO);
-
-            // find or create AppUser class variables
-            donor.email = findOrCreateEmail(donorDTO.email);
-            donor.mainLanguage = findOrCreateLanguage(donorDTO.mainLanguage);
-            donor.mainPhoneNumber = findOrCreatePhoneNumber(donorDTO.mainPhoneNumber);
-
-            donor = addCreationDateToUser(donor);
-            donor = donorRepository.save(donor);
-
-            System.out.println("New Donor:\n" + donor.toString());
-        }
-
-        return donor;
     }
 
     @Transactional
