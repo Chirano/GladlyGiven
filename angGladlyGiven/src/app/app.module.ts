@@ -38,6 +38,7 @@ import { ViewReviewComponent } from './components/views/view-review/view-review.
 import { DevHeaderComponent } from './components/dev/dev-header/dev-header.component';
 import { ViewHomeComponent } from './components/views/view-home/view-home.component';
 import { ViewReviewServiceProviderComponent } from './components/views/view-reviews-service-provider/view-review-service-provider/view-review-service-provider.component';
+import { ViewServiceProviderServicesComponent } from './components/views/view-service-provider-services/view-service-provider-services/view-service-provider-services.component';
 
 
 @NgModule({
@@ -76,7 +77,8 @@ import { ViewReviewServiceProviderComponent } from './components/views/view-revi
     ViewListDonationsComponent,
     ViewReviewComponent,
     DevHeaderComponent,
-    ViewReviewServiceProviderComponent
+    ViewReviewServiceProviderComponent,
+    ViewServiceProviderServicesComponent, 
 
   ],
   imports: [

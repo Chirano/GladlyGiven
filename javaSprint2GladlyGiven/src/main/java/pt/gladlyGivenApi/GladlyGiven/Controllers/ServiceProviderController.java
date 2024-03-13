@@ -68,7 +68,7 @@ public class ServiceProviderController {
         }
 
         List<ServiceProvider> serviceProviders = serviceProviderService.findServicesProvidersByHealthService(id);
-        if(serviceProviders.isEmpty()){
+        if(serviceProviders.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 

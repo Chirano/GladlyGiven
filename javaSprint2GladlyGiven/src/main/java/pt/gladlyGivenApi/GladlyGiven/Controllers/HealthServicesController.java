@@ -6,12 +6,14 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pt.gladlyGivenApi.GladlyGiven.Models.DTO.HealthServiceDTO;
 import pt.gladlyGivenApi.GladlyGiven.Models.HealthServices.Category;
 import pt.gladlyGivenApi.GladlyGiven.Models.HealthServices.HealthService;
 import pt.gladlyGivenApi.GladlyGiven.Models.Users.ServiceProvider;
 import pt.gladlyGivenApi.GladlyGiven.Services.HealthServiceService;
 import pt.gladlyGivenApi.GladlyGiven.Services.Users.ServiceProviderService;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -42,7 +44,7 @@ public class HealthServicesController {
     Author:Sónia Ribeiro
      */
     @GetMapping(value= "/healthservices/serviceProvider/{serviceProviderId}", produces = "application/json")
-    public ResponseEntity<List<HealthService>> getAllServicesByProviderId(@PathVariable("serviceProviderId") long serviceProviderId)
+    public ResponseEntity<List<HealthServiceDTO>> getAllServicesByProviderId(@PathVariable("serviceProviderId") long serviceProviderId)
     {
         ServiceProvider serviceProvider = spService.findServiceProviderById(serviceProviderId);
         if(serviceProvider == null){
@@ -54,8 +56,13 @@ public class HealthServicesController {
         if(healthServices.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
+        List<HealthServiceDTO> healthServiceDTOS = new ArrayList<>();
 
-       return new ResponseEntity<>(healthServices, HttpStatus.OK);
+        for(HealthService healthService : healthServices){
+        HealthServiceDTO healthServiceDTO = new HealthServiceDTO(healthService);
+        healthServiceDTOS.add(healthServiceDTO);
+        }
+       return new ResponseEntity<>(healthServiceDTOS, HttpStatus.OK);
    }
 
 

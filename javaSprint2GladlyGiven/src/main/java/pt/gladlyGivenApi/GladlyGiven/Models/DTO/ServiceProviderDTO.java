@@ -33,6 +33,7 @@ public class ServiceProviderDTO extends AppUserDTO {
         this.invoiceInfoId = serviceProvider.invoiceInfoId;
         this.licenseNumber = serviceProvider.licenseNumber;
         this.categoryId = serviceProvider.categoryId;
+        ///modificar o metodo
         this.servicesIds = serviceProvider.healthServices != null ? serviceProvider.healthServices.toArray(new Long[0]) : null;
         this.reviewIds = serviceProvider.reviewIds != null ? serviceProvider.reviewIds.toArray(new Long[0]) : null;
         this.reviewAverage = serviceProvider.reviewAverage;

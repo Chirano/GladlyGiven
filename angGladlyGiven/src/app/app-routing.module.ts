@@ -25,6 +25,7 @@ import { ViewListDonationsComponent } from './components/views/view-list-donatio
 import { ViewReviewComponent } from './components/views/view-review/view-review.component';
 import { ViewHomeComponent } from './components/views/view-home/view-home.component';
 import { ViewReviewServiceProviderComponent } from './components/views/view-reviews-service-provider/view-review-service-provider/view-review-service-provider.component';
+import { ViewServiceProviderServicesComponent } from './components/views/view-service-provider-services/view-service-provider-services/view-service-provider-services.component';
 
 
 
@@ -70,8 +71,10 @@ const routes: Routes = [
 
   //Review
   { path: RouterPaths.ViewReview, component: ViewReviewComponent, canActivate: [RefreshSignUpGuard] },
-  { path: RouterPaths.ViewReviewServiceProvider, component: ViewReviewServiceProviderComponent },
+  { path: RouterPaths.ViewReviewServiceProvider, component: ViewReviewServiceProviderComponent, canActivate: [RefreshSignUpGuard]},
 
+  //HealthServices
+  { path: RouterPaths.ViewHealthServicesServiceProvider, component: ViewServiceProviderServicesComponent, canActivate: [RefreshSignUpGuard] },
 
 
   { path: RouterPaths.ViewListServiceRequest, component: ViewListServicerequestComponent, canActivate: [RefreshSignUpGuard] },

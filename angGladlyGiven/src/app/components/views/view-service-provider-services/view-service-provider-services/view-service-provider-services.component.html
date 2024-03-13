@@ -1,0 +1,12 @@
+
+<div class="review-list">
+    <h3>Services List</h3>
+    <ul>
+      <li *ngFor="let item of healthServices">
+        <div class="card-body">
+        <strong>Service Id:</strong> {{ item.id }}<br>
+        <strong>Description:</strong> {{ item.description }}<br>
+        </div>
+      </li>
+    </ul>
+  </div>

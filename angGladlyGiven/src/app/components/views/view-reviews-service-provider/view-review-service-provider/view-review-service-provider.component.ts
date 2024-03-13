@@ -9,7 +9,6 @@ import { ReviewService } from 'src/app/services/review/review.service';
   styleUrls: ['./view-review-service-provider.component.scss']
 })
 export class ViewReviewServiceProviderComponent implements OnInit{
-  id: number = 1;
 
   constructor(private reviewService : ReviewService){}
 
