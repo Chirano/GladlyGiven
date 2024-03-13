@@ -36,6 +36,7 @@ export class TranslationService {
       'secondLanguage': 'Segunda Língua',
       'back': 'Voltar',
       'register': 'Registar',
+      'SelectTranslation': 'Selecione o idioma'
     },
     'en': {
       'question1': 'What is a refugee?',
@@ -67,6 +68,7 @@ export class TranslationService {
       'secondLanguage': 'Second Language', 
       'back':'Back',
       'register': 'Register',
+      'SelectTranslation': 'Select language',
     },
     'uk': {
       'question1': 'Що таке біженець?',
@@ -98,6 +100,7 @@ export class TranslationService {
       'secondLanguage': 'Друга мова', 
       'back': 'Назад',
       'register': 'Зареєструватися',
+      'SelectTranslation': 'Виберіть мову'
 
     },
     'es': {
@@ -130,7 +133,7 @@ export class TranslationService {
     'secondLanguage': 'Segundo Idioma', 
     'back': 'Atrás',
     'register': 'Registrar',
-
+    'SelectTranslation': 'Seleccione el idioma'
   },
   };
 

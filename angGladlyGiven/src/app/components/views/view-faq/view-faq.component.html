@@ -1,7 +1,7 @@
 
 <div class="container">
   <div style="max-width: 800px; margin: 0 auto; font-family: Arial, sans-serif;">
-    <div style="margin-bottom: 20px;">
+    <div style="margin-bottom: 20px;"> {{ translations?.SelectTranslation }}
       <select [(ngModel)]="selectedLanguage" (ngModelChange)="changeLanguage($event)" >
       <option value="en">English</option>
       <option value="pt">Português</option>
