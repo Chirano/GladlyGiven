@@ -93,6 +93,7 @@ public class ServiceProvider extends MonetaryUser<ServiceProvider> implements ID
         serviceProvider.email = new Email(serviceProviderDTO.email);
         serviceProvider.gender = serviceProviderDTO.gender;
         serviceProvider.mainLanguage = new Language(serviceProviderDTO.mainLanguage);
+        serviceProvider.secondLanguage = new Language(serviceProviderDTO.secondLanguage);
         serviceProvider.mainPhoneNumber = new PhoneNumber(serviceProviderDTO.mainPhoneNumber);
         serviceProvider.nif = serviceProviderDTO.nif;
         serviceProvider.paymentInfoId = serviceProviderDTO.paymentInfoId;

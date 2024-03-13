@@ -9,17 +9,17 @@
       <form #signUpForm="ngForm" (ngSubmit)="signUp(signUpForm)">
         <div class="input-group mb-2">
           <span class="input-group-text" id="basic-addon1">Email</span>
-          <input type="email" id="email" class="form-control" placeholder="Email" required>
+          <input type="email" id="email" name="email" class="form-control" placeholder="Email" required ngModel>
         </div>
 
         <div class="input-group mb-2">
           <span class="input-group-text" id="basic-addon2">Password</span>
-          <input type="password" id="password" class="form-control" placeholder="Password" required>
+          <input type="password" id="password" name="password" class="form-control" placeholder="Password" required ngModel>
         </div>
 
         <div class="input-group mb-2">
           <span class="input-group-text" id="basic-addon3">Confirm Password</span>
-          <input type="password" id="confirm-password" class="form-control" placeholder="Confirm Password" required>
+          <input type="password" id="confirm-password" name="confirmPassword" class="form-control" placeholder="Confirm Password" required ngModel>
         </div>
 
         <div class="mb-2 d-flex justify-content-between"> <!-- occupy full width -->

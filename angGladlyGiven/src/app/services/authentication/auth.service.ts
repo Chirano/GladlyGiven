@@ -19,6 +19,9 @@ import { DonorService } from '../data/javaSpring/donor/donor.service';
 import { AuthState } from 'src/app/classes/authentication/AuthState';
 import { Observable, catchError, filter, tap } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { SignUpRequestRefugee } from 'src/app/classes/authentication/SignUpRequestRefugee';
+import { SignUpRequestDonor } from 'src/app/classes/authentication/SignUpRequestDonor';
+import { SignUpRequestServiceProvider } from 'src/app/classes/authentication/SignUpRequestServiceProvider';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +31,17 @@ export class AuthService {
   static AuthState: AuthState = AuthState.None;
   static SessionContext: SessionContext;
 
-  private signUpDetails : SignUpDetails | null = null;
+  private signInURL: string                 = "http://localhost:8080/api/auth/signin";
+  private signUpServiceProviderURL: string  = "http://localhost:8080/api/auth/signup/serviceprovider";
+  private signUpRefugeeURL: string          = "http://localhost:8080/api/auth/signup/refugee";
+  private signUpDonorURL: string            = "http://localhost:8080/api/auth/signup/donor";
+
+  private signUpDetails : SignUpDetails = {
+    email: "",
+    name: "",
+    password: "",
+  }
+
   private sessionContext: SessionContext = 
   {
     userId: -1,
@@ -43,7 +56,6 @@ export class AuthService {
     private serviceProviderService: ServiceProviderService,
     private donorService: DonorService
   ) {
-
     EventManagerService.OnSignInEvent.subscribe(this.SignInFilter.bind(this));
     EventManagerService.OnSingUpEvent.subscribe(this.SignUp.bind(this));
 
@@ -129,21 +141,22 @@ export class AuthService {
     EventManagerService.OnRouteEvent.emit(RouterPaths.SignUpHelpIntention);
   }
 
-
   private SignUpRefugee(refugee: RefugeeDTO) {
-    this.refugeeService.postRefugeeFromBody(refugee).subscribe({
-      next: (response: any) => {
-        var mappedRefugee: RefugeeDTO | null = RefugeeService.MapToRefugee(response);
+    this.signUpDetails.email = refugee.email;
+    this.signUpDetails.name = refugee.firstName;
 
-        if (mappedRefugee == null || mappedRefugee.id < 1) {
-          console.log("Refugee came empty");
-        } else {
-          console.log("Registered Refugee:", mappedRefugee);
-          EventManagerService.OnRouteEvent.emit(RouterPaths.ViewRefugee);
-          this.SetSessionContext(mappedRefugee.id, mappedRefugee.firstName, mappedRefugee.email, UserType.Refugee);
-        }
+    var signUpRequest: SignUpRequestRefugee = {
+      signUpDetails: this.signUpDetails,
+      refugeeDTO: refugee
+    }
+
+    console.log("SignUpRequest: ", signUpRequest);
+
+    this.http.post<SessionContext>(this.signUpRefugeeURL, signUpRequest).subscribe({
+      next: (response: SessionContext) => {
+        this.SetSessionContext(response.userId, response.name, response.email, response.userType);
+        EventManagerService.OnRouteEvent.emit(RouterPaths.ViewRefugee);
       },
-
       error: (error: any) => {
         console.error("Error creating refugee account: ", error);
       }
@@ -151,42 +164,47 @@ export class AuthService {
   }
   
   private SignUpServiceProvider(serviceProvider: ServiceProviderDTO) {
-    this.serviceProviderService.postServiceProviderBody(serviceProvider).subscribe({
-      next: (response: any) => {
-        var mappedServiceProvider: ServiceProviderDTO | null = ServiceProviderService.MapToServiceProvider(response);
-
-        if (mappedServiceProvider == null || mappedServiceProvider.id < 1) {
-          console.log("Service Provider came empty");
-        } else {
-          console.log("Registered Service Provider:", mappedServiceProvider);
-          EventManagerService.OnRouteEvent.emit(RouterPaths.ViewServiceProvider);
-          this.SetSessionContext(mappedServiceProvider.id, mappedServiceProvider.firstName, mappedServiceProvider.email, UserType.ServiceProvider);
-        }
+    this.signUpDetails.email = serviceProvider.email;
+    this.signUpDetails.name = serviceProvider.firstName;
+  
+    var signUpRequest: SignUpRequestServiceProvider = {
+      signUpDetails: this.signUpDetails,
+      serviceProviderDTO: serviceProvider
+    }
+  
+    console.log("SignUpRequest: ", signUpRequest);
+  
+    this.http.post<SessionContext>(this.signUpServiceProviderURL, signUpRequest).subscribe({
+      next: (response: SessionContext) => {
+        this.SetSessionContext(response.userId, response.name, response.email, response.userType);
+        EventManagerService.OnRouteEvent.emit(RouterPaths.ViewServiceProvider);
       },
-
       error: (error: any) => {
-        console.error("Error creating Service Provider account: ", error);
+        console.error("Error creating service provider account: ", error);
       }
     });
   }
   
   private SignUpDonor(donor: DonorDTO) {
-    this.donorService.postDonor(donor).subscribe({
-      next: (response: any) => {
-        var mappedDonor: DonorDTO | null = DonorService.MapToDonor(response);
-
-        if (mappedDonor == null || mappedDonor.id < 1) {
-          console.log("Donor came empty");
-        } else {
-          console.log("Registered Donor:", mappedDonor);
-          EventManagerService.OnRouteEvent.emit(RouterPaths.ViewDonor);
-          this.SetSessionContext(mappedDonor.id, mappedDonor.firstName, mappedDonor.email, UserType.ServiceProvider);
-        }
+    this.signUpDetails.email = donor.email;
+    this.signUpDetails.name = donor.firstName;
+  
+    var signUpRequest: SignUpRequestDonor = {
+      signUpDetails: this.signUpDetails,
+      donorDTO: donor
+    }
+  
+    console.log("SignUpRequest: ", signUpRequest);
+  
+    this.http.post<SessionContext>(this.signUpDonorURL, signUpRequest).subscribe({
+      next: (response: SessionContext) => {
+        this.SetSessionContext(response.userId, response.name, response.email, response.userType);
+        EventManagerService.OnRouteEvent.emit(RouterPaths.ViewDonor);
       },
-
       error: (error: any) => {
-        console.error("Error creating Donor account: ", error);
+        console.error("Error creating donor account: ", error);
       }
     });
   }
+  
 }
