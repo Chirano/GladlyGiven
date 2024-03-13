@@ -39,7 +39,7 @@ public class AuthController {
         if (sessionContext != null) {
             return sessionContext.toDTO();
         } else {
-            System.out.println("\nFailed to find SessionContext");
+            System.out.println("\nFailed to find SessionContext for user: " + email);
             return new SessionContextDTO();
         }
     }
@@ -61,6 +61,8 @@ public class AuthController {
 
     @PostMapping("/signup/refugee")
     public SessionContextDTO signUp(@RequestBody SignUpRequestRefugee signUpRequest) {
+        System.out.printf("Sign Up Request:\n%s\n", signUpRequest.toString());
+
         Refugee user = Refugee.fromDTO(signUpRequest.refugeeDTO);
         user.password = signUpRequest.signUpDetails.password;
 

@@ -135,31 +135,31 @@ public abstract class AppUserService {
         T existing = findUserById(user.id, repository);
 
         if (existing != null) {
-            if (!existing.firstName.equalsIgnoreCase(user.firstName)) {
+            if (existing.firstName != null && !existing.firstName.equalsIgnoreCase(user.firstName)) {
                 existing.firstName = user.firstName;
             }
 
-            if (!existing.lastName.equalsIgnoreCase(user.lastName)) {
+            if (existing.lastName != null && !existing.lastName.equalsIgnoreCase(user.lastName)) {
                 existing.lastName = user.lastName;
             }
 
-            if (!existing.email.email.equalsIgnoreCase(user.email.email)) {
+            if (existing.email != null && !existing.email.email.equalsIgnoreCase(user.email.email)) {
                 existing.email = user.email;
             }
 
-            if (!existing.gender.equalsIgnoreCase(user.gender)) {
+            if (existing.gender != null && !existing.gender.equalsIgnoreCase(user.gender)) {
                 existing.gender = user.gender;
             }
 
-            if (!existing.mainLanguage.language.equalsIgnoreCase(user.mainLanguage.language)) {
+            if (existing.mainLanguage != null && !existing.mainLanguage.language.equalsIgnoreCase(user.mainLanguage.language)) {
                 existing.mainLanguage = user.mainLanguage;
             }
 
-            if (!existing.mainPhoneNumber.number.equalsIgnoreCase(user.mainPhoneNumber.number)) {
+            if (existing.mainPhoneNumber != null &&!existing.mainPhoneNumber.number.equalsIgnoreCase(user.mainPhoneNumber.number)) {
                 existing.mainPhoneNumber = user.mainPhoneNumber;
             }
 
-            if (!existing.photoURL.equalsIgnoreCase(user.photoURL)) {
+            if (existing.photoURL != null && !existing.photoURL.equalsIgnoreCase(user.photoURL)) {
                 existing.photoURL = user.photoURL;
             }
 
