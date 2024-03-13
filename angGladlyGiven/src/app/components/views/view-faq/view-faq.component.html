@@ -1,14 +1,14 @@
 
 <div class="container">
-<div style="max-width: 800px; margin: 0 auto; font-family: Arial, sans-serif;">
-  <div style="margin-bottom: 20px;">
-  <select [(ngModel)]="selectedLanguage" (ngModelChange)="changeLanguage($event)" >
-    <option value="en">English</option>
-    <option value="pt">Português</option>
-    <option value="es">Español</option>
-    <option value="uk">Українська</option>
-  </select>
-</div>
+  <div style="max-width: 800px; margin: 0 auto; font-family: Arial, sans-serif;">
+    <div style="margin-bottom: 20px;">
+      <select [(ngModel)]="selectedLanguage" (ngModelChange)="changeLanguage($event)" >
+      <option value="en">English</option>
+      <option value="pt">Português</option>
+      <option value="es">Español</option>
+      <option value="uk">Українська</option>
+    </select>
+  </div>
 </div>
 
 
@@ -47,4 +47,6 @@
     <h3>{{ translations?.question6 }}</h3>
     <p>{{ translations?.answer6 }}</p>
   </div>  
+  <p></p>
+  <app-back-button></app-back-button>
 </div>

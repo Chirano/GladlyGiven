@@ -20,4 +20,7 @@ export class ViewServiceProviderComponent {
   toManageServices(){
     EventManagerService.OnRouteEvent.emit(RouterPaths.ViewHealthServicesServiceProvider);
   }
+  toServiceRequest() {
+    EventManagerService.OnRouteEvent.emit(RouterPaths.ViewServiceRequest);
+  }
 }

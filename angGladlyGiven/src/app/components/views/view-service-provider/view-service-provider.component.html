@@ -1,18 +1,16 @@
-<div class="row row-cols-2 row-cols-md-2 g-5">
-  <div class="col">
-    <div class="card h-100">
-      <img class="card-img-top" src="../../../../assets/request.png" alt="Request a new service" />
-      <div class="card-body">
-        <h4 class="card-title">Request a new service</h4>
-        <p class="card-text">
-          If you want to offer a service that is not yet registered on
-          GladlyGiven, open a request with your suggestion. Don't forget to send
-          us a detailed description of this service. Your request will be reviewed
-          and responded to within 48 hours
-        </p>
-        <a href="#" class="btn btn-primary">Open Service Request</a>
-      </div>
-    </div>
+<div class="navbar">
+  <input id="service-name" placeholder="Type your search" />
+  <button>Search</button>
+</div>
+
+
+<div class="card" style="width:400px">
+  <img class="card-img-top" src="../../../../assets/request.png" alt="Request a new service">
+  <div class="card-body">
+    <h4 class="card-title">Request a new service</h4>
+    <p class="card-text">If you want to offer a service that is not yet registered on GladlyGiven, open a request with your suggestion. Don't forget to send us a detailed description of this service.  Your request will be reviewed and responded to within 48 hours</p>
+    <!--   <a href="#" class="btn btn-primary">Open Service Request Profile</a>   -->
+    <button type="button" (click)="toServiceRequest()" class="btn btn-primary">Open Service Request Profile</button>
   </div>
   <div class="col">
     <div class="card h-100">

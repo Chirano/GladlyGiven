@@ -2,7 +2,7 @@
 
 export interface ServiceRequest{
     id              : number,
-    dataRequest     : string,
+    dateRequest     : string,
     idCategory      : number[] | null,
     description     : string ,
     status          : number,
