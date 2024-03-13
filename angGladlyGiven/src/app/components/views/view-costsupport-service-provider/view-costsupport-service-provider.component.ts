@@ -61,8 +61,6 @@ export class ViewCostsupportServiceProviderComponent {
       .subscribe({
         next: (addedCostSupport) => {
           this.costSupport = addedCostSupport;
-          this.success = true;
-          this.confirmationMsg = 'Cost support request sent successfully!';
         },
         error: (error) => {
           console.error('Failed to send cost support request:', error);

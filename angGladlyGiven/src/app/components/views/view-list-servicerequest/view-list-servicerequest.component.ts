@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ServiceRequest } from 'src/app/classes/ServiceRequest';
+import { AuthService } from 'src/app/services/authentication/auth.service';
 import { ServiceRequestService } from 'src/app/services/service-request/service-request.service';
 
 
@@ -22,6 +23,7 @@ export class ViewListServicerequestComponent {
 
     //GET: returns all costs supports saved in database.
     getServiceRequests() : void {
+      console.log(AuthService.SessionContext.userId);
       this.serviceRequestService.getServiceRequest().subscribe(serviceRequests => this.serviceRequests = serviceRequests)
     }
 

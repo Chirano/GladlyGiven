@@ -9,8 +9,6 @@ import pt.gladlyGivenApi.GladlyGiven.Models.DTO.RefugeeDTO;
 import pt.gladlyGivenApi.GladlyGiven.Models.Users.Refugee;
 import pt.gladlyGivenApi.GladlyGiven.Repositories.Users.*;
 
-import javax.sound.midi.Soundbank;
-
 @Service
 public class RefugeeService extends AppUserService {
 
@@ -23,8 +21,12 @@ public class RefugeeService extends AppUserService {
 
     // Refugee
     // ---------------------------------------------------------------------
-    private Refugee saveRefugee(Refugee refugee) {
+    public Refugee saveRefugee(Refugee refugee) {
         return saveUserToRepository(refugee, refugeeRepository);
+    }
+
+    public Refugee setRefugeePassword(Refugee refugee, String password) {
+        return setUserPassword(refugee, password, refugeeRepository);
     }
 
     // find ---
@@ -91,10 +93,7 @@ public class RefugeeService extends AppUserService {
                 refugee = Refugee.fromDTO(refugeeDTO);
 
                 // find or create AppUser class variables
-                refugee.email = findOrCreateEmail(refugeeDTO.email);
-                refugee.mainLanguage = findOrCreateLanguage(refugeeDTO.mainLanguage);
-                refugee.secondLanguage = findOrCreateLanguage(refugeeDTO.secondLanguage);
-                refugee.mainPhoneNumber = findOrCreatePhoneNumber(refugeeDTO.mainPhoneNumber);
+                refugee = createAppUserDependantEntities(refugee);
 
                 // find or create Refugee class Variables
                 refugee.country = findOrCreateCountry(refugeeDTO.country);
@@ -103,6 +102,8 @@ public class RefugeeService extends AppUserService {
                 refugee = saveRefugee(refugee);
 
                 System.out.println("New Refugee:\n" + refugee.toString());
+            } else {
+                refugee = updateRefugee(refugee);
             }
 
             return refugee;
@@ -111,6 +112,24 @@ public class RefugeeService extends AppUserService {
             System.out.println(e.getMessage());
             return null;
         }
+    }
+
+    public Refugee createRefugee(Refugee refugee) {
+        if (refugee == null) {
+            System.out.println("Tried to create null refugee");
+            return null;
+        }
+
+        Refugee existing = findRefugeeByEmail(refugee.email.email);
+
+        if (existing == null) {
+            refugee.country = findOrCreateCountry(refugee.country.country);
+            existing = createAppUserDependantEntities(refugee);
+            existing = addCreationDateToUser(existing);
+            existing = saveRefugee(existing);
+        }
+
+        return existing;
     }
 
     // create refugee with language & phone number

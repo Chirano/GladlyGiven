@@ -1,0 +1,38 @@
+<h2>Register your availability</h2>
+<div class="container">
+    <div class="mb-3">
+        <label for="inputStartDate" class="form-label">Start date:</label>
+        <input type="date" [(ngModel)]="availability.startDate" class="form-control" id="inputStartDate" required>
+    </div>
+    <div class="mb-3">
+        <label for="inputEndDate" class="form-label">End date:</label>
+        <input type="date" [(ngModel)]="availability.endDate" class="form-control" id="inputEndDate" required>
+    </div>
+    <div class="mb-3">
+        <label for="inputStartTime" class="form-label">Start time:</label>
+        <input type="time" [(ngModel)]="availability.startTime" class="form-control" id="inputStartTime" required>
+    </div>
+    <div class="mb-3">
+        <label for="inputEndTime" class="form-label">End time:</label>
+        <input type="time"  [(ngModel)]="availability.endTime" class="form-control" id="inputEndTime" required>
+    </div>
+</div>
+<div class="mb-2 d-flex justify-content-between">
+    <app-back-button></app-back-button>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      (click)="
+        addAvailability(
+          0,
+          availability.serviceProviderId,
+          availability.startDate,
+          availability.endDate,
+          availability.startTime,
+          availability.endTime
+        )
+      "
+    >
+      Submit
+    </button>
+  </div>

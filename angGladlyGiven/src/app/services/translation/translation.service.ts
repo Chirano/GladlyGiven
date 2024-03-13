@@ -30,12 +30,13 @@ export class TranslationService {
       'phone': 'Telemóvel',
       'protocolId': 'Id do Protocolo',
       'sns': 'SNS',
-      'nacionality': 'Nacionalidade',
+      'nationality': 'Nacionalidade',
       'country': 'País',
       'mainLanguage': 'Língua nativa',
       'secondLanguage': 'Segunda Língua',
       'back': 'Voltar',
       'register': 'Registar',
+      'SelectTranslation': 'Selecione o idioma'
     },
     'en': {
       'question1': 'What is a refugee?',
@@ -61,12 +62,13 @@ export class TranslationService {
       'phone': 'Phone',
       'protocolId': 'Protocol Id',
       'sns': 'SNS',
-      'nacionality': 'Nacionality',
+      'nationality': 'Nationality',
       'country': 'Country',
       'mainLanguage': 'Main Language',
       'secondLanguage': 'Second Language', 
       'back':'Back',
       'register': 'Register',
+      'SelectTranslation': 'Select language',
     },
     'uk': {
       'question1': 'Що таке біженець?',
@@ -92,12 +94,13 @@ export class TranslationService {
       'phone': 'Мобільний телефон',
       'protocolId': 'Ідентифікатор протоколу',
       'sns': 'SNS',
-      'nacionality': 'Національність',
+      'nationality': 'Національність',
       'country': 'Країна',
       'mainLanguage': 'Рідна мова',
       'secondLanguage': 'Друга мова', 
       'back': 'Назад',
       'register': 'Зареєструватися',
+      'SelectTranslation': 'Виберіть мову'
 
     },
     'es': {
@@ -124,14 +127,14 @@ export class TranslationService {
     'phone': 'Teléfono móvil',
     'protocolId': 'ID del Protocolo',
     'sns': 'SNS',
-    'nacionality': 'Nacionalidad',
+    'nationality': 'Nacionalidad',
     'country': 'País',
     'mainLanguage': 'Idioma nativo',
     'secondLanguage': 'Segundo Idioma', 
     'back': 'Atrás',
     'register': 'Registrar',
-
-  },
+    'SelectTranslation': 'Seleccione el idioma'
+    },
   };
 
   getTranslation(language: string) {

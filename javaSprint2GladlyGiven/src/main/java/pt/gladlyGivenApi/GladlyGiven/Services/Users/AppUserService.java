@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import pt.gladlyGivenApi.GladlyGiven.DateTimeUtils;
+import pt.gladlyGivenApi.GladlyGiven.Models.DTO.AppUserDTO;
 import pt.gladlyGivenApi.GladlyGiven.Models.Email;
 import pt.gladlyGivenApi.GladlyGiven.Models.PhoneNumber;
 import pt.gladlyGivenApi.GladlyGiven.Models.Country;
@@ -49,7 +50,9 @@ public abstract class AppUserService {
     // ---------------------------------------------------------------------
     protected <T extends AppUser> T saveUserToRepository(T user, AppUserRepository<T> repository) {
         try {
-            return repository.save(user);
+            T savedUser = repository.save(user);
+            System.out.printf("Saved user: \n%s", savedUser.toString());
+            return savedUser;
         } catch (Exception e) {
             System.out.println("Failed to save user. Error:\n" + e.getMessage());
             return null;
@@ -124,6 +127,7 @@ public abstract class AppUserService {
     }
 
 
+    @Transactional
     protected <T extends AppUser> T updateUser(T user, AppUserRepository<T> repository) {
         if (user == null)
             return null;
@@ -131,31 +135,31 @@ public abstract class AppUserService {
         T existing = findUserById(user.id, repository);
 
         if (existing != null) {
-            if (!existing.firstName.equalsIgnoreCase(user.firstName)) {
+            if (existing.firstName != null && !existing.firstName.equalsIgnoreCase(user.firstName)) {
                 existing.firstName = user.firstName;
             }
 
-            if (!existing.lastName.equalsIgnoreCase(user.lastName)) {
+            if (existing.lastName != null && !existing.lastName.equalsIgnoreCase(user.lastName)) {
                 existing.lastName = user.lastName;
             }
 
-            if (!existing.email.email.equalsIgnoreCase(user.email.email)) {
+            if (existing.email != null && !existing.email.email.equalsIgnoreCase(user.email.email)) {
                 existing.email = user.email;
             }
 
-            if (!existing.gender.equalsIgnoreCase(user.gender)) {
+            if (existing.gender != null && !existing.gender.equalsIgnoreCase(user.gender)) {
                 existing.gender = user.gender;
             }
 
-            if (!existing.mainLanguage.language.equalsIgnoreCase(user.mainLanguage.language)) {
+            if (existing.mainLanguage != null && !existing.mainLanguage.language.equalsIgnoreCase(user.mainLanguage.language)) {
                 existing.mainLanguage = user.mainLanguage;
             }
 
-            if (!existing.mainPhoneNumber.number.equalsIgnoreCase(user.mainPhoneNumber.number)) {
+            if (existing.mainPhoneNumber != null &&!existing.mainPhoneNumber.number.equalsIgnoreCase(user.mainPhoneNumber.number)) {
                 existing.mainPhoneNumber = user.mainPhoneNumber;
             }
 
-            if (!existing.photoURL.equalsIgnoreCase(user.photoURL)) {
+            if (existing.photoURL != null && !existing.photoURL.equalsIgnoreCase(user.photoURL)) {
                 existing.photoURL = user.photoURL;
             }
 
@@ -163,6 +167,28 @@ public abstract class AppUserService {
         }
 
         return existing;
+    }
+
+    public <T extends AppUser> T createAppUserDependantEntities(T user) {
+        if (user == null)
+            return null;
+
+        user.email = findOrCreateEmail(user.email.email);
+        user.mainLanguage = findOrCreateLanguage(user.mainLanguage.language);
+        user.secondLanguage = findOrCreateLanguage(user.secondLanguage.language);
+        user.mainPhoneNumber = findOrCreatePhoneNumber(user.mainPhoneNumber.number);
+
+        return user;
+    }
+
+    public void createAppUserDependantEntities(AppUserDTO user) {
+        if (user == null)
+            return;
+
+        findOrCreateEmail(user.email);
+        findOrCreateLanguage(user.mainLanguage);
+        findOrCreateLanguage(user.secondLanguage);
+        findOrCreatePhoneNumber(user.mainPhoneNumber);
     }
 
     private void printCreatingNew(String classType) {
@@ -273,5 +299,16 @@ public abstract class AppUserService {
             System.out.println(e.getMessage());
             return new PhoneNumber();
         }
+    }
+
+
+    // Password
+    // ---------------------------------------------------------------------
+    public <T extends AppUser> T setUserPassword(T user, String password, AppUserRepository<T> repository) {
+        if (user == null)
+            return null;
+
+        user.password = password;
+        return saveUserToRepository(user, repository);
     }
 }

@@ -25,6 +25,9 @@ public abstract class AppUser<T extends AppUser> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
 
+    @OneToOne
+    public SessionContext userContext;
+
     @Max(32)
     @Column(nullable = false)
     public String firstName;

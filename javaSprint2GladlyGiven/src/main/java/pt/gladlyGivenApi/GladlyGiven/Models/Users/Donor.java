@@ -54,6 +54,7 @@ public class Donor extends MonetaryUser<Donor> implements IDTOable<DonorDTO> {
         donorDTO.gender = this.gender;
         donorDTO.photoURL = this.photoURL;
         donorDTO.mainLanguage = this.mainLanguage.language;
+        donorDTO.secondLanguage = this.secondLanguage.language;
         donorDTO.mainPhoneNumber = this.mainPhoneNumber.number;
         donorDTO.nif = this.nif;
         donorDTO.paymentInfoId = this.paymentInfoId;
@@ -71,6 +72,7 @@ public class Donor extends MonetaryUser<Donor> implements IDTOable<DonorDTO> {
         donor.email = new Email(donorDTO.email);
         donor.gender = donorDTO.gender;
         donor.mainLanguage = new Language(donorDTO.mainLanguage);
+        donor.secondLanguage = new Language(donorDTO.secondLanguage);
         donor.mainPhoneNumber = new PhoneNumber(donorDTO.mainPhoneNumber);
         donor.nif = donorDTO.nif;
         donor.paymentInfoId = donorDTO.paymentInfoId;

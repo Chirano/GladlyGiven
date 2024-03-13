@@ -66,31 +66,21 @@ public class Refugee extends AppUser<Refugee> implements IDTOable<RefugeeDTO> {
     }
 
     public static Refugee fromDTO(RefugeeDTO dto) {
-        Email email = new Email();
-        email.email = dto.email;
-
-        Language language = new Language();
-        language.language = dto.mainLanguage;
-
-        PhoneNumber phoneNumber = new PhoneNumber();
-        phoneNumber.number = dto.mainPhoneNumber;
-
-        Country country = new Country();
-        country.country = dto.country;
 
         Refugee refugee = new Refugee();
         refugee.id = dto.id;
         refugee.firstName = dto.firstName;
         refugee.lastName = dto.lastName;
-        refugee.email = email;
+        refugee.email = new Email(dto.email);
         refugee.gender = dto.gender;
         refugee.photoURL = dto.photoURL;
-        refugee.mainLanguage = language;
-        refugee.mainPhoneNumber = phoneNumber;
+        refugee.mainLanguage = new Language(dto.mainLanguage);
+        refugee.secondLanguage = new Language(dto.secondLanguage);
+        refugee.mainPhoneNumber = new PhoneNumber(dto.mainPhoneNumber);
         refugee.protocolId = dto.protocolId;
         refugee.snsNumber = dto.snsNumber;
         refugee.nationality = dto.nationality;
-        refugee.country = country;
+        refugee.country = new Country(dto.country);
 
         return refugee;
     }

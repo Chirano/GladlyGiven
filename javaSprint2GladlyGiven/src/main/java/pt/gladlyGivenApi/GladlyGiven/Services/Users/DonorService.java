@@ -7,7 +7,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import pt.gladlyGivenApi.GladlyGiven.Enums.FiscalIdentity;
 import pt.gladlyGivenApi.GladlyGiven.Models.DTO.DonorDTO;
+import pt.gladlyGivenApi.GladlyGiven.Models.Email;
 import pt.gladlyGivenApi.GladlyGiven.Models.Users.Donor;
+import pt.gladlyGivenApi.GladlyGiven.Models.Users.Refugee;
+import pt.gladlyGivenApi.GladlyGiven.Models.Users.ServiceProvider;
 import pt.gladlyGivenApi.GladlyGiven.Repositories.Users.*;
 
 @Service
@@ -16,6 +19,10 @@ public class DonorService extends AppUserService{
     @Autowired
     DonorRepository donorRepository;
 
+    public Donor setRefugeePassword(Donor donor, String password) {
+        return setUserPassword(donor, password, donorRepository);
+    }
+
 
     public Page<Donor> findAllDonors(int page, int size){
         return donorRepository.findAll(PageRequest.of(page, size));
@@ -23,6 +30,11 @@ public class DonorService extends AppUserService{
 
     public Donor findDonorById(Long id){
         return donorRepository.findById(id).orElse(null);
+    }
+
+
+    public Donor findDonorByEmail(String email){
+        return donorRepository.findByEmail(new Email(email)).orElse(null);
     }
 
     public Donor findDonorByNif(String nif) {
@@ -91,6 +103,24 @@ public class DonorService extends AppUserService{
         donorDTO.fiscalIdentity = FiscalIdentity.values()[fiscalIdentity];
 
         return createDonor(donorDTO);
+    }
+
+
+    public Donor createDonor(Donor donor) {
+        if (donor == null) {
+            System.out.println("Tried to create null Donor");
+            return null;
+        }
+
+        Donor existing = findDonorByEmail(donor.email.email);
+
+        if (existing == null) {
+            existing = createAppUserDependantEntities(donor);
+            existing = addCreationDateToUser(existing);
+            existing = saveUserToRepository(existing, donorRepository);
+        }
+
+        return existing;
     }
 
     @Transactional
