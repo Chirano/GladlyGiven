@@ -1,74 +1,88 @@
-<div class="center-content">
-  <div class="width-custom" style="--width: 80%;">
-    <div>
-      <h2>Tell us</h2>
-      <h2>More about you</h2>
+<div class="container">
+  <div style="max-width: 800px; margin: 0 auto; font-family: Arial, sans-serif;">
+    <div style="margin-bottom: 20px;">
+      <select [(ngModel)]="selectedLanguage" (ngModelChange)="changeLanguage($event)">
+        <option value="en">English</option>
+        <option value="pt">Português</option>
+        <option value="es">Español</option>
+        <option value="uk">Українська</option>
+      </select>
     </div>
-  
-    <div>
-      <form #refugeeForm="ngForm" (ngSubmit)="registerNewRefugee(refugeeForm)" class="form">
-        <!-- App User Information -->
-        <div class="input-group mb-2">
-          <span class="input-group-text">First Name</span>
-          <input type="text" id="firstName" placeholder="First Name" name="firstName" class="form-control" ngModel required>
-        </div>
-  
-        <div class="input-group mb-2">
-          <span class="input-group-text">Last Name</span>
-          <input type="text" id="lastName" placeholder="Last Name" name="lastName" class="form-control" ngModel required>
-        </div>
-  
-        <div class="input-group mb-2">
-          <span class="input-group-text">Email</span>
-          <input type="email" id="email" placeholder="Email" name="email" class="form-control" ngModel required>
-        </div>
-  
-        <div class="input-group mb-2">
-          <span class="input-group-text">Gender</span>
-          <input type="text" id="gender" placeholder="Gender" name="gender" class="form-control" ngModel required>
-        </div>
-  
-        <div class="input-group mb-2">
-          <span class="input-group-text">Phone</span>
-          <input type="text" id="phone" placeholder="Phone" name="phone" class="form-control" ngModel required>
-        </div>
-  
-        <!-- Refugee Information -->
-        <div class="input-group mb-2">
-          <span class="input-group-text">Protocol Id</span>
-          <input type="text" id="protocolId" placeholder="Protocol ID" name="protocolId" class="form-control" ngModel required>
-        </div>
-  
-        <div class="input-group mb-2">
-          <span class="input-group-text">SNS</span>
-          <input type="text" id="sns" placeholder="SNS" name="sns" class="form-control" ngModel required>
-        </div>
-  
-        <div class="input-group mb-2">
-          <span class="input-group-text">Nationality</span>
-          <input type="text" id="nationality" placeholder="Nationality" name="nationality" class="form-control" ngModel required>
-        </div>
-  
-        <div class="input-group mb-2">
-          <span class="input-group-text">Country</span>
-          <input type="text" id="country" placeholder="Country" name="country" class="form-control" ngModel required>
-        </div>
-  
-        <div class="input-group mb-2">
-          <span class="input-group-text">Main Language</span>
-          <input type="text" id="mainLanguage" placeholder="Main Language" name="mainLanguage" class="form-control" ngModel required>
-        </div>
-  
-        <div class="input-group mb-2">
-          <span class="input-group-text">Second Language</span>
-          <input type="text" id="secondLanguage" placeholder="Second Language" name="secondLanguage" class="form-control" ngModel>
-        </div>
-        
-        <div class="mb-2 d-flex justify-content-between">
-          <app-back-button></app-back-button>
-          <button type="submit" class="btn btn-primary">Register</button>
-        </div>
-      </form>
+  </div>
+
+  <div class="center-content">
+    <div class="width-custom" style="--width: 80%;">
+      <div>
+        <h2>{{ translations?.title1 }}</h2>
+        <h2>{{ translations?.title2 }}</h2>
+      </div>
+    
+      <div>
+        <form #refugeeForm="ngForm" (ngSubmit)="registerNewRefugee(refugeeForm)" class="form">
+          <!-- App User Information -->
+          <div class="input-group mb-2">
+            <span class="input-group-text">{{ translations?.firstName }}</span>
+            <input type="text" id="firstName" placeholder="{{ translations?.firstName }}" name="firstName" class="form-control" ngModel required>
+          </div>
+    
+          <div class="input-group mb-2">
+            <span class="input-group-text">{{ translations?.lastName }}</span>
+            <input type="text" id="lastName" placeholder="{{ translations?.lastName }}" name="lastName" class="form-control" ngModel required>
+          </div>
+    
+          <div class="input-group mb-2">
+            <span class="input-group-text">{{ translations?.email }}</span>
+            <input type="email" id="email" placeholder="{{ translations?.email }}" name="email" class="form-control" ngModel required>
+          </div>
+    
+          <div class="input-group mb-2">
+            <span class="input-group-text">{{ translations?.gender }}</span>
+            <input type="text" id="gender" placeholder="{{ translations?.gender }}" name="gender" class="form-control" ngModel required>
+          </div>
+    
+          <div class="input-group mb-2">
+            <span class="input-group-text">{{ translations?.phone }}</span>
+            <input type="text" id="phone" placeholder="{{ translations?.phone }}" name="phone" class="form-control" ngModel required>
+          </div>
+    
+          <!-- Refugee Information -->
+          <div class="input-group mb-2">
+            <span class="input-group-text">{{ translations?.protocolId }}</span>
+            <input type="text" id="protocolId" placeholder="{{ translations?.protocolId }}" name="protocolId" class="form-control" ngModel required>
+          </div>
+    
+          <div class="input-group mb-2">
+            <span class="input-group-text">{{ translations?.sns }}</span>
+            <input type="text" id="sns" placeholder="{{ translations?.sns }}" name="sns" class="form-control" ngModel required>
+          </div>
+    
+          <div class="input-group mb-2">
+            <span class="input-group-text">{{ translations?.nacionality }}</span>
+            <input type="text" id="nacionality" placeholder="{{ translations?.nacionality }}" name="nacionality" class="form-control" ngModel required>
+          </div>
+    
+          <div class="input-group mb-2">
+            <span class="input-group-text">{{ translations?.country }}</span>
+            <input type="text" id="country" placeholder="{{ translations?.country }}" name="country" class="form-control" ngModel required>
+          </div>
+    
+          <div class="input-group mb-2">
+            <span class="input-group-text">{{ translations?.mainLanguage }}</span>
+            <input type="text" id="mainLanguage" placeholder="{{ translations?.mainLanguage }}" name="mainLanguage" class="form-control" ngModel required>
+          </div>
+    
+          <div class="input-group mb-2">
+            <span class="input-group-text">{{ translations?.secondLanguage }}</span>
+            <input type="text" id="secondLanguage" placeholder="{{ translations?.secondLanguage }}" name="secondLanguage" class="form-control" ngModel>
+          </div>
+          
+          <div class="mb-2 d-flex justify-content-between">
+            <app-back-button>{{ translations?.back }}</app-back-button>
+            <button type="submit" class="btn btn-primary">{{ translations?.register }}</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>
+

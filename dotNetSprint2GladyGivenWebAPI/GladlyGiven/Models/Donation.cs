@@ -24,6 +24,7 @@ namespace GladlyGiven.Models
         /// The ID of the donor who made the donation.
         /// </summary>
 
+        [JsonPropertyName("userId")]
         public long DonorId { get; set; }
 
         /// <summary>

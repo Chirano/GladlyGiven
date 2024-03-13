@@ -26,7 +26,7 @@ export class ServiceRequestService {
   addServiceRequest(serviceRequest: ServiceRequest): Observable<ServiceRequest> {
     const newServiceRequest: ServiceRequest = {
       id : serviceRequest.id,
-      dataRequest : serviceRequest.dataRequest,
+      dateRequest : serviceRequest.dateRequest,
       idCategory : serviceRequest.idCategory,
       description : serviceRequest.description,
       status : serviceRequest.status

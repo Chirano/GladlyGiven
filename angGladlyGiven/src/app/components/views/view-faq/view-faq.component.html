@@ -1,16 +1,52 @@
 
-<div>
-  <select [(ngModel)]="selectedLanguage" (ngModelChange)="changeLanguage($event)" >
-    <option value="pt">Português</option>
-    <option value="en">English</option>
-    <option value="uk">Українська</option>
-  </select>
+<div class="container">
+  <div style="max-width: 800px; margin: 0 auto; font-family: Arial, sans-serif;">
+    <div style="margin-bottom: 20px;">
+      <select [(ngModel)]="selectedLanguage" (ngModelChange)="changeLanguage($event)" >
+      <option value="en">English</option>
+      <option value="pt">Português</option>
+      <option value="es">Español</option>
+      <option value="uk">Українська</option>
+    </select>
+  </div>
 </div>
 
-<div>
-  <h3>{{ translations?.question1 }}</h3>
-  <p>{{ translations?.answer1 }}</p>
 
-  <h3>{{ translations?.question2 }}</h3>
-  <p>{{ translations?.answer2 }}</p>
+<div class="faq">
+  <div class="quadro">
+    <h3>{{ translations?.question7 }}</h3>
+    <p>{{ translations?.answer7 }}</p>
+  </div>
+  <p></p>
+  <div class="quadro">
+    <h3>{{ translations?.question1 }}</h3>
+    <p>{{ translations?.answer1 }}</p>
+  </div>
+  <p></p>
+  <div class="quadro">
+    <h3>{{ translations?.question2 }}</h3>
+    <p>{{ translations?.answer2 }}</p>
+  </div>
+  <p></p>
+  <div class="quadro">
+    <h3>{{ translations?.question3 }}</h3>
+    <p>{{ translations?.answer3 }}</p>
+  </div>
+  <p></p>
+  <div class="quadro">  
+    <h3>{{ translations?.question4 }}</h3>
+    <p>{{ translations?.answer4 }}</p>
+  </div>
+  <p></p>
+  <div class="quadro">
+    <h3>{{ translations?.question5 }}</h3>
+    <p>{{ translations?.answer5 }}</p>
+  </div>
+  <p></p>
+  <div class="quadro">
+    <h3>{{ translations?.question6 }}</h3>
+    <p>{{ translations?.answer6 }}</p>
+  </div>  
+  <p></p>
+  <app-back-button></app-back-button>
 </div>

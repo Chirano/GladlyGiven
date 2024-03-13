@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Donation } from 'src/app/classes/Donation';
+import { AuthService } from 'src/app/services/authentication/auth.service';
 import { DonationServiceService } from 'src/app/services/donation-service/donation-service.service';
 
 @Component({
@@ -9,12 +10,23 @@ import { DonationServiceService } from 'src/app/services/donation-service/donati
 })
 export class ViewListDonationsComponent {
 
-  constructor(private donationService : DonationServiceService) {}
 
   donations: Donation[] = [];
 
-  getDonationsByDonorId(donorId: number): void{
-    this.donationService.getDonationsByDonorId(donorId).subscribe(donations => this.donations = donations);
+  constructor(private donationService: DonationServiceService) { }
+
+
+  ngOnInit(): void {
+    this.getDonationsByUserId();
+  }
+
+  getDonationsByUserId(): void {
+    console.log(AuthService.SessionContext.userId);
+    this.donationService.getDonationsByDonorId(AuthService.SessionContext.userId)
+      .subscribe(donations => {
+        this.donations = donations;
+        console.log(this.donations); // Printing donations to console
+      });
   }
 
 }

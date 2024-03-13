@@ -3,6 +3,7 @@ using GladlyGiven.Models;
 using GladlyGiven.Services;
 using GladyGivenWebAPI.Data;
 using GladyGivenWebAPI.Services;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GladlyGiven.Controllers
@@ -15,6 +16,7 @@ namespace GladlyGiven.Controllers
 
     [ApiController]
     [Route("[Controller]")]
+    [EnableCors]
     public class DonationController : ControllerBase
     {
         /// <summary>

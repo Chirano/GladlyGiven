@@ -16,4 +16,11 @@ export class ViewServiceProviderComponent {
   toCostSupportList() {
     EventManagerService.OnRouteEvent.emit(RouterPaths.ViewListCostsupport);
   }
+
+  toManageServices(){
+    EventManagerService.OnRouteEvent.emit(RouterPaths.ViewHealthServicesServiceProvider);
+  }
+  toServiceRequest() {
+    EventManagerService.OnRouteEvent.emit(RouterPaths.ViewServiceRequest);
+  }
 }

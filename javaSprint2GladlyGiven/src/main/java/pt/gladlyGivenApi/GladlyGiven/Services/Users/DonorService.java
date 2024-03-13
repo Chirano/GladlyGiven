@@ -69,7 +69,8 @@ public class DonorService extends AppUserService{
                 donor.email = findOrCreateEmail(donorDTO.email);
                 donor.mainLanguage = findOrCreateLanguage(donorDTO.mainLanguage);
                 donor.secondLanguage = findOrCreateLanguage(donorDTO.secondLanguage);
-                donor.mainPhoneNumber = findOrCreatePhoneNumber(donorDTO.mainPhoneNumber);
+                donor.secondLanguage = findOrCreateLanguage(donorDTO.secondLanguage);
+            donor.mainPhoneNumber = findOrCreatePhoneNumber(donorDTO.mainPhoneNumber);
 
                 // Other donor-specific operations can be added here if needed
 

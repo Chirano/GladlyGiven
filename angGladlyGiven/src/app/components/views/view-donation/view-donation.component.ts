@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Donation } from 'src/app/classes/Donation';
 import { DonationType } from 'src/app/classes/DonationType';
 import { FiscalIdentity } from 'src/app/classes/FiscalIdentity';
+import { AuthService } from 'src/app/services/authentication/auth.service';
 import { DonationServiceService } from 'src/app/services/donation-service/donation-service.service';
 
 @Component({
@@ -10,10 +11,10 @@ import { DonationServiceService } from 'src/app/services/donation-service/donati
   styleUrls: ['./view-donation.component.scss']
 })
 export class ViewDonationComponent {
-
+  
   donation: Donation = {
     id:0,
-    donorId: 0,
+    donorId: AuthService.SessionContext.userId,
     amount: 0,
     donationType: DonationType.Singular,
     fiscalIdentity: FiscalIdentity.Individual,
@@ -23,7 +24,9 @@ export class ViewDonationComponent {
   DonationType = DonationType; 
   FiscalIdentity = FiscalIdentity;
 
-  constructor(private donationService : DonationServiceService){}
+  constructor(private donationService : DonationServiceService){
+    
+  }
 
   createDonation(id:number,donorId: number, amount: number, donationType: DonationType, fiscalIdentity: FiscalIdentity, date:string): void {
     

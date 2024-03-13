@@ -20,8 +20,7 @@ export class ViewReviewComponent {
   constructor(private reviewService : ReviewService){}
 
   createReview(reviewId:number, appointmentId: number, rating: number, description:string, date:string): void {
-    //O atributo rating está sendo criado como string. O código abaixo converte em number.
-    //const numericRating = +rating;
+    const numericRating = +rating;
 
     
     // Call the review service to create the review

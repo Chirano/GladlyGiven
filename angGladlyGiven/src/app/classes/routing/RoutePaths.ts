@@ -34,6 +34,12 @@ export const RouterPaths = {
 
     ViewListServiceRequest: "view-list-servicerequest",
     ViewListDonations: "view-list-donations",
+    
     ViewReview: "view-review",
-    ViewReviewServiceProvider: "view-review-service-provider"
+    ViewReviewServiceProvider: "view-review-service-provider",
+
+    ViewHealthServicesServiceProvider: "view-healthservice-service-provider",
+
+    NgbdTimepickerBasic : "view-availability",
+    
 }

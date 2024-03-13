@@ -30,6 +30,9 @@ export class ReviewService {
 
     return this.http.post<Review>(`${this.url}/review`, newReview, this.httpOptions);
   }
+  
+  
+  
 
   formatDate(date: Date): string {
     const dateOfAppointment : Intl.DateTimeFormatOptions = { day: '2-digit', month: '2-digit', year: 'numeric' };

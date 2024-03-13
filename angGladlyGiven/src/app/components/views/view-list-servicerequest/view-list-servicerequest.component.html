@@ -2,16 +2,10 @@
 <div *ngFor="let serviceRequest of serviceRequests">
   <div class="list-group">
     <a href="#" class="list-group-item list-group-item-action">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1"> Date request: {{ serviceRequest.dataRequest }}
-           - Description: {{ serviceRequest.description }}
-        </h5>
-      </div>
-
-      <p class="mb-1">{{ serviceRequest.description }}</p>
-      <p class="mb-1">{{ serviceRequest.idCategory }}</p>
-      <p class="mb-1">{{ serviceRequest.id }}</p>
-      <p class="mb-1">{{ serviceRequest.status }}</p>
+      <p class="mb-1"> Date request: {{ serviceRequest.dateRequest }}</p>
+      <p class="mb-1">Description of the service requested: {{ serviceRequest.description }}</p>
+      <p class="mb-1">Probable category requested: {{ serviceRequest.idCategory }}</p>
+      <p class="mb-1">Status request: {{ serviceRequest.status }}</p>
     </a>
   </div>
 </div>

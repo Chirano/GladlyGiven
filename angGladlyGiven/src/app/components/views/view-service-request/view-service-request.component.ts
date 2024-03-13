@@ -35,7 +35,7 @@ export class ViewServiceRequestComponent implements OnInit{
       this.serviceRequest = {
         // app user:
         id                 : -1,
-        dataRequest        : form.value.dataRequest,
+        dateRequest        : form.value.dataRequest,
         idCategory         : [],
         description        : form.value.description,
         status             : form.value.status,

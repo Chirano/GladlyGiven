@@ -9,33 +9,74 @@
   <div class="card-body">
     <h4 class="card-title">Request a new service</h4>
     <p class="card-text">If you want to offer a service that is not yet registered on GladlyGiven, open a request with your suggestion. Don't forget to send us a detailed description of this service.  Your request will be reviewed and responded to within 48 hours</p>
-    <a href="#" class="btn btn-primary">Open Service Request Profile</a>
+    <!--   <a href="#" class="btn btn-primary">Open Service Request Profile</a>   -->
+    <button type="button" (click)="toServiceRequest()" class="btn btn-primary">Open Service Request Profile</button>
   </div>
-</div>
-<div class="card" style="width:400px">
-  <img class="card-img-top" src="../../../../assets/schedule.png" alt="List appointments">
-  <div class="card-body">
-    <h4 class="card-title">List of Appointments</h4>
-    <p class="card-text">Click here to see all appointments you have.</p>
-    <a href="#" class="btn btn-primary">View appointments list</a>
+  <div class="col">
+    <div class="card h-100">
+      <img class="card-img-top" src="../../../../assets/schedule.png" alt="List appointments" />
+      <div class="card-body">
+        <h4 class="card-title">List of Appointments</h4>
+        <p class="card-text">Click here to see all appointments you have.</p>
+        <a href="#" class="btn btn-primary">View list</a>
+      </div>
+    </div>
   </div>
-</div>
-<div class="card" style="width:400px">
-  <img class="card-img-top" src="../../../../assets/schedule.png" alt="List appointments">
-  <div class="card-body">
-    <h4 class="card-title">List of all cost supports requested by you</h4>
-    <p class="card-text">Click here to see all costs support requested by you</p>
-    <button type="button" (click)="toCostSupportList()" class="btn btn-primary">View cost support requested list</button>
+  <div class="col">  
+    <div class="card .h-100">
+        <img class="card-img-top" src="../../../../assets/price-list.png" alt="List appointments" />
+        <div class="card-body">
+          <h4 class="card-title">List of all cost supports requested by you</h4>
+          <p class="card-text"> Click here to see all costs support requested by you</p>
+          <button type="button" (click)="toCostSupportList()" class="btn btn-primary">
+            View cost support list
+          </button>
+      </div>
+    </div>
   </div>
-</div>
-<div class="card" style="width:400px">
-  <img class="card-img-top" src="../../../../assets/money.png" alt="Cost support request">
-  <div class="card-body">
-    <h4 class="card-title">Request a cost support</h4>
-    <p class="card-text">If you have provided any services that required travel and/or incurred expenses for materials, please send us a request for reimbursement with all the details of your expenses. Your request will be reviewed and responded to within 48 hours.</p>
-    <button type="button" (click)="toRequestCostSupport()" class="btn btn-primary">Open a cost support request</button>
+  <div class="col">
+      <div class="card h-100">
+        <img class="card-img-top" src="../../../../assets/money.png" alt="Request a cost support" />
+        <div class="card-body">
+          <h4 class="card-title">Request a cost support</h4>
+          <p class="card-text">
+            If you have provided any services that required travel and/or incurred
+            expenses for materials, please send us a request for reimbursement with
+            all the details of your expenses. Your request will be reviewed and
+            responded to within 48 hours.
+          </p>
+          <button type="button" (click)="toRequestCostSupport()" class="btn btn-primary">
+            Open a cost support request
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100">
+        <img class="card-img-top" src="../../../../assets/appointment-book.png" alt="Register your schedule" />
+        <div class="card-body">
+          <h4 class="card-title">Register your schedule</h4>
+          <p class="card-text">
+            If you want to offer a service that is not yet registered on
+            GladlyGiven, open a request with your suggestion. Don't forget to send
+            us a detailed description of this service. Your request will be reviewed
+            and responded to within 48 hours
+          </p>
+          <a href="#" class="btn btn-primary">Register</a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100">
+        <img class="card-img-top" src="../../../../assets/money.png" alt="Cost support request">
+        <div class="card-body">
+          <h4 class="card-title">Manage services</h4>
+          <p class="card-text">If you have provided any services that required travel and/or incurred expenses for materials, please send us a request for reimbursement with all the details of your expenses. Your request will be reviewed and responded to within 48 hours.</p>
+          <button type="button" (click)="toManageServices()" class="btn btn-primary">Manage Services</button>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 
 
 

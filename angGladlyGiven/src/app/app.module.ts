@@ -38,6 +38,8 @@ import { ViewReviewComponent } from './components/views/view-review/view-review.
 import { DevHeaderComponent } from './components/dev/dev-header/dev-header.component';
 import { ViewHomeComponent } from './components/views/view-home/view-home.component';
 import { ViewReviewServiceProviderComponent } from './components/views/view-reviews-service-provider/view-review-service-provider/view-review-service-provider.component';
+import { ViewServiceProviderServicesComponent } from './components/views/view-service-provider-services/view-service-provider-services/view-service-provider-services.component';
+import { NgbdTimepickerBasicComponent } from './components/views/view-availability/ngbd-timepicker-basic/ngbd-timepicker-basic.component';
 
 
 @NgModule({
@@ -76,8 +78,8 @@ import { ViewReviewServiceProviderComponent } from './components/views/view-revi
     ViewListDonationsComponent,
     ViewReviewComponent,
     DevHeaderComponent,
-    ViewReviewServiceProviderComponent
-
+    ViewReviewServiceProviderComponent,
+    ViewServiceProviderServicesComponent 
   ],
   imports: [
     BrowserModule,
@@ -85,7 +87,8 @@ import { ViewReviewServiceProviderComponent } from './components/views/view-revi
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbdTimepickerBasicComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
