@@ -10,8 +10,12 @@ public class ServiceProviderDTO extends AppUserDTO {
     public String nif;
     public String paymentInfoId;
     public String invoiceInfoId;
+
+    // Service provider
     public String licenseNumber;
     public long categoryId;
+    public Long[] servicesIds;
+    public Long[] reviewIds;
     public float reviewAverage;
 
     public ServiceProviderDTO() {}
@@ -29,12 +33,16 @@ public class ServiceProviderDTO extends AppUserDTO {
         this.invoiceInfoId = serviceProvider.invoiceInfoId;
         this.licenseNumber = serviceProvider.licenseNumber;
         this.categoryId = serviceProvider.categoryId;
+        ///modificar o metodo
+        this.servicesIds = serviceProvider.healthServices != null ? serviceProvider.healthServices.toArray(new Long[0]) : null;
+        this.reviewIds = serviceProvider.reviewIds != null ? serviceProvider.reviewIds.toArray(new Long[0]) : null;
         this.reviewAverage = serviceProvider.reviewAverage;
     }
 
     public ServiceProviderDTO(long id, String firstName, String lastName, String email, String gender, String language, String phoneNumber,
                               String nif, String paymentInfoId, String invoiceInfoId,
-                              String licenseNumber, long categoryId, float reviewAverage) {
+                              String licenseNumber, long categoryId, Long[] servicesIds,
+                              Long[] reviewIds, float reviewAverage) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -47,6 +55,8 @@ public class ServiceProviderDTO extends AppUserDTO {
         this.invoiceInfoId = invoiceInfoId;
         this.licenseNumber = licenseNumber;
         this.categoryId = categoryId;
+        this.servicesIds = servicesIds;
+        this.reviewIds = reviewIds;
         this.reviewAverage = reviewAverage;
     }
 
@@ -76,6 +86,8 @@ public class ServiceProviderDTO extends AppUserDTO {
         sb.append("| Invoice Info ID: ").append(invoiceInfoId).append("\n");
         sb.append("| License Number: ").append(licenseNumber).append("\n");
         sb.append("| Category ID: ").append(categoryId).append("\n");
+        sb.append("| Service IDs: ").append(Arrays.toString(servicesIds)).append("\n");
+        sb.append("| Review IDs: ").append(Arrays.toString(reviewIds)).append("\n");
         sb.append("| Review Average: ").append(reviewAverage).append("\n");
         sb.append("-----------------------------------\n");
         return sb.toString();

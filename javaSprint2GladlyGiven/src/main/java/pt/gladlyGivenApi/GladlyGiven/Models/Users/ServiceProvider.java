@@ -11,7 +11,6 @@ import pt.gladlyGivenApi.GladlyGiven.Models.*;
 import pt.gladlyGivenApi.GladlyGiven.Models.DTO.ServiceProviderDTO;
 import pt.gladlyGivenApi.GladlyGiven.Models.HealthServices.HealthService;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -75,6 +74,8 @@ public class ServiceProvider extends MonetaryUser<ServiceProvider> implements ID
 
         serviceProviderDTO.licenseNumber = this.licenseNumber;
         serviceProviderDTO.categoryId = this.categoryId;
+        serviceProviderDTO.servicesIds = this.healthServices != null ? this.healthServices.toArray(new Long[0]) : null;
+        serviceProviderDTO.reviewIds = this.reviewIds != null ? this.reviewIds.toArray(new Long[0]) : null;
         serviceProviderDTO.reviewAverage = this.reviewAverage;
 
         return serviceProviderDTO;
@@ -96,8 +97,8 @@ public class ServiceProvider extends MonetaryUser<ServiceProvider> implements ID
         serviceProvider.invoiceInfoId = serviceProviderDTO.invoiceInfoId;
         serviceProvider.licenseNumber = serviceProviderDTO.licenseNumber;
         serviceProvider.categoryId = serviceProviderDTO.categoryId;
-        serviceProvider.healthServices = new ArrayList<>();
-        serviceProvider.reviewIds = new ArrayList<>();
+        serviceProvider.healthServices = null; // TODO
+        serviceProvider.reviewIds = serviceProviderDTO.reviewIds != null ? Arrays.asList(serviceProviderDTO.reviewIds) : null;
         serviceProvider.reviewAverage = serviceProviderDTO.reviewAverage;
 
         return serviceProvider;

@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pt.gladlyGivenApi.GladlyGiven.Models.Appointment;
 import pt.gladlyGivenApi.GladlyGiven.Models.Availability;
-import pt.gladlyGivenApi.GladlyGiven.Models.DTO.HealthServiceDTO;
 import pt.gladlyGivenApi.GladlyGiven.Models.DTO.ServiceProviderDTO;
 import pt.gladlyGivenApi.GladlyGiven.Models.HealthServices.HealthService;
 import pt.gladlyGivenApi.GladlyGiven.Models.Users.ServiceProvider;
@@ -118,7 +117,7 @@ public class ServiceProviderController {
     }
 
     @PutMapping("/{serviceProviderId}/addservice/{healthServiceId}")
-    public ResponseEntity<List<HealthServiceDTO>> addServiceToServiceProvider(@PathVariable("serviceProviderId") Long serviceProviderId,
+    public ResponseEntity<ServiceProvider> addServiceToServiceProvider(@PathVariable("serviceProviderId") Long serviceProviderId,
                                                       @PathVariable ("healthServiceId") Long serviceId) {
 
         ServiceProvider serviceProvider = serviceProviderService.findServiceProviderById(serviceProviderId);
@@ -131,18 +130,11 @@ public class ServiceProviderController {
         ServiceProvider updatedServiceProvider = serviceProviderService.addServicesToServiceProvider(serviceProvider,
                                                     healthService);
 
-        List<HealthService> healthServiceList = updatedServiceProvider.healthServices;
-        List<HealthServiceDTO> healthServiceDTOS = new ArrayList<>();
-
-        for(HealthService healthService1 : healthServiceList){
-            HealthServiceDTO healthServiceDTO = new HealthServiceDTO(healthService1);
-            healthServiceDTOS.add(healthServiceDTO);
-        }
-        return new ResponseEntity<>(healthServiceDTOS, HttpStatus.OK);
+        return new ResponseEntity<>(updatedServiceProvider, HttpStatus.OK);
     }
 
     @PutMapping("/{serviceProviderId}/removeservice/{healthServiceId}")
-    public ResponseEntity<List<HealthServiceDTO>> removeServiceofServiceProvider(
+    public ResponseEntity<ServiceProvider> removeServiceofServiceProvider(
                                         @PathVariable("serviceProviderId") Long serviceProviderId,
                                         @PathVariable ("healthServiceId") Long serviceId)
     {
@@ -158,15 +150,8 @@ public class ServiceProviderController {
         }
 
         ServiceProvider updatedServiceProvider = serviceProviderService.removeHealthService(serviceProvider, healthService);
-        List<HealthService> healthServiceList = updatedServiceProvider.healthServices;
 
-        List<HealthServiceDTO> healthServiceDTOS = new ArrayList<>();
-
-        for(HealthService healthService1 : healthServiceList){
-            HealthServiceDTO healthServiceDTO = new HealthServiceDTO(healthService1);
-            healthServiceDTOS.add(healthServiceDTO);
-        }
-        return new ResponseEntity<>(healthServiceDTOS, HttpStatus.OK);
+        return new ResponseEntity<>(updatedServiceProvider, HttpStatus.OK);
     }
 
 
