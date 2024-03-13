@@ -24,7 +24,7 @@ export const MockSessionContexts = {
     },
 
     AuthDonor: {
-        userId: 0,
+        userId: 1,
         name: "donor",
         email: "donor", // @donor.com
         userType: UserType.Donor,

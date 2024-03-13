@@ -1,4 +1,4 @@
-<div class="donation-list">
+<!-- <div class="donation-list">
     <h2>Donations List</h2>
     <ul>
       <li *ngFor="let donation of donations">
@@ -9,6 +9,21 @@
         <strong>Date:</strong> {{ donation.date }}
       </li>
     </ul>
+  </div> -->
+
+  <h2 class="title">List of Donations</h2>
+<div *ngFor="let donation of donations">
+  <div class="list-group">
+    <a href="#" class="list-group-item list-group-item-action">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">
+          Date: {{ donation.date }} - Amount: {{ donation.amount }}€
+        </h5>
+      </div>
+      <p class="mb-1">{{ donation.donationType }}</p>
+      <p class="mb-1">{{ donation.fiscalIdentity }}</p>
+    </a>
   </div>
+</div>
   
   

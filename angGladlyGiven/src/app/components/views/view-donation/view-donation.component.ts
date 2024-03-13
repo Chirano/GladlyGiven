@@ -10,7 +10,7 @@ import { DonationServiceService } from 'src/app/services/donation-service/donati
   styleUrls: ['./view-donation.component.scss']
 })
 export class ViewDonationComponent {
-
+  
   donation: Donation = {
     id:0,
     donorId: 0,
@@ -23,7 +23,9 @@ export class ViewDonationComponent {
   DonationType = DonationType; 
   FiscalIdentity = FiscalIdentity;
 
-  constructor(private donationService : DonationServiceService){}
+  constructor(private donationService : DonationServiceService){
+    
+  }
 
   createDonation(id:number,donorId: number, amount: number, donationType: DonationType, fiscalIdentity: FiscalIdentity, date:string): void {
     
