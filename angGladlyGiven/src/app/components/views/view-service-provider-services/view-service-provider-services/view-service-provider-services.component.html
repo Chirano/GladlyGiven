@@ -1,12 +1,34 @@
 
-<div class="review-list">
-    <h3>Services List</h3>
-    <ul>
+<div class="mx-auto p-3">
+    <h2>Services List</h2>
+    <div class="card">
+      <ul style="list-style-type: none;">
       <li *ngFor="let item of healthServices">
-        <div class="card-body">
-        <strong>Service Id:</strong> {{ item.id }}<br>
-        <strong>Description:</strong> {{ item.description }}<br>
+        <div class="card-body">    
+              {{ item.id }} - {{ item.description }}
+            <button type="button" (click)="removeService(item.id)" class="btn btn-outline-danger">Remove</button>
         </div>
       </li>
-    </ul>
+      </ul>
+    </div>
   </div>
+
+  <div class="mx-auto p-3">
+  <div class="card-body">
+    <h2>Add Service</h2>
+    <div class="row pt-3">
+      <div class="col-4">
+      <!-- metodo ver todos aqui  -->
+        <label for ="">Select a service</label>
+          <select class="form-select" [(ngModel)]="toaddhealthService.id">
+            <option *ngFor="let item of allHealthServices" [value]="item.id">{{item.description}}</option>
+          </select><br>
+        </div>
+      <div>
+        <button type="button" (click)="addService(toaddhealthService.id)" class="btn btn-primary">Add</button>
+      </div>
+    </div>
+</div>
+
+
+ 
