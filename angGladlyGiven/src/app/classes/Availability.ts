@@ -1,6 +1,8 @@
 export interface Availability{
     id : number,
     serviceProviderId : number,
-    startDateTime : string, 
-    endDateTime : string,
+    startDate : string, 
+    endDate : string,
+    startTime: string,
+    endTime : string
 }

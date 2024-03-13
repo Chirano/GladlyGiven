@@ -31,12 +31,14 @@ export class AvailabilityService {
     const newAvailability: Availability = {
       id : availability.id,
       serviceProviderId: availability.serviceProviderId,
-      startDateTime: availability.startDateTime,
-      endDateTime : availability.endDateTime,
+      startDate: availability.startDate,
+      endDate : availability.endDate,
+      startTime: availability.startTime,
+      endTime : availability.endTime,
     };
 
     return this.http.post<any>(
-      this.java + "api/serviceProvider/availability", // http://localhost:8080/api/serviceProvider/availability
+      this.java + "/api/serviceProvider/availability", // http://localhost:8080/api/serviceProvider/availability
       newAvailability, this.httpOptions
     );
   }
