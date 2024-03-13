@@ -9,6 +9,8 @@ import { EventManagerService } from 'src/app/services/events/event-manager.servi
 })
 export class ViewRefugeeComponent {
 
+  //este método terá de ser colocado no view do apointment
+  
   toCreateReview(){
     EventManagerService.OnRouteEvent.emit(RouterPaths.ViewReview);
   }
