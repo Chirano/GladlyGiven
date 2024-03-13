@@ -22,12 +22,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SignUpRequestRefugee } from 'src/app/classes/authentication/SignUpRequestRefugee';
 import { SignUpRequestDonor } from 'src/app/classes/authentication/SignUpRequestDonor';
 import { SignUpRequestServiceProvider } from 'src/app/classes/authentication/SignUpRequestServiceProvider';
+import { SaveService } from '../saveData/save.service';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
+  private sessionContextKey = "context";
+
   static AuthState: AuthState = AuthState.None;
   static SessionContext: SessionContext;
 
@@ -62,6 +65,8 @@ export class AuthService {
     EventManagerService.OnSignUpRefugeeEvent.subscribe(this.SignUpRefugee.bind(this));
     EventManagerService.OnSignUpServiceProviderEvent.subscribe(this.SignUpServiceProvider.bind(this));
     EventManagerService.OnSignUpDonorEvent.subscribe(this.SignUpDonor.bind(this));
+
+    this.GetSessionContext();
   }
 
   
@@ -73,6 +78,9 @@ export class AuthService {
     this.sessionContext.userType = userType;
 
     AuthService.SessionContext = this.sessionContext;
+    SaveService.saveData(this.sessionContextKey, this.sessionContext);
+
+    console.log("Session Context: ", this.sessionContext);
     return this.sessionContext;
   }
 
@@ -83,10 +91,18 @@ export class AuthService {
     this.sessionContext.userType = context.userType;
 
     AuthService.SessionContext = this.sessionContext;
+    SaveService.saveData(this.sessionContextKey, this.sessionContext);
+
+    console.log("Session Context: ", this.sessionContext);
     return this.sessionContext;
   }
 
   GetSessionContext() : SessionContext {
+    var context = SaveService.loadData<SessionContext>(this.sessionContextKey);
+    if (context != null) {
+      this.SetSessionContextByObject(context);
+    }
+
     return this.sessionContext;
   }
 

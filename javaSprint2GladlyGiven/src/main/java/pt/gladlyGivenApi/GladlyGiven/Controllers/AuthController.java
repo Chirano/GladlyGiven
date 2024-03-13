@@ -63,10 +63,12 @@ public class AuthController {
     public SessionContextDTO signUp(@RequestBody SignUpRequestRefugee signUpRequest) {
         Refugee user = Refugee.fromDTO(signUpRequest.refugeeDTO);
         user.password = signUpRequest.signUpDetails.password;
-        SessionContext context = createSessionContextForUser(user, user.password, AppUserType.Refugee);
 
-        refugeeService.createRefugee(user);
+        user = refugeeService.createRefugee(user);
+        SessionContext context = createSessionContextForUser(user, user.password, AppUserType.Refugee);
         context = sessionContextService.createUserContext(context);
+        user.userContext = context;
+        refugeeService.updateRefugee(user);
 
         return context.toDTO();
     }
@@ -75,10 +77,12 @@ public class AuthController {
     public SessionContextDTO signUp(@RequestBody SignUpRequestServiceProvider signUpRequest) {
         ServiceProvider user = ServiceProvider.fromDTO(signUpRequest.serviceProviderDTO);
         user.password = signUpRequest.signUpDetails.password;
-        SessionContext context = createSessionContextForUser(user, user.password, AppUserType.ServiceProvider);
 
-        serviceProviderService.createServiceProvider(user);
+        user = serviceProviderService.createServiceProvider(user);
+        SessionContext context = createSessionContextForUser(user, user.password, AppUserType.ServiceProvider);
         context = sessionContextService.createUserContext(context);
+        user.userContext = context;
+        serviceProviderService.updateServiceProvider(user);
 
         return context.toDTO();
     }
@@ -87,10 +91,12 @@ public class AuthController {
     public SessionContextDTO signUp(@RequestBody SignUpRequestDonor signUpRequest) {
         Donor user = Donor.fromDTO(signUpRequest.donorDTO);
         user.password = signUpRequest.signUpDetails.password;
-        SessionContext context = createSessionContextForUser(user, user.password, AppUserType.ServiceProvider);
 
-        donorService.createDonor(user);
+        user = donorService.createDonor(user);
+        SessionContext context = createSessionContextForUser(user, user.password, AppUserType.Donor);
         context = sessionContextService.createUserContext(context);
+        user.userContext = context;
+        donorService.updateDonor(user);
 
         return context.toDTO();
     }

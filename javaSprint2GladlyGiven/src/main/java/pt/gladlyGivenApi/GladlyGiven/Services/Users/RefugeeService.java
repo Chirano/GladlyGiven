@@ -21,7 +21,7 @@ public class RefugeeService extends AppUserService {
 
     // Refugee
     // ---------------------------------------------------------------------
-    private Refugee saveRefugee(Refugee refugee) {
+    public Refugee saveRefugee(Refugee refugee) {
         return saveUserToRepository(refugee, refugeeRepository);
     }
 

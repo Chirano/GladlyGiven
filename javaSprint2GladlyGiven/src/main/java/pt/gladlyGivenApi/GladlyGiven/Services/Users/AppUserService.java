@@ -50,7 +50,9 @@ public abstract class AppUserService {
     // ---------------------------------------------------------------------
     protected <T extends AppUser> T saveUserToRepository(T user, AppUserRepository<T> repository) {
         try {
-            return repository.save(user);
+            T savedUser = repository.save(user);
+            System.out.printf("Saved user: \n%s", savedUser.toString());
+            return savedUser;
         } catch (Exception e) {
             System.out.println("Failed to save user. Error:\n" + e.getMessage());
             return null;

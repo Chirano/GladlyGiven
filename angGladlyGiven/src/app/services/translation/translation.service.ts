@@ -134,7 +134,7 @@ export class TranslationService {
     'back': 'Atrás',
     'register': 'Registrar',
     'SelectTranslation': 'Seleccione el idioma'
-  },
+    },
   };
 
   getTranslation(language: string) {

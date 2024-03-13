@@ -40,7 +40,7 @@ public class ServiceProviderService extends AppUserService {
 
     // Service Provider
     // ---------------------------------------------------------------------
-    private ServiceProvider saveServiceProvider(ServiceProvider serviceProvider) {
+    public ServiceProvider saveServiceProvider(ServiceProvider serviceProvider) {
         return saveUserToRepository(serviceProvider, serviceProviderRepository);
     }
 
