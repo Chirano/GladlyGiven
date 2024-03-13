@@ -19,18 +19,24 @@ public class Availability {
 
     public AvailabilityStatus availabilityStatus;
 
-    public String startDateTime;
+    public String startDate;
 
-    public String endDateTime;
+    public String startTime;
+
+    public String endDate;
+
+    public String endTime;
 
     public Availability() {
 
     }
 
-    public Availability(long serviceProviderId, AvailabilityStatus availabilityStatus, String startDateTime, String endDateTime) {
+    public Availability(long serviceProviderId, AvailabilityStatus availabilityStatus, String startDate, String startTime, String endDate, String endTime) {
         this.serviceProviderId = serviceProviderId;
         this.availabilityStatus = availabilityStatus;
-        this.startDateTime = startDateTime;
-        this.endDateTime = endDateTime;
+        this.startDate = startDate;
+        this.startTime = startTime;
+        this.endDate = endDate;
+        this.endTime = endTime;
     }
 }

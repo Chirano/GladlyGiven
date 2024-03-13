@@ -202,16 +202,51 @@ public class ServiceProviderService extends AppUserService {
 
     // Service Provider Availability
     // ---------------------------------------------------------------------
-    public Availability findAvailability(Long id) {
+
+    /**
+     * Retrieves a paginated list of availabilities from the Availability repository.
+     *
+     * @param page Page number for pagination.
+     * @param size Number of items per page.
+     * @return Page of Availability objects representing the retrieved availabilities.
+     * @throws NotImplementedException if the table 'Availability' is null.
+     */
+    public Page<Availability> findAllAvailabilities(int page, int size) {
+        Page<Availability> avPage =  this.availabilityRepository.findAll(PageRequest.of(page, size));
+
+        if(!avPage.hasContent()) {
+            throw new NotImplementedException("Table Availabity is null!");
+        }
+
+        return avPage;
+    }
+
+    public Page<Availability> findAllAvailabilitiesByUserId(long id, int page, int size) {
+        Page<Availability> avPage =  this.availabilityRepository.findAllAvailabilitiesByServiceProviderId(id, PageRequest.of(page, size));
+
+        if(!avPage.hasContent()) {
+            throw new NotImplementedException("There's no availabilities registered for this user id!");
+        }
+
+        return avPage;
+    }
+
+    /**
+     * Retrieves an availability by its unique identifier.
+     *
+     * @param id The unique identifier of the availability.
+     * @return The availability object if found, or null if not found.
+     */
+    public Availability findAvailabilityById(Long id) {
+        Availability av = this.availabilityRepository.findById(id).orElse(null);
+
+        if(av == null) {
+            throw new NotImplementedException("Entity doesn't exist");
+        }
+
         return availabilityRepository.findById(id).orElse(null);
     }
 
-    public List<Availability> findAvailabilitiesByStartDateTime(int pageNumber, int pageSize, String startDateTimeString) {
-        Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("availability.startDateTimeString"));
-        Page<Availability> page = availabilityRepository.findByStartDateTime(startDateTimeString, pageable);
-
-        return PageUtils.pageToList(page);
-    }
 
     @Transactional
     public Availability createAvailability(Availability availability) {
@@ -227,6 +262,7 @@ public class ServiceProviderService extends AppUserService {
 
         return newAv;
     }
+
 
     //TODO:
     public List<Availability> findAvailabilitiesByStatus(int pageNumber, int pageSize, String availabilityStatus) {
