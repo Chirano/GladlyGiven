@@ -1,30 +1,16 @@
+
 <div>
-  <div (click)="changeLanguage()" class="language-selector">
-    <label for="language-select">Select Language:</label>
-    <select id="language-select">
-      <option value="pt">Português</option>
-      <option value="en">English</option>
-      <option value="uk">Українська</option>
-    </select>
-  </div>
-  
-  <div class="container">
-    <div id="pt"> <!-- *ngIf="{language} == "pt""> -->
-      <h1 id="faq-title">Perguntas Frequentes sobre Refugiados</h1>
+  <select [(ngModel)]="selectedLanguage" (ngModelChange)="changeLanguage($event)" >
+    <option value="pt">Português</option>
+    <option value="en">English</option>
+    <option value="uk">Українська</option>
+  </select>
+</div>
 
-      <div class="faq-item">
-        <h2 id="q1">1. O que é um refugiado?</h2>
-        <p id="a1">Um refugiado é alguém que foge de seu país de origem devido a perseguição, conflito armado, violência ou violação de direitos humanos e busca proteção em outro país.</p>
-      </div>
+<div>
+  <h3>{{ translations?.question1 }}</h3>
+  <p>{{ translations?.answer1 }}</p>
 
-      <div class="faq-item">
-        <h2 id="q2">2. Qual é a diferença entre um refugiado e um imigrante?</h2>
-        <p id="a2">A principal diferença é que os refugiados fogem de suas casas devido a circunstâncias extremas, como guerra ou perseguição, enquanto os imigrantes geralmente buscam melhores condições de vida, oportunidades de trabalho ou educação em outros países.</p>
-      </div>
-    </div>
-
-
-  </div>
-    
-  <app-back-button></app-back-button>
+  <h3>{{ translations?.question2 }}</h3>
+  <p>{{ translations?.answer2 }}</p>
 </div>
