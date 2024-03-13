@@ -84,6 +84,13 @@ public class AppointmentService {
         return appointmentPage;
     }
 
+
+    /**
+     * Retrieves a list of appointments associated with a specific service provider.
+     *
+     * @param serviceProviderId The unique identifier of the service provider.
+     * @return A list of appointment objects representing appointments linked to the specified service provider.
+     */
     public List<Appointment> findAllAppointmentsByServiceProviderId(long serviceProviderId){
         return this.appointmentRepository.findAllAppointmentsByServiceProviderId(serviceProviderId);
     }

@@ -4,18 +4,22 @@
 package pt.gladlyGivenApi.GladlyGiven.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pt.gladlyGivenApi.GladlyGiven.Models.Appointment;
 import pt.gladlyGivenApi.GladlyGiven.Models.Availability;
 import pt.gladlyGivenApi.GladlyGiven.Models.DTO.ServiceProviderDTO;
 import pt.gladlyGivenApi.GladlyGiven.Models.HealthServices.HealthService;
 import pt.gladlyGivenApi.GladlyGiven.Models.Users.ServiceProvider;
+import pt.gladlyGivenApi.GladlyGiven.PageUtils;
 import pt.gladlyGivenApi.GladlyGiven.Services.HealthServiceService;
 import pt.gladlyGivenApi.GladlyGiven.Services.Users.ServiceProviderService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -29,6 +33,7 @@ public class ServiceProviderController {
 
     @Autowired
     private HealthServiceService healthServiceService;
+
 
 
     // Service Provider
@@ -153,11 +158,58 @@ public class ServiceProviderController {
 
     // Service Provider Availability
     // --------------------------------------------------------------------------------------
-    @PostMapping("/availability/{id}")
-    public Availability createAvailability(@PathVariable("id") Long serviceProviderId, @RequestBody Availability availability) {
-        return this.serviceProviderService.createAvailability(availability);
+    
+    /**
+     * Retrieves a paginated list of all availabilities for all service providers.
+     * @param page Page number for pagination (optional, defaults to 0).
+     * @param size Number of items per page (optional, defaults to 10).
+     * @return ResponseEntity with a list of availabilities if found.
+     */
+    @GetMapping("/availabilities")
+    public ResponseEntity<List<Availability>> findAllAvailabilities(@RequestParam Optional<Integer> page,
+                                                 @RequestParam Optional<Integer> size) {
+        int _page = page.orElse(0);
+        int _size = size.orElse(10);
+
+        Page<Availability> availabilityPage = this.serviceProviderService.findAllAvailabilities(_page, _size);
+
+        //Converter page em list.
+        List<Availability> availabilityList = PageUtils.pageToList(availabilityPage);
+
+        return new ResponseEntity<>(availabilityList, HttpStatus.OK);
     }
 
+    /**
+     * Retrieves a paginated list of availabilities associated with a specific user.
+     *
+     * @param userId The unique identifier of the user.
+     * @param page   Page number for pagination (optional, defaults to 0).
+     * @param size   Number of items per page (optional, defaults to 10).
+     * @return ResponseEntity with a list of availabilities if found.
+     */
+    @GetMapping("/availabilities/{userId}")
+    public ResponseEntity<List<Availability>> findAllAvailabilitiesByUserId(@PathVariable ("userId") Long userId, @RequestParam Optional<Integer> page,
+                                                                    @RequestParam Optional<Integer> size) {
+        int _page = page.orElse(0);
+        int _size = size.orElse(10);
+
+        Page<Availability> availabilityPage = this.serviceProviderService.findAllAvailabilitiesByUserId(userId, _page, _size);
+
+        //Converter page em list.
+        List<Availability> availabilityList = PageUtils.pageToList(availabilityPage);
+
+        return new ResponseEntity<>(availabilityList, HttpStatus.OK);
+    }
+
+    /**
+     * Creates a new availability entry for a service provider.
+     * @param availability The Availability object representing the availability information.
+     * @return The newly created Availability object.
+     */
+    @PostMapping(value = "/availability", consumes = "application/json", produces = "application/json")
+    public Availability createAvailability(@RequestBody Availability availability) {
+        return this.serviceProviderService.createAvailability(availability);
+    }
 
 
     // Service Reviews

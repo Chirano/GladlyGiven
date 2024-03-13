@@ -1,3 +1,5 @@
+//Author: Lia Araruna
+
 package pt.gladlyGivenApi.GladlyGiven.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,7 @@ public class AppointmentController {
     @Autowired
     private AppointmentService appointmentService;
 
-    @GetMapping(value= "/appointments", produces = "application/json")
+    @GetMapping("/appointments")
     public List<Appointment> findAllAppointments(@RequestParam Optional<Integer> page,
                                                                  @RequestParam Optional<Integer> size) {
         int _page = page.orElse(0);

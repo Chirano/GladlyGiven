@@ -35,9 +35,6 @@ public class ServiceProvider extends MonetaryUser<ServiceProvider> implements ID
     @Min(0)
     public float reviewAverage; // fetched from Entity Framework API reviewObject
 
-    @ManyToOne
-    public Availability availabilities;
-
     public ServiceProvider() {
 
     }

@@ -5,6 +5,5 @@ package pt.gladlyGivenApi.GladlyGiven.Enums;
 
 public enum AvailabilityStatus {
     Free,
-    Pending,
     Used,
 }
