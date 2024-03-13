@@ -25,7 +25,6 @@ export class ViewListDonationsComponent {
     this.donationService.getDonationsByDonorId(AuthService.SessionContext.userId)
       .subscribe(donations => {
         this.donations = donations;
-        console.log(this.donations); // Printing donations to console
       });
   }
 

@@ -31,7 +31,7 @@ export class DonationServiceService {
   createDonation(donation: Donation): Observable<Donation> {
     const newDonation: Donation = {
       id:donation.id,
-      donorId: donation.donorId,
+      donorId: AuthService.SessionContext.userId,
       amount: donation.amount,
       donationType: donation.donationType,
       fiscalIdentity: donation.fiscalIdentity,

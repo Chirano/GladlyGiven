@@ -14,7 +14,7 @@ export class ViewDonationComponent {
   
   donation: Donation = {
     id:0,
-    donorId: AuthService.SessionContext.userId,
+    donorId: 0,
     amount: 0,
     donationType: DonationType.Singular,
     fiscalIdentity: FiscalIdentity.Individual,
@@ -24,16 +24,42 @@ export class ViewDonationComponent {
   DonationType = DonationType; 
   FiscalIdentity = FiscalIdentity;
 
-  constructor(private donationService : DonationServiceService){
-    
+  constructor(private donationService : DonationServiceService, private authService: AuthService){}
+  
+  ngOnInit(): void {
+    // Update donorId with the current user's id when the component initializes
+    this.donation.donorId = AuthService.SessionContext.userId;
   }
 
-  createDonation(id:number,donorId: number, amount: number, donationType: DonationType, fiscalIdentity: FiscalIdentity, date:string): void {
+  //  createDonation(id:number,donorId: number, amount: number, donationType: DonationType, fiscalIdentity: FiscalIdentity, date:string): void {
     
     
+  //   // Call the donation service to create the donation
+  //   this.donationService.createDonation({id, donorId, amount, donationType, fiscalIdentity, date
+  //   } as Donation) 
+  //     .subscribe({
+  //       next: (createdDonation) => {
+  //         // Handle the created donation as needed
+  //         console.log('Donation created:', createdDonation);
+  //         // Optionally, update UI or perform any additional actions here
+  //         this.donation = createdDonation;
+  //       },
+  //       error: (error) => {
+  //         console.error('Failed to create donation', error);
+  //         // Optionally, show an error message to the user
+  //       }
+  //     });
+  //   }
+
+  createDonation(amount: number, donationType: DonationType, fiscalIdentity: FiscalIdentity, date: string): void {
     // Call the donation service to create the donation
-    this.donationService.createDonation({id, donorId, amount, donationType, fiscalIdentity, date
-    } as Donation) 
+    this.donationService.createDonation({
+      donorId: this.donation.donorId, // Use donorId from the donation object
+      amount,
+      donationType,
+      fiscalIdentity,
+      date
+    } as Donation)
       .subscribe({
         next: (createdDonation) => {
           // Handle the created donation as needed
@@ -46,6 +72,5 @@ export class ViewDonationComponent {
           // Optionally, show an error message to the user
         }
       });
-    }
-
+  }
 }

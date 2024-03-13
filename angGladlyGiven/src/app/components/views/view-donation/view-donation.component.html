@@ -1,6 +1,6 @@
 <div class="container">
     <h2>Create Donation</h2>
-    <form (ngSubmit)="createDonation(0, donation.donorId, donation.amount, donation.donationType, donation.fiscalIdentity, '')">
+    <form (ngSubmit)="createDonation(donation.amount, donation.donationType, donation.fiscalIdentity, '')">
       <!-- <div class="form-group">
         <label for="donorId">Donor ID:</label>
         <input type="number" id="donorId" name="donorId" [(ngModel)]="donation.donorId" required>
