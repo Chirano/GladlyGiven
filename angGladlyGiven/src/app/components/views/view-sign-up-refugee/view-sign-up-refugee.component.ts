@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RefugeeDTO as RefugeeDTO } from 'src/app/classes/userProfiles/RefugeeDTO';
 import { RefugeeService } from 'src/app/services/data/javaSpring/refugee/refugee.service';
 import { EventManagerService } from 'src/app/services/events/event-manager.service';
+import { TranslationService } from 'src/app/services/translation/translation.service';
 
 @Component({
   selector: 'app-view-sign-up-refugee',
@@ -11,7 +12,20 @@ import { EventManagerService } from 'src/app/services/events/event-manager.servi
 
 export class ViewSignUpRefugeeComponent {
 
-  constructor() {
+  selectedLanguage: string = 'en'; // Default language
+  translations: any;
+
+  constructor(private translationService: TranslationService) {
+    this.loadTranslations();
+  }
+
+  loadTranslations() {
+    this.translations = this.translationService.getTranslation(this.selectedLanguage);
+  }
+
+  changeLanguage(language: string) {
+    this.selectedLanguage = language;
+    this.loadTranslations();
   }
 
   registerNewRefugee(form: any) {

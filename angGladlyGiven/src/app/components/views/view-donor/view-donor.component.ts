@@ -12,5 +12,10 @@ export class ViewDonorComponent {
   toCreateDonation(){
     EventManagerService.OnRouteEvent.emit(RouterPaths.ViewDonation);
   }
+
+  toDonationsList() {
+    EventManagerService.OnRouteEvent.emit(RouterPaths.ViewListDonations);
+  }
+  
   
 }

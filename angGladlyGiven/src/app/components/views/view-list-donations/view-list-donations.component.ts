@@ -8,21 +8,25 @@ import { DonationServiceService } from 'src/app/services/donation-service/donati
   templateUrl: './view-list-donations.component.html',
   styleUrls: ['./view-list-donations.component.scss']
 })
-export class ViewListDonationsComponent{
+export class ViewListDonationsComponent {
 
-  
+
   donations: Donation[] = [];
 
-  constructor(private donationService : DonationServiceService) {}
+  constructor(private donationService: DonationServiceService) { }
 
 
   ngOnInit(): void {
-    this.getDonationsByUserId(); 
+    this.getDonationsByUserId();
   }
 
-  getDonationsByUserId() : void {
+  getDonationsByUserId(): void {
     console.log(AuthService.SessionContext.userId);
-    this.donationService.getDonationsByDonorId(AuthService.SessionContext.userId).subscribe(donations => this.donations = donations);
+    this.donationService.getDonationsByDonorId(AuthService.SessionContext.userId)
+      .subscribe(donations => {
+        this.donations = donations;
+        console.log(this.donations); // Printing donations to console
+      });
   }
 
 }

@@ -37,7 +37,6 @@ import { ViewListDonationsComponent } from './components/views/view-list-donatio
 import { ViewReviewComponent } from './components/views/view-review/view-review.component';
 import { DevHeaderComponent } from './components/dev/dev-header/dev-header.component';
 import { ViewHomeComponent } from './components/views/view-home/view-home.component';
-import { ListServicesByServiceProviderIdComponent } from './components/list-services-by-service-provider-id/list-services-by-service-provider-id.component';
 import { ViewReviewServiceProviderComponent } from './components/views/view-reviews-service-provider/view-review-service-provider/view-review-service-provider.component';
 import { ViewServiceProviderServicesComponent } from './components/views/view-service-provider-services/view-service-provider-services/view-service-provider-services.component';
 import { NgbdTimepickerBasicComponent } from './components/views/view-availability/ngbd-timepicker-basic/ngbd-timepicker-basic.component';
@@ -79,7 +78,6 @@ import { NgbdTimepickerBasicComponent } from './components/views/view-availabili
     ViewListDonationsComponent,
     ViewReviewComponent,
     DevHeaderComponent,
-    ListServicesByServiceProviderIdComponent,
     ViewReviewServiceProviderComponent,
     ViewServiceProviderServicesComponent 
   ],
