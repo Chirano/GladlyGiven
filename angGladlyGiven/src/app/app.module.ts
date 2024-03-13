@@ -37,6 +37,7 @@ import { ViewListDonationsComponent } from './components/views/view-list-donatio
 import { ViewReviewComponent } from './components/views/view-review/view-review.component';
 import { DevHeaderComponent } from './components/dev/dev-header/dev-header.component';
 import { ViewHomeComponent } from './components/views/view-home/view-home.component';
+import { ViewReviewServiceProviderComponent } from './components/views/view-reviews-service-provider/view-review-service-provider/view-review-service-provider.component';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import { ViewHomeComponent } from './components/views/view-home/view-home.compon
     ViewListServicerequestComponent,
     ViewListDonationsComponent,
     ViewReviewComponent,
-    DevHeaderComponent
+    DevHeaderComponent,
+    ViewReviewServiceProviderComponent
 
   ],
   imports: [

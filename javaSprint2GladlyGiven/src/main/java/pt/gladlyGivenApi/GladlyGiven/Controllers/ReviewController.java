@@ -121,7 +121,7 @@ public class ReviewController {
      * @return ResponseEntity with a list of reviews if found, or HTTP status NO_CONTENT if not found
      */
 
-    @GetMapping(value = "review/serviceprovider/{id}", produces = "application/json")
+    @GetMapping(value = "review/serviceprovider/{id}")
     public ResponseEntity<List<Review>> findAllReviewsByServiceProvider(@PathVariable("id") long id)
     {
         List<Appointment> appointments = appointmentService.findAllAppointmentsByServiceProviderId(id);

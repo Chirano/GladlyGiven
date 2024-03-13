@@ -35,4 +35,9 @@ export class ReviewService {
     const dateOfAppointment : Intl.DateTimeFormatOptions = { day: '2-digit', month: '2-digit', year: 'numeric' };
     return date.toLocaleDateString('pt-PT', dateOfAppointment);
   }
+
+  getReviewsByServiceProviderId(): Observable<Review[]>{
+    return this.http.get<Review[]>(this.url+"/review/serviceprovider/1");
+  }
+
 }

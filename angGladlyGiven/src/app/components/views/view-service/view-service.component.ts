@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './view-service.component.html',
-  styleUrl: './view-service.component.scss'
+  styleUrls: ['./view-service.component.scss']
 })
 export class ViewServiceComponent {
 
