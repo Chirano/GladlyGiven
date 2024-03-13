@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import pt.gladlyGivenApi.GladlyGiven.Enums.AvailabilityStatus;
 import pt.gladlyGivenApi.GladlyGiven.Models.HealthServices.HealthService;
+import pt.gladlyGivenApi.GladlyGiven.Models.Users.Refugee;
 import pt.gladlyGivenApi.GladlyGiven.PageUtils;
 import pt.gladlyGivenApi.GladlyGiven.Models.Availability;
 import pt.gladlyGivenApi.GladlyGiven.Models.Users.ServiceProvider;
@@ -41,6 +42,10 @@ public class ServiceProviderService extends AppUserService {
     // ---------------------------------------------------------------------
     private ServiceProvider saveServiceProvider(ServiceProvider serviceProvider) {
         return saveUserToRepository(serviceProvider, serviceProviderRepository);
+    }
+
+    public ServiceProvider setRefugeePassword(ServiceProvider serviceProvider, String password) {
+        return setUserPassword(serviceProvider, password, serviceProviderRepository);
     }
 
     // find ---
@@ -94,10 +99,7 @@ public class ServiceProviderService extends AppUserService {
                 serviceProvider = ServiceProvider.fromDTO(serviceProviderDTO);
 
                 // find or create AppUser class variables
-                serviceProvider.email = findOrCreateEmail(serviceProviderDTO.email);
-                serviceProvider.mainLanguage = findOrCreateLanguage(serviceProviderDTO.mainLanguage);
-                serviceProvider.secondLanguage = findOrCreateLanguage(serviceProviderDTO.secondLanguage);
-                serviceProvider.mainPhoneNumber = findOrCreatePhoneNumber(serviceProviderDTO.mainPhoneNumber);
+                serviceProvider = createAppUserDependantEntities(serviceProvider);
 
                 // find or create ServiceProvider class variables
                 // TODO add or create healthServices
@@ -114,6 +116,23 @@ public class ServiceProviderService extends AppUserService {
             System.out.println(e.getMessage());
             return null;
         }
+    }
+
+    public ServiceProvider createServiceProvider(ServiceProvider serviceProvider) {
+        if (serviceProvider == null) {
+            System.out.println("Tried to create null ServiceProvider");
+            return null;
+        }
+
+        ServiceProvider existing = findServiceProviderByEmail(serviceProvider.email.email);
+
+        if (existing == null) {
+            existing = createAppUserDependantEntities(serviceProvider);
+            existing = addCreationDateToUser(serviceProvider);
+            existing = saveServiceProvider(serviceProvider);
+        }
+
+        return existing;
     }
 
     @Transactional

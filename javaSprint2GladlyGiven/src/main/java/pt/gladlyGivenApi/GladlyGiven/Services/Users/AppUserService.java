@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import pt.gladlyGivenApi.GladlyGiven.DateTimeUtils;
+import pt.gladlyGivenApi.GladlyGiven.Models.DTO.AppUserDTO;
 import pt.gladlyGivenApi.GladlyGiven.Models.Email;
 import pt.gladlyGivenApi.GladlyGiven.Models.PhoneNumber;
 import pt.gladlyGivenApi.GladlyGiven.Models.Country;
@@ -124,6 +125,7 @@ public abstract class AppUserService {
     }
 
 
+    @Transactional
     protected <T extends AppUser> T updateUser(T user, AppUserRepository<T> repository) {
         if (user == null)
             return null;
@@ -163,6 +165,28 @@ public abstract class AppUserService {
         }
 
         return existing;
+    }
+
+    public <T extends AppUser> T createAppUserDependantEntities(T user) {
+        if (user == null)
+            return null;
+
+        user.email = findOrCreateEmail(user.email.email);
+        user.mainLanguage = findOrCreateLanguage(user.mainLanguage.language);
+        user.secondLanguage = findOrCreateLanguage(user.secondLanguage.language);
+        user.mainPhoneNumber = findOrCreatePhoneNumber(user.mainPhoneNumber.number);
+
+        return user;
+    }
+
+    public void createAppUserDependantEntities(AppUserDTO user) {
+        if (user == null)
+            return;
+
+        findOrCreateEmail(user.email);
+        findOrCreateLanguage(user.mainLanguage);
+        findOrCreateLanguage(user.secondLanguage);
+        findOrCreatePhoneNumber(user.mainPhoneNumber);
     }
 
     private void printCreatingNew(String classType) {
@@ -273,5 +297,16 @@ public abstract class AppUserService {
             System.out.println(e.getMessage());
             return new PhoneNumber();
         }
+    }
+
+
+    // Password
+    // ---------------------------------------------------------------------
+    public <T extends AppUser> T setUserPassword(T user, String password, AppUserRepository<T> repository) {
+        if (user == null)
+            return null;
+
+        user.password = password;
+        return saveUserToRepository(user, repository);
     }
 }
