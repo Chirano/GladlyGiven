@@ -26,7 +26,7 @@ import { ViewReviewComponent } from './components/views/view-review/view-review.
 import { ViewHomeComponent } from './components/views/view-home/view-home.component';
 import { ViewReviewServiceProviderComponent } from './components/views/view-reviews-service-provider/view-review-service-provider/view-review-service-provider.component';
 import { ViewServiceProviderServicesComponent } from './components/views/view-service-provider-services/view-service-provider-services/view-service-provider-services.component';
-
+import { NgbdTimepickerBasicComponent } from './components/views/view-availability/ngbd-timepicker-basic/ngbd-timepicker-basic.component';
 
 
 const routes: Routes = [
@@ -75,11 +75,11 @@ const routes: Routes = [
 
   //HealthServices
   { path: RouterPaths.ViewHealthServicesServiceProvider, component: ViewServiceProviderServicesComponent, canActivate: [RefreshSignUpGuard] },
+  //Availability
+  { path : RouterPaths.NgbdTimepickerBasic, component: NgbdTimepickerBasicComponent },
 
-
+  //Service Request
   { path: RouterPaths.ViewListServiceRequest, component: ViewListServicerequestComponent, canActivate: [RefreshSignUpGuard] },
-
-
 
 
   { path: '**', redirectTo: RouterPaths.SignIn }

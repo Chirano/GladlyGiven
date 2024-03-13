@@ -40,6 +40,7 @@ import { ViewHomeComponent } from './components/views/view-home/view-home.compon
 import { ListServicesByServiceProviderIdComponent } from './components/list-services-by-service-provider-id/list-services-by-service-provider-id.component';
 import { ViewReviewServiceProviderComponent } from './components/views/view-reviews-service-provider/view-review-service-provider/view-review-service-provider.component';
 import { ViewServiceProviderServicesComponent } from './components/views/view-service-provider-services/view-service-provider-services/view-service-provider-services.component';
+import { NgbdTimepickerBasicComponent } from './components/views/view-availability/ngbd-timepicker-basic/ngbd-timepicker-basic.component';
 
 
 @NgModule({
@@ -88,7 +89,8 @@ import { ViewServiceProviderServicesComponent } from './components/views/view-se
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbdTimepickerBasicComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
