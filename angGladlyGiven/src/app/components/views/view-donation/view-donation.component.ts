@@ -5,34 +5,88 @@ import { FiscalIdentity } from 'src/app/classes/FiscalIdentity';
 import { AuthService } from 'src/app/services/authentication/auth.service';
 import { DonationServiceService } from 'src/app/services/donation-service/donation-service.service';
 
+//Author: Sónia Ribeiro
+
+/**
+ * Component for viewing and creating donations.
+ */
+
 @Component({
   selector: 'app-view-donation',
   templateUrl: './view-donation.component.html',
   styleUrls: ['./view-donation.component.scss']
 })
 export class ViewDonationComponent {
+
+  /**
+   * Represents the donation being created.
+   */
   
   donation: Donation = {
     id:0,
-    donorId: AuthService.SessionContext.userId,
+    donorId: 0,
     amount: 0,
     donationType: DonationType.Singular,
     fiscalIdentity: FiscalIdentity.Individual,
     date: '',
   };
 
+   /**
+   * Enum reference for DonationType.
+   */
   DonationType = DonationType; 
+
+  /**
+   * Enum reference for FiscalIdentity.
+   */
+
   FiscalIdentity = FiscalIdentity;
 
-  constructor(private donationService : DonationServiceService){
-    
+  /**
+   * Warning message to be displayed to the user.
+   */
+
+  warningMessage: string = '';
+
+  /**
+   * Initializes a new instance of the ViewDonationComponent class.
+   * @param donationService - The service responsible for donation-related operations.
+   * @param authService - The service responsible for authentication-related operations.
+   */
+  constructor(private donationService : DonationServiceService, private authService: AuthService){}
+
+  /**
+   * Initializes the component.
+   * Updates donorId with the current user's id.
+   */
+
+  ngOnInit(): void{
+    //Update donorId with the current user's id when the component initializes
+    this.donation.donorId = AuthService.SessionContext.userId;
   }
 
-  createDonation(id:number,donorId: number, amount: number, donationType: DonationType, fiscalIdentity: FiscalIdentity, date:string): void {
-    
+
+  /**
+   * Creates a new donation.
+   * @param amount - The amount of the donation.
+   * @param donationType - The type of the donation (Singular, Monthly, Yearly).
+   * @param fiscalIdentity - The fiscal identity of the donor (Individual, Company).
+   * @param date - The date of the donation.
+   */
+
+  createDonation(amount: number, donationType: DonationType, fiscalIdentity: FiscalIdentity, date:string): void {
+    if (amount <= 0) {
+      this.warningMessage = 'Invalid amount! Please enter a positive value.';
+      return;
+    }
     
     // Call the donation service to create the donation
-    this.donationService.createDonation({id, donorId, amount, donationType, fiscalIdentity, date
+    this.donationService.createDonation({
+      donorId: this.donation.donorId, //Use donorId from the donation object
+      amount, 
+      donationType, 
+      fiscalIdentity, 
+      date
     } as Donation) 
       .subscribe({
         next: (createdDonation) => {

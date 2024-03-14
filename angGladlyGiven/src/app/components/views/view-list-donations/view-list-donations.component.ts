@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Donation } from 'src/app/classes/Donation';
 import { AuthService } from 'src/app/services/authentication/auth.service';
 import { DonationServiceService } from 'src/app/services/donation-service/donation-service.service';
@@ -8,25 +8,39 @@ import { DonationServiceService } from 'src/app/services/donation-service/donati
   templateUrl: './view-list-donations.component.html',
   styleUrls: ['./view-list-donations.component.scss']
 })
-export class ViewListDonationsComponent {
+export class ViewListDonationsComponent implements OnInit {
 
 
   donations: Donation[] = [];
+  pageSize = 4;
+  currentPage = 1;
 
   constructor(private donationService: DonationServiceService) { }
-
 
   ngOnInit(): void {
     this.getDonationsByUserId();
   }
 
   getDonationsByUserId(): void {
-    console.log(AuthService.SessionContext.userId);
-    this.donationService.getDonationsByDonorId(AuthService.SessionContext.userId)
+    const userId = AuthService.SessionContext.userId;
+    console.log(userId);
+    this.donationService.getDonationsByDonorId(userId, this.currentPage, this.pageSize)
       .subscribe(donations => {
         this.donations = donations;
-        console.log(this.donations); // Printing donations to console
       });
   }
+
+  nextPage(): void {
+    this.currentPage++;
+    this.getDonationsByUserId();
+  }
+
+  previousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.getDonationsByUserId();
+    }
+  }
+
 
 }

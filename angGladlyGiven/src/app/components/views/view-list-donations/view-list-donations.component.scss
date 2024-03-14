@@ -1,51 +1,46 @@
-/* view-list-donations.component.scss */
-
 .donation-list {
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-  }
-  
-  h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  li {
-    margin-bottom: 15px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease;
-  }
-  
-  li:hover {
-    background-color: #f0f0f0;
-  }
-  
-  strong {
-    color: #333;
-  }
-  
-  /* Additional styling for specific elements */
-  
-  .amount {
-    color: #27ae60; /* Green color for amount */
-  }
-  
-  .donation-type {
-    color: #3498db; /* Blue color for donation type */
-  }
-  
-  .fiscal-identity {
-    color: #f39c12; /* Orange color for fiscal identity */
-  }
+  padding: 20px;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  background-color: #ffffff;
+}
+
+h2.title {
+  font-size: 45px;
+  margin-bottom: 20px;
+}
+
+.list-group-item {
+  padding: 15px;
+  border: 1px solid #1b1a1a;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(255, 252, 252, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.list-group-item:hover {
+  background-color: #f0f0f0;
+}
+
+.list-group-item-action {
+  margin-bottom: 20px; /* Adjust the spacing between each donation */
+}
+
+.amount {
+  color: #27ae60; /* Green color for amount */
+}
+
+.donation-type {
+  color: #3498db; /* Blue color for donation type */
+}
+
+.fiscal-identity {
+  color: #f39c12; /* Orange color for fiscal identity */
+}
+
+.pagination {
+  margin-top: 20px;
+}
+
   

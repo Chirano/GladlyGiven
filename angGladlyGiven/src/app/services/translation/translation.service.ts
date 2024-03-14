@@ -1,11 +1,23 @@
 import { Injectable } from '@angular/core';
 
+//Authors: Hugo Lopes, Sónia Ribeiro
+/**
+ * Service for managing translations.
+ */
+
 @Injectable({
   providedIn: 'root'
 })
 export class TranslationService {
 
+   /**
+   * Object containing translations in different languages.
+   */
+
   private translations: any = {
+
+    // Portuguese translations
+
     'pt': {
       'question1': 'O que é um refugiado?',
       'answer1': 'Um refugiado é alguém que foge de seu país de origem devido a perseguição, conflito armado, violência ou violação de direitos humanos e busca proteção em outro país.',
@@ -38,6 +50,9 @@ export class TranslationService {
       'register': 'Registar',
       'SelectTranslation': 'Selecione o idioma'
     },
+
+    // English translations
+
     'en': {
       'question1': 'What is a refugee?',
       'answer1': 'A refugee is someone who flees their country of origin due to persecution, armed conflict, violence, or violation of human rights and seeks protection in another country.',
@@ -70,6 +85,9 @@ export class TranslationService {
       'register': 'Register',
       'SelectTranslation': 'Select language',
     },
+
+    // Ukrainian translations
+
     'uk': {
       'question1': 'Що таке біженець?',
       'answer1': 'Біженець - це людина, яка втікає зі своєї країни походження через переслідування, збройний конфлікт, насильство або порушення прав людини і шукає захист в іншій країні.',
@@ -103,6 +121,9 @@ export class TranslationService {
       'SelectTranslation': 'Виберіть мову'
 
     },
+
+    // Spanish translations
+
     'es': {
     'question1': '¿Qué es un refugiado?',
     'answer1':'Un refugiado es alguien que ha huido de su país de origen por persecución, conflicto armado, violencia o violación de los derechos humanos y busca protección en otro país.',
@@ -136,6 +157,12 @@ export class TranslationService {
     'SelectTranslation': 'Seleccione el idioma'
     },
   };
+
+  /**
+   * Retrieves translations for a specific language.
+   * @param language - The language code ('pt', 'en', 'uk', 'es').
+   * @returns Translations for the specified language.
+   */
 
   getTranslation(language: string) {
     return this.translations[language];
