@@ -32,6 +32,14 @@ public class AuthController {
 
     // Sign In
     // -----------------------------------------------------
+    @GetMapping("/{email}")
+    public boolean isEmailAvailable(@PathVariable("email") String email) {
+        if (email == null || email.isEmpty())
+            return false;
+
+        return sessionContextService.isEmailAvailable(email);
+    }
+
     @PostMapping("/signin/{email}")
     public SessionContextDTO signIn(@PathVariable("email") String email) {
         SessionContext sessionContext = sessionContextService.findSessionContextByEmail(email);

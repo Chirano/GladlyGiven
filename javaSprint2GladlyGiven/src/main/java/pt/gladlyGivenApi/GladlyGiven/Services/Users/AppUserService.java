@@ -135,31 +135,31 @@ public abstract class AppUserService {
         T existing = findUserById(user.id, repository);
 
         if (existing != null) {
-            if (!existing.firstName.equalsIgnoreCase(user.firstName)) {
+            if (user.firstName != null && !existing.firstName.equalsIgnoreCase(user.firstName)) {
                 existing.firstName = user.firstName;
             }
 
-            if (!existing.lastName.equalsIgnoreCase(user.lastName)) {
+            if (user.lastName != null && !existing.lastName.equalsIgnoreCase(user.lastName)) {
                 existing.lastName = user.lastName;
             }
 
-            if (!existing.email.email.equalsIgnoreCase(user.email.email)) {
+            if (user.email != null && !existing.email.email.equalsIgnoreCase(user.email.email)) {
                 existing.email = user.email;
             }
 
-            if (!existing.gender.equalsIgnoreCase(user.gender)) {
+            if (user.gender != null && !existing.gender.equalsIgnoreCase(user.gender)) {
                 existing.gender = user.gender;
             }
 
-            if (!existing.mainLanguage.language.equalsIgnoreCase(user.mainLanguage.language)) {
+            if (user.mainLanguage != null && !existing.mainLanguage.language.equalsIgnoreCase(user.mainLanguage.language)) {
                 existing.mainLanguage = user.mainLanguage;
             }
 
-            if (!existing.mainPhoneNumber.number.equalsIgnoreCase(user.mainPhoneNumber.number)) {
+            if (user.mainPhoneNumber != null && !existing.mainPhoneNumber.number.equalsIgnoreCase(user.mainPhoneNumber.number)) {
                 existing.mainPhoneNumber = user.mainPhoneNumber;
             }
 
-            if (!existing.photoURL.equalsIgnoreCase(user.photoURL)) {
+            if (user.photoURL != null && !existing.photoURL.equalsIgnoreCase(user.photoURL)) {
                 existing.photoURL = user.photoURL;
             }
 
@@ -168,6 +168,7 @@ public abstract class AppUserService {
 
         return existing;
     }
+
 
     public <T extends AppUser> T createAppUserDependantEntities(T user) {
         if (user == null)

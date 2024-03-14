@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pt.gladlyGivenApi.GladlyGiven.Models.DTO.SessionContextDTO;
 import pt.gladlyGivenApi.GladlyGiven.Models.Users.AppUser;
 import pt.gladlyGivenApi.GladlyGiven.Models.Users.SessionContext;
+import pt.gladlyGivenApi.GladlyGiven.Repositories.EmailRepository;
 import pt.gladlyGivenApi.GladlyGiven.Repositories.Users.*;
 
 import java.util.Objects;
@@ -23,6 +24,13 @@ public class SessionContextService extends AppUserService {
     @Autowired
     DonorRepository donorRepository;
 
+    @Autowired
+    EmailRepository emailRepository;
+
+
+    public boolean isEmailAvailable(String email) {
+        return emailRepository.findById(email).orElse(null) == null;
+    }
 
     private SessionContext userContextNotFoundException(Exception e) {
         System.out.println("Failed to find user context. Returning empty");

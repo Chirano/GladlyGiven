@@ -5,13 +5,9 @@ import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import pt.gladlyGivenApi.GladlyGiven.Enums.AvailabilityStatus;
 import pt.gladlyGivenApi.GladlyGiven.Models.HealthServices.HealthService;
-import pt.gladlyGivenApi.GladlyGiven.Models.Users.Refugee;
-import pt.gladlyGivenApi.GladlyGiven.PageUtils;
 import pt.gladlyGivenApi.GladlyGiven.Models.Availability;
 import pt.gladlyGivenApi.GladlyGiven.Models.Users.ServiceProvider;
 import pt.gladlyGivenApi.GladlyGiven.Models.DTO.ServiceProviderDTO;
@@ -136,14 +132,15 @@ public class ServiceProviderService extends AppUserService {
     }
 
     @Transactional
-    public ServiceProvider createServiceProvider(String firstName, String lastName, String emailAddress, String gender, String password, String language, String phoneNumber, String nif, String licenseNumber, long categoryId) {
+    public ServiceProvider createServiceProvider(String firstName, String lastName, String emailAddress, String gender, String password, String mainLanguage, String secondLanguage, String phoneNumber, String nif, String licenseNumber, long categoryId) {
         // Create a ServiceProviderDTO using the provided parameters
         ServiceProviderDTO serviceProviderDTO = new ServiceProviderDTO();
         serviceProviderDTO.firstName = firstName;
         serviceProviderDTO.lastName = lastName;
         serviceProviderDTO.email = emailAddress;
         serviceProviderDTO.gender = gender;
-        serviceProviderDTO.mainLanguage = language;
+        serviceProviderDTO.mainLanguage = mainLanguage;
+        serviceProviderDTO.secondLanguage = secondLanguage;
         serviceProviderDTO.mainPhoneNumber = phoneNumber;
         serviceProviderDTO.nif = nif;
         serviceProviderDTO.licenseNumber = licenseNumber;
@@ -164,15 +161,16 @@ public class ServiceProviderService extends AppUserService {
         ServiceProvider existing = updateUser(serviceProvider, serviceProviderRepository);
 
         if (existing != null) {
-            if (!existing.licenseNumber.equalsIgnoreCase(serviceProvider.licenseNumber))
+            if (serviceProvider.licenseNumber != null && !existing.licenseNumber.equalsIgnoreCase(serviceProvider.licenseNumber))
                 existing.licenseNumber = serviceProvider.licenseNumber;
 
-            if (existing.categoryId != serviceProvider.categoryId)
+            if (existing.categoryId != null && existing.categoryId != serviceProvider.categoryId)
                 existing.categoryId = serviceProvider.categoryId;
         }
 
         return existing;
     }
+
 
     @Transactional
     public ServiceProvider addServicesToServiceProvider(ServiceProvider serviceProvider, HealthService service) {

@@ -17,7 +17,7 @@ import { RefugeeService } from '../data/javaSpring/refugee/refugee.service';
 import { ServiceProviderService } from '../data/javaSpring/serviceProvider/service-provider.service';
 import { DonorService } from '../data/javaSpring/donor/donor.service';
 import { AuthState } from 'src/app/classes/authentication/AuthState';
-import { Observable, catchError, filter, tap } from 'rxjs';
+import { Observable, catchError, filter, map, tap } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SignUpRequestRefugee } from 'src/app/classes/authentication/SignUpRequestRefugee';
 import { SignUpRequestDonor } from 'src/app/classes/authentication/SignUpRequestDonor';
@@ -34,6 +34,7 @@ export class AuthService {
   static AuthState: AuthState = AuthState.None;
   static SessionContext: SessionContext;
 
+  private emailURL: string                  = "http://localhost:8080/api/auth/";
   private signInURL: string                 = "http://localhost:8080/api/auth/signin";
   private signUpServiceProviderURL: string  = "http://localhost:8080/api/auth/signup/serviceprovider";
   private signUpRefugeeURL: string          = "http://localhost:8080/api/auth/signup/refugee";
@@ -69,8 +70,10 @@ export class AuthService {
     this.GetSessionContext();
   }
 
-  
 
+
+  // Session Context
+  // ----------------------------------------------------------------------
   private SetSessionContext(userId: number, name: string, email: string, userType: UserType) : SessionContext {
     this.sessionContext.userId = userId;
     this.sessionContext.name = name;
@@ -112,36 +115,77 @@ export class AuthService {
   // ----------------------------------------------------------------------
 
   private SignInFilter(signInDetails: SignInDetails) {
-
-    console.log("sign in recieved")
-    var targetRoute: string = RouterPaths.SignIn;
-
+    console.log("Sign in received");
+  
+    // is mock session?
+    if (this.IsMockSession(signInDetails)) {
+      console.log("Mock SignIn: ", this.sessionContext);
+      this.RedirectToSessionContextView(this.sessionContext.userType);
+    }
+    
+    // login
+    else {
+      console.log("Not mock SignIn. Trying to fetch user with email: ", signInDetails.email);
+      this.http.post<any>(this.signInURL + "/" + signInDetails.email, signInDetails).subscribe({
+        next: (response: any) => {
+          console.log("SignIn attempted: ", response);
+  
+          if (response.userId >= 1) {
+            console.log("SignIn successful: ", response);
+            this.RedirectToSessionContextView(AuthService.mapUserType(response.userType));
+          }
+          
+        },
+        error: (error: any) => {
+          console.error("Error during signin: ", error);
+        }
+      });
+    }
+  }
+  
+  private IsMockSession(signInDetails: SignInDetails) : boolean {
     switch(signInDetails.email) {
       case MockSessionContexts.AuthAdmin.email:
-        targetRoute = RouterPaths.ViewAdmin;
         this.SetSessionContextByObject(MockSessionContexts.AuthAdmin);
-        break;
+        return true;
         
       case MockSessionContexts.AuthRefugee.email:
-        targetRoute = RouterPaths.ViewRefugee;
         this.SetSessionContextByObject(MockSessionContexts.AuthRefugee);
-        break;
+        return true;
       
       case MockSessionContexts.AuthServiceProvider.email:
-        targetRoute = RouterPaths.ViewServiceProvider;
         this.SetSessionContextByObject(MockSessionContexts.AuthServiceProvider);
-        break;
+        return true;
         
       case MockSessionContexts.AuthDonor.email:
-        targetRoute = RouterPaths.ViewDonor;
         this.SetSessionContextByObject(MockSessionContexts.AuthDonor);
+        return true;
+    }
+  
+    return false;
+  }
+  
+  private RedirectToSessionContextView(userType: UserType) {
+    var targetRoute: string = RouterPaths.SignIn;
+  
+    switch(userType) {
+      case UserType.Admin:
+        targetRoute = RouterPaths.ViewAdmin;
         break;
-
-      default:
-        targetRoute = RouterPaths.SignIn;
+  
+      case UserType.Refugee:
+        targetRoute = RouterPaths.ViewRefugee;
+        break;
+  
+      case UserType.ServiceProvider:
+        targetRoute = RouterPaths.ViewServiceProvider;
+        break;
+  
+      case UserType.Donor:
+        targetRoute = RouterPaths.ViewDonor;
         break;
     }
-
+  
     console.log("Target route:", targetRoute);
     EventManagerService.OnRouteEvent.emit(targetRoute);
   }
@@ -157,9 +201,13 @@ export class AuthService {
     EventManagerService.OnRouteEvent.emit(RouterPaths.SignUpHelpIntention);
   }
 
+  IsEmailAvailable(email: string): Observable<boolean> {
+    return this.http.get<boolean>(this.emailURL + email);
+  }
+
   private SignUpRefugee(refugee: RefugeeDTO) {
-    this.signUpDetails.email = refugee.email;
     this.signUpDetails.name = refugee.firstName;
+    refugee.email = this.signUpDetails.email;
 
     var signUpRequest: SignUpRequestRefugee = {
       signUpDetails: this.signUpDetails,
@@ -180,8 +228,8 @@ export class AuthService {
   }
   
   private SignUpServiceProvider(serviceProvider: ServiceProviderDTO) {
-    this.signUpDetails.email = serviceProvider.email;
     this.signUpDetails.name = serviceProvider.firstName;
+    serviceProvider.email = this.signUpDetails.email;
   
     var signUpRequest: SignUpRequestServiceProvider = {
       signUpDetails: this.signUpDetails,
@@ -202,8 +250,8 @@ export class AuthService {
   }
   
   private SignUpDonor(donor: DonorDTO) {
-    this.signUpDetails.email = donor.email;
     this.signUpDetails.name = donor.firstName;
+    donor.email = this.signUpDetails.email;
   
     var signUpRequest: SignUpRequestDonor = {
       signUpDetails: this.signUpDetails,
@@ -223,4 +271,21 @@ export class AuthService {
     });
   }
   
+  
+  
+  static mapUserType(userTypeString: string): UserType {
+    const lowercaseUserType = userTypeString.toLowerCase();
+    switch (lowercaseUserType) {
+      case 'admin':
+        return UserType.Admin;
+      case 'refugee':
+        return UserType.Refugee;
+      case 'serviceprovider':
+        return UserType.ServiceProvider;
+      case 'donor':
+        return UserType.Donor;
+      default:
+        return UserType.None;
+    }
+  }
 }

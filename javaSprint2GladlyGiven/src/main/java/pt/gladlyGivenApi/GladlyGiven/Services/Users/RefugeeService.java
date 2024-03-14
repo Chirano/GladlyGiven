@@ -148,19 +148,20 @@ public class RefugeeService extends AppUserService {
         Refugee existing = updateUser(refugee, refugeeRepository);
 
         if (existing != null) {
-            if (!existing.protocolId.equalsIgnoreCase(refugee.protocolId))
+            if (refugee.protocolId != null && !existing.protocolId.equalsIgnoreCase(refugee.protocolId))
                 existing.protocolId = refugee.protocolId;
 
-            if (!existing.snsNumber.equalsIgnoreCase(refugee.snsNumber))
+            if (refugee.snsNumber != null && !existing.snsNumber.equalsIgnoreCase(refugee.snsNumber))
                 existing.snsNumber = refugee.snsNumber;
 
-            if (!existing.nationality.equalsIgnoreCase(refugee.nationality))
+            if (refugee.nationality != null && !existing.nationality.equalsIgnoreCase(refugee.nationality))
                 existing.nationality = refugee.nationality;
 
-            if (!existing.country.country.equalsIgnoreCase(refugee.country.country))
+            if (refugee.country != null && refugee.country.country != null && !existing.country.country.equalsIgnoreCase(refugee.country.country))
                 existing.country = refugee.country;
         }
 
         return existing;
     }
+
 }

@@ -21,6 +21,7 @@ export class ViewSignUpComponent {
   signUp(form: any) {
     if (form.valid) {
 
+      const email = form.value.email;
       const password = form.value.password;
       const confirmPassword = form.value.confirmPassword;
 
@@ -29,15 +30,22 @@ export class ViewSignUpComponent {
         return;
       }
 
-      const signUpDetails: SignUpDetails = {
-        name: "",
-        email: form.value.email,
-        password: password,
-      };
+      // Check email availability
+      this.authManager.IsEmailAvailable(email).subscribe((available: boolean) => {
+        if (available) {
+          const signUpDetails: SignUpDetails = {
+            name: "",
+            email: email,
+            password: password,
+        };
 
-      console.log("Signed Up:", signUpDetails);
-      EventManagerService.OnSingUpEvent.emit(signUpDetails);
-      EventManagerService.OnRouteEvent.emit(RoutePaths.SignUpHelpIntention);
+        console.log("Signed Up:", signUpDetails);
+        EventManagerService.OnSingUpEvent.emit(signUpDetails);
+        EventManagerService.OnRouteEvent.emit(RoutePaths.SignUpHelpIntention);
+      } else {
+        console.error("Email is already in use");
+      }
+    });
     } else {
       console.error("Form is invalid");
     }

@@ -9,8 +9,6 @@ import pt.gladlyGivenApi.GladlyGiven.Enums.FiscalIdentity;
 import pt.gladlyGivenApi.GladlyGiven.Models.DTO.DonorDTO;
 import pt.gladlyGivenApi.GladlyGiven.Models.Email;
 import pt.gladlyGivenApi.GladlyGiven.Models.Users.Donor;
-import pt.gladlyGivenApi.GladlyGiven.Models.Users.Refugee;
-import pt.gladlyGivenApi.GladlyGiven.Models.Users.ServiceProvider;
 import pt.gladlyGivenApi.GladlyGiven.Repositories.Users.*;
 
 @Service
@@ -131,16 +129,40 @@ public class DonorService extends AppUserService{
             return null;
         }
 
-        existingDonor.firstName = donor.firstName;
-        existingDonor.lastName = donor.lastName;
-        existingDonor.gender = donor.gender;
-        existingDonor.mainPhoneNumber = donor.mainPhoneNumber;
-        existingDonor.nif = donor.nif;
-        existingDonor.paymentInfoId = donor.paymentInfoId;
-        existingDonor.invoiceInfoId = donor.invoiceInfoId;
-        existingDonor.fiscalIdentity = donor.fiscalIdentity;
+        if(donor.firstName != null){
+            existingDonor.firstName = donor.firstName;
+        }
+
+        if(donor.lastName != null){
+            existingDonor.lastName = donor.lastName;
+        }
+
+        if(donor.gender != null){
+            existingDonor.gender = donor.gender;
+        }
+
+        if(donor.mainPhoneNumber != null){
+            existingDonor.mainPhoneNumber = donor.mainPhoneNumber;
+        }
+
+        if(donor.nif != null){
+            existingDonor.nif = donor.nif;
+        }
+
+        if(donor.paymentInfoId != null){
+            existingDonor.paymentInfoId = donor.paymentInfoId;
+        }
+
+        if(donor.invoiceInfoId != null){
+            existingDonor.invoiceInfoId = donor.invoiceInfoId;
+        }
+
+        if(donor.fiscalIdentity != null){
+            existingDonor.fiscalIdentity = donor.fiscalIdentity;
+        }
 
         return donorRepository.save(existingDonor);
     }
+
 
 }
