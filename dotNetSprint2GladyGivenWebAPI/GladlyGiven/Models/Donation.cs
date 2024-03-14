@@ -23,15 +23,13 @@ namespace GladlyGiven.Models
         /// <summary>
         /// The ID of the donor who made the donation.
         /// </summary>
-
-        [JsonPropertyName("userId")]
         public long DonorId { get; set; }
 
         /// <summary>
         /// The amount of the donation.
         /// </summary>
 
-        public double Amount { get; set; }
+        public double? Amount { get; set; }
 
 
         /// <summary>

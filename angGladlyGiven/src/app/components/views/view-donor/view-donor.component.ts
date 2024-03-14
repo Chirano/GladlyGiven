@@ -9,11 +9,21 @@ import { EventManagerService } from 'src/app/services/events/event-manager.servi
 })
 export class ViewDonorComponent {
   
-  toCreateDonation(){
+  //Author: Sónia Ribeiro
+
+  /**
+ * Emits an event to navigate to the view donation page.
+ */
+
+  toCreateDonation(): void{
     EventManagerService.OnRouteEvent.emit(RouterPaths.ViewDonation);
   }
 
-  toDonationsList() {
+  /**
+ * Emits an event to navigate to the view list of donations page.
+ */
+
+  toDonationsList(): void {
     EventManagerService.OnRouteEvent.emit(RouterPaths.ViewListDonations);
   }
   

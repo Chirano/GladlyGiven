@@ -12,16 +12,41 @@ import { TranslationService } from 'src/app/services/translation/translation.ser
 
 export class ViewSignUpRefugeeComponent {
 
+  //Author: Sónia Ribeiro
+
+  /**
+   * The selected language.
+   */
+
   selectedLanguage: string = 'en'; // Default language
+
+  /**
+   * The translations for the selected language.
+   */
+
   translations: any;
+
+   /**
+   * Initializes a new instance of this class.
+   * @param translationService - The service responsible for translation-related operations.
+   */
 
   constructor(private translationService: TranslationService) {
     this.loadTranslations();
   }
 
-  loadTranslations() {
+   /**
+   * Loads translations for the selected language.
+   */
+
+  loadTranslations(): void {
     this.translations = this.translationService.getTranslation(this.selectedLanguage);
   }
+
+  /**
+   * Changes the selected language and loads translations for the new language.
+   * @param language - The new language to set.
+   */
 
   changeLanguage(language: string) {
     this.selectedLanguage = language;

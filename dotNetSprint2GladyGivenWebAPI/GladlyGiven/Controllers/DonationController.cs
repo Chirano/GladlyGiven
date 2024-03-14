@@ -2,8 +2,6 @@
 using GladlyGiven.Models;
 using GladlyGiven.Services;
 using GladyGivenWebAPI.Data;
-using GladyGivenWebAPI.Services;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GladlyGiven.Controllers
@@ -16,7 +14,6 @@ namespace GladlyGiven.Controllers
 
     [ApiController]
     [Route("[Controller]")]
-    [EnableCors]
     public class DonationController : ControllerBase
     {
         /// <summary>
@@ -195,6 +192,13 @@ namespace GladlyGiven.Controllers
             if(donation == null)
             {
                 return BadRequest();
+            }
+
+            // Check if the amount is null or negative
+            if (donation.Amount == null || donation.Amount < 0)
+            {
+                ModelState.AddModelError("Amount", "Please enter a valid donation amount.");
+                return BadRequest(ModelState);
             }
 
             Donation addedDonation = await _donationService.CreateDonation(donation);
