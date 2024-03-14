@@ -50,4 +50,7 @@ export const RouterPaths = {
     ViewHealthServicesServiceProvider: "view-healthservice-service-provider",
 
     ViewAvailability: "view-availability",
+
+    ViewCategory: "view-category",
+    
 }

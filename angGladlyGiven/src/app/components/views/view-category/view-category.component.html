@@ -1,0 +1,22 @@
+<div class="container">
+    <h3>Create New Category Service</h3>
+    <p></p>
+
+    <div class="input-group mb-2">
+        <span class="input-group-text">Category</span>
+          <input type="text" id="category" placeholder="Enter your category of the type of service" name="Category" class="form-control" [(ngModel)]="category.name" required>
+    </div>
+
+    <div class="mb-2 d-flex justify-content-between">
+        <app-back-button></app-back-button>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        (click)="registerNewCategory
+        (
+            category.id,
+            category.name
+        )"
+        >submit</button>
+    </div>
+</div>

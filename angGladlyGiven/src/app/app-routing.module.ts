@@ -32,6 +32,8 @@ import { RefugeeAppointmentsComponent } from './components/viewComponents/refuge
 import { RefugeeHelpRequestComponent } from './components/viewComponents/refugee/refugee-help-request/refugee-help-request.component';
 import { RefugeeProfileComponent } from './components/viewComponents/refugee/refugee-profile/refugee-profile.component';
 import { RefugeeSearchComponent } from './components/viewComponents/refugee/refugee-search/refugee-search.component';
+import { ViewCategoryComponent } from './components/views/view-category/view-category.component';
+
 
 
 const routes: Routes = [
@@ -71,10 +73,10 @@ const routes: Routes = [
   { path: RouterPaths.ViewCostSupport, component: ViewCostsupportServiceProviderComponent },
   { path: RouterPaths.ViewListCostsupport, component: ViewListCostsupportComponent },
   { path : RouterPaths.ViewAdminListCostsupport, component: ViewAdminListCostsupportComponent },
-  // FAQ
+  //FAQ
   { path: RouterPaths.ViewFaq, component: ViewFaqComponent, canActivate: [RefreshSignUpGuard] },
 
-  // Contact
+  //Contact
   { path: RouterPaths.ViewContact, component: ViewContactComponent, canActivate: [RefreshSignUpGuard] },
 
   { path: RouterPaths.ViewServiceRequest, component: ViewServiceRequestComponent, canActivate: [RefreshSignUpGuard] },
@@ -89,11 +91,15 @@ const routes: Routes = [
 
   //HealthServices
   { path: RouterPaths.ViewHealthServicesServiceProvider, component: ViewServiceProviderServicesComponent, canActivate: [RefreshSignUpGuard] },
+ 
   //Availability
   { path: RouterPaths.ViewAvailability, component: ViewAvailabilityComponent },
 
   //Service Request
   { path: RouterPaths.ViewListServiceRequest, component: ViewListServicerequestComponent, canActivate: [RefreshSignUpGuard] },
+
+  //Category
+  { path: RouterPaths.ViewCategory, component: ViewCategoryComponent, canActivate: [RefreshSignUpGuard] },
 
 
   //{ path: '**', redirectTo: RouterPaths.Home },

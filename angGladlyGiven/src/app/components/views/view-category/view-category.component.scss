@@ -1,0 +1,50 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .language-selector {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    font-weight: bold;
+  }
+  
+  select {
+    padding: 8px 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+
+  .quadro {
+    border: 2px solid #9f9fd5;
+    border-radius: 10px; /* Define o raio de curvatura dos cantos */
+    padding: 20px;
+    
+}
+  
+  .faq {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .question {
+    margin-bottom: 20px;
+  }
+  
+  h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #3c55bb;
+  }
+  
+  p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  

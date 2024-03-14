@@ -32,4 +32,8 @@ export class DevHeaderComponent {
   toServiceRequest() {
     EventManagerService.OnRouteEvent.emit(RouterPaths.ViewServiceRequest);
   }
+
+  toRegisterNewCategory() {
+    EventManagerService.OnRouteEvent.emit(RouterPaths.ViewCategory);
+  }
 }

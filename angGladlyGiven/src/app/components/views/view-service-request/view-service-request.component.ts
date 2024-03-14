@@ -59,13 +59,13 @@ ngOnInit(): void {
     } as ServiceRequest)
       .subscribe({
         next: (registerNewServiceRequest) => {
-          // Handle the created donation as needed
-          console.log('Registro created:', registerNewServiceRequest);
+          // Handle the created Service Request as needed
+          console.log('Register created:', registerNewServiceRequest);
           // Optionally, update UI or perform any additional actions here
           this.serviceRequest = registerNewServiceRequest;
         },
         error: (error) => {
-          console.error('Failed to create donation', error);
+          console.error('Failed to create Service Request', error);
           // Optionally, show an error message to the user
         }
       });

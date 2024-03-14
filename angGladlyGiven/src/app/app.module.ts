@@ -49,6 +49,7 @@ import { RefugeeAppointmentsComponent } from './components/viewComponents/refuge
 import { RefugeeProfileComponent } from './components/viewComponents/refugee/refugee-profile/refugee-profile.component';
 import { AppointmentComponent } from './components/viewComponents/appointment/appointment.component';
 import { AvailabilityComponent } from './components/viewComponents/availability/availability.component';
+import { ViewCategoryComponent } from './components/views/view-category/view-category.component';
 
 
 @NgModule({
@@ -99,6 +100,7 @@ import { AvailabilityComponent } from './components/viewComponents/availability/
     RefugeeProfileComponent,
     AppointmentComponent,
     AvailabilityComponent,
+    ViewCategoryComponent 
   ],
   imports: [
     BrowserModule,
