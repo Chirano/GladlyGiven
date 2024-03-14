@@ -1,18 +1,20 @@
 <app-refugee-header>
 </app-refugee-header>
 
-<div *ngIf="isHome()">
-  <app-refugee-home></app-refugee-home>
-</div>
-
-<div *ngIf="isSearch()">
-  <app-refugee-search></app-refugee-search>
-</div>
-
-<div *ngIf="isAppointments()">
-  <app-refugee-appointments></app-refugee-appointments>
-</div>
-
-<div *ngIf="isProfile()">
-  <app-refugee-profile></app-refugee-profile>
+<div class="width-custom" style="--width: 80%;">
+  <div *ngIf="isHome()">
+    <app-refugee-home></app-refugee-home>
+  </div>
+  
+  <div *ngIf="isSearch()">
+    <app-refugee-search></app-refugee-search>
+  </div>
+  
+  <div *ngIf="isAppointments()">
+    <app-refugee-appointments></app-refugee-appointments>
+  </div>
+  
+  <div *ngIf="isProfile()">
+    <app-refugee-profile></app-refugee-profile>
+  </div>
 </div>

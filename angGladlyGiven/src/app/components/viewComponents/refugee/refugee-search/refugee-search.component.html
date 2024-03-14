@@ -1,9 +1,9 @@
-<div>
+<div class="width-custom" style="--width: 80%;">
     <app-refugee-searchbar>
     </app-refugee-searchbar>
     
     <!-- list service providers here -->
-    <div>
-        
+    <div *ngFor="let serviceProvider of serviceProviders">
+        <app-service-provider-details [serviceProvider]="serviceProvider"> </app-service-provider-details>
     </div>
 </div>

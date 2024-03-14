@@ -43,6 +43,7 @@ export class EventManagerService {
 
   // Refugee View events
   static OnRefugeeViewChanged: EventEmitter<RefugeePage> = new EventEmitter<RefugeePage>();
+  static OnRefugeeSearched: EventEmitter<string> = new EventEmitter<string>();
 
   // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   // INITIALIZE SERVICES WITH EVENTS HERE

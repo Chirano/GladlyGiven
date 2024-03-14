@@ -239,8 +239,11 @@ public class ServiceProviderController {
      * @param availability The Availability object representing the availability information.
      * @return The newly created Availability object.
      */
-    @PostMapping(value = "/availability", consumes = "application/json", produces = "application/json")
+    @PostMapping(value = "/availability")
     public Availability createAvailability(@RequestBody Availability availability) {
+        System.out.println("Recieved:\n" + availability.toString());
+        System.out.println();
+
         return this.serviceProviderService.createAvailability(availability);
     }
 

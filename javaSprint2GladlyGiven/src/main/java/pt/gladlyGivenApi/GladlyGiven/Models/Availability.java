@@ -39,4 +39,21 @@ public class Availability {
         this.endDate = endDate;
         this.endTime = endTime;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder card = new StringBuilder();
+        card.append("-----------------------------------\n");
+        card.append("|          Availability Card       |\n");
+        card.append("-----------------------------------\n");
+        card.append("| ID: ").append(id).append("\n");
+        card.append("| Service Provider ID: ").append(serviceProviderId).append("\n");
+        card.append("| Status: ").append(availabilityStatus).append("\n");
+        card.append("| Start Date: ").append(startDate).append("\n");
+        card.append("| Start Time: ").append(startTime).append("\n");
+        card.append("| End Date: ").append(endDate).append("\n");
+        card.append("| End Time: ").append(endTime).append("\n");
+        card.append("-----------------------------------\n");
+        return card.toString();
+    }
 }

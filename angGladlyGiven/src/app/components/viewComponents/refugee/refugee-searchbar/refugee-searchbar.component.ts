@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { EventManagerService } from 'src/app/services/events/event-manager.service';
 
 @Component({
   selector: 'app-refugee-searchbar',
@@ -7,11 +8,19 @@ import { Component } from '@angular/core';
 })
 
 export class RefugeeSearchbarComponent {
-  onSearchSubmit(searchInput: string) {
-    if (!searchInput || searchInput.trim() === '') {
+
+  constructor(
+    private eventManager: EventManagerService
+  ) {
+
+  }
+
+  onSearchSubmit(query: string) {
+    if (!query || query.trim() === '') {
       return;
     }
 
-    console.log("searched for:", searchInput);
+    //console.log("searched for:", query);
+    EventManagerService.OnRefugeeSearched.emit(query);
   }
 }
