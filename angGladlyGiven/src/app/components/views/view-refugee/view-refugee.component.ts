@@ -33,18 +33,19 @@ export class ViewRefugeeComponent {
 
   isAppointments() : boolean {
     return this.targetPage == RefugeePage.Appointments;
+
+  }
+  isProfile() : boolean {
+    return this.targetPage == RefugeePage.Profile;
+  }
+
   //Author: Sónia Ribeiro
   //este método terá de ser colocado no view do apointment
   
   /**
  * Emits an event to navigate to the view review page.
  */
-
   toCreateReview(): void{
     EventManagerService.OnRouteEvent.emit(RouterPaths.ViewReview);
-  }
-
-  isProfile() : boolean {
-    return this.targetPage == RefugeePage.Profile;
   }
 }
