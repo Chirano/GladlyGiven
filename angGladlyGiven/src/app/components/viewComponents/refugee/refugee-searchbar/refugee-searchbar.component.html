@@ -1,6 +1,6 @@
 <div>
-    <form #searchForm="ngForm" class="mb-3 input-group" (ngSubmit)="onSearchSubmit(searchForm.value.search)">
-        <input type="text" placeholder="search" name="search" ngModel>
+    <form #searchForm="ngForm" class="input-group mb-3" (ngSubmit)="onSearchSubmit(searchForm.value.search)">
+        <input type="text" class="form-control"  aria-label="Small" placeholder="search" name="search" ngModel>
         <button type="submit" class="btn btn-primary">Search</button>
     </form>
 </div>

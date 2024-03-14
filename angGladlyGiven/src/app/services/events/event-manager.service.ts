@@ -42,8 +42,12 @@ export class EventManagerService {
   static OnContactEvent: EventEmitter<Contact> = new EventEmitter<Contact>();
 
   // Refugee View events
+  static OnSelectedRefugee: EventEmitter<RefugeeDTO> = new EventEmitter<RefugeeDTO>();
   static OnRefugeeViewChanged: EventEmitter<RefugeePage> = new EventEmitter<RefugeePage>();
   static OnRefugeeSearched: EventEmitter<string> = new EventEmitter<string>();
+
+  // Service Provider events
+  static OnSelectedServiceProvider: EventEmitter<ServiceProviderDTO> = new EventEmitter<ServiceProviderDTO>();
 
   // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   // INITIALIZE SERVICES WITH EVENTS HERE
