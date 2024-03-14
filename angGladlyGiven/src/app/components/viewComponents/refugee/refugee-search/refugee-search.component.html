@@ -1,9 +1,10 @@
-<div class="width-custom" style="--width: 80%;">
-    <app-refugee-searchbar>
-    </app-refugee-searchbar>
-    
+<div class="container">
+    <div> <!-- Use the 'col-12' class to make the div occupy the entire width -->
+        <app-refugee-searchbar></app-refugee-searchbar>
+    </div>
+
     <!-- list service providers here -->
     <div *ngFor="let serviceProvider of serviceProviders">
-        <app-service-provider-details [serviceProvider]="serviceProvider"> </app-service-provider-details>
+        <app-service-provider-details [serviceProvider]="serviceProvider"></app-service-provider-details>
     </div>
 </div>
