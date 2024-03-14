@@ -202,6 +202,21 @@ public class ServiceProviderController {
         return new ResponseEntity<>(availabilityList, HttpStatus.OK);
     }
 
+    @GetMapping("/availabilities/status/{availabilityStatus}")
+    public ResponseEntity<List<Availability>> findAvailabilitiesByStatus(@PathVariable ("availabilityStatus") int availabilityStatus,
+                                                                         @RequestParam Optional<Integer> page,
+                                                                         @RequestParam Optional<Integer> size) {
+        int _page = page.orElse(0);
+        int _size = size.orElse(10);
+
+        Page<Availability> availabilityPage = this.serviceProviderService.findAvailabilitiesByStatus(availabilityStatus, _page, _size);
+
+        //Converter page em list.
+        List<Availability> availabilityList = PageUtils.pageToList(availabilityPage);
+
+        return new ResponseEntity<>(availabilityList, HttpStatus.OK);
+    }
+
     /**
      * Creates a new availability entry for a service provider.
      * @param availability The Availability object representing the availability information.

@@ -30,7 +30,7 @@ export class AvailabilityService {
   addAvailability(availability: Availability): Observable<Availability> {
     const newAvailability: Availability = {
       id : availability.id,
-      serviceProviderId: availability.serviceProviderId,
+      serviceProviderId: AuthService.SessionContext.userId,
       startDate: availability.startDate,
       endDate : availability.endDate,
       startTime: availability.startTime,

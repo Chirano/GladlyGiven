@@ -10,6 +10,10 @@ import { format } from 'date-fns';
 })
 export class ViewAvailabilityComponent {
 
+  startDateError : string = '';
+  startTimeError : string = '';
+
+
   availability: Availability =  {
     id : 0,
     serviceProviderId : 0,
@@ -49,4 +53,22 @@ export class ViewAvailabilityComponent {
         }
       })
     }
+
+    // Exibir mensagem de erro ou destacar visualmente o campo de entrada
+    validateDate(): void {
+      if (this.availability.startDate > this.availability.endDate) {
+          this.startDateError = 'End date must be after start date';
+      } else {
+          this.startDateError = ''; 
+      }
+    }
+
+    // Exibir mensagem de erro ou destacar visualmente o campo de entrada
+    validateTime(): void {
+      if (this.availability.startTime > this.availability.endTime) {
+          this.startTimeError = 'End time must be after start time';
+      } else {
+          this.startTimeError = ''; 
+      }
+  }
 }

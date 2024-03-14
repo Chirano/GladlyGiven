@@ -15,4 +15,6 @@ public interface AvailabilityRepository extends JpaRepository<Availability, Long
     Page<Availability> findByEndDate(String endDate, Pageable pageable);
 
     Page<Availability> findByEndTime(String endTime, Pageable pageable);
+
+    Page<Availability> findByAvailabilityStatus(int availabilityStatus, Pageable pageable);
 }

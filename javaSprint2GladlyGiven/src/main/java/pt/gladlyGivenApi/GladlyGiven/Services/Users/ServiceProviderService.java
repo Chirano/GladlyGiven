@@ -71,6 +71,14 @@ public class ServiceProviderService extends AppUserService {
     }
 
     // create ---
+
+    /**
+     * Creates a new service provider based on the provided service provider DTO.
+     *
+     * @param serviceProviderDTO The service provider DTO containing information about the service provider.
+     * @param isServiceOriginated A boolean indicating whether the service is originated from this service provider.
+     * @return The created service provider if successful, otherwise null.
+     */
     @Transactional
     public ServiceProvider createServiceProvider(ServiceProviderDTO serviceProviderDTO, boolean isServiceOriginated) {
         try {
@@ -172,7 +180,13 @@ public class ServiceProviderService extends AppUserService {
         return existing;
     }
 
-
+    /**
+     * Adds a service to the specified service provider.
+     *
+     * @param serviceProvider The service provider to which the health service will be added.
+     * @param service The health service to be added.
+     * @return The updated service provider with the added health service if successful, otherwise null.
+     */
     @Transactional
     public ServiceProvider addServicesToServiceProvider(ServiceProvider serviceProvider, HealthService service) {
 
@@ -220,6 +234,14 @@ public class ServiceProviderService extends AppUserService {
         return avPage;
     }
 
+    /**
+     * Retrieves a page of availabilities associated with the specified user ID.
+     *
+     * @param id The ID of the user (service provider) whose availabilities are to be retrieved.
+     * @param page The page number to be retrieved. Pages are zero-indexed.
+     * @param size The size of each page to be retrieved.
+     * @return A {@link Page} containing the availabilities associated with the specified user ID.
+     */
     public Page<Availability> findAllAvailabilitiesByUserId(long id, int page, int size) {
         Page<Availability> avPage =  this.availabilityRepository.findAllAvailabilitiesByServiceProviderId(id, PageRequest.of(page, size));
 
@@ -246,14 +268,19 @@ public class ServiceProviderService extends AppUserService {
         return availabilityRepository.findById(id).orElse(null);
     }
 
-
+    /**
+     * Creates a new availability entry in the system.
+     *
+     * @param availability The availability object to be created.
+     * @return The newly created availability if successful.
+     */
     @Transactional
     public Availability createAvailability(Availability availability) {
         //Checar se já existe uma availability com o mesmo id
         Availability av = this.availabilityRepository.findById(availability.id).orElse(null);
 
         if(av != null) {
-            throw new NotImplementedException(); //Availability already exists
+            throw new NotImplementedException("Availability already exists");
         }
 
         availability.availabilityStatus = AvailabilityStatus.Free;
@@ -264,10 +291,12 @@ public class ServiceProviderService extends AppUserService {
 
 
     //TODO:
-    public List<Availability> findAvailabilitiesByStatus(int pageNumber, int pageSize, String availabilityStatus) {
-
-
-        return null;
+    public Page<Availability> findAvailabilitiesByStatus(int availabilityStatus, int page, int size) {
+        if(availabilityStatus == 0) {
+            return this.availabilityRepository.findByAvailabilityStatus(availabilityStatus, PageRequest.of(page, size));
+        } else {
+            return this.availabilityRepository.findByAvailabilityStatus(availabilityStatus, PageRequest.of(page, size));
+        }
     }
 
     // Service Reviews

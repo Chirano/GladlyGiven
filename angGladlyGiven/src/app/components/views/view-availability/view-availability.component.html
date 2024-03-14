@@ -6,7 +6,8 @@
     </div>
     <div class="mb-3">
         <label for="inputEndDate" class="form-label">End date:</label>
-        <input type="date" [(ngModel)]="availability.endDate" class="form-control" id="inputEndDate" required>
+        <input type="date" [(ngModel)]="availability.endDate" class="form-control" id="inputEndDate" (ngModelChange)="validateDate()" required>
+        <div *ngIf="startDateError" class="text-danger">{{ startDateError }}</div>
     </div>
     <div class="mb-3">
         <label for="inputStartTime" class="form-label">Start time:</label>
@@ -14,7 +15,8 @@
     </div>
     <div class="mb-3">
         <label for="inputEndTime" class="form-label">End time:</label>
-        <input type="time"  [(ngModel)]="availability.endTime" class="form-control" id="inputEndTime" required>
+        <input type="time"  [(ngModel)]="availability.endTime" class="form-control" id="inputEndTime" (ngModelChange)="validateTime()" required>
+        <div *ngIf="startTimeError" class="text-danger">{{ startTimeError }}</div>
     </div>
 </div>
 <div class="mb-2 d-flex justify-content-between">
