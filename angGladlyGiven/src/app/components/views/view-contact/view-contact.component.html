@@ -1,33 +1,34 @@
-  <div class="center-content" style="--width: 10%;">
-    <div class="width-custom" style="--width: 80%;">
-      <div>
-        <h2>Do you have any doubts?</h2>
-        <h2>Ask the site administrator</h2>
-      </div>
-
-      <div>
-        <form #contatctForm="ngForm" (ngSubmit)="registerNewContact(contactForm)" class="form">
-          <!-- App Contact Information -->
-          <div class="input-group mb-2">
-            <span class="input-group-text">Name</span>
-            <input type="text" id="contactName" placeholder="Name" name="contactName" class="form-control" ngModel required>
-          </div>
-
-          <div class="input-group mb-2">
-            <span class="input-group-text">Email</span>
-            <input type="email" id="contactemail" placeholder="Your best email" name="contactemail" class="form-control" ngModel required>
-          </div>
-
-          <div class="input-group mb-2">
-            <span class="input-group-text">Description</span>
-            <input type="text" id="contactdescription" placeholder="Describe your question" name="contactdescription" class="form-control" ngModel required>
-          </div>
-
-          <div class="mb-2 d-flex justify-content-between">
-            <app-back-button></app-back-button>
-            <button type="submit" class="btn btn-primary">submit</button>
-          </div>
-        </form>
-      </div>
+<div class="center-content" style="--width: 10%;">
+  <div class="width-custom" style="--width: 80%;">
+    <div>
+      <h2>Do you have any doubts?</h2>
+      <h2>Ask the site administrator</h2>
     </div>
+
+    <div>
+      <form #contatctForm="ngForm" (ngSubmit)="registerNewContact(contatctForm)" class="form">
+       
+        <div class="input-group mb-2">
+          <span class="input-group-text">Name</span>
+          <input type="text" id="contactName" placeholder="Name" name="contactName" class="form-control" ngModel required>
+        </div>
+
+        <div class="input-group mb-2">
+          <span class="input-group-text">Email</span>
+          <input type="email" id="contactemail" placeholder="Your best email" name="contactemail" class="form-control" ngModel required>
+        </div>
+
+        <div class="input-group mb-2">
+          <span class="input-group-text">Description</span>
+          <input type="text" id="contactdescription" placeholder="Describe your question" name="contactdescription" class="form-control" ngModel required>
+        </div>
+
+        <div class="mb-2 d-flex justify-content-between">
+          <app-back-button></app-back-button>
+          <button type="submit" class="btn btn-primary">submit</button>
+        </div>
+      </form>
+    </div>
+    <div class="message-container" *ngIf="emailSentMessage">{{ emailSentMessage }}</div>
   </div>
+</div>
