@@ -11,10 +11,12 @@ import { HealthServices } from 'src/app/classes/HealthServices';
 })
 export class HealthserviceService {
 
-  private url = 'http://localhost:8080/api/healthservices';
+  private url = 'http://localhost:8080/api';
 
   userId: number | null = null;
   sessionContext: SessionContext | null = AuthService.SessionContext;
+  serviceId: number | null = null; 
+
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json',
@@ -27,10 +29,18 @@ export class HealthserviceService {
   ) { }
 
   getAllServices() : Observable<HealthServices[]>{
-    return this.http.get<HealthServices[]>(this.url);
+    return this.http.get<HealthServices[]>(this.url+"/healthservices");
   }
 
   getAllServicesByServiceId(userId: number) : Observable<HealthServices[]>{
-    return this.http.get<HealthServices[]>(this.url+"/serviceProvider/"+userId);
+    return this.http.get<HealthServices[]>(this.url+"/healthservices/serviceProvider/"+userId);
+  }
+  
+  removeService(userId: number, serviceId: number) : Observable<HealthServices[]>{
+    return this.http.put<HealthServices[]>(this.url+"/serviceProvider/"+userId+"/removeservice/"+serviceId, this.httpOptions);
+  }
+
+  addService(userId: number, serviceId: number): Observable<HealthServices[]>{
+    return this.http.put<HealthServices[]>(this.url+"/serviceProvider/"+userId+"/addservice/"+serviceId, this.httpOptions); 
   }
 }
