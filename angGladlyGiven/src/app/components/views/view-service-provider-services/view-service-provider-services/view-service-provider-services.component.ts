@@ -12,15 +12,40 @@ import { HealthserviceService } from 'src/app/services/healthservices/healthserv
 export class ViewServiceProviderServicesComponent implements OnInit{
 
   constructor(private service : HealthserviceService){}
-
+  allHealthServices : HealthServices [] = [];
   healthServices : HealthServices[] = [];
+  healthService : HealthServices ={
+    id: 0,
+    description: "",
+  }
+  toaddhealthService : HealthServices ={
+    id: 0, 
+    description: " ",
+  }
+
 
   ngOnInit(): void {
     this.loadServices();
+    this.loadAllServices();
   }
 
   loadServices(): void{
-    console.log(AuthService.SessionContext.userId);
     this.service.getAllServicesByServiceId(AuthService.SessionContext.userId).subscribe(healthServices => this.healthServices = healthServices);
+  }
+
+  removeService(serviceId: number): void{
+    this.service.removeService(AuthService.SessionContext.userId, serviceId).subscribe(healthServices => this.healthServices = healthServices);
+  }
+
+  addService(serviceId: number) : void{
+    const obj = [
+
+    ];
+    obj.push(this.toaddhealthService);
+    this.service.addService(AuthService.SessionContext.userId, serviceId).subscribe(healthServices => this.healthServices = healthServices)
+  }
+
+  loadAllServices(): void {
+    this.service.getAllServices().subscribe(allHealthServices => this.allHealthServices = allHealthServices)
   }
 }
