@@ -1,5 +1,6 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { ServiceProviderDTO } from 'src/app/classes/userProfiles/ServiceProviderDTO';
+import { EventManagerService } from 'src/app/services/events/event-manager.service';
 
 @Component({
   selector: 'app-service-provider-details',
@@ -34,5 +35,10 @@ export class ServiceProviderDetailsComponent {
     if (this.serviceProvider) {
       this.SetServiceProvider(this.serviceProvider);
     }
+  }
+
+  OnClickedServiceProvider() {
+    console.log("Clicked SP:", this.serviceProvider);
+    EventManagerService.OnSelectedServiceProvider.emit(this.serviceProvider);
   }
 }
