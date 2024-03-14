@@ -27,11 +27,15 @@ import { ViewHomeComponent } from './components/views/view-home/view-home.compon
 import { ViewReviewServiceProviderComponent } from './components/views/view-reviews-service-provider/view-review-service-provider/view-review-service-provider.component';
 import { ViewServiceProviderServicesComponent } from './components/views/view-service-provider-services/view-service-provider-services/view-service-provider-services.component';
 import { ViewAvailabilityComponent } from './components/views/view-availability/view-availability.component';
+import { RefugeeHomeComponent } from './components/viewComponents/refugee/refugee-home/refugee-home.component';
+import { RefugeeAppointmentsComponent } from './components/viewComponents/refugee/refugee-appointments/refugee-appointments.component';
+import { RefugeeHelpRequestComponent } from './components/viewComponents/refugee/refugee-help-request/refugee-help-request.component';
+import { RefugeeProfileComponent } from './components/viewComponents/refugee/refugee-profile/refugee-profile.component';
+import { RefugeeSearchComponent } from './components/viewComponents/refugee/refugee-search/refugee-search.component';
 
 
 const routes: Routes = [
   /// remover esse redirecionamento
-  { path: '', redirectTo: RouterPaths.Home, pathMatch: 'full' },
   { path: RouterPaths.Home, component: ViewHomeComponent },
 
   { path: RouterPaths.SignIn, component: ViewSignInComponent },
@@ -48,7 +52,17 @@ const routes: Routes = [
   // refresh end
 
   { path: RouterPaths.ViewAdmin, component: ViewAdminComponent },
-  { path: RouterPaths.ViewRefugee, component: ViewRefugeeComponent },
+  {
+    path: RouterPaths.ViewRefugee, component: ViewRefugeeComponent,
+    children: [
+      { path: '', redirectTo: RouterPaths.ViewRefugeeHome, pathMatch: 'full' }, // Default child route
+      { path: RouterPaths.ViewRefugeeHome, component: RefugeeHomeComponent, outlet: 'view-refugee' },
+      { path: RouterPaths.ViewRefugeeSearch, component: RefugeeSearchComponent, outlet: 'view-refugee' },
+      { path: RouterPaths.ViewRefugeeAppointments, component: RefugeeAppointmentsComponent, outlet: 'view-refugee' },
+      { path: RouterPaths.ViewRefugeeHelpRequest, component: RefugeeHelpRequestComponent, outlet: 'view-refugee' },
+      { path: RouterPaths.ViewRefugeeProfile, component: RefugeeProfileComponent, outlet: 'view-refugee' },
+    ]
+  },
   { path: RouterPaths.ViewServiceProvider, component: ViewServiceProviderComponent },
   { path: RouterPaths.ViewDonor, component: ViewDonorComponent },
   { path: RouterPaths.ViewCostSupport, component: ViewCostsupportServiceProviderComponent},
@@ -82,9 +96,10 @@ const routes: Routes = [
   { path: RouterPaths.ViewListServiceRequest, component: ViewListServicerequestComponent, canActivate: [RefreshSignUpGuard] },
 
 
-  { path: '**', redirectTo: RouterPaths.SignIn }
-
+  //{ path: '**', redirectTo: RouterPaths.Home },
+  //{ path: '', redirectTo: RouterPaths.Home, pathMatch: 'full' },
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

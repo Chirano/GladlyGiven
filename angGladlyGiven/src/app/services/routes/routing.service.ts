@@ -12,7 +12,8 @@ export class RoutingService {
       private router : Router,
       private location : Location,
     ) {
-    EventManagerService.OnRouteEvent.subscribe(this.OnRoutingEvent.bind(this));
+    //EventManagerService.OnRouteEvent.subscribe(this.OnRoutingEvent.bind(this));
+    EventManagerService.OnRouteEvent.subscribe((targetRoute: string) => this.OnRoutingEvent(targetRoute));
     EventManagerService.OnBackEvent.subscribe(() => this.OnBack());
   }
 

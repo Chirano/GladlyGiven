@@ -40,6 +40,13 @@ import { ViewHomeComponent } from './components/views/view-home/view-home.compon
 import { ViewReviewServiceProviderComponent } from './components/views/view-reviews-service-provider/view-review-service-provider/view-review-service-provider.component';
 import { ViewServiceProviderServicesComponent } from './components/views/view-service-provider-services/view-service-provider-services/view-service-provider-services.component';
 import { ViewAvailabilityComponent } from './components/views/view-availability/view-availability.component';
+import { RefugeeHeaderComponent } from './components/viewComponents/refugee/refugee-header/refugee-header.component';
+import { RefugeeSearchbarComponent } from './components/viewComponents/refugee/refugee-searchbar/refugee-searchbar.component';
+import { RefugeeHomeComponent } from './components/viewComponents/refugee/refugee-home/refugee-home.component';
+import { RefugeeSearchComponent } from './components/viewComponents/refugee/refugee-search/refugee-search.component';
+import { RefugeeHelpRequestComponent } from './components/viewComponents/refugee/refugee-help-request/refugee-help-request.component';
+import { RefugeeAppointmentsComponent } from './components/viewComponents/refugee/refugee-appointments/refugee-appointments.component';
+import { RefugeeProfileComponent } from './components/viewComponents/refugee/refugee-profile/refugee-profile.component';
 
 
 @NgModule({
@@ -80,7 +87,14 @@ import { ViewAvailabilityComponent } from './components/views/view-availability/
     DevHeaderComponent,
     ViewReviewServiceProviderComponent,
     ViewServiceProviderServicesComponent,
-    ViewAvailabilityComponent 
+    ViewAvailabilityComponent,
+    RefugeeHeaderComponent,
+    RefugeeSearchbarComponent,
+    RefugeeHomeComponent,
+    RefugeeSearchComponent,
+    RefugeeHelpRequestComponent,
+    RefugeeAppointmentsComponent,
+    RefugeeProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,7 +103,6 @@ import { ViewAvailabilityComponent } from './components/views/view-availability/
     ReactiveFormsModule,
     NgbModule,
     HttpClientModule,
-
   ],
   providers: [],
   bootstrap: [AppComponent]

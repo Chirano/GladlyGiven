@@ -14,8 +14,17 @@ export const RouterPaths = {
     SignUpDonor: "sign-up-donor",
 
     ViewAdmin: "view-admin",
+    
     ViewRefugee: "view-refugee",
+    // Refugee child views
+    ViewRefugeeHome: "home",
+    ViewRefugeeSearch: "search",
+    ViewRefugeeAppointments: "appointments",
+    ViewRefugeeHelpRequest: "helprequest",
+    ViewRefugeeProfile: "profile",
+    
     ViewServiceProvider: "view-service-provider",
+    
     ViewDonor: "view-donor",
 
     ViewFaq: "view-faq",
@@ -41,5 +50,4 @@ export const RouterPaths = {
     ViewHealthServicesServiceProvider: "view-healthservice-service-provider",
 
     ViewAvailability: "view-availability",
-    
 }
