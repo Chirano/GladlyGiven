@@ -1,47 +1,3 @@
-// .container {
-//     max-width: 400px;
-//     margin: 0 auto;
-//     padding: 20px;
-//     border: 1px solid #ccc;
-//     border-radius: 5px;
-//     background-color: #f9f9f9;
-//   }
-  
-//   h2 {
-//     margin-top: 0;
-//   }
-  
-//   .form-group {
-//     margin-bottom: 20px;
-//   }
-  
-//   label {
-//     display: block;
-//     margin-bottom: 5px;
-//   }
-  
-//   input[type="number"],
-//   select {
-//     width: 100%;
-//     padding: 10px;
-//     border: 1px solid #ccc;
-//     border-radius: 5px;
-//   }
-  
-//   button[type="submit"] {
-//     background-color: #007bff;
-//     color: white;
-//     padding: 10px 20px;
-//     border: none;
-//     border-radius: 5px;
-//     cursor: pointer;
-//     transition: background-color 0.3s ease;
-//   }
-  
-//   button[type="submit"]:hover {
-//     background-color: #0056b3;
-//   }
-
 .container {
   max-width: 600px;
   margin: 50px auto;
@@ -98,4 +54,10 @@ button[type="submit"]:hover {
 .btn-block {
   display: block;
   width: 100%;
+}
+
+.message-container {
+  font-size: 24px; 
+  text-align: center; 
+  margin-top: 20px; 
 }

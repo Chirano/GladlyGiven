@@ -272,6 +272,24 @@ namespace GladlyGiven.Services
             return donation;
         }
 
+        public async Task<decimal> DonationsAmount()
+        {
+            var donationsAmount = await _context.Donations.SumAsync(don => don.Amount);
+            return (decimal)donationsAmount;
+        }
+
+        public async Task<long> DonorsCount()
+        {
+            var donors = await _context.Donations.Select(d => d.DonorId).Distinct().CountAsync();
+            return (long)donors;
+        }
+
+        public async Task<long> AppointmentsCount()
+        {
+            long appointments = await _javaUserClient.GetTotalAppointments();
+            return appointments;
+        }
+
     }
 }
 

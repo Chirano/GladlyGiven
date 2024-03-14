@@ -28,6 +28,12 @@ export class ViewReviewComponent {
   };
 
   /**
+   * Success message to be displayed to the user.
+   */
+
+  successMessage: string = '';
+
+  /**
    * Initializes a new instance of the ViewReviewComponent class.
    * @param reviewService - The service responsible for review-related operations.
    */
@@ -56,6 +62,22 @@ export class ViewReviewComponent {
           console.log('Review created:', createdReview);
           // Optionally, update UI or perform any additional actions here
           this.review = createdReview;
+          this.successMessage = 'Review created successfully!';
+
+          // Set a timeout to clear the form and success message after 3 seconds
+          
+          setTimeout(() => {
+            this.review = {
+              reviewId: 0,
+              appointmentId: 0,
+              rating: 0,
+              description: '',
+              date: '',
+            };
+            this.successMessage = '';
+          }, 3000);
+
+
         },
         error: (error) => {
           console.error('Failed to create review', error);
