@@ -90,7 +90,7 @@ public class ServiceProviderController {
 
     // --- create ---
     @PostMapping("/params")
-    public ServiceProvider createServiceProviderViaRequestParams(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String gender, @RequestParam String password, @RequestParam String mainLanguage, @RequestParam String secondLanguage, @RequestParam String phoneNumber, @RequestParam String nif, @RequestParam String licenseNumber, @RequestParam long categoryId) {
+    public ServiceProvider createServiceProviderViaRequestParams(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String gender, @RequestParam String password, @RequestParam String mainLanguage, @RequestParam String secondLanguage, @RequestParam String phoneNumber, @RequestParam String nif, @RequestParam String licenseNumber, @RequestParam long categoryId, @RequestParam String streetName,  @RequestParam String doorNumber, @RequestParam String cityName, @RequestParam String postalCode) {
         return serviceProviderService.createServiceProvider(
                 firstName,
                 lastName,
@@ -102,7 +102,11 @@ public class ServiceProviderController {
                 phoneNumber,
                 nif,
                 licenseNumber,
-                categoryId
+                categoryId,
+                streetName,
+                doorNumber,
+                cityName,
+                postalCode
         );
     }
 
@@ -261,4 +265,5 @@ public class ServiceProviderController {
     }
 
     // TODO: Add Average
+
 }

@@ -11,6 +11,7 @@ import pt.gladlyGivenApi.GladlyGiven.Models.*;
 import pt.gladlyGivenApi.GladlyGiven.Models.DTO.ServiceProviderDTO;
 import pt.gladlyGivenApi.GladlyGiven.Models.HealthServices.HealthService;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class ServiceProvider extends MonetaryUser<ServiceProvider> implements ID
     @Max(16)
     public String licenseNumber;
 
-    public Long categoryId; // fetched from Entity Framework API
+    public Long categoryId;
 
     @ManyToMany
     @JoinTable(name = "service_provider_health_services",
@@ -35,10 +36,32 @@ public class ServiceProvider extends MonetaryUser<ServiceProvider> implements ID
     @Min(0)
     public float reviewAverage; // fetched from Entity Framework API reviewObject
 
+    public String streetName;
+    public String doorNumber;
+    public String cityName;
+    public String postalCode;
+
+    /**
+     * Initializes a new instance of ServiceProvider with default values.
+     */
     public ServiceProvider() {
 
     }
 
+    /**
+     * Constructs a new ServiceProvider object with the provided attributes.
+     *
+     * @param firstName      The first name of the service provider.
+     * @param lastName       The last name of the service provider.
+     * @param email          The email of the service provider.
+     * @param gender         The gender of the service provider.
+     * @param password       The password of the service provider.
+     * @param language       The language preference of the service provider.
+     * @param phoneNumber    The phone number of the service provider.
+     * @param nif            The NIF (Número de Identificação Fiscal) of the service provider.
+     * @param licenseNumber  The license number of the service provider.
+     * @param categoryId     The category ID of the service provider.
+     */
     public ServiceProvider(String firstName, String lastName, Email email, String gender,
                            String password, Language language, PhoneNumber phoneNumber, String nif,
                            String licenseNumber, long categoryId) {
@@ -47,16 +70,68 @@ public class ServiceProvider extends MonetaryUser<ServiceProvider> implements ID
         this.categoryId = categoryId;
     }
 
+    /**
+     * Constructs a new ServiceProvider object with the provided attributes.
+     *
+     * @param firstName      The first name of the service provider.
+     * @param lastName       The last name of the service provider.
+     * @param email          The email of the service provider.
+     * @param gender         The gender of the service provider.
+     * @param password       The password of the service provider.
+     * @param language       The language preference of the service provider.
+     * @param phoneNumber    The phone number of the service provider.
+     * @param nif            The NIF (Número de Identificação Fiscal) of the service provider.
+     * @param licenseNumber  The license number of the service provider.
+     * @param categoryId     The category ID of the service provider.
+     * @param reviewIds      The list of review IDs associated with the service provider.
+     */
     public ServiceProvider(String firstName, String lastName, Email email, String gender, String password,
                            Language language, PhoneNumber phoneNumber, String nif, String licenseNumber,
-                           long categoryId,List<Long> reviewIds) {
+                           long categoryId, List<Long> reviewIds) {
         super(firstName, lastName, email, gender, password, language, phoneNumber, nif);
         this.licenseNumber = licenseNumber;
         this.categoryId = categoryId;
         this.reviewIds = reviewIds;
     }
 
+    /**
+     * Constructs a new ServiceProvider object with the provided attributes.
+     *
+     * @param firstName      The first name of the service provider.
+     * @param lastName       The last name of the service provider.
+     * @param email          The email of the service provider.
+     * @param gender         The gender of the service provider.
+     * @param password       The password of the service provider.
+     * @param language       The language preference of the service provider.
+     * @param phoneNumber    The phone number of the service provider.
+     * @param nif            The NIF (Número de Identificação Fiscal) of the service provider.
+     * @param licenseNumber  The license number of the service provider.
+     * @param categoryId     The category ID of the service provider.
+     * @param reviewIds      The list of review IDs associated with the service provider.
+     * @param streetName     The street name of the service provider's address.
+     * @param doorNumber     The door number of the service provider's address.
+     * @param cityName       The city name of the service provider's address.
+     * @param postalCode     The postal code of the service provider's address.
+     */
+    public ServiceProvider(String firstName, String lastName, Email email, String gender, String password,
+                           Language language, PhoneNumber phoneNumber, String nif, String licenseNumber,
+                           long categoryId, List<Long> reviewIds, String streetName, String doorNumber,
+                           String cityName, String postalCode) {
+        super(firstName, lastName, email, gender, password, language, phoneNumber, nif);
+        this.licenseNumber = licenseNumber;
+        this.categoryId = categoryId;
+        this.reviewIds = reviewIds;
+        this.streetName = streetName;
+        this.doorNumber = doorNumber;
+        this.cityName = cityName;
+        this.postalCode = postalCode;
+    }
 
+    /**
+     * Converts the ServiceProvider object to a ServiceProviderDTO (Data Transfer Object).
+     *
+     * @return The ServiceProviderDTO representing this ServiceProvider object.
+     */
     public ServiceProviderDTO toDTO() {
         ServiceProviderDTO serviceProviderDTO = new ServiceProviderDTO();
 
@@ -97,9 +172,13 @@ public class ServiceProvider extends MonetaryUser<ServiceProvider> implements ID
         serviceProvider.invoiceInfoId = serviceProviderDTO.invoiceInfoId;
         serviceProvider.licenseNumber = serviceProviderDTO.licenseNumber;
         serviceProvider.categoryId = serviceProviderDTO.categoryId;
-        serviceProvider.healthServices = null; // TODO
+        serviceProvider.healthServices = null;
         serviceProvider.reviewIds = serviceProviderDTO.reviewIds != null ? Arrays.asList(serviceProviderDTO.reviewIds) : null;
         serviceProvider.reviewAverage = serviceProviderDTO.reviewAverage;
+        serviceProvider.streetName = serviceProviderDTO.streetName;
+        serviceProvider.doorNumber = serviceProviderDTO.doorNumber;
+        serviceProvider.cityName = serviceProviderDTO.cityName;
+        serviceProvider.postalCode = serviceProviderDTO.postalCode;
 
         return serviceProvider;
     }
@@ -122,6 +201,10 @@ public class ServiceProvider extends MonetaryUser<ServiceProvider> implements ID
         sb.append("| Invoice Info ID: ").append(invoiceInfoId).append("\n");
         sb.append("| License Number: ").append(licenseNumber).append("\n");
         sb.append("| Category ID: ").append(categoryId).append("\n");
+        sb.append("| Street Name: ").append(streetName).append("\n");
+        sb.append("| Door Number: ").append(doorNumber).append("\n");
+        sb.append("| City Name: ").append(cityName).append("\n");
+        sb.append("| Postal Code: ").append(postalCode).append("\n");
 
         // check if lists are null
         if (healthServices != null) {
