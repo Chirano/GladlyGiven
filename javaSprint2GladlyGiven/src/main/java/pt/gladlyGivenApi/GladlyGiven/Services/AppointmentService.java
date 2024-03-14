@@ -140,4 +140,8 @@ public class AppointmentService {
         return a;
     }
 
+    public int getTotalAppointments(){
+        return appointmentRepository.countTotalAppointments();
+    }
+
 }

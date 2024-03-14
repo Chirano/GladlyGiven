@@ -105,4 +105,11 @@ public class AppointmentController {
         Appointment canceledAppointment = this.appointmentService.cancelAppointment(ap);
         return new ResponseEntity<>(canceledAppointment, HttpStatus.OK);
     }
+
+    @GetMapping(value = "/appointments/total", produces = "application/json")
+    public ResponseEntity<Integer> totalAppointments(){
+        int countAppointments = appointmentService.getTotalAppointments();
+
+        return new ResponseEntity<>(countAppointments, HttpStatus.OK);
+    }
 }

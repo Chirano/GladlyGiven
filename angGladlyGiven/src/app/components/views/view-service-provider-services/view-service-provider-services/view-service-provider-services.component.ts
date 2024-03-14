@@ -33,19 +33,20 @@ export class ViewServiceProviderServicesComponent implements OnInit{
     this.service.getAllServicesByServiceId(AuthService.SessionContext.userId).subscribe(healthServices => this.healthServices = healthServices);
   }
 
-  removeService(serviceId: number): void{
+  removeService(serviceId:number): void{
     this.service.removeService(AuthService.SessionContext.userId, serviceId).subscribe(healthServices => this.healthServices = healthServices);
   }
 
-  addService(serviceId: number) : void{
+  addService(serviceId: number): void{
+    console.log(2, AuthService.SessionContext.userId)
     const obj = [
 
     ];
-    obj.push(this.toaddhealthService);
-    this.service.addService(AuthService.SessionContext.userId, serviceId).subscribe(healthServices => this.healthServices = healthServices)
+    obj.push(this.toaddhealthService)
+    this.service.addService(AuthService.SessionContext.userId, serviceId).subscribe(healthServices => this.healthServices = healthServices);
   }
 
-  loadAllServices(): void {
-    this.service.getAllServices().subscribe(allHealthServices => this.allHealthServices = allHealthServices)
+  loadAllServices(){
+    this.service.getAllServices().subscribe(allHealthServices => this.allHealthServices = allHealthServices);
   }
 }

@@ -1,5 +1,6 @@
 ﻿using Backup.Exceptions;
 using GladlyGiven.DTOs;
+using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
 
@@ -71,6 +72,25 @@ namespace GladlyGiven.Services
 
             }
             catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<long> GetTotalAppointments()
+        {
+            HttpResponseMessage response;
+            string json;
+            long appointments;
+            
+            using HttpClient client = new HttpClient();
+            try
+            {
+                response = await client.GetAsync($"{url}/appointments/total");
+                json = await response.Content.ReadAsStringAsync();
+                appointments = JsonSerializer.Deserialize<long>(json)!;
+                return appointments;
+            }catch (Exception)
             {
                 throw;
             }
