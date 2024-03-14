@@ -69,43 +69,6 @@ export class AuthService {
     this.GetSessionContext();
   }
 
-  
-
-  private SetSessionContext(userId: number, name: string, email: string, userType: UserType) : SessionContext {
-    this.sessionContext.userId = userId;
-    this.sessionContext.name = name;
-    this.sessionContext.email = email;
-    this.sessionContext.userType = userType;
-
-    AuthService.SessionContext = this.sessionContext;
-    SaveService.saveData(this.sessionContextKey, this.sessionContext);
-
-    console.log("Session Context: ", this.sessionContext);
-    return this.sessionContext;
-  }
-
-  private SetSessionContextByObject(context: SessionContext) : SessionContext {
-    this.sessionContext.userId = context.userId;
-    this.sessionContext.name = context.name;
-    this.sessionContext.email = context.email;
-    this.sessionContext.userType = context.userType;
-
-    AuthService.SessionContext = this.sessionContext;
-    SaveService.saveData(this.sessionContextKey, this.sessionContext);
-
-    console.log("Session Context: ", this.sessionContext);
-    return this.sessionContext;
-  }
-
-  GetSessionContext() : SessionContext {
-    var context = SaveService.loadData<SessionContext>(this.sessionContextKey);
-    if (context != null) {
-      this.SetSessionContextByObject(context);
-    }
-
-    return this.sessionContext;
-  }
-
 
 
   // Sign IN - Login
@@ -125,8 +88,13 @@ export class AuthService {
       console.log("Not mock SignIn. Trying to fetch user with email: ", signInDetails.email);
       this.http.post<any>(this.signInURL + "/" + signInDetails.email, signInDetails).subscribe({
         next: (response: any) => {
-          console.log("SignIn successful: ", response);
-          this.RedirectToSessionContextView(AuthService.mapUserType(response.userType));
+          console.log("SignIn attempted: ", response);
+
+          if (response.userId >= 1) {
+            console.log("SignIn successful: ", response);
+            this.RedirectToSessionContextView(AuthService.mapUserType(response.userType));
+          }
+          
         },
         error: (error: any) => {
           console.error("Error during signin: ", error);
@@ -273,5 +241,44 @@ export class AuthService {
       default:
         return UserType.None;
     }
+  }
+
+
+
+  // Session Context
+  // ----------------------------------------------------------------------
+  private SetSessionContext(userId: number, name: string, email: string, userType: UserType) : SessionContext {
+    this.sessionContext.userId = userId;
+    this.sessionContext.name = name;
+    this.sessionContext.email = email;
+    this.sessionContext.userType = userType;
+
+    AuthService.SessionContext = this.sessionContext;
+    SaveService.saveData(this.sessionContextKey, this.sessionContext);
+
+    console.log("Session Context: ", this.sessionContext);
+    return this.sessionContext;
+  }
+
+  private SetSessionContextByObject(context: SessionContext) : SessionContext {
+    this.sessionContext.userId = context.userId;
+    this.sessionContext.name = context.name;
+    this.sessionContext.email = context.email;
+    this.sessionContext.userType = context.userType;
+
+    AuthService.SessionContext = this.sessionContext;
+    SaveService.saveData(this.sessionContextKey, this.sessionContext);
+
+    console.log("Session Context: ", this.sessionContext);
+    return this.sessionContext;
+  }
+
+  GetSessionContext() : SessionContext {
+    var context = SaveService.loadData<SessionContext>(this.sessionContextKey);
+    if (context != null) {
+      this.SetSessionContextByObject(context);
+    }
+
+    return this.sessionContext;
   }
 }
