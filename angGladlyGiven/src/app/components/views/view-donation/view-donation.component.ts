@@ -49,6 +49,12 @@ export class ViewDonationComponent {
   warningMessage: string = '';
 
   /**
+   * Success message to be displayed to the user.
+   */
+
+  successMessage: string = '';
+
+  /**
    * Initializes a new instance of the ViewDonationComponent class.
    * @param donationService - The service responsible for donation-related operations.
    * @param authService - The service responsible for authentication-related operations.
@@ -94,6 +100,22 @@ export class ViewDonationComponent {
           console.log('Donation created:', createdDonation);
           // Optionally, update UI or perform any additional actions here
           this.donation = createdDonation;
+          this.successMessage = 'Donation created successfully!';
+
+          // Set a timeout to clear the form and success message after 3 seconds
+          
+          setTimeout(() => {
+            this.donation = {
+              id: 0,
+              donorId: 0,
+              amount: 0,
+              donationType: DonationType.Singular,
+              fiscalIdentity: FiscalIdentity.Individual,
+              date: '',
+            };
+            this.successMessage = '';
+          }, 3000);
+
         },
         error: (error) => {
           console.error('Failed to create donation', error);
@@ -101,5 +123,7 @@ export class ViewDonationComponent {
         }
       });
     }
+
+  
 
 }
