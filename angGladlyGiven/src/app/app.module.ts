@@ -47,6 +47,8 @@ import { RefugeeSearchComponent } from './components/viewComponents/refugee/refu
 import { RefugeeHelpRequestComponent } from './components/viewComponents/refugee/refugee-help-request/refugee-help-request.component';
 import { RefugeeAppointmentsComponent } from './components/viewComponents/refugee/refugee-appointments/refugee-appointments.component';
 import { RefugeeProfileComponent } from './components/viewComponents/refugee/refugee-profile/refugee-profile.component';
+import { AppointmentComponent } from './components/viewComponents/appointment/appointment.component';
+import { AvailabilityComponent } from './components/viewComponents/availability/availability.component';
 
 
 @NgModule({
@@ -95,6 +97,8 @@ import { RefugeeProfileComponent } from './components/viewComponents/refugee/ref
     RefugeeHelpRequestComponent,
     RefugeeAppointmentsComponent,
     RefugeeProfileComponent,
+    AppointmentComponent,
+    AvailabilityComponent,
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,13 @@ import { Component } from '@angular/core';
   templateUrl: './refugee-searchbar.component.html',
   styleUrls: ['./refugee-searchbar.component.scss']
 })
-export class RefugeeSearchbarComponent {
 
+export class RefugeeSearchbarComponent {
+  onSearchSubmit(searchInput: string) {
+    if (!searchInput || searchInput.trim() === '') {
+      return;
+    }
+
+    console.log("searched for:", searchInput);
+  }
 }
