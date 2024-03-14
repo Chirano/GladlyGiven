@@ -24,6 +24,11 @@ public class HealthServiceService {
     @Autowired
     ServiceProviderRepository serviceProviderRepository;
 
+    /**
+     * Retrieves a list of all health services available.
+     *
+     * @return A list of all health services in the system.
+     */
     public List<HealthService> findAllHealthServices() {
         return healthServiceRepository.findAll();
     }

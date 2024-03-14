@@ -46,26 +46,63 @@ public class ServiceProviderService extends AppUserService {
     }
 
     // find ---
+
+    /**
+     * Retrieves a service provider by its ID.
+     *
+     * @param id The ID of the service provider to retrieve.
+     * @return The service provider with the specified ID, or null if not found.
+     */
     public ServiceProvider findServiceProviderById(Long id) {
         return findUserById(id, serviceProviderRepository);
     }
 
+    /**
+     * Retrieves a service provider by its email address.
+     *
+     * @param email The email address of the service provider to retrieve.
+     * @return The service provider with the specified email address, or null if not found.
+     */
     public ServiceProvider findServiceProviderByEmail(String email) {
         return findUserByEmail(email, serviceProviderRepository);
     }
 
+    /**
+     * Retrieves a service provider by their first name.
+     *
+     * @param firstName The first name of the service provider to retrieve.
+     * @return The service provider with the specified first name, or null if not found.
+     */
     public ServiceProvider findServiceProviderByFirstName(String firstName) {
         return findUserByFirstName(firstName, serviceProviderRepository);
     }
 
+    /**
+     * Retrieves a service provider by their last name.
+     *
+     * @param lastName The last name of the service provider to retrieve.
+     * @return The service provider with the specified last name, or null if not found.
+     */
     public ServiceProvider findServiceProviderByLastName(String lastName) {
         return findUserByLastName(lastName, serviceProviderRepository);
     }
 
+    /**
+     * Retrieves a service provider by their license number.
+     *
+     * @param licenseNumber The license number of the service provider to retrieve.
+     * @return The service provider with the specified license number, or null if not found.
+     */
     public ServiceProvider findServiceProviderByLicenseNumber(String licenseNumber) {
         return serviceProviderRepository.findByLicenseNumber(licenseNumber).orElse(null);
     }
 
+    /**
+     * Retrieves a list of service providers offering a specific health service.
+     *
+     * @param id The ID of the health service to filter by.
+     * @return A list of service providers offering the specified health service, or an empty list if none are found.
+     */
     public List<ServiceProvider> findServicesProvidersByHealthService(long id){
         return serviceProviderRepository.findByHealthServiceId(id);
     }
@@ -108,7 +145,17 @@ public class ServiceProviderService extends AppUserService {
 
                 // find or create ServiceProvider class variables
                 // TODO add or create healthServices
-
+                List<HealthService> healthServices = new ArrayList<>();
+                if (serviceProviderDTO.servicesIds != null) {
+                    for (Long healthServiceId : serviceProviderDTO.servicesIds) {
+                        HealthService hs = this.healthServiceRepository.findById(healthServiceId).orElse(null);
+                        if (hs != null) {
+                            healthServices.add(hs);
+                        }
+                    }
+                }
+                System.out.println("Teste");
+                serviceProvider.healthServices = healthServices;
                 serviceProvider = addCreationDateToUser(serviceProvider);
                 serviceProvider = saveServiceProvider(serviceProvider);
 
@@ -141,7 +188,7 @@ public class ServiceProviderService extends AppUserService {
     }
 
     @Transactional
-    public ServiceProvider createServiceProvider(String firstName, String lastName, String emailAddress, String gender, String password, String mainLanguage, String secondLanguage, String phoneNumber, String nif, String licenseNumber, long categoryId) {
+    public ServiceProvider createServiceProvider(String firstName, String lastName, String emailAddress, String gender, String password, String mainLanguage, String secondLanguage, String phoneNumber, String nif, String licenseNumber, long categoryId, String streetName, String doorNumber, String cityName, String postalCode) {
         // Create a ServiceProviderDTO using the provided parameters
         ServiceProviderDTO serviceProviderDTO = new ServiceProviderDTO();
         serviceProviderDTO.firstName = firstName;
@@ -154,14 +201,25 @@ public class ServiceProviderService extends AppUserService {
         serviceProviderDTO.nif = nif;
         serviceProviderDTO.licenseNumber = licenseNumber;
         serviceProviderDTO.categoryId = categoryId;
+        serviceProviderDTO.streetName = streetName;
+        serviceProviderDTO.doorNumber = doorNumber;
+        serviceProviderDTO.cityName = cityName;
+        serviceProviderDTO.postalCode = postalCode;
+
 
         // Return the method call on top
         return createServiceProvider(serviceProviderDTO, true);
     }
 
 
-
     // update ---
+
+    /**
+     * Updates an existing service provider with the provided data.
+     *
+     * @param serviceProvider The service provider object containing the updated data.
+     * @return The updated service provider object, or null if the provided service provider is null or not found.
+     */
     @Transactional
     public ServiceProvider updateServiceProvider(ServiceProvider serviceProvider) {
         if (serviceProvider == null)
@@ -200,6 +258,14 @@ public class ServiceProviderService extends AppUserService {
         return serviceProvider;
     }
 
+    /**
+     * Removes a health service from the list of services offered by a service provider.
+     *
+     * @param serviceProvider The service provider object from which to remove the health service.
+     * @param service The health service object to be removed.
+     * @return The updated service provider object after removing the health service,
+     *         or null if the service provider does not offer the specified health service.
+     */
     @Transactional
     public ServiceProvider removeHealthService(ServiceProvider serviceProvider, HealthService service)
     {
@@ -290,7 +356,15 @@ public class ServiceProviderService extends AppUserService {
     }
 
 
-    //TODO:
+    /**
+     * Retrieves a page of availabilities based on the given availability status.
+     *
+     * @param availabilityStatus The availability status to filter by.
+     * @param page               The page number to retrieve.
+     * @param size               The number of items per page.
+     * @return A Page object containing the availabilities with the specified status,
+     *         paginated according to the given page and size parameters.
+     */
     public Page<Availability> findAvailabilitiesByStatus(int availabilityStatus, int page, int size) {
         if(availabilityStatus == 0) {
             return this.availabilityRepository.findByAvailabilityStatus(availabilityStatus, PageRequest.of(page, size));
@@ -301,6 +375,15 @@ public class ServiceProviderService extends AppUserService {
 
     // Service Reviews
     // ---------------------------------------------------------------------
+
+    /**
+     * Adds a review ID to the list of reviews associated with a service provider.
+     *
+     * @param serviceProvider The service provider object to which the review ID will be added.
+     * @param reviewId The ID of the review to be added.
+     * @return The updated service provider object after adding the review ID,
+     *         or the original service provider object if it is null.
+     */
     private ServiceProvider addServiceReview(ServiceProvider serviceProvider, Long reviewId) {
         if (serviceProvider != null) {
             if (serviceProvider.reviewIds == null)
@@ -315,13 +398,69 @@ public class ServiceProviderService extends AppUserService {
         return serviceProvider;
     }
 
+    /**
+     * Adds a review ID to the list of reviews associated with a service provider.
+     *
+     * @param serviceProviderId The ID of the service provider to which the review ID will be added.
+     * @param reviewId The ID of the review to be added.
+     * @return The updated service provider object after adding the review ID,
+     *         or null if no service provider is found with the specified ID
+     *         or if an error occurs during the process.
+     */
     public ServiceProvider addServiceReview(Long serviceProviderId, Long reviewId) {
         ServiceProvider serviceProvider = findServiceProviderById(serviceProviderId);
         return addServiceReview(serviceProvider, reviewId);
     }
 
+    /**
+     * Adds a review ID to the list of reviews associated with a service provider identified by their license number.
+     *
+     * @param serviceProviderlicenseNumber The license number of the service provider to which the review ID will be added.
+     * @param reviewId The ID of the review to be added.
+     * @return The updated service provider object after adding the review ID,
+     *         or null if no service provider is found with the specified license number
+     *         or if an error occurs during the process.
+     */
     public ServiceProvider addServiceReview(String serviceProviderlicenseNumber, Long reviewId) {
         ServiceProvider serviceProvider = findServiceProviderByLicenseNumber(serviceProviderlicenseNumber);
         return addServiceReview(serviceProvider, reviewId);
+    }
+
+
+    /**
+     * Finds service providers offering a specific service in a given city.
+     *
+     * @param serviceId The ID of the service offered by the service providers.
+     * @param cityName The name of the city where the service providers are located.
+     * @return A list of ServiceProviderDTO objects representing the service providers offering the specified service
+     *         in the given city, or an empty list if no service providers are found.
+     */
+    public List<ServiceProviderDTO> findByHealthServiceIdAndCityName(Long serviceId, String cityName) {
+        List<ServiceProvider> serviceProviderList = this.serviceProviderRepository
+                .findByHealthServiceIdAndCityName(serviceId, cityName);
+
+        if(serviceProviderList == null) {
+            throw new NotImplementedException("There's no service providers for this service and this location");
+        }
+
+        List<ServiceProviderDTO> serviceProviderDTOS = new ArrayList<>();
+
+        for(ServiceProvider sp : serviceProviderList) {
+            serviceProviderDTOS.add(new ServiceProviderDTO(sp));
+        }
+
+        return serviceProviderDTOS;
+    }
+
+    public List<ServiceProvider> findByHealthServiceDescriptionAndCityName(String serviceDescription,
+                                                                           String cityName) {
+        List<ServiceProvider> serviceProviders = this.serviceProviderRepository.
+                findByHealthServiceDescriptionAndCityName(serviceDescription, cityName);
+
+        if(serviceProviders == null) {
+            throw new NotImplementedException("There's no service providers for this service and this location");
+        }
+
+        return serviceProviders;
     }
 }
