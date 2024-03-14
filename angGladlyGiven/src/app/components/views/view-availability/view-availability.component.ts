@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Availability } from 'src/app/classes/Availability';
 import { AvailabilityService } from 'src/app/services/availability/availability.service';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-view-availability',
@@ -30,19 +31,22 @@ export class ViewAvailabilityComponent {
     endDate: string,
     startTime: string,
     endTime: string) : void {
-    this.availabilityService.addAvailability({
-      id, 
-      serviceProviderId,
-      startDate,
-      endDate,
-      startTime,
-      endTime
-    } as Availability)
-    .subscribe({
-      next: (addedAvailability) => {
-        this.availability = addedAvailability;
-      }
-    })
-  }
-
+      //Formatar a data para dd/MM/yyyy.
+      const formattedStartDate = format(new Date(startDate), 'dd/MM/yyyy');
+      const formattedEndDate = format(new Date(endDate), 'dd/MM/yyyy');
+      
+      this.availabilityService.addAvailability({
+        id, 
+        serviceProviderId,
+        startDate: formattedStartDate,
+        endDate: formattedEndDate,
+        startTime,
+        endTime
+      } as Availability)
+      .subscribe({
+        next: (addedAvailability) => {
+          this.availability = addedAvailability;
+        }
+      })
+    }
 }

@@ -23,4 +23,8 @@ export class ViewServiceProviderComponent {
   toServiceRequest() {
     EventManagerService.OnRouteEvent.emit(RouterPaths.ViewServiceRequest);
   }
+
+  toRegisterAvailability() {
+    EventManagerService.OnRouteEvent.emit(RouterPaths.ViewAvailability);
+  }
 }

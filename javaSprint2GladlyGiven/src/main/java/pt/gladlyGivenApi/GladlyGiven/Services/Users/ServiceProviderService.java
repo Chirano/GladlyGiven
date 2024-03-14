@@ -15,6 +15,7 @@ import pt.gladlyGivenApi.GladlyGiven.Repositories.AvailabilityRepository;
 import pt.gladlyGivenApi.GladlyGiven.Repositories.HealthServiceRepository;
 import pt.gladlyGivenApi.GladlyGiven.Repositories.Users.ServiceProviderRepository;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
