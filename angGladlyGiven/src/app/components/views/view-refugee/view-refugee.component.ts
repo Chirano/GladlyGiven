@@ -11,7 +11,7 @@ import { RefugeePage } from '../../viewComponents/refugee/RefugeePage';
 
 export class ViewRefugeeComponent {
 
-  targetPage: RefugeePage = RefugeePage.Home;
+  static targetRefugeePage: RefugeePage = RefugeePage.Home;
 
   constructor(
     private eventManager: EventManagerService
@@ -20,23 +20,27 @@ export class ViewRefugeeComponent {
   }
   
   private targetPageChanged(targetPage: RefugeePage) {
-    this.targetPage = targetPage;
+    ViewRefugeeComponent.targetRefugeePage = targetPage;
   }
 
   isHome() : boolean {
-    return this.targetPage == RefugeePage.Home;
+    return ViewRefugeeComponent.targetRefugeePage == RefugeePage.Home;
   }
 
   isSearch() : boolean {
-    return this.targetPage == RefugeePage.Search;
+    return ViewRefugeeComponent.targetRefugeePage == RefugeePage.Search;
   }
 
   isAppointments() : boolean {
-    return this.targetPage == RefugeePage.Appointments;
-
+    return ViewRefugeeComponent.targetRefugeePage == RefugeePage.Appointments;
   }
+
+  isRequestAppointment() : boolean {
+    return ViewRefugeeComponent.targetRefugeePage == RefugeePage.RequestAppointment;
+  }
+
   isProfile() : boolean {
-    return this.targetPage == RefugeePage.Profile;
+    return ViewRefugeeComponent.targetRefugeePage == RefugeePage.Profile;
   }
 
   //Author: Sónia Ribeiro

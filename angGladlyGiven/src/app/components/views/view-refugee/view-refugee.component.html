@@ -14,6 +14,10 @@
     <app-refugee-appointments></app-refugee-appointments>
   </div>
   
+  <div *ngIf="isRequestAppointment()">
+    <app-refugee-request-appointment></app-refugee-request-appointment>
+  </div>
+  
   <div *ngIf="isProfile()">
     <app-refugee-profile></app-refugee-profile>
   </div>

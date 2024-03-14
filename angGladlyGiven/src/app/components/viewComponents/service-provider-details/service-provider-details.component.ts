@@ -38,7 +38,6 @@ export class ServiceProviderDetailsComponent {
   }
 
   OnClickedServiceProvider() {
-    console.log("Clicked SP:", this.serviceProvider);
     EventManagerService.OnSelectedServiceProvider.emit(this.serviceProvider);
   }
 }
