@@ -98,10 +98,10 @@ const routes: Routes = [
 
   //Category
   { path: RouterPaths.ViewCategory, component: ViewCategoryComponent, canActivate: [RefreshSignUpGuard] },
-
+  { path: '', redirectTo: RouterPaths.Home, pathMatch: 'full' },
   //PageNotFound
   { path: '**', component: ViewPagenotfoundComponent },
-  //{ path: '', redirectTo: RouterPaths.Home, pathMatch: 'full' },
+
 ];
 
 

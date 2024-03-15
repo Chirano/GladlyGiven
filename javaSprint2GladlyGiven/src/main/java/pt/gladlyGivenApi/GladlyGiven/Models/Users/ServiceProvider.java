@@ -134,6 +134,12 @@ public class ServiceProvider extends MonetaryUser<ServiceProvider> implements ID
         return serviceProviderDTO;
     }
 
+    /**
+     * Constructs a new ServiceProvider object based on the provided ServiceProviderDTO.
+     *
+     * @param serviceProviderDTO The ServiceProviderDTO containing the information to create the ServiceProvider object.
+     * @return A new ServiceProvider object initialized with the data from the ServiceProviderDTO.
+     */
     public static ServiceProvider fromDTO(ServiceProviderDTO serviceProviderDTO) {
         ServiceProvider serviceProvider = new ServiceProvider();
 
@@ -161,6 +167,11 @@ public class ServiceProvider extends MonetaryUser<ServiceProvider> implements ID
         return serviceProvider;
     }
 
+    /**
+     * Returns a string representation of the Service Provider object.
+     *
+     * @return A string containing detailed information about the Service Provider.
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

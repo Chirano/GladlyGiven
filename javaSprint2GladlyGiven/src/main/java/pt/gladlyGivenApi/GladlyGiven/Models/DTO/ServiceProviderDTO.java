@@ -23,8 +23,17 @@ public class ServiceProviderDTO extends AppUserDTO {
     public String cityName;
     public String postalCode;
 
+    /**
+     * Initializes a new instance of ServiceProviderDTO with default values.
+     */
     public ServiceProviderDTO() {}
 
+    /**
+     * Initializes a new instance of ServiceProviderDTO based on the provided ServiceProvider object.
+     * Copies relevant fields from the ServiceProvider object to the DTO.
+     *
+     * @param serviceProvider The ServiceProvider object from which to initialize the DTO.
+     */
     public ServiceProviderDTO(ServiceProvider serviceProvider) {
         this.id = serviceProvider.id;
         this.firstName = serviceProvider.firstName;
@@ -59,6 +68,29 @@ public class ServiceProviderDTO extends AppUserDTO {
 
     }
 
+    /**
+     * Constructs a new ServiceProviderDTO object with the provided attributes.
+     *
+     * @param id              The ID of the service provider.
+     * @param firstName       The first name of the service provider.
+     * @param lastName        The last name of the service provider.
+     * @param email           The email of the service provider.
+     * @param gender          The gender of the service provider.
+     * @param language        The main language of the service provider.
+     * @param phoneNumber     The main phone number of the service provider.
+     * @param nif             The NIF (Número de Identificação Fiscal) of the service provider.
+     * @param paymentInfoId   The payment information ID of the service provider.
+     * @param invoiceInfoId   The invoice information ID of the service provider.
+     * @param licenseNumber   The license number of the service provider.
+     * @param categoryId      The category ID of the service provider.
+     * @param servicesIds     The IDs of the services provided by the service provider.
+     * @param reviewIds       The IDs of the reviews associated with the service provider.
+     * @param reviewAverage   The average review rating of the service provider.
+     * @param streetName      The street name of the service provider's address.
+     * @param doorNumber      The door number of the service provider's address.
+     * @param cityName        The city name of the service provider's address.
+     * @param postalCode      The postal code of the service provider's address.
+     */
     public ServiceProviderDTO(long id, String firstName, String lastName, String email, String gender, String language, String phoneNumber,
                               String nif, String paymentInfoId, String invoiceInfoId,
                               String licenseNumber, long categoryId, Long[] servicesIds,
@@ -93,6 +125,11 @@ public class ServiceProviderDTO extends AppUserDTO {
                 invoiceInfoId != null && !invoiceInfoId.isEmpty();
     }
 
+    /**
+     * Returns a string representation of the ServiceProviderDTO object.
+     *
+     * @return A string representing the ServiceProviderDTO object, with detailed information about the service provider.
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

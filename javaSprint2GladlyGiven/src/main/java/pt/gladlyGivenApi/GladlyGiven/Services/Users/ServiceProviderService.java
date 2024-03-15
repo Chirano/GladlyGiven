@@ -37,15 +37,29 @@ public class ServiceProviderService extends AppUserService {
 
     // Service Provider
     // ---------------------------------------------------------------------
+
+    /**
+     * Saves a service provider to the repository.
+     *
+     * @param serviceProvider The service provider to be saved.
+     * @return The saved service provider object.
+     */
     public ServiceProvider saveServiceProvider(ServiceProvider serviceProvider) {
         return saveUserToRepository(serviceProvider, serviceProviderRepository);
     }
 
-    public ServiceProvider setRefugeePassword(ServiceProvider serviceProvider, String password) {
+    /**
+     * Sets a new password for a service provider.
+     *
+     * @param serviceProvider The service provider for which to set the new password.
+     * @param password The new password to be set.
+     * @return The updated service provider object with the new password set.
+     */
+    public ServiceProvider setServiceProviderPassword(ServiceProvider serviceProvider, String password) {
         return setUserPassword(serviceProvider, password, serviceProviderRepository);
     }
 
-    // find ---
+    // Finds ---
 
     /**
      * Retrieves a service provider by its ID.
@@ -170,6 +184,12 @@ public class ServiceProviderService extends AppUserService {
         }
     }
 
+    /**
+     * Creates a new service provider using the provided ServiceProvider object.
+     *
+     * @param serviceProvider The ServiceProvider object containing the details of the service provider to be created.
+     * @return The newly created ServiceProvider object, or null if the provided ServiceProvider object is null.
+     */
     public ServiceProvider createServiceProvider(ServiceProvider serviceProvider) {
         if (serviceProvider == null) {
             System.out.println("Tried to create null ServiceProvider");
@@ -187,6 +207,26 @@ public class ServiceProviderService extends AppUserService {
         return existing;
     }
 
+    /**
+     * Creates a new service provider using the provided information.
+     *
+     * @param firstName The first name of the service provider.
+     * @param lastName The last name of the service provider.
+     * @param emailAddress The email address of the service provider.
+     * @param gender The gender of the service provider.
+     * @param password The password of the service provider.
+     * @param mainLanguage The main language preference of the service provider.
+     * @param secondLanguage The second language preference of the service provider.
+     * @param phoneNumber The phone number of the service provider.
+     * @param nif The NIF (Número de Identificação Fiscal) of the service provider.
+     * @param licenseNumber The license number of the service provider.
+     * @param categoryId The category ID of the service provider.
+     * @param streetName The street name of the service provider's address.
+     * @param doorNumber The door number of the service provider's address.
+     * @param cityName The city name of the service provider's address.
+     * @param postalCode The postal code of the service provider's address.
+     * @return The newly created ServiceProvider object.
+     */
     @Transactional
     public ServiceProvider createServiceProvider(String firstName, String lastName, String emailAddress, String gender, String password, String mainLanguage, String secondLanguage, String phoneNumber, String nif, String licenseNumber, long categoryId, String streetName, String doorNumber, String cityName, String postalCode) {
         // Create a ServiceProviderDTO using the provided parameters
@@ -294,7 +334,7 @@ public class ServiceProviderService extends AppUserService {
         Page<Availability> avPage =  this.availabilityRepository.findAll(PageRequest.of(page, size));
 
         if(!avPage.hasContent()) {
-            throw new NotImplementedException("Table Availabity is null!");
+            throw new IllegalArgumentException("Table Availabity is null!");
         }
 
         return avPage;
@@ -312,7 +352,7 @@ public class ServiceProviderService extends AppUserService {
         Page<Availability> avPage =  this.availabilityRepository.findAllAvailabilitiesByServiceProviderId(id, PageRequest.of(page, size));
 
         if(!avPage.hasContent()) {
-            throw new NotImplementedException("There's no availabilities registered for this user id!");
+            throw new IllegalArgumentException("There's no availabilities registered for this user id!");
         }
 
         return avPage;
@@ -328,7 +368,7 @@ public class ServiceProviderService extends AppUserService {
         Availability av = this.availabilityRepository.findById(id).orElse(null);
 
         if(av == null) {
-            throw new NotImplementedException("Entity doesn't exist");
+            throw new IllegalArgumentException("Entity doesn't exist");
         }
 
         return availabilityRepository.findById(id).orElse(null);
@@ -342,11 +382,10 @@ public class ServiceProviderService extends AppUserService {
      */
     @Transactional
     public Availability createAvailability(Availability availability) {
-        //Checar se já existe uma availability com o mesmo id
         Availability av = this.availabilityRepository.findById(availability.id).orElse(null);
 
         if(av != null) {
-            throw new NotImplementedException("Availability already exists");
+            throw new IllegalArgumentException("Availability already exists");
         }
 
         availability.availabilityStatus = AvailabilityStatus.Free;
@@ -426,7 +465,7 @@ public class ServiceProviderService extends AppUserService {
         return addServiceReview(serviceProvider, reviewId);
     }
 
-
+    //TODO: NÃO ESTÁ SENDO USADO. RETIRAR!
     /**
      * Finds service providers offering a specific service in a given city.
      *
@@ -440,7 +479,7 @@ public class ServiceProviderService extends AppUserService {
                 .findByHealthServiceIdAndCityName(serviceId, cityName);
 
         if(serviceProviderList == null) {
-            throw new NotImplementedException("There's no service providers for this service and this location");
+            throw new IllegalArgumentException("There's no service providers for this service and this location");
         }
 
         List<ServiceProviderDTO> serviceProviderDTOS = new ArrayList<>();
@@ -452,13 +491,21 @@ public class ServiceProviderService extends AppUserService {
         return serviceProviderDTOS;
     }
 
+    /**
+     * Finds service providers by the description of a health service and the city name.
+     *
+     * @param serviceDescription The description of the health service.
+     * @param cityName The name of the city.
+     * @return A list of ServiceProvider objects that match the given service description and city name.
+     * @throws NotImplementedException If no service providers are found for the given service description and city name.
+     */
     public List<ServiceProvider> findByHealthServiceDescriptionAndCityName(String serviceDescription,
                                                                            String cityName) {
         List<ServiceProvider> serviceProviders = this.serviceProviderRepository.
                 findByHealthServiceDescriptionAndCityName(serviceDescription, cityName);
 
         if(serviceProviders == null) {
-            throw new NotImplementedException("There's no service providers for this service and this location");
+            throw new IllegalArgumentException("There's no service providers for this service and this location");
         }
 
         return serviceProviders;

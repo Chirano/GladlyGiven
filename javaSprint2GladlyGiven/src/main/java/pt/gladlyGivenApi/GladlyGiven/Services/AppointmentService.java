@@ -141,6 +141,11 @@ public class AppointmentService {
         return a;
     }
 
+    /**
+     * Retrieves the total number of appointments.
+     *
+     * @return The total number of appointments.
+     */
     public int getTotalAppointments(){
         return appointmentRepository.countTotalAppointments();
     }
