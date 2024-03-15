@@ -34,8 +34,8 @@ public class SearchController {
 
     @GetMapping("/service/{serviceDescription}/{cityName}")
     public ResponseEntity<List<ServiceProviderDTO>> searchServiceProvidersByServiceDescriptionAndCityName(
-            @RequestParam String serviceDescription,
-            @RequestParam String cityName) {
+            @PathVariable("serviceDescription") String serviceDescription,
+            @PathVariable("cityName") String cityName) {
 
         List<ServiceProvider> serviceProviders = serviceProviderService.findByHealthServiceDescriptionAndCityName(serviceDescription, cityName);
 

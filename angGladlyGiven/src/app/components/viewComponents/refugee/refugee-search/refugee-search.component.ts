@@ -5,6 +5,7 @@ import { ServiceProviderService } from 'src/app/services/data/javaSpring/service
 import { EventManagerService } from 'src/app/services/events/event-manager.service';
 import { RefugeePage } from '../RefugeePage';
 import { RefugeeService } from 'src/app/services/data/javaSpring/refugee/refugee.service';
+import { RefugeeSearch } from 'src/app/classes/RefugeeSearch';
 
 @Component({
   selector: 'app-refugee-search',
@@ -20,8 +21,9 @@ export class RefugeeSearchComponent implements OnChanges {
 
   constructor(
     private serviceProviderService: ServiceProviderService,
-  ) {
-    EventManagerService.OnRefugeeSearched.subscribe(this.OnRefugeeSearched.bind(this));
+    ) {
+    
+    EventManagerService.OnRefugeeSearched.subscribe(this.onSearchSubmit.bind(this));
     EventManagerService.OnSelectedServiceProvider.subscribe(this.OnServiceProviderClicked.bind(this));
   }
 
@@ -39,10 +41,21 @@ export class RefugeeSearchComponent implements OnChanges {
     this.serviceProviderService.getServiceProviderByFirstName(query);
   }
 
+  
   OnRefugeeSearched(query: string) {
     console.log("Query to filter:", query);
     this.serviceProviders = [];
     this.listServiceProviders();
+  }
+
+  
+  onSearchSubmit(refugeeSearch : RefugeeSearch): void {
+    var array = this.serviceProviderService
+      .searchServiceProvidersByServiceDescriptionAndCityName(refugeeSearch.serviceDescription, refugeeSearch.cityName)
+      .subscribe((serviceProviders: ServiceProviderDTO[]) => {
+        this.serviceProviders = serviceProviders;
+      });
+      console.log("Services providers", array);
   }
 
   listServiceProviders(): void {
