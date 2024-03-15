@@ -29,7 +29,7 @@ export class ServiceProviderDetailsComponent {
     this.name = serviceProvider.firstName + " " + serviceProvider.lastName;
     this.category = serviceProvider.categoryId.toString();
     this.services = serviceProvider.servicesIds?.toString() || "No services found";
-    this.location = serviceProvider.email;
+    this.location = serviceProvider.cityName;
   }
 
   private updateServiceProvider() {
@@ -39,6 +39,7 @@ export class ServiceProviderDetailsComponent {
   }
 
   OnClickedServiceProvider() {
+    //console.log("Service provider clicked");
     EventManagerService.OnSelectedServiceProvider.emit(this.serviceProvider);
   }
 }

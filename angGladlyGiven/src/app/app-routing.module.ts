@@ -28,11 +28,11 @@ import { ViewServiceProviderServicesComponent } from './components/views/view-se
 import { ViewAvailabilityComponent } from './components/views/view-availability/view-availability.component';
 import { RefugeeHomeComponent } from './components/viewComponents/refugee/refugee-home/refugee-home.component';
 import { RefugeeAppointmentsComponent } from './components/viewComponents/refugee/refugee-appointments/refugee-appointments.component';
-import { RefugeeHelpRequestComponent } from './components/viewComponents/refugee/refugee-help-request/refugee-help-request.component';
 import { RefugeeProfileComponent } from './components/viewComponents/refugee/refugee-profile/refugee-profile.component';
 import { RefugeeSearchComponent } from './components/viewComponents/refugee/refugee-search/refugee-search.component';
 import { ViewCategoryComponent } from './components/views/view-category/view-category.component';
 import { ViewPagenotfoundComponent } from './components/views/view-pagenotfound/view-pagenotfound.component';
+import { RefugeeRequestAppointmentComponent } from './components/viewComponents/refugee/refugee-request-appointment/refugee-request-appointment.component';
 
 
 
@@ -59,7 +59,7 @@ const routes: Routes = [
   { path: RouterPaths.ViewRefugeeHome, component: ViewHomeComponent },
   { path: RouterPaths.ViewRefugeeSearch, component: RefugeeSearchComponent },
   { path: RouterPaths.ViewRefugeeAppointments, component: RefugeeAppointmentsComponent },
-  { path: RouterPaths.ViewRefugeeHelpRequest, component: RefugeeHelpRequestComponent },
+  { path: RouterPaths.ViewRefugeeRequestAppointment, component: RefugeeRequestAppointmentComponent },
   { path: RouterPaths.ViewRefugeeProfile, component: RefugeeProfileComponent },
 
   { path: RouterPaths.ViewServiceProvider, component: ViewServiceProviderComponent },

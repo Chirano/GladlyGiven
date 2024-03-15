@@ -43,7 +43,6 @@ import { RefugeeHeaderComponent } from './components/viewComponents/refugee/refu
 import { RefugeeSearchbarComponent } from './components/viewComponents/refugee/refugee-searchbar/refugee-searchbar.component';
 import { RefugeeHomeComponent } from './components/viewComponents/refugee/refugee-home/refugee-home.component';
 import { RefugeeSearchComponent } from './components/viewComponents/refugee/refugee-search/refugee-search.component';
-import { RefugeeHelpRequestComponent } from './components/viewComponents/refugee/refugee-help-request/refugee-help-request.component';
 import { RefugeeAppointmentsComponent } from './components/viewComponents/refugee/refugee-appointments/refugee-appointments.component';
 import { RefugeeProfileComponent } from './components/viewComponents/refugee/refugee-profile/refugee-profile.component';
 import { AppointmentComponent } from './components/viewComponents/appointment/appointment.component';
@@ -101,13 +100,12 @@ import { ViewPagenotfoundComponent } from './components/views/view-pagenotfound/
     RefugeeSearchbarComponent,
     RefugeeHomeComponent,
     RefugeeSearchComponent,
-    RefugeeHelpRequestComponent,
     RefugeeAppointmentsComponent,
+    RefugeeRequestAppointmentComponent,
     RefugeeProfileComponent,
     AppointmentComponent,
     AvailabilityComponent,
     ViewCategoryComponent,
-    RefugeeRequestAppointmentComponent,
     ButtonAppointmentRequestComponent,
     AvailabilityInputComponent,
     ServiceProviderDetailsComponent,

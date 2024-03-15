@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ServiceProviderDTO } from 'src/app/classes/userProfiles/ServiceProviderDTO';
 import { MockServiceProviders } from 'src/app/classes/userProfiles/mockUsers/MockServiceProviders';
+import { EventManagerService } from 'src/app/services/events/event-manager.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,11 @@ import { MockServiceProviders } from 'src/app/classes/userProfiles/mockUsers/Moc
 export class ServiceProviderService  {
 
   private baseUrl = "http://localhost:8080/api";
+  static selectedServiceProvider : ServiceProviderDTO;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    EventManagerService.OnSelectedServiceProvider.subscribe(this.OnSelectedServiceProvider.bind(this));
+  }
 
 
   
@@ -131,5 +135,9 @@ export class ServiceProviderService  {
   //GET http://localhost:8080/api/search/service/{serviceDescription}/{cityName}?serviceDescription=Troca%20de%20curativo&cityName=Porto
   searchServiceProvidersByServiceDescriptionAndCityName(serviceDescription : string, cityName : string) : Observable<any> {
     return this.http.get(`${this.baseUrl}/search/service/${serviceDescription}/${cityName}`);
+  }
+
+  private OnSelectedServiceProvider(serviceProvider : ServiceProviderDTO) {
+    ServiceProviderService.selectedServiceProvider = serviceProvider;
   }
 }

@@ -27,6 +27,10 @@ export class RefugeeSearchComponent implements OnChanges {
     EventManagerService.OnSelectedServiceProvider.subscribe(this.OnServiceProviderClicked.bind(this));
   }
 
+  ngOnInit() {
+    RefugeeService.currentRefugeePage = RefugeePage.Search;
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     //this.searchServiceProviders(this.previousSearch);
   }
@@ -62,8 +66,7 @@ export class RefugeeSearchComponent implements OnChanges {
   }
 
   private OnServiceProviderClicked(serviceProvider: ServiceProviderDTO) {
-    if (RefugeeService.targetRefugeePage) {
-      console.log("", serviceProvider);
+    if (RefugeeService.currentRefugeePage == RefugeePage.Search) {
       EventManagerService.OnRefugeeViewChanged.emit(RefugeePage.RequestAppointment);
     }
   }

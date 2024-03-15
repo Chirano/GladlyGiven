@@ -1,41 +1,33 @@
 <app-header></app-header>
 
 <div class="container">
-    <div>
+    <div class="mb-3">
         <div class="row">
             <!-- Image Column -->
             <div class="col-md-6">
                 <div>
                     <!-- Placeholder for image -->
-                    <img src="https://via.placeholder.com/248" alt="Image" class="img-fluid">
+                    <img src="https://via.placeholder.com/192" alt="Image" class="img-fluid">
                 </div>
             </div>
     
             <!-- Details Column -->
             <div class="col-md-6">
-                <div>
-                    <h1>{{ serviceProvider.firstName }} {{ serviceProvider.lastName }}</h1>
-                    <div>{{ serviceProvider.categoryId }}</div>
-                    <div>{{ serviceProvider.servicesIds }}</div>
-                    <div>{{ serviceProvider.email }}</div>
+                <div class="container">
+                    <h1>{{ GetServiceProvider().firstName }} {{ GetServiceProvider().lastName }}</h1>
+                    <div>{{ GetServiceProvider().categoryId }}</div>
+                    <div>{{ GetServiceProvider().servicesIds }}</div>
+                    <div>{{ GetServiceProvider().cityName }}</div>
                 </div>
             </div>
         </div>
-
-        <div>
-            <app-availability></app-availability>
-            <app-availability-input></app-availability-input>
-            <app-appointment></app-appointment>
-        </div>
     </div>
 
-    <!-- Date -->
-    <div>
+    <app-availability-input *ngIf="CanShowAppointmentRequestInput()"></app-availability-input>
 
-    </div>
-
-    <div>
-        <app-button-appointment-request></app-button-appointment-request>
-        <button type="button" (click)="ToRefugeeHome()" class="btn btn-secondary mb-2">Back</button>
+    <div class="mb-3 d-flex justify-content-between container">
+        <app-back-button></app-back-button>
+        <button class="btn btn-primary" *ngIf="CanShowAppointmentRequestInput() == false" (click)="ShowAppointmentInput()">Request Appointment</button>
+        <button class="btn btn-danger" *ngIf="CanShowAppointmentRequestInput()" (click)="HideAppointmentInput()">Close Request</button>
     </div>
 </div>

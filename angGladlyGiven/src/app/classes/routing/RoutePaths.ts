@@ -19,6 +19,7 @@ export const RouterPaths = {
     ViewRefugeeHome: "refugee/home",
     ViewRefugeeSearch: "refugee/search",
     ViewRefugeeAppointments: "refugee/appointments",
+    ViewRefugeeRequestAppointment: "refugee/request",
     ViewRefugeeHelpRequest: "refugee/help",
     ViewRefugeeProfile: "refugee/profile",
     

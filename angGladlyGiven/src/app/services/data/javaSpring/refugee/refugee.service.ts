@@ -4,6 +4,9 @@ import { Observable, catchError, tap, throwError } from 'rxjs';
 import { RefugeeDTO } from 'src/app/classes/userProfiles/RefugeeDTO';
 import { MockRefugees } from 'src/app/classes/userProfiles/mockUsers/MockRefugees';
 import { RefugeePage } from 'src/app/classes/RefugeePage';
+import { EventManagerService } from 'src/app/services/events/event-manager.service';
+import { ServiceProviderDTO } from 'src/app/classes/userProfiles/ServiceProviderDTO';
+import { RouterPaths } from 'src/app/classes/routing/RoutePaths';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +14,12 @@ import { RefugeePage } from 'src/app/classes/RefugeePage';
 
 export class RefugeeService  {
 
-  static targetRefugeePage : RefugeePage = RefugeePage.Home;
+  static currentRefugeePage : RefugeePage = RefugeePage.Home;
   private baseUrl = "http://localhost:8080/api";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    EventManagerService.OnSelectedServiceProvider.subscribe(this.OnServiceProvidedSelected.bind(this));
+  }
 
   private logEndpoint(endpoint: string) {
     console.log("Attemped connection to:", endpoint);
@@ -92,5 +97,12 @@ export class RefugeeService  {
     const refugeeKeys = Object.keys(mockRefugees);
     const randomKey = refugeeKeys[Math.floor(Math.random() * refugeeKeys.length)];
     return mockRefugees[randomKey];
+  }
+
+  private OnServiceProvidedSelected(serviceProvider : ServiceProviderDTO) {
+    console.log("Service Provider Clicked! Current Page", RefugeeService.currentRefugeePage);
+    if (RefugeeService.currentRefugeePage == RefugeePage.Search) {
+      EventManagerService.OnRouteEvent.emit(RouterPaths.ViewRefugeeRequestAppointment);
+    }
   }
 }
