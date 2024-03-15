@@ -1,4 +1,3 @@
-
 <body>
   <!-- Top nav -->
   <app-header></app-header>
@@ -12,19 +11,19 @@
       <div class="mx-auto p-2">
         <app-refugee-searchbar></app-refugee-searchbar>
       </div>
-  
+
       <!-- Donate Btn -->
-      <div class="d-grid gap-2 col-6 mx-auto mt-3" *ngIf="isGuest() || isDonor()">
-        <button
-          class="btn btn-warning"
-          type="button"
-          (click)="toDontation()">
+      <div class="donation">
+      <div
+        class="d-grid gap-2 col-6 mx-auto mt-3"
+        *ngIf="isGuest() || isDonor()"
+      >
+        <button class="btn btn-warning" type="button" (click)="toDontation()">
           DONATE
         </button>
       </div>
+    </div>
   </div>
-  
-
 
     <!-- Presentation / Guest Home -->
     <div class="row p-3" *ngIf="isGuest()">
