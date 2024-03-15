@@ -96,7 +96,7 @@ namespace GladyGivenWebAPI.Controllers
 
         }
 
-        [HttpGet("/servicerequest/category/Category")]
+        [HttpGet("/servicerequest/category/{Category}")]
         public async Task<ActionResult<List<ServiceRequestDTO>>> FindServiceRequestCategory(long IdCategory)
         {
             List<ServiceRequestDTO> serviceRequests = await serviceRequestServ.FindServiceRequestCategory(IdCategory);

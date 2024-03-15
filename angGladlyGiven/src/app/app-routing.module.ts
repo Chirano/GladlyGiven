@@ -76,6 +76,7 @@ const routes: Routes = [
   //Contact
   { path: RouterPaths.ViewContact, component: ViewContactComponent, canActivate: [RefreshSignUpGuard] },
 
+  //Service Request
   { path: RouterPaths.ViewServiceRequest, component: ViewServiceRequestComponent, canActivate: [RefreshSignUpGuard] },
 
   //Donation
