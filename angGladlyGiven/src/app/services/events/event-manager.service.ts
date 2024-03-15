@@ -50,6 +50,7 @@ export class EventManagerService {
   static OnRefugeeSearchedHomePage: EventEmitter<string> = new EventEmitter<string>();
   static OnRefugeeSearched: EventEmitter<RefugeeSearch> = new EventEmitter<RefugeeSearch>();
 
+
   // Service Provider events
   static OnSelectedServiceProvider: EventEmitter<ServiceProviderDTO> = new EventEmitter<ServiceProviderDTO>();
 

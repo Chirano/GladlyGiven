@@ -56,6 +56,7 @@ import { ServiceProviderDetailsComponent } from './components/viewComponents/ser
 import { ServiceProviderDetailsSimpleComponent } from './components/viewComponents/serviceProviderComponents/service-provider-details-simple/service-provider-details-simple.component';
 import { GlobalDetailsComponent } from './components/viewComponents/global-details/global-details.component';
 import { ViewListServicerequestAllComponent } from './components/views/view-list-servicerequest-all/view-list-servicerequest-all.component';
+import { ViewPagenotfoundComponent } from './components/views/view-pagenotfound/view-pagenotfound.component';
 
 
 @NgModule({
@@ -113,6 +114,7 @@ import { ViewListServicerequestAllComponent } from './components/views/view-list
     ServiceProviderDetailsSimpleComponent,
     GlobalDetailsComponent,
     ViewListServicerequestAllComponent,
+    ViewPagenotfoundComponent,
   ],
   imports: [
     BrowserModule,
