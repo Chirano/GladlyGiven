@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterPaths } from 'src/app/classes/routing/RoutePaths';
 import { UserType } from 'src/app/classes/userProfiles/UserType';
 import { AuthService } from 'src/app/services/authentication/auth.service';
 import { DonationService } from 'src/app/services/donation/donation.service';
@@ -67,5 +68,11 @@ export class ViewHomeComponent {
 
   isDonor(): boolean {
     return AuthService.SessionContext.userType === UserType.Donor;
+  }
+
+  // Routing
+  // ---------------------------------------------------------
+  toDontation() {
+    EventManagerService.OnRouteEvent.emit(RouterPaths.ViewDonation);
   }
 }

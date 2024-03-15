@@ -54,6 +54,7 @@ import { ButtonAppointmentRequestComponent } from './components/viewComponents/b
 import { AvailabilityInputComponent } from './components/viewComponents/availability-input/availability-input.component';
 import { ServiceProviderDetailsComponent } from './components/viewComponents/serviceProviderComponents/service-provider-details/service-provider-details.component';
 import { ServiceProviderDetailsSimpleComponent } from './components/viewComponents/serviceProviderComponents/service-provider-details-simple/service-provider-details-simple.component';
+import { GlobalDetailsComponent } from './components/viewComponents/global-details/global-details.component';
 
 
 @NgModule({
@@ -109,6 +110,7 @@ import { ServiceProviderDetailsSimpleComponent } from './components/viewComponen
     AvailabilityInputComponent,
     ServiceProviderDetailsComponent,
     ServiceProviderDetailsSimpleComponent,
+    GlobalDetailsComponent,
   ],
   imports: [
     BrowserModule,

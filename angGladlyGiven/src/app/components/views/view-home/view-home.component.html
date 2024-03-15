@@ -2,73 +2,28 @@
 <body>
   <!-- Top nav -->
   <app-header></app-header>
-  <!--   
-  <nav class="navbar bg-body-tertiary">
-    <div class="container-fluid">
-      <img
-        src="assets/logo.png"
-        alt="Logo"
-        style="max-height: 64px; width: auto"
-      />
-      <div *ngIf="isNotGuest()">
-        <a href="#" class="btn btn-outline-info" [routerLink]="'/sign-in'"
-        >Sign in</a
-      >
-      </div>
-    </div>
-  </nav>
-   -->
 
   <!-- Global Info Display -->
-  <div class="card p-2 width:80px">
-    <span class="border border-primay-subtle border-1">
-      <div class="container text-center">
-        <div class="row align-items-center">
-          <div class="col">
-            {{ this.appointments }}
-          </div>
-          <div class="col">€{{ this.amount }}</div>
-          <div class="col">
-            {{ this.donors }}
-          </div>
-        </div>
-        <div class="row align-items-start">
-          <div class="col">People reached</div>
-          <div class="col">Towards services</div>
-          <div class="col">People Helping</div>
-        </div>
+  <app-global-details></app-global-details>
+
+  <div class="container">
+    <!-- Search -->
+    <div class="card-body" *ngIf="isGuest() || isRefugee() || isDonor()">
+      <div class="mx-auto p-2">
+        <app-refugee-searchbar></app-refugee-searchbar>
       </div>
-    </span>
+  
+      <!-- Donate Btn -->
+      <div class="d-grid gap-2 col-6 mx-auto mt-3" *ngIf="isGuest() || isDonor()">
+        <button
+          class="btn btn-warning"
+          type="button"
+          (click)="toDontation()">
+          DONATE
+        </button>
+      </div>
   </div>
-
-  <!-- Search -->
-  <div class="card-body">
-    <div class="mx-auto p-2">
-      <nav class="navbar bg-body">
-        <div class="container-fluid">
-          <form class="d-flex" role="search">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search for a service"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-info" type="submit">Search</button>
-          </form>
-        </div>
-      </nav>
-    </div>
-
-    <!-- Donate Btn -->
-    <div class="d-grid gap-2 col-6 mx-auto mt-3">
-      <button
-        class="btn btn-warning"
-        type="button"
-        [routerLink]="'/view-donation'"
-      >
-        DONATE
-      </button>
-    </div>
+  
 
 
     <!-- Presentation / Guest Home -->
