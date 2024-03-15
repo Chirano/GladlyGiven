@@ -60,6 +60,7 @@ export class AuthService {
     private serviceProviderService: ServiceProviderService,
     private donorService: DonorService
   ) {
+    EventManagerService.OnLogout.subscribe(() => this.logout());
     EventManagerService.OnSignInEvent.subscribe(this.SignInFilter.bind(this));
     EventManagerService.OnSingUpEvent.subscribe(this.SignUp.bind(this));
 
@@ -188,6 +189,11 @@ export class AuthService {
   
     console.log("Target route:", targetRoute);
     EventManagerService.OnRouteEvent.emit(targetRoute);
+  }
+
+  private logout() {
+    this.SetSessionContext(-1, "", "", UserType.None);
+    console.log("Loged out")
   }
 
 

@@ -30,6 +30,7 @@ export class EventManagerService {
   static OnBackEvent: EventEmitter<void> = new EventEmitter<void>();
 
   // Auth Events
+  static OnLogout: EventEmitter<void> = new EventEmitter<void>();
   static OnSignInEvent: EventEmitter<SignInDetails> = new EventEmitter<SignInDetails>();
   static OnSingUpEvent: EventEmitter<SignUpDetails> = new EventEmitter<SignUpDetails>();
   

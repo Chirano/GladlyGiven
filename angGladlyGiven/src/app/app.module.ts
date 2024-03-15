@@ -49,10 +49,10 @@ import { RefugeeProfileComponent } from './components/viewComponents/refugee/ref
 import { AppointmentComponent } from './components/viewComponents/appointment/appointment.component';
 import { AvailabilityComponent } from './components/viewComponents/availability/availability.component';
 import { ViewCategoryComponent } from './components/views/view-category/view-category.component';
-import { ServiceProviderDetailsComponent } from './components/viewComponents/serviceProviderComponents/service-provider-details/service-provider-details.component';
 import { RefugeeRequestAppointmentComponent } from './components/viewComponents/refugee/refugee-request-appointment/refugee-request-appointment.component';
 import { ButtonAppointmentRequestComponent } from './components/viewComponents/button-appointment-request/button-appointment-request.component';
 import { AvailabilityInputComponent } from './components/viewComponents/availability-input/availability-input.component';
+import { ServiceProviderDetailsComponent } from './components/viewComponents/serviceProviderComponents/service-provider-details/service-provider-details.component';
 import { ServiceProviderDetailsSimpleComponent } from './components/viewComponents/serviceProviderComponents/service-provider-details-simple/service-provider-details-simple.component';
 
 
@@ -104,10 +104,10 @@ import { ServiceProviderDetailsSimpleComponent } from './components/viewComponen
     AppointmentComponent,
     AvailabilityComponent,
     ViewCategoryComponent,
-    ServiceProviderDetailsComponent,
     RefugeeRequestAppointmentComponent,
     ButtonAppointmentRequestComponent,
     AvailabilityInputComponent,
+    ServiceProviderDetailsComponent,
     ServiceProviderDetailsSimpleComponent,
   ],
   imports: [
