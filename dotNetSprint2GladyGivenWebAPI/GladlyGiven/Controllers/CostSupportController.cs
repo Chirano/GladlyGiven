@@ -162,6 +162,23 @@ namespace GladlyGiven.Controllers
 
             return Ok();
         }
+
+        [HttpPost("/costsupport/payment")]
+        public async Task<ActionResult<CostSupportPayment>> AddCostSupportPayment(int costSupportId)
+        {
+            CostSupportDTO costSupport = await costSupportService.FindCostSupport(costSupportId);
+
+            if(costSupport == null)
+            {
+                return BadRequest(costSupport);
+            }
+
+            string date = DateTime.Now.Date.ToString();
+
+            CostSupportPayment costSupportPayment = costSupportService.createCostSupportPayment(costSupport, date).Result;
+
+            return Ok(costSupportPayment);
+        }
     }
 }
 

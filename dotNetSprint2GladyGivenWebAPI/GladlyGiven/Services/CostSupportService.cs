@@ -180,6 +180,29 @@ namespace GladlyGiven.Services
 
             return dTO;
         }
-   }
+
+        public async Task<CostSupportPayment> createCostSupportPayment(CostSupportDTO costSupportDTO, string date)
+        {
+            var costSupport = await context.CostSupports.FirstOrDefaultAsync(cs => cs.Id == costSupportDTO.Id);
+                
+            if (costSupport.Status != Enums.CostSupportStatus.PENDING)
+            {
+                return null; 
+            }
+                costSupport.Status = Enums.CostSupportStatus.APPROVED;
+                CostSupportPayment payment = new CostSupportPayment
+                {
+                    CostSupportId = costSupport.Id,
+                    CostSupport = costSupport,
+                    Amount = costSupport.Amount,
+                    PaymentDate = date
+                };
+                context.CostSupportPayment.Add(payment);
+                await context.SaveChangesAsync();
+
+                return payment;
+        
+        }
+    }
 }
 

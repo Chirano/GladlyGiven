@@ -28,5 +28,7 @@ namespace GladyGivenWebAPI.Data
         /// </summary>
         public DbSet<Donation> Donations { get; set; }
 
+        public DbSet<CostSupportPayment> CostSupportPayment { get; set; }
+
     }
 }

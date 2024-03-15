@@ -1,12 +1,15 @@
-<div class="review-list">
-    <h3>Reviews List</h3>
-    <ul>
-      <li *ngFor="let item of reviews">
-        <strong>Review Id:</strong> {{ item.reviewId }}<br>
-        <strong>Appointment ID:</strong> {{ item.appointmentId }}<br>
-        <strong>Rating:</strong> {{ item.rating }}<br>
-        <strong>Description:</strong> {{ item.description }}<br>
-        <strong>Date:</strong> {{ item.date }}<br>
-      </li>
-    </ul>
-  </div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <h2 class="title text-center mb-4">Check your reviews</h2>
+        <div *ngFor="let item of reviews" class="list-group review-list">
+          <div class="list-group-item list-group-item-action mb-3">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="mb-0">Rating: {{ item.rating }} - Description: {{ item.description }}</h5>
+              <div>
+                <p class="mb-0"><b>Date: </b> {{ item.date }}</p>
+                <p class="mb-0"><b>Appointment: </b> {{ item.appointmentId }}</p>
+              </div>
+            </div>
+          </div>
+        </div>

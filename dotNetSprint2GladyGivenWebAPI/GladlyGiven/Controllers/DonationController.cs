@@ -268,30 +268,6 @@ namespace GladlyGiven.Controllers
             return Ok(donors);
         }
 
-        [HttpGet("/donations/Report")]
-        public async Task<ActionResult<long[]>> DonationReport()
-        {
-            
-            var donorsCountTask = _donationService.DonorsCount();
-            var donationsAmountTask = _donationService.DonationsAmount();
-          ///  var appointmentsCountTask = _donationService.AppointmentsCount();
-
-            decimal donationsAmount = await donationsAmountTask;
-            long donorsCount = await donorsCountTask;
-            ///long appointmentsCount = await appointmentsCountTask;
-
-            long[] report = new long[2];
-
-
-            report.Append((long)donationsAmount);
-            report.Append(donorsCount);
-           //// report.Append(appointmentsCount.ToString());
-           
-
-            DonationReport donationReport = new DonationReport(donationsAmount, donorsCount);
-            
-            return Ok(report);
-        }
     }
 
 }

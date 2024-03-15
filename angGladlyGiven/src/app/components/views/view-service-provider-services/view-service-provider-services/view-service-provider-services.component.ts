@@ -38,7 +38,6 @@ export class ViewServiceProviderServicesComponent implements OnInit{
   }
 
   addService(serviceId: number): void{
-    console.log(2, AuthService.SessionContext.userId)
     const obj = [
 
     ];

@@ -17,7 +17,7 @@ export const MockSessionContexts = {
     },
     
     AuthServiceProvider: {
-        userId: 1,
+        userId: 0,
         name: "service",
         email: "service", // @service.com
         userType: UserType.ServiceProvider,
