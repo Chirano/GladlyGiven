@@ -3,12 +3,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 import { RefugeeDTO } from 'src/app/classes/userProfiles/RefugeeDTO';
 import { MockRefugees } from 'src/app/classes/userProfiles/mockUsers/MockRefugees';
+import { RefugeePage } from 'src/app/classes/RefugeePage';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class RefugeeService  {
 
+  static targetRefugeePage : RefugeePage = RefugeePage.Home;
   private baseUrl = "http://localhost:8080/api";
 
   constructor(private http: HttpClient) { }

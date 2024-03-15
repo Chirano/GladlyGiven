@@ -174,7 +174,7 @@ export class AuthService {
         break;
   
       case UserType.Refugee:
-        targetRoute = RouterPaths.ViewRefugee;
+        targetRoute = RouterPaths.ViewRefugeeHome;
         break;
   
       case UserType.ServiceProvider:
@@ -219,7 +219,7 @@ export class AuthService {
     this.http.post<SessionContext>(this.signUpRefugeeURL, signUpRequest).subscribe({
       next: (response: SessionContext) => {
         this.SetSessionContext(response.userId, response.name, response.email, response.userType);
-        EventManagerService.OnRouteEvent.emit(RouterPaths.ViewRefugee);
+        EventManagerService.OnRouteEvent.emit(RouterPaths.ViewRefugeeHome);
       },
       error: (error: any) => {
         console.error("Error creating refugee account: ", error);

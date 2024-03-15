@@ -15,13 +15,12 @@ export const RouterPaths = {
 
     ViewAdmin: "view-admin",
     
-    ViewRefugee: "view-refugee",
     // Refugee child views
-    ViewRefugeeHome: "home",
-    ViewRefugeeSearch: "search",
-    ViewRefugeeAppointments: "appointments",
-    ViewRefugeeHelpRequest: "helprequest",
-    ViewRefugeeProfile: "profile",
+    ViewRefugeeHome: "refugee/home",
+    ViewRefugeeSearch: "refugee/search",
+    ViewRefugeeAppointments: "refugee/appointments",
+    ViewRefugeeHelpRequest: "refugee/help",
+    ViewRefugeeProfile: "refugee/profile",
     
     ViewServiceProvider: "view-service-provider",
     

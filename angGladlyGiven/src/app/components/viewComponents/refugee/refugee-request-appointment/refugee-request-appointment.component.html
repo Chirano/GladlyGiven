@@ -1,2 +1,42 @@
-<h1>Request Appointment with: {{ serviceProvider.firstName }} {{ serviceProvider.lastName }}</h1>
-<button type="button" (click)="ToRefugeeHome()" class="btn btn-secondary mb-2">Back</button>
+<app-refugee-header>
+</app-refugee-header>
+
+<div class="container">
+    <div>
+        <div class="row">
+            <!-- Image Column -->
+            <div class="col-md-6">
+                <div>
+                    <!-- Placeholder for image -->
+                    <img src="https://via.placeholder.com/248" alt="Image" class="img-fluid">
+                </div>
+            </div>
+    
+            <!-- Details Column -->
+            <div class="col-md-6">
+                <div>
+                    <h1>{{ serviceProvider.firstName }} {{ serviceProvider.lastName }}</h1>
+                    <div>{{ serviceProvider.categoryId }}</div>
+                    <div>{{ serviceProvider.servicesIds }}</div>
+                    <div>{{ serviceProvider.email }}</div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <app-availability></app-availability>
+            <app-availability-input></app-availability-input>
+            <app-appointment></app-appointment>
+        </div>
+    </div>
+
+    <!-- Date -->
+    <div>
+
+    </div>
+
+    <div>
+        <app-button-appointment-request></app-button-appointment-request>
+        <button type="button" (click)="ToRefugeeHome()" class="btn btn-secondary mb-2">Back</button>
+    </div>
+</div>

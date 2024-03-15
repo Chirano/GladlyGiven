@@ -9,7 +9,6 @@ import { ViewSignUpRefugeeComponent } from './components/views/view-sign-up-refu
 import { ViewSignUpServiceProviderComponent } from './components/views/view-sign-up-service-provider/view-sign-up-service-provider.component';
 import { ViewSignUpDonorComponent } from './components/views/view-sign-up-donor/view-sign-up-donor.component';
 import { ViewAdminComponent } from './components/views/view-admin/view-admin.component';
-import { ViewRefugeeComponent } from './components/views/view-refugee/view-refugee.component';
 import { ViewServiceProviderComponent } from './components/views/view-service-provider/view-service-provider.component';
 import { ViewDonorComponent } from './components/views/view-donor/view-donor.component';
 import { RefreshSignUpGuard as RefreshSignUpGuard } from './guards/refresh/refreshSignUp.guard';
@@ -54,17 +53,14 @@ const routes: Routes = [
   // refresh end
 
   { path: RouterPaths.ViewAdmin, component: ViewAdminComponent },
-  {
-    path: RouterPaths.ViewRefugee, component: ViewRefugeeComponent,
-    children: [
-      { path: '', redirectTo: RouterPaths.ViewRefugeeHome, pathMatch: 'full' }, // Default child route
-      { path: RouterPaths.ViewRefugeeHome, component: RefugeeHomeComponent, outlet: 'view-refugee' },
-      { path: RouterPaths.ViewRefugeeSearch, component: RefugeeSearchComponent, outlet: 'view-refugee' },
-      { path: RouterPaths.ViewRefugeeAppointments, component: RefugeeAppointmentsComponent, outlet: 'view-refugee' },
-      { path: RouterPaths.ViewRefugeeHelpRequest, component: RefugeeHelpRequestComponent, outlet: 'view-refugee' },
-      { path: RouterPaths.ViewRefugeeProfile, component: RefugeeProfileComponent, outlet: 'view-refugee' },
-    ]
-  },
+  
+  // Refugee views:
+  { path: RouterPaths.ViewRefugeeHome, component: RefugeeHomeComponent },
+  { path: RouterPaths.ViewRefugeeSearch, component: RefugeeSearchComponent },
+  { path: RouterPaths.ViewRefugeeAppointments, component: RefugeeAppointmentsComponent },
+  { path: RouterPaths.ViewRefugeeHelpRequest, component: RefugeeHelpRequestComponent },
+  { path: RouterPaths.ViewRefugeeProfile, component: RefugeeProfileComponent },
+
   { path: RouterPaths.ViewServiceProvider, component: ViewServiceProviderComponent },
   { path: RouterPaths.ViewDonor, component: ViewDonorComponent },
   { path: RouterPaths.ViewCostSupport, component: ViewCostsupportServiceProviderComponent},

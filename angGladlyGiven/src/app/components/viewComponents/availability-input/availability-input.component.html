@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row">
+        <!-- Start Date and Time Column -->
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="inputStartDate" class="form-label"><strong>Start date:</strong></label>
+                <input type="date" [(ngModel)]="availability.startDate" class="form-control" id="inputStartDate" required>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="inputStartTime" class="form-label"><strong>Start time:</strong></label>
+                <input type="time" [(ngModel)]="availability.startTime" class="form-control" id="inputStartTime" required>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <!-- End Date and Time Column -->
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="inputEndDate" class="form-label"><strong>End date:</strong></label>
+                <input type="date" [(ngModel)]="availability.endDate" class="form-control" id="inputEndDate" (ngModelChange)="validateDate()" required>
+                <div *ngIf="startDateError" class="text-danger">{{ startDateError }}</div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="inputEndTime" class="form-label"><strong>End time:</strong></label>
+                <input type="time"  [(ngModel)]="availability.endTime" class="form-control" id="inputEndTime" (ngModelChange)="validateTime()" required>
+                <div *ngIf="startTimeError" class="text-danger">{{ startTimeError }}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="row">
+        <div class="col-md-12 d-flex justify-content-end">
+          <button type="button" class="btn btn-primary" (click)="addAvailability(availability.id, availability.serviceProviderId, availability.startDate, availability.endDate, availability.startTime, availability.endTime)">Submit</button>
+        </div>
+    </div>
+</div>

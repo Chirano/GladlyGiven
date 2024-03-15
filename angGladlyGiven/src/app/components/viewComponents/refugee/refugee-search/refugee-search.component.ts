@@ -1,10 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ServiceProviderDTO } from 'src/app/classes/userProfiles/ServiceProviderDTO';
 import { MockServiceProviders } from 'src/app/classes/userProfiles/mockUsers/MockServiceProviders';
-import { ViewRefugeeComponent } from 'src/app/components/views/view-refugee/view-refugee.component';
 import { ServiceProviderService } from 'src/app/services/data/javaSpring/serviceProvider/service-provider.service';
 import { EventManagerService } from 'src/app/services/events/event-manager.service';
 import { RefugeePage } from '../RefugeePage';
+import { RefugeeService } from 'src/app/services/data/javaSpring/refugee/refugee.service';
 
 @Component({
   selector: 'app-refugee-search',
@@ -12,22 +12,27 @@ import { RefugeePage } from '../RefugeePage';
   styleUrls: ['./refugee-search.component.scss']
 })
 
-export class RefugeeSearchComponent {
+export class RefugeeSearchComponent implements OnChanges {
   // 1) search
   // 2) list service providers
-
-  @Input() serviceProviders: ServiceProviderDTO[] = [];
+  @Input() previousSearch: string = "";
+  serviceProviders: ServiceProviderDTO[] = [];
 
   constructor(
     private serviceProviderService: ServiceProviderService,
-    ) {
+  ) {
     EventManagerService.OnRefugeeSearched.subscribe(this.OnRefugeeSearched.bind(this));
     EventManagerService.OnSelectedServiceProvider.subscribe(this.OnServiceProviderClicked.bind(this));
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.searchServiceProviders(this.previousSearch);
+  }
+
   ngOnInit(): void {
     // Initialize the component with all service providers
-    this.searchServiceProviders('');
+    //this.searchServiceProviders(this.previousSearch);
+    //console.log("Initialized!");
   }
 
   searchServiceProviders(query: string): void {
@@ -48,7 +53,7 @@ export class RefugeeSearchComponent {
   }
 
   private OnServiceProviderClicked(serviceProvider: ServiceProviderDTO) {
-    if (ViewRefugeeComponent.targetRefugeePage) {
+    if (RefugeeService.targetRefugeePage) {
       console.log("", serviceProvider);
       EventManagerService.OnRefugeeViewChanged.emit(RefugeePage.RequestAppointment);
     }

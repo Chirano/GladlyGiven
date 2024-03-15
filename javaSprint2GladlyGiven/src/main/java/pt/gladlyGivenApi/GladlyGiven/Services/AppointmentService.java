@@ -103,7 +103,8 @@ public class AppointmentService {
      */
     public Appointment createAppointment(Appointment appointment) {
         if(appointment == null) {
-            throw new NotImplementedException();
+            System.out.println("Tried to create emtpy appointment");
+            return new Appointment();
         }
 
         appointment.setStatus(AppointmentStatus.WAITING_VALIDATION);

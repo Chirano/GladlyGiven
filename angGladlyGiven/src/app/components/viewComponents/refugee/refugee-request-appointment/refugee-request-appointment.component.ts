@@ -22,6 +22,6 @@ export class RefugeeRequestAppointmentComponent {
   }
 
   ToRefugeeHome() {
-    EventManagerService.OnRefugeeViewChanged.emit(RefugeePage.Home);
+    EventManagerService.OnRefugeeViewChanged.emit(RefugeePage.Search);
   }
 }

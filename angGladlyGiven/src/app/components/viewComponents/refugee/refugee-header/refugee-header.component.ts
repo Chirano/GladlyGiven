@@ -15,31 +15,31 @@ export class RefugeeHeaderComponent {
   ToRefugeeHome() {
     this.targetPage = RefugeePage.Home;
     this.pageChanged();
-    //EventManagerService.OnRouteEvent.emit(RouterPaths.ViewRefugeeHome);
+    EventManagerService.OnRouteEvent.emit(RouterPaths.ViewRefugeeHome);
   }
   
   ToRefugeeSearch() {
     this.targetPage = RefugeePage.Search;
     this.pageChanged();
-    //EventManagerService.OnRouteEvent.emit(RouterPaths.ViewRefugeeSearch);
+    EventManagerService.OnRouteEvent.emit(RouterPaths.ViewRefugeeSearch);
   }
 
   ToRefugeeHelpRequest() {
     this.targetPage = RefugeePage.Home;
     this.pageChanged();
-    //EventManagerService.OnRouteEvent.emit(RouterPaths.ViewRefugeeHelpRequest);
+    EventManagerService.OnRouteEvent.emit(RouterPaths.ViewRefugeeHelpRequest);
   }
 
   ToRefugeeAppointments() {
     this.targetPage = RefugeePage.Appointments;
     this.pageChanged();
-    //EventManagerService.OnRouteEvent.emit(RouterPaths.ViewRefugeeAppointments);
+    EventManagerService.OnRouteEvent.emit(RouterPaths.ViewRefugeeAppointments);
   }
 
   ToRefugeeProfile() {
     this.targetPage = RefugeePage.Profile;
     this.pageChanged();
-    //EventManagerService.OnRouteEvent.emit(RouterPaths.ViewRefugeeHome);
+    EventManagerService.OnRouteEvent.emit(RouterPaths.ViewRefugeeHome);
   }
 
   private pageChanged() {

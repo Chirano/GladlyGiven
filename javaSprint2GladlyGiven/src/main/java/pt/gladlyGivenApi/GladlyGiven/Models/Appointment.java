@@ -21,16 +21,26 @@ public class Appointment {
     private AppointmentStatus status;
     private String observations;
 
-    public Appointment(long serviceProviderId, long refugeeId, long healthServiceId, String appointmentDate, String address, String observations) {
+    private String startDate;
+
+    private String startTime;
+
+    private String endTime;
+
+
+    public Appointment(long serviceProviderId, long refugeeId, long healthServiceId, String appointmentDate, String address, String observations, String startDate, String startTime, String endTime) {
         this.serviceProviderId = serviceProviderId;
         this.refugeeId = refugeeId;
         this.healthServiceId = healthServiceId;
         this.appointmentDate = appointmentDate;
         this.address = address;
         this.observations = observations;
+        this.startDate = startDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
-    public Appointment(long serviceProviderId, long refugeeId, long healthServiceId, String appointmentDate, String address, AppointmentStatus status, String observations) {
+    public Appointment(long serviceProviderId, long refugeeId, long healthServiceId, String appointmentDate, String address, AppointmentStatus status, String observations, String startDate, String startTime, String endTime) {
         this.serviceProviderId = serviceProviderId;
         this.refugeeId = refugeeId;
         this.healthServiceId = healthServiceId;
@@ -38,6 +48,9 @@ public class Appointment {
         this.address = address;
         this.status = status;
         this.observations = observations;
+        this.startDate = startDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     public Appointment() { }
@@ -104,5 +117,29 @@ public class Appointment {
 
     public void setObservations(String observations) {
         this.observations = observations;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 }

@@ -22,7 +22,6 @@ import { ViewSignUpDonorComponent } from './components/views/view-sign-up-donor/
 import { ViewCostsupportServiceProviderComponent } from './components/views/view-costsupport-service-provider/view-costsupport-service-provider.component';
 import { ViewAdminComponent } from './components/views/view-admin/view-admin.component';
 import { ViewServiceProviderComponent } from './components/views/view-service-provider/view-service-provider.component';
-import { ViewRefugeeComponent } from './components/views/view-refugee/view-refugee.component';
 import { ViewDonorComponent } from './components/views/view-donor/view-donor.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BackButtonComponent } from './components/buttons/back-button/back-button.component';
@@ -50,8 +49,11 @@ import { RefugeeProfileComponent } from './components/viewComponents/refugee/ref
 import { AppointmentComponent } from './components/viewComponents/appointment/appointment.component';
 import { AvailabilityComponent } from './components/viewComponents/availability/availability.component';
 import { ViewCategoryComponent } from './components/views/view-category/view-category.component';
-import { ServiceProviderDetailsComponent } from './components/viewComponents/service-provider-details/service-provider-details.component';
+import { ServiceProviderDetailsComponent } from './components/viewComponents/serviceProviderComponents/service-provider-details/service-provider-details.component';
 import { RefugeeRequestAppointmentComponent } from './components/viewComponents/refugee/refugee-request-appointment/refugee-request-appointment.component';
+import { ButtonAppointmentRequestComponent } from './components/viewComponents/button-appointment-request/button-appointment-request.component';
+import { AvailabilityInputComponent } from './components/viewComponents/availability-input/availability-input.component';
+import { ServiceProviderDetailsSimpleComponent } from './components/viewComponents/serviceProviderComponents/service-provider-details-simple/service-provider-details-simple.component';
 
 
 @NgModule({
@@ -78,7 +80,6 @@ import { RefugeeRequestAppointmentComponent } from './components/viewComponents/
 
     ViewAdminComponent,
     ViewServiceProviderComponent,
-    ViewRefugeeComponent,
     ViewDonorComponent,
     BackButtonComponent,
 
@@ -105,6 +106,9 @@ import { RefugeeRequestAppointmentComponent } from './components/viewComponents/
     ViewCategoryComponent,
     ServiceProviderDetailsComponent,
     RefugeeRequestAppointmentComponent,
+    ButtonAppointmentRequestComponent,
+    AvailabilityInputComponent,
+    ServiceProviderDetailsSimpleComponent,
   ],
   imports: [
     BrowserModule,
