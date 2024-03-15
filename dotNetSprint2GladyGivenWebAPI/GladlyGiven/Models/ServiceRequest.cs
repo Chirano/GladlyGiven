@@ -14,7 +14,7 @@ namespace GladyGivenWebAPI.Models
         public string DateRequest { get; set; }
         public long IdCategory { get; set; }
         public string Description { get; set; }
-        public ServiceRequestStatus Status { get; set; }
+        public long Status { get; set; }
 
     }
 }

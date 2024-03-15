@@ -96,10 +96,21 @@ namespace GladyGivenWebAPI.Controllers
 
         }
 
-        [HttpGet("/servicerequest/professional")]
-        public async Task<ActionResult<List<ServiceRequestDTO>>> FindServiceRequestProfessionalDescription(long IdCategory)
+        [HttpGet("/servicerequest/category/Category")]
+        public async Task<ActionResult<List<ServiceRequestDTO>>> FindServiceRequestCategory(long IdCategory)
         {
-            List<ServiceRequestDTO> serviceRequests = await serviceRequestServ.FindServiceRequestProfessionalDescription(IdCategory);
+            List<ServiceRequestDTO> serviceRequests = await serviceRequestServ.FindServiceRequestCategory(IdCategory);
+
+            if (serviceRequests != null && serviceRequests.Any())
+                return Ok(serviceRequests);
+
+            return NoContent();
+        }
+
+        [HttpGet("/servicerequest/status/{Status}")]
+        public async Task<ActionResult<List<ServiceRequestDTO>>> FindServiceRequestStatus(long Status)
+        {
+            List<ServiceRequestDTO> serviceRequests = await serviceRequestServ.FindServiceRequestStatus(Status);
 
             if (serviceRequests != null && serviceRequests.Any())
                 return Ok(serviceRequests);

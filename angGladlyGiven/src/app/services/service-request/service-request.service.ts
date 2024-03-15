@@ -40,7 +40,30 @@ export class ServiceRequestService {
   /* GET : */
   getServiceRequest(): Observable<ServiceRequest[]> {
     return this.http.get<ServiceRequest[]>(this.dotNet + "/servicerequests");
+    }
+
+   /* GET all pending service request status  */
+  getServiceRequestByStatus(status : number): Observable<ServiceRequest[]> {
+    return this.http.get<ServiceRequest[]>(this.dotNet + "/servicerequest/status/"+0);
   }
+
+  message: string = '';
+    /* PUT: add a new Service request to the database */
+  statusUpdateServiceRequest(serviceRequest: ServiceRequest): Observable<ServiceRequest> {
+    const updateServiceRequest: ServiceRequest = {
+      id : serviceRequest.id,
+      dateRequest : serviceRequest.dateRequest,
+      idCategory : serviceRequest.idCategory,
+      description : serviceRequest.description,
+      status : serviceRequest.status
+      };
+      console.log(updateServiceRequest);
+      
+    return this.http.put<any>(
+      this.dotNet + "/servicerequest/"+serviceRequest.id,
+      updateServiceRequest, this.httpOptions
+      );
+
+  }
+
 }
-
-

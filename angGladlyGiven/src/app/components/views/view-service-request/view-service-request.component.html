@@ -24,6 +24,19 @@
                </div>
              </div>
           </div>
+
+          <div class="status-selector">
+            <div style="max-width: 200px">
+             <div style="margin-bottom:  10%;">
+             <label for="status-select">Select Status:</label>
+                <select [(ngModel)]="serviceRequest.status" name="status" type="number">
+                  <option value='0'>PENDING</option>
+                  <option value='1'>APPROVAL</option>
+                  <option value='2'>REJECTED</option>
+                </select>
+              </div>
+            </div>
+          </div>
      
           <p></p>
 

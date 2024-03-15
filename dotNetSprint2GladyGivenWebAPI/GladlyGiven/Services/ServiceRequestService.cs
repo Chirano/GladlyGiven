@@ -102,7 +102,8 @@ namespace GladyGivenWebAPI.Services
             return serviceRequest;
         }
 
-        public async Task<List<ServiceRequestDTO>> FindServiceRequestProfessionalDescription(long idCategory)
+
+        public async Task<List<ServiceRequestDTO>> FindServiceRequestCategory(long idCategory)
         {
             var serviceRequests = await context.ServiceRequest
                                                .Where(sr => sr.IdCategory == idCategory)
@@ -110,7 +111,7 @@ namespace GladyGivenWebAPI.Services
 
             if (serviceRequests == null || !serviceRequests.Any())
             {
-                throw new Exception($"No service requests found with Description {idCategory}");
+                throw new Exception($"No service requests found with Category {idCategory}");
             }
 
             List<ServiceRequestDTO> serviceRequestDTOs = serviceRequests
@@ -120,33 +121,51 @@ namespace GladyGivenWebAPI.Services
             return serviceRequestDTOs;
         }
 
-        public async Task<ServiceRequestDTO> UpdateCostSupport(ServiceRequestDTO cost, int ServiceRequestStatus)
+        public async Task<List<ServiceRequestDTO>> FindServiceRequestStatus(long status)
         {
-            var serviceRequest = await context.ServiceRequest.FirstOrDefaultAsync(cs => cs.Id == cost.Id);
+            var serviceRequests = await context.ServiceRequest
+                                               .Where(sr => sr.Status == status)
+                                               .ToListAsync();
 
-            if (serviceRequest == null)
+            if (serviceRequests == null || !serviceRequests.Any())
             {
-                throw new EntityDoesntExistException("CostSupport was not found", "CostSupport", "UpdateCostSupport()");
+                throw new Exception($"No service requests found with Status {status}");
             }
 
-            if (ServiceRequestStatus == 1)
-            {
-                serviceRequest.Status = GladlyGiven.Enums.ServiceRequestStatus.APPROVED;
-                context.ServiceRequest.Entry(serviceRequest).State = EntityState.Modified;
-            }
+            List<ServiceRequestDTO> serviceRequestDTOs = serviceRequests
+                .Select(sr => new ServiceRequestDTO(sr))
+                .ToList();
 
-            if (ServiceRequestStatus == 2)
-            {
-                serviceRequest.Status = GladlyGiven.Enums.ServiceRequestStatus.REJECTED;
-                context.ServiceRequest.Entry(serviceRequest).State = EntityState.Modified;
-            }
-
-            await context.SaveChangesAsync();
-
-            ServiceRequestDTO dTO = new ServiceRequestDTO(serviceRequest);
-
-            return dTO;
+            return serviceRequestDTOs;
         }
+
+        //public async Task<ServiceRequestDTO> UpdateServiceRequest(ServiceRequestDTO cost, int ServiceRequestStatus)
+        //{
+        //    var serviceRequest = await context.ServiceRequest.FirstOrDefaultAsync(cs => cs.Id == cost.Id);
+
+        //    if (serviceRequest == null)
+        //    {
+        //        throw new EntityDoesntExistException("CostSupport was not found", "CostSupport", "UpdateCostSupport()");
+        //    }
+
+        //    if (ServiceRequestStatus == 1)
+        //    {
+        //        serviceRequest.Status = GladlyGiven.Enums.ServiceRequestStatus.APPROVED;
+        //        context.ServiceRequest.Entry(serviceRequest).State = EntityState.Modified;
+        //    }
+
+        //    if (ServiceRequestStatus == 2)
+        //    {
+        //        serviceRequest.Status = GladlyGiven.Enums.ServiceRequestStatus.REJECTED;
+        //        context.ServiceRequest.Entry(serviceRequest).State = EntityState.Modified;
+        //    }
+
+        //    await context.SaveChangesAsync();
+
+        //    ServiceRequestDTO dTO = new ServiceRequestDTO(serviceRequest);
+
+        //    return dTO;
+        //}
 
 
     }

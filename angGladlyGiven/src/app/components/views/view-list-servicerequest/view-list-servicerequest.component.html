@@ -1,12 +1,95 @@
-<h2 class="title">List of all new service type requests</h2>
-<div *ngFor="let serviceRequest of serviceRequests">
-  <div class="list-group">
-    <a href="#" class="list-group-item list-group-item-action">
-      <p class="mb-1"> Date request: {{ serviceRequest.dateRequest }}</p>
-      <p class="mb-1">Description of the service requested: {{ serviceRequest.description }}</p>
-      <p class="mb-1">Probable category requested: {{ serviceRequest.idCategory }}</p>
-      <p class="mb-1">Status request: {{ serviceRequest.status }}</p>
-    </a>
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+    <h5 class="card-title">List of all new service type requests</h5>
+      <div *ngFor="let serviceRequest of serviceRequests">
+        <div class="list-group">
+          <a class="list-group-item list-group-item-action">
+            <p class="mb-1"> Id request: {{ serviceRequest.id }}</p>
+            <p class="mb-1"> Date request: {{ serviceRequest.dateRequest }}</p>
+            <p class="mb-1">Description of the service requested: {{ serviceRequest.description }}</p>
+            <!-- <p class="mb-1">Probable category requested: {{ serviceRequest.idCategory }}</p> --> 
+            <!-- <p class="mb-1">Status request: {{ serviceRequest.status }}</p> -->
+            </a>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+<p></p>
+
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+    <h5 class="card-title">Fill the ID of the new service type you want to change</h5>
+
+      <div class="input-group mb-2">
+        <span class="input-group-text">Id Request</span>
+        <input type="text" id="Id" placeholder="Fill in the ID Request you want to change" name="Id" class="form-control" [(ngModel)]="serviceRequest.id" required>
+      </div>
+
+      <div class="input-group mb-2">
+        <span class="input-group-text">Serviço</span>
+        <input type="text" id="service" placeholder="Fill in the service type." name="Description" class="form-control" [(ngModel)]="serviceRequest.description" required>
+      </div>
+
+      <div class="input-group mb-2">
+        <span class="input-group-text">Date Change: </span>
+        <input type="text" id="dateRequest" placeholder="dd/mm/aaaa" name="Date" class="form-control" [(ngModel)]="serviceRequest.dateRequest" required>
+      </div>
+
+      <div class="category-selector">
+        <div style="max-width: 200px">
+         <div style="margin-bottom:  10%;">
+         <label for="category-select">Select Category:</label>
+            <select [(ngModel)]="serviceRequest.idCategory" name="idCategory" type="number">
+              <option value=0>select an option</option>
+              <option value=1>MEDICAL</option>
+              <option value=2>PSYCHOLOGIST</option>
+              <option value=3>NURSE</option>
+              <option value=4>OTHER</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="status-selector">
+        <div style="max-width: 200px">
+         <div style="margin-bottom:  10%;">
+         <label for="status-select">Select Status:</label>
+            <select [(ngModel)]="serviceRequest.status" name="status" type="number">
+              <option value="0">PENDING</option>
+              <option value="1">APPROVAL</option>
+              <option value="2">REJECTED</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-2 d-flex justify-content-between">
+        <app-back-button></app-back-button>
+          <button 
+            type="submit" 
+            class="btn btn-primary"
+            (click)="statusUpdateServiceRequest
+            (
+              serviceRequest.id,
+              serviceRequest.dateRequest,
+              serviceRequest.idCategory,
+              serviceRequest.description,
+              serviceRequest.status
+            )"
+             type="submit" 
+             class="btn btn-primary"
+             (click)="submitForm()"
+          >submit</button>
+</div>
+         <div class="message-container" *ngIf="message">{{ message }}</div>
+
+          
+      
+
+    </div>
+  </div>
+</div>    
 

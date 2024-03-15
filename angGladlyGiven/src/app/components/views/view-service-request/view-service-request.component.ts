@@ -35,7 +35,7 @@ constructor(
  
 ngOnInit(): void {
   this.mostrarDataAtual()
-   // this.donation.donorId = AuthService.SessionContext.userId; 
+   
   }
 
   mostrarDataAtual(): void {
@@ -49,7 +49,7 @@ ngOnInit(): void {
 
 
   registerNewServiceRequest(id: number, dateRequest: string, idCategory: number, description: string, status: number): void {
-    // Call the donation service to create the donation
+    // Call the request service to create the donation
     this.serviceRequestService.registerNewServiceRequest({
       id,
       dateRequest,
