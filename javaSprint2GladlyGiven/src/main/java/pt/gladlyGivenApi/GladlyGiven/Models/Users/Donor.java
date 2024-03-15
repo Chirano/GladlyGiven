@@ -31,15 +31,8 @@ public class Donor extends MonetaryUser<Donor> implements IDTOable<DonorDTO> {
 
     }
 
-    public Donor(String firstName, String lastName, Email email, String gender, String password, Language language,
-                 PhoneNumber phoneNumber, String nif, String paymentInfoId, String invoiceInfoId, FiscalIdentity fiscalIdentity) {
-        super(firstName, lastName, email, gender, password, language, phoneNumber, nif, paymentInfoId, invoiceInfoId);
-        this.fiscalIdentity = fiscalIdentity;
-        this.donationIds = new ArrayList<>();
-    }
-
-    public Donor(String firstName, String lastName, Email email, String gender, String password, Language language, PhoneNumber phoneNumber, String nif, String paymentInfoId, String invoiceInfoId, FiscalIdentity fiscalIdentity, List<String> donationIds) {
-        super(firstName, lastName, email, gender, password, language, phoneNumber, nif, paymentInfoId, invoiceInfoId);
+    public Donor(String firstName, String lastName, Email email, String gender, String password, Language mainLanguage, Language secondLanguage, PhoneNumber phoneNumber, String nif, String paymentInfoId, String invoiceInfoId, FiscalIdentity fiscalIdentity, List<String> donationIds) {
+        super(firstName, lastName, email, gender, password, mainLanguage, secondLanguage, phoneNumber, nif, paymentInfoId, invoiceInfoId);
         this.fiscalIdentity = fiscalIdentity;
         this.donationIds = donationIds;
     }

@@ -62,22 +62,14 @@ public abstract class AppUser<T extends AppUser> {
 
     }
 
-
-    public AppUser(String firstName, String lastName, Email email, String gender, String password) {
+    public AppUser(String firstName, String lastName, Email email, String gender, String password, Language mainLanguage, Language secondLanguage, PhoneNumber phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.gender = gender;
         this.password = password;
-    }
-
-    public AppUser(String firstName, String lastName, Email email, String gender, String password, Language language, PhoneNumber phoneNumber) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.gender = gender;
-        this.password = password;
-        this.mainLanguage = language;
+        this.mainLanguage = mainLanguage;
+        this.secondLanguage = secondLanguage;
         this.mainPhoneNumber = phoneNumber;
     }
 }

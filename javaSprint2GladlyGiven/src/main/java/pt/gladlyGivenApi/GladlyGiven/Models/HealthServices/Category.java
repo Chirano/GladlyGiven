@@ -1,5 +1,6 @@
 package pt.gladlyGivenApi.GladlyGiven.Models.HealthServices;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -18,6 +19,7 @@ public class Category {
     @GeneratedValue
     public Long id;
 
+    @Column(unique = true)
     public String description;
 
     public Category(String description){

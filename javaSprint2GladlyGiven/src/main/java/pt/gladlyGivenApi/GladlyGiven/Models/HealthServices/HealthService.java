@@ -20,6 +20,7 @@ public class HealthService {
     @GeneratedValue
     public Long id;
 
+    @Column(unique = true)
     public String description;
 
     @ManyToMany(mappedBy = "healthServices")
@@ -32,5 +33,4 @@ public class HealthService {
         this.description = description;
         this.category = category;
     }
-
 }

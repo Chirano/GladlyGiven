@@ -32,15 +32,8 @@ public class Refugee extends AppUser<Refugee> implements IDTOable<RefugeeDTO> {
         super();
     }
 
-    public Refugee(String firstName, String lastName, Email email, String gender, String password, String protocolId, String snsNumber, String nationality) {
-        super(firstName, lastName, email, gender, password);
-        this.protocolId = protocolId;
-        this.snsNumber = snsNumber;
-        this.nationality = nationality;
-    }
-
-    public Refugee(String firstName, String lastName, Email email, String gender, String password, String protocolId, String snsNumber, String nationality, Country country, Language language, PhoneNumber phoneNumber) {
-        super(firstName, lastName, email, gender, password, language, phoneNumber);
+    public Refugee(String firstName, String lastName, Email email, String gender, String password, String protocolId, String snsNumber, String nationality, Country country, Language mainLanguage, Language secondLanguage, PhoneNumber phoneNumber) {
+        super(firstName, lastName, email, gender, password, mainLanguage, secondLanguage, phoneNumber);
         this.protocolId = protocolId;
         this.snsNumber = snsNumber;
         this.nationality = nationality;
@@ -57,6 +50,7 @@ public class Refugee extends AppUser<Refugee> implements IDTOable<RefugeeDTO> {
         refugeeDTO.gender = this.gender;
         refugeeDTO.photoURL = this.photoURL;
         refugeeDTO.mainLanguage = this.mainLanguage.language;
+        refugeeDTO.secondLanguage = this.secondLanguage.language;
         refugeeDTO.mainPhoneNumber = this.mainPhoneNumber.number;
         refugeeDTO.protocolId = this.protocolId;
         refugeeDTO.snsNumber = this.snsNumber;

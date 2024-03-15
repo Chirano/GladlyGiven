@@ -56,29 +56,7 @@ public class ServiceProvider extends MonetaryUser<ServiceProvider> implements ID
      * @param email          The email of the service provider.
      * @param gender         The gender of the service provider.
      * @param password       The password of the service provider.
-     * @param language       The language preference of the service provider.
-     * @param phoneNumber    The phone number of the service provider.
-     * @param nif            The NIF (Número de Identificação Fiscal) of the service provider.
-     * @param licenseNumber  The license number of the service provider.
-     * @param categoryId     The category ID of the service provider.
-     */
-    public ServiceProvider(String firstName, String lastName, Email email, String gender,
-                           String password, Language language, PhoneNumber phoneNumber, String nif,
-                           String licenseNumber, long categoryId) {
-        super(firstName, lastName, email, gender, password, language, phoneNumber, nif);
-        this.licenseNumber = licenseNumber;
-        this.categoryId = categoryId;
-    }
-
-    /**
-     * Constructs a new ServiceProvider object with the provided attributes.
-     *
-     * @param firstName      The first name of the service provider.
-     * @param lastName       The last name of the service provider.
-     * @param email          The email of the service provider.
-     * @param gender         The gender of the service provider.
-     * @param password       The password of the service provider.
-     * @param language       The language preference of the service provider.
+     * @param mainLanguage       The language preference of the service provider.
      * @param phoneNumber    The phone number of the service provider.
      * @param nif            The NIF (Número de Identificação Fiscal) of the service provider.
      * @param licenseNumber  The license number of the service provider.
@@ -86,9 +64,9 @@ public class ServiceProvider extends MonetaryUser<ServiceProvider> implements ID
      * @param reviewIds      The list of review IDs associated with the service provider.
      */
     public ServiceProvider(String firstName, String lastName, Email email, String gender, String password,
-                           Language language, PhoneNumber phoneNumber, String nif, String licenseNumber,
+                           Language mainLanguage, Language secondLanguage, PhoneNumber phoneNumber, String nif, String licenseNumber,
                            long categoryId, List<Long> reviewIds) {
-        super(firstName, lastName, email, gender, password, language, phoneNumber, nif);
+        super(firstName, lastName, email, gender, password, mainLanguage, secondLanguage, phoneNumber, nif);
         this.licenseNumber = licenseNumber;
         this.categoryId = categoryId;
         this.reviewIds = reviewIds;
@@ -102,7 +80,7 @@ public class ServiceProvider extends MonetaryUser<ServiceProvider> implements ID
      * @param email          The email of the service provider.
      * @param gender         The gender of the service provider.
      * @param password       The password of the service provider.
-     * @param language       The language preference of the service provider.
+     * @param mainLanguage       The language preference of the service provider.
      * @param phoneNumber    The phone number of the service provider.
      * @param nif            The NIF (Número de Identificação Fiscal) of the service provider.
      * @param licenseNumber  The license number of the service provider.
@@ -114,10 +92,10 @@ public class ServiceProvider extends MonetaryUser<ServiceProvider> implements ID
      * @param postalCode     The postal code of the service provider's address.
      */
     public ServiceProvider(String firstName, String lastName, Email email, String gender, String password,
-                           Language language, PhoneNumber phoneNumber, String nif, String licenseNumber,
+                           Language mainLanguage, Language secondLanguage, PhoneNumber phoneNumber, String nif, String licenseNumber,
                            long categoryId, List<Long> reviewIds, String streetName, String doorNumber,
                            String cityName, String postalCode) {
-        super(firstName, lastName, email, gender, password, language, phoneNumber, nif);
+        super(firstName, lastName, email, gender, password, mainLanguage, secondLanguage, phoneNumber, nif);
         this.licenseNumber = licenseNumber;
         this.categoryId = categoryId;
         this.reviewIds = reviewIds;
