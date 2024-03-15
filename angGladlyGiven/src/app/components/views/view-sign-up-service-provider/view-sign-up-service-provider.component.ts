@@ -37,6 +37,10 @@ export class ViewSignUpServiceProviderComponent {
         servicesIds: [],
         reviewIds: [],
         reviewAverage: form.value.reviewAverage,
+        streetName: form.value.streetName,
+        doorNumber: form.value.doorNumber,
+        cityName: form.value.cityName,
+        postalCode: form.value.postalCode,
       };
     } else {
       do {

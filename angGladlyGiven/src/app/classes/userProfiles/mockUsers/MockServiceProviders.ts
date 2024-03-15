@@ -19,6 +19,10 @@ export const MockServiceProviders = {
         servicesIds: [1, 2],
         reviewIds: [1, 2],
         reviewAverage: 4.5,
+        streetName: "Rua A",
+        doorNumber: "10",
+        cityName: "Porto",
+        postalCode: "1600-012"
     },
 
     serviceProvider2: {
@@ -41,6 +45,10 @@ export const MockServiceProviders = {
         servicesIds: [7, 8],
         reviewIds: [7, 8],
         reviewAverage: 4.6,
+        streetName: "Rua B",
+        doorNumber: "20",
+        cityName: "Amarante",
+        postalCode: "1200-012"
     },
 
     serviceProvider3: {
@@ -63,5 +71,9 @@ export const MockServiceProviders = {
         servicesIds: [9, 10],
         reviewIds: [9, 10],
         reviewAverage: 4.3,
+        streetName: "Rua C",
+        doorNumber: "30",
+        cityName: "Lisboa",
+        postalCode: "1650-012"
     }
 };

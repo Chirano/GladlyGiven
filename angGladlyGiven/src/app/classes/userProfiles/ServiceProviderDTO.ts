@@ -23,4 +23,8 @@ export interface ServiceProviderDTO {
     servicesIds:        number[] | null,
     reviewIds:          number[] | null,
     reviewAverage:      number,
+    streetName:         string,
+    doorNumber:         string,
+    cityName:           string,
+    postalCode:         string
 }

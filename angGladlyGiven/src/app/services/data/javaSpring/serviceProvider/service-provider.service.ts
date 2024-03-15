@@ -110,7 +110,11 @@ export class ServiceProviderService  {
       categoryId: data.categoryId || '',
       servicesIds: data.servicesIds || [],
       reviewIds: data.reviewIds || [],
-      reviewAverage: data.reviewAverage || ''
+      reviewAverage: data.reviewAverage || '',
+      streetName: data.streetName || '',
+      doorNumber: data.doorNumber || '',
+      cityName: data.cityName || '',
+      postalCode: data.postalCode || '',
     };
   }
 
