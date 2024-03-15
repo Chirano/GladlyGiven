@@ -5,20 +5,17 @@
 }
 
 .col {
+    margin-top: 30px;
     margin-bottom: 20px; // Espaço entre as colunas, ajuste conforme necessário
 }
 
 .card {
     height: 100%; // Garante que todos os cards tenham a mesma altura
+    margin-left: 70px;
+    margin-right: 70px;
 }
 
-.card-img-top {
-  width: 0%; // A imagem ocupará 100% da largura do contêiner pai
-  height: auto; // Mantém a proporção original da imagem, ajustando automaticamente a altura
-  max-width: 100%; // Garante que a imagem não ultrapasse a largura do contêiner pai
-  max-height: 200px; // Define uma altura máxima para a imagem
 
-}
 
 .card-body {
     height: 100%; // Garante que todos os corpos dos cards tenham a mesma altura
