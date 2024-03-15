@@ -4,6 +4,7 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import pt.gladlyGivenApi.GladlyGiven.Controllers.GeographicController;
 import pt.gladlyGivenApi.GladlyGiven.Enums.AvailabilityStatus;
 import pt.gladlyGivenApi.GladlyGiven.Enums.FiscalIdentity;
 import pt.gladlyGivenApi.GladlyGiven.Models.*;
@@ -17,53 +18,37 @@ import pt.gladlyGivenApi.GladlyGiven.Repositories.*;
 import pt.gladlyGivenApi.GladlyGiven.Repositories.Users.DonorRepository;
 import pt.gladlyGivenApi.GladlyGiven.Repositories.Users.RefugeeRepository;
 import pt.gladlyGivenApi.GladlyGiven.Repositories.Users.ServiceProviderRepository;
+import pt.gladlyGivenApi.GladlyGiven.Services.HealthServiceService;
+import pt.gladlyGivenApi.GladlyGiven.Services.Users.DonorService;
+import pt.gladlyGivenApi.GladlyGiven.Services.Users.RefugeeService;
+import pt.gladlyGivenApi.GladlyGiven.Services.Users.ServiceProviderService;
 
 import java.util.*;
 
 @Component
-public class DataInitializer {
+public class DataInitializerUsingServices {
 
-    // User Details Repositories
+    // Services
     // ---------------------------------------------------------------------
     @Autowired
-    private EmailRepository emailRepository;
+    GeographicController geographicController;
 
     @Autowired
-    private CountryRepository countryRepository;
+    HealthServiceService healthServiceService;
 
     @Autowired
-    private LanguageRepository languageRepository;
+    ServiceProviderService serviceProviderService;
 
     @Autowired
-    private PhoneNumberRepository phoneNumberRepository;
+    RefugeeService refugeeService;
+
+    @Autowired
+    DonorService donorService;
 
 
 
-    // Service Provider Repositories
+    // Initialize Data
     // ---------------------------------------------------------------------
-    @Autowired
-    CategoryRepository categoryRepository;
-
-    @Autowired
-    HealthServiceRepository serviceRepository;
-
-    @Autowired
-    AvailabilityRepository availabilityRepository;
-
-    @Autowired
-    ServiceProviderRepository serviceProviderRepository;
-
-
-    // Refugee Repositories
-    // ---------------------------------------------------------------------
-    @Autowired
-    RefugeeRepository refugeeRepository;
-
-    @Autowired
-    DonorRepository donorRepository;
-
-
-
     @PostConstruct
     @Transactional
     public void initData() {
@@ -73,6 +58,7 @@ public class DataInitializer {
 
         // service provider
         initializeServiceProviders();
+        assignServicesToServiceProviders();
         initializeAvailabilities();
 
         // donors
@@ -82,27 +68,14 @@ public class DataInitializer {
         initializeRefugees();
     }
 
-    public <T extends AppUser> T createAppUserDependantEntities(T user) {
-        if (user == null)
-            return null;
-
-        user.email = findOrCreateEmail(user.email.email);
-        user.mainLanguage = findOrCreateLanguage(user.mainLanguage.language);
-        user.secondLanguage = findOrCreateLanguage(user.secondLanguage.language);
-        user.mainPhoneNumber = findOrCreatePhoneNumber(user.mainPhoneNumber.number);
-
-        if (user instanceof Refugee refugee)
-            refugee.country = findOrCreateCountry(refugee.country.country);
-
-        return user;
-    }
-
 
 
     // Service Providers
     // ---------------------------------------------------------------------
     @Transactional
     private void initializeCategories() {
+        List<Category> existing = healthServiceService.findAllCategories();
+
         List<Category> categories = Arrays.asList(
                 new Category("Medicine"),
                 new Category("Nurse"),
@@ -110,29 +83,35 @@ public class DataInitializer {
                 new Category("Psychology")
         );
 
-        categoryRepository.saveAll(categories);
+        for (Category c : categories) {
+            if (existing.stream().noneMatch(existingCategory -> existingCategory.description.equalsIgnoreCase(c.description))) {
+                healthServiceService.createCategory(c);
+            }
+        }
     }
 
     @Transactional
     private void initializeServices() {
-        List<Category> categories = categoryRepository.findAll();
+        List<Category> categories = healthServiceService.findAllCategories();
+        List<HealthService> services = new ArrayList<>();
+
         for (Category category : categories) {
             switch (category.description) {
-                case "Medicine" -> serviceRepository.saveAll(Arrays.asList(
+                case "Medicine" -> services.addAll(Arrays.asList(
                         new HealthService("General Check-up", category),
                         new HealthService("Pediatric Care", category),
                         new HealthService("Dermatology Consultation", category),
                         new HealthService("Ophthalmology Exam", category),
                         new HealthService("Internal Medicine Consultation", category)
                 ));
-                case "Nurse" -> serviceRepository.saveAll(Arrays.asList(
+                case "Nurse" -> services.addAll(Arrays.asList(
                         new HealthService("Vaccination Service", category),
                         new HealthService("Wound Care", category),
                         new HealthService("Health Education", category),
                         new HealthService("Blood Pressure Monitoring", category),
                         new HealthService("Home Care Assistance", category)
                 ));
-                case "Dentist" -> serviceRepository.saveAll(Arrays.asList(
+                case "Dentist" -> services.addAll(Arrays.asList(
                         new HealthService("Teeth Cleaning", category),
                         new HealthService("Dental Check-up", category),
                         new HealthService("Root Canal Treatment", category),
@@ -140,6 +119,14 @@ public class DataInitializer {
                         new HealthService("Orthodontic Consultation", category)
                 ));
                 default -> System.out.println("Unknown category: " + category.description);
+            }
+        }
+
+        // only add those that don't exist
+        List<HealthService> existing = healthServiceService.findAllHealthServices();
+        for (HealthService s : services) {
+            if (existing.stream().noneMatch(healthService -> healthService.description.equalsIgnoreCase(s.description))) {
+                healthServiceService.createHealthService(s.description, s.category.description);
             }
         }
     }
@@ -253,15 +240,26 @@ public class DataInitializer {
                 )
         );
 
-        for (ServiceProvider user : serviceProviders) {
-            user = createAppUserDependantEntities(user);
+        List<ServiceProvider> existing = serviceProviderService.findAllServiceProviders();
+        for (ServiceProvider s : serviceProviders) {
+            serviceProviderService.createServiceProvider(s);
         }
-        serviceProviderRepository.saveAll(serviceProviders);
+    }
+
+    @Transactional
+    private void assignServicesToServiceProviders() {
+        List<ServiceProvider> serviceProviders = serviceProviderService.findAllServiceProviders();
+        List<HealthService> healthServices = healthServiceService.findAllHealthServices();
+
+        for (ServiceProvider sp : serviceProviders) {
+            sp.healthServices = healthServices;
+            serviceProviderService.addServicesToServiceProvider(sp, healthServices);
+        }
     }
 
     @Transactional
     private void initializeAvailabilities() {
-        List<ServiceProvider> serviceProviders = serviceProviderRepository.findAll();
+        List<ServiceProvider> serviceProviders = serviceProviderService.findAllServiceProviders();
 
         for (ServiceProvider serviceProvider : serviceProviders) {
             Availability availability = new Availability(
@@ -273,7 +271,7 @@ public class DataInitializer {
                     "18:00"
             );
 
-            availabilityRepository.save(availability);
+            serviceProviderService.createServiceProviderAvailability(serviceProvider, availability);
         }
     }
 
@@ -339,10 +337,9 @@ public class DataInitializer {
                 )
         );
 
-        for (Donor user : donors) {
-            user = createAppUserDependantEntities(user);
+        for (Donor donor : donors) {
+            donor = donorService.createDonor(donor);
         }
-        donorRepository.saveAll(donors);
     }
 
 
@@ -402,10 +399,9 @@ public class DataInitializer {
                 new PhoneNumber(generateUniqueNumberString()) // Unique snsNumber
         ));
 
-        for (Refugee user : refugees) {
-            user = createAppUserDependantEntities(user);
+        for (Refugee refugee : refugees) {
+            refugee = refugeeService.createRefugee(refugee);
         }
-        refugeeRepository.saveAll(refugees);
     }
 
 
@@ -420,113 +416,5 @@ public class DataInitializer {
             sb.append(random.nextInt(9) + 1); // Generates numbers from 1 to 9
         }
         return sb.toString();
-    }
-
-    private void printCreatingNew(String classType) {
-        System.out.printf("%s, was not found. Creating one%n", classType);
-    }
-
-    // Email
-    // ---------------------------------------------------------------------
-    public Email findEmailByEmail(String email) {
-        return emailRepository.findById(email).orElse(null);
-    }
-
-    public Email findOrCreateEmail(String email) {
-        try {
-            Email mail = findEmailByEmail(email);
-            if (mail == null) {
-                printCreatingNew("Email");
-                mail = new Email(email);
-                mail = emailRepository.save(mail);
-            }
-
-            return mail;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return new Email();
-        }
-    }
-
-
-
-    // Country
-    // ---------------------------------------------------------------------
-    public Country findCountryById(Long id) {
-        return countryRepository.findById(id).orElse(null);
-    }
-
-    public Country findCountryByString(String country) {
-        return countryRepository.findByCountryIgnoreCase(country).orElse(null);
-    }
-
-    public Country findOrCreateCountry(String country) {
-        try {
-            Country existing = findCountryByString(country);
-
-            if (existing == null) {
-                printCreatingNew("Country");
-                existing = new Country(country);
-                existing = countryRepository.save(existing);
-            }
-
-            return existing;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return new Country();
-        }
-    }
-
-
-    // Language
-    // ---------------------------------------------------------------------
-    public Language findLanguageById(Long id) {
-        return languageRepository.findById(id).orElse(null);
-    }
-
-    public Language findLanguageByLanguage(String language) {
-        return languageRepository.findByLanguageIgnoreCase(language).orElse(null);
-    }
-
-    public Language findOrCreateLanguage(String language) {
-        try {
-            Language lang = findLanguageByLanguage(language);
-            if (lang == null) {
-                printCreatingNew("Language");
-                lang = new Language(language);
-                lang = languageRepository.save(lang);
-            }
-
-            return lang;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return new Language();
-        }
-    }
-
-
-
-    // Phone Number
-    // ---------------------------------------------------------------------
-    public PhoneNumber findPhoneNumberByNumber(String number) {
-        return phoneNumberRepository.findByNumber(number).orElse(null);
-    }
-
-    public PhoneNumber findOrCreatePhoneNumber(String number) {
-        try {
-            PhoneNumber phoneNumber = findPhoneNumberByNumber(number);
-
-            if (phoneNumber == null) {
-                printCreatingNew("Phone Number");
-                phoneNumber = new PhoneNumber(number);
-                phoneNumber = phoneNumberRepository.save(phoneNumber);
-
-            }
-
-            return phoneNumber;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return new PhoneNumber();
-        }
     }
 }

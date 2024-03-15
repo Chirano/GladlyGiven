@@ -5,7 +5,7 @@ import { ServiceProviderService } from 'src/app/services/data/javaSpring/service
 import { EventManagerService } from 'src/app/services/events/event-manager.service';
 import { RefugeePage } from '../RefugeePage';
 import { RefugeeService } from 'src/app/services/data/javaSpring/refugee/refugee.service';
-import { RefugeeSearch } from 'src/app/classes/RefugeeSearch';
+import { RefugeeSearch as ServiceSearchQuery } from 'src/app/classes/RefugeeSearch';
 
 @Component({
   selector: 'app-refugee-search',
@@ -28,13 +28,7 @@ export class RefugeeSearchComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.searchServiceProviders(this.previousSearch);
-  }
-
-  ngOnInit(): void {
-    // Initialize the component with all service providers
     //this.searchServiceProviders(this.previousSearch);
-    //console.log("Initialized!");
   }
 
   searchServiceProviders(query: string): void {
@@ -49,13 +43,15 @@ export class RefugeeSearchComponent implements OnChanges {
   }
 
   
-  onSearchSubmit(refugeeSearch : RefugeeSearch): void {
-    var array = this.serviceProviderService
-      .searchServiceProvidersByServiceDescriptionAndCityName(refugeeSearch.serviceDescription, refugeeSearch.cityName)
+  onSearchSubmit(refugeeSearchQuery: ServiceSearchQuery): void {
+    console.log("Service:", refugeeSearchQuery.serviceDescription, "City:", refugeeSearchQuery.cityName);
+  
+    this.serviceProviderService
+      .searchServiceProvidersByServiceDescriptionAndCityName(refugeeSearchQuery.serviceDescription, refugeeSearchQuery.cityName)
       .subscribe((serviceProviders: ServiceProviderDTO[]) => {
         this.serviceProviders = serviceProviders;
+        console.log("Services providers:", this.serviceProviders);
       });
-      console.log("Services providers", array);
   }
 
   listServiceProviders(): void {

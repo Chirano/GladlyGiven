@@ -14,6 +14,7 @@ import pt.gladlyGivenApi.GladlyGiven.Models.HealthServices.HealthService;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class ServiceProvider extends MonetaryUser<ServiceProvider> implements IDTOable<ServiceProviderDTO> {
@@ -208,5 +209,4 @@ public class ServiceProvider extends MonetaryUser<ServiceProvider> implements ID
         sb.append("-----------------------------------\n");
         return sb.toString();
     }
-
 }

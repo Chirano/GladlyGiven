@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ServiceProviderRepository extends AppUserRepository<ServiceProvider> {
+    Optional<ServiceProvider> findByNif(String nif);
+
     Optional<ServiceProvider> findByLicenseNumber(String licenseNumber);
 
     @Query(value = "SELECT sp FROM ServiceProvider sp JOIN sp.healthServices hs WHERE hs.id = :healthServiceId")
@@ -30,8 +32,8 @@ public interface ServiceProviderRepository extends AppUserRepository<ServiceProv
 
     @Query("SELECT sp FROM ServiceProvider sp " +
             "JOIN sp.healthServices hs " +
-            "WHERE hs.description = :healthServiceDescription " +
-            "AND sp.cityName = :cityName")
+            "WHERE LOWER(hs.description) = LOWER(:healthServiceDescription) " +
+            "AND LOWER(sp.cityName) = LOWER(:cityName)")
     List<ServiceProvider> findByHealthServiceDescriptionAndCityName(@Param("healthServiceDescription")
                                                                     String healthServiceDescription,
                                                                     @Param("cityName") String cityName);

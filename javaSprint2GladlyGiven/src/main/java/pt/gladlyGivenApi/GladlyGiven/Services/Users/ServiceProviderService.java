@@ -61,6 +61,10 @@ public class ServiceProviderService extends AppUserService {
 
     // Finds ---
 
+    public List<ServiceProvider> findAllServiceProviders() {
+        return serviceProviderRepository.findAll();
+    }
+
     /**
      * Retrieves a service provider by its ID.
      *
@@ -79,6 +83,10 @@ public class ServiceProviderService extends AppUserService {
      */
     public ServiceProvider findServiceProviderByEmail(String email) {
         return findUserByEmail(email, serviceProviderRepository);
+    }
+
+    public ServiceProvider findServiceProviderByNIF(String nif) {
+        return serviceProviderRepository.findByNif(nif).orElse(null);
     }
 
     /**
@@ -199,6 +207,10 @@ public class ServiceProviderService extends AppUserService {
         ServiceProvider existing = findServiceProviderByEmail(serviceProvider.email.email);
 
         if (existing == null) {
+            existing = findServiceProviderByNIF(serviceProvider.nif);
+        }
+
+        if (existing == null) {
             existing = createAppUserDependantEntities(serviceProvider);
             existing = addCreationDateToUser(serviceProvider);
             existing = saveServiceProvider(serviceProvider);
@@ -286,16 +298,28 @@ public class ServiceProviderService extends AppUserService {
      * @return The updated service provider with the added health service if successful, otherwise null.
      */
     @Transactional
-    public ServiceProvider addServicesToServiceProvider(ServiceProvider serviceProvider, HealthService service) {
+    public ServiceProvider addServiceToServiceProvider(ServiceProvider serviceProvider, HealthService service) {
 
         if(serviceProvider.healthServices.contains(service)){
             return null;
         }
 
         serviceProvider.healthServices.add(service);
-        serviceProvider = serviceProviderRepository.save(serviceProvider);
+        return saveServiceProvider(serviceProvider);
+    }
 
-        return serviceProvider;
+    @Transactional
+    public ServiceProvider addServicesToServiceProvider(ServiceProvider serviceProvider, List<HealthService> healthServices) {
+        if (serviceProvider == null || healthServices == null || healthServices.size() == 0)
+            return null;
+
+        for (HealthService hs : healthServices) {
+            if (!serviceProvider.healthServices.contains(hs)) {
+                serviceProvider.healthServices.add(hs);
+            }
+        }
+
+        return saveServiceProvider(serviceProvider);
     }
 
     /**
@@ -374,6 +398,26 @@ public class ServiceProviderService extends AppUserService {
         return availabilityRepository.findById(id).orElse(null);
     }
 
+
+    /**
+     * Retrieves a page of availabilities based on the given availability status.
+     *
+     * @param availabilityStatus The availability status to filter by.
+     * @param page               The page number to retrieve.
+     * @param size               The number of items per page.
+     * @return A Page object containing the availabilities with the specified status,
+     *         paginated according to the given page and size parameters.
+     */
+    public Page<Availability> findAvailabilitiesByStatus(int availabilityStatus, int page, int size) {
+        if(availabilityStatus == 0) {
+            return this.availabilityRepository.findByAvailabilityStatus(availabilityStatus, PageRequest.of(page, size));
+        } else {
+            return this.availabilityRepository.findByAvailabilityStatus(availabilityStatus, PageRequest.of(page, size));
+        }
+    }
+
+
+
     /**
      * Creates a new availability entry in the system.
      *
@@ -394,23 +438,33 @@ public class ServiceProviderService extends AppUserService {
         return newAv;
     }
 
+    @Transactional
+    public Availability createServiceProviderAvailability(ServiceProvider serviceProvider, Availability availability) {
+        Availability av = this.availabilityRepository.findById(availability.id).orElse(null);
 
-    /**
-     * Retrieves a page of availabilities based on the given availability status.
-     *
-     * @param availabilityStatus The availability status to filter by.
-     * @param page               The page number to retrieve.
-     * @param size               The number of items per page.
-     * @return A Page object containing the availabilities with the specified status,
-     *         paginated according to the given page and size parameters.
-     */
-    public Page<Availability> findAvailabilitiesByStatus(int availabilityStatus, int page, int size) {
-        if(availabilityStatus == 0) {
-            return this.availabilityRepository.findByAvailabilityStatus(availabilityStatus, PageRequest.of(page, size));
-        } else {
-            return this.availabilityRepository.findByAvailabilityStatus(availabilityStatus, PageRequest.of(page, size));
+        if(av != null) {
+            throw new IllegalArgumentException("Availability already exists");
         }
+
+        availability.availabilityStatus = AvailabilityStatus.Free;
+        availability.serviceProviderId = serviceProvider.id;
+        return this.availabilityRepository.save(availability);
     }
+
+    @Transactional
+    public Availability createServiceProviderAvailability(Long serviceProviderId, Availability availability) {
+        Availability av = this.availabilityRepository.findById(availability.id).orElse(null);
+
+        if(av != null) {
+            throw new IllegalArgumentException("Availability already exists");
+        }
+
+        availability.availabilityStatus = AvailabilityStatus.Free;
+        availability.serviceProviderId = serviceProviderId;
+        return this.availabilityRepository.save(availability);
+    }
+
+
 
     // Service Reviews
     // ---------------------------------------------------------------------

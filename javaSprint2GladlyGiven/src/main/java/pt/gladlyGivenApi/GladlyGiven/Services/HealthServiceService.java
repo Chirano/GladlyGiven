@@ -68,7 +68,6 @@ public class HealthServiceService {
     public HealthService createHealthService(String description, String categoryStr) {
 
         Category category = findOrCreateCategory(categoryStr);
-
         HealthService newHealthService = new HealthService(description, category);
 
         return healthServiceRepository.save(newHealthService);

@@ -1,4 +1,4 @@
-export interface HealthServices{
+export interface HealthService{
     id: number, 
     description: string, 
 }

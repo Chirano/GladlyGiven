@@ -8,7 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pt.gladlyGivenApi.GladlyGiven.Models.Appointment;
 import pt.gladlyGivenApi.GladlyGiven.Models.Availability;
 import pt.gladlyGivenApi.GladlyGiven.Models.DTO.HealthServiceDTO;
 import pt.gladlyGivenApi.GladlyGiven.Models.DTO.ServiceProviderDTO;
@@ -137,7 +136,7 @@ public class ServiceProviderController {
             throw new RuntimeException();
         }
 
-        ServiceProvider updatedServiceProvider = serviceProviderService.addServicesToServiceProvider(serviceProvider,
+        ServiceProvider updatedServiceProvider = serviceProviderService.addServiceToServiceProvider(serviceProvider,
                                                     healthService);
         List<HealthService> healthServiceList = updatedServiceProvider.healthServices;
 

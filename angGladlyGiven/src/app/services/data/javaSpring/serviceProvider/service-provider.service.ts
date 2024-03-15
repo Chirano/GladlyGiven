@@ -130,7 +130,6 @@ export class ServiceProviderService  {
 
   //GET http://localhost:8080/api/search/service/{serviceDescription}/{cityName}?serviceDescription=Troca%20de%20curativo&cityName=Porto
   searchServiceProvidersByServiceDescriptionAndCityName(serviceDescription : string, cityName : string) : Observable<any> {
-    //http://localhost:8080/api/search/service/{serviceDescription}/{cityName}?serviceDescription=Troca%20de%20curativo&cityName=Porto
     return this.http.get(`${this.baseUrl}/search/service/${serviceDescription}/${cityName}`);
   }
 }

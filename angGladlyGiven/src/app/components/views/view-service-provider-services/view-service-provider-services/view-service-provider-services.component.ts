@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HealthServices } from 'src/app/classes/HealthServices';
+import { HealthService } from 'src/app/classes/HealthServices';
 import { SessionContext } from 'src/app/classes/authentication/SessionContext';
 import { AuthService } from 'src/app/services/authentication/auth.service';
 import { HealthserviceService } from 'src/app/services/healthservices/healthservice.service';
@@ -12,13 +12,13 @@ import { HealthserviceService } from 'src/app/services/healthservices/healthserv
 export class ViewServiceProviderServicesComponent implements OnInit{
 
   constructor(private service : HealthserviceService){}
-  allHealthServices : HealthServices [] = [];
-  healthServices : HealthServices[] = [];
-  healthService : HealthServices ={
+  allHealthServices : HealthService [] = [];
+  healthServices : HealthService[] = [];
+  healthService : HealthService ={
     id: 0,
     description: "",
   }
-  toaddhealthService : HealthServices ={
+  toaddhealthService : HealthService ={
     id: 0, 
     description: " ",
   }

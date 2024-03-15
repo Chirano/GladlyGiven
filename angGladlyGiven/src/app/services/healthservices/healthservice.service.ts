@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../authentication/auth.service';
 import { Observable } from 'rxjs';
-import { HealthServices } from 'src/app/classes/HealthServices';
+import { HealthService } from 'src/app/classes/HealthServices';
 
 @Injectable({
   providedIn: 'root'
@@ -28,19 +28,19 @@ export class HealthserviceService {
     private authService: AuthService
   ) { }
 
-  getAllServices() : Observable<HealthServices[]>{
-    return this.http.get<HealthServices[]>(this.url+"/healthservices");
+  getAllServices() : Observable<HealthService[]>{
+    return this.http.get<HealthService[]>(this.url+"/healthservices");
   }
 
-  getAllServicesByServiceId(userId: number) : Observable<HealthServices[]>{
-    return this.http.get<HealthServices[]>(this.url+"/healthservices/serviceProvider/"+userId);
+  getAllServicesByServiceId(userId: number) : Observable<HealthService[]>{
+    return this.http.get<HealthService[]>(this.url+"/healthservices/serviceProvider/"+userId);
   }
   
-  removeService(userId: number, serviceId: number) : Observable<HealthServices[]>{
-    return this.http.put<HealthServices[]>(this.url+"/serviceProvider/"+userId+"/removeservice/"+serviceId, this.httpOptions);
+  removeService(userId: number, serviceId: number) : Observable<HealthService[]>{
+    return this.http.put<HealthService[]>(this.url+"/serviceProvider/"+userId+"/removeservice/"+serviceId, this.httpOptions);
   }
 
-  addService(userId: number, serviceId: number): Observable<HealthServices[]>{
-    return this.http.put<HealthServices[]>(this.url+"/serviceProvider/"+userId+"/addservice/"+serviceId, this.httpOptions); 
+  addService(userId: number, serviceId: number): Observable<HealthService[]>{
+    return this.http.put<HealthService[]>(this.url+"/serviceProvider/"+userId+"/addservice/"+serviceId, this.httpOptions); 
   }
 }
