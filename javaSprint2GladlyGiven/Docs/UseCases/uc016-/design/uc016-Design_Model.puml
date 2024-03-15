@@ -1,0 +1,42 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title UC016 - Donor makes a donation
+
+autonumber
+
+actor Donor as donor
+participant ":DonationUI" as ui
+participant ":DonationController" as ctrl
+participant Repositories as repo
+participant "donationRepo : DonationRepo" as donationRepo
+
+activate donor
+    donor -> ui : starts the process of requesting a new donation
+     activate ui
+            ui -> ctrl** : create()
+            ui -> ctrl : createDonation()
+            activate ctrl
+                ctrl -> Repositories : getDonationRepository()
+                activate Repositories
+                    Repositories -> Repositories : donationRepository()
+                    Repositories-->ctrl : donationRepo
+                deactivate Repositories
+            deactivate ctrl
+                ui --> donor : requests data (amount, donation type, fiscal identity)
+                donor -> ui : fills requested data (amount, donation type, fiscal identity)
+                ui -> ctrl : createDonation(amount, donation type, fiscal identity)
+            activate ctrl
+            activate donationRepo
+                    donationRepo -> donationRepo : localValidation(amount, donation type, fiscal identity)
+                    donationRepo --> donationRepo : donation
+            deactivate donationRepo
+                ctrl --> ui : success
+            deactivate ctrl
+    deactivate ui
+deactivate Donor
+
+
+@enduml

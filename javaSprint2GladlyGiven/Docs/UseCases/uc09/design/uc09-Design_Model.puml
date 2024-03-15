@@ -1,0 +1,44 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title UC09 - Design Model - Refugee chooses a language
+
+actor Refugee as refugee
+participant ":RefugeeUI" as ui
+participant ":RefugeeController" as ctrl
+participant "LanguageService" as languageService
+participant "TranslationService" as translationService
+
+activate refugee
+    refugee -> ui : initiates language selection
+    activate ui
+        ui -> ctrl : getLanguages()
+        activate ctrl
+            ctrl -> languageService : getLanguages()
+            activate languageService
+                languageService -> languageService : retrieve languages
+                languageService --> ctrl : languages
+            deactivate languageService
+            ctrl --> ui : languages
+        deactivate ctrl
+        ui --> refugee : displays language selection options
+        refugee -> ui : selects language
+        ui -> ctrl : translatePage(language)
+        activate ctrl
+            ctrl -> translationService : translatePage(language)
+            activate translationService
+                translationService -> translationService : translate page content
+                translationService --> ctrl : translated content
+            deactivate translationService
+            ctrl --> ui : translated content
+        deactivate ctrl
+    deactivate ui
+deactivate refugee
+
+
+
+
+
+@enduml

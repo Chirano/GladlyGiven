@@ -1,0 +1,33 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+title UC06 - Service Provider visualize a list of services available
+
+class ServiceProvider {
+    id
+    firstName
+    lastName
+    email
+    gender
+    password
+    language
+    phoneNumber
+    nif
+    licenseNumber
+}
+
+class HealthService {
+    id
+    description
+}
+
+ServiceProvider "1   " - "   *" HealthService : sees >
+
+@enduml

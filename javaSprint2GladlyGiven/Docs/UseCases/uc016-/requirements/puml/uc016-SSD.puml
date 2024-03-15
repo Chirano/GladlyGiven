@@ -1,0 +1,26 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - UC016 - Donor makes a donation
+
+
+
+autonumber
+
+actor Donor as donor
+participant ":System" as system
+
+activate donor
+    donor -> system : starts the process of registering a donation
+    activate system
+        system --> donor : displays the requested data(amount, donation type, fiscal identity)
+    donor -> system : fills the requested data(amount) and selects the donation type and the fiscal identity
+        activate system
+            system --> donor : validates, records the information and notifies the success of the operation
+        deactivate system
+    deactivate donor
+
+
+@enduml
