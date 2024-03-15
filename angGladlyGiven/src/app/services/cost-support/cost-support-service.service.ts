@@ -49,7 +49,7 @@ export class CostSupportServiceService {
       amount: costSupport.amount,
       description: costSupport.description,
       appointmentId: costSupport.appointmentId,
-      serviceProviderId: costSupport.serviceProviderId,
+      serviceProviderId: AuthService.SessionContext.userId,
       type: costSupport.type,
       dateRequest: this.formatDate(new Date()), //Data atual.
     };

@@ -18,20 +18,15 @@ public class SearchController {
     @Autowired
     private ServiceProviderService serviceProviderService;
 
-    /*@GetMapping("/search/{serviceId}/{cityName}")
-    public ResponseEntity<List<ServiceProviderDTO>> searchServiceProvidersByServiceIdAndCityName(
-            @RequestParam Long serviceId,
-            @RequestParam String cityName) {
-
-        List<ServiceProviderDTO> serviceProviders = serviceProviderService.findByHealthServiceIdAndCityName(serviceId, cityName);
-
-        if (serviceProviders.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-
-        return new ResponseEntity<>(serviceProviders, HttpStatus.OK);
-    }*/
-
+    /**
+     * Retrieves service providers based on the description of a service and a city name.
+     *
+     * @param serviceDescription The description of the service to search for.
+     * @param cityName The name of the city where the service providers are located.
+     * @return A ResponseEntity containing a list of ServiceProviderDTO objects representing the service providers
+     *         offering the specified service in the given city, or a ResponseEntity with status NO_CONTENT
+     *         if no service providers are found.
+     */
     @GetMapping("/service/{serviceDescription}/{cityName}")
     public ResponseEntity<List<ServiceProviderDTO>> searchServiceProvidersByServiceDescriptionAndCityName(
             @PathVariable("serviceDescription") String serviceDescription,

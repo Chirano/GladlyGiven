@@ -1,13 +1,25 @@
-<h2 class="title">List of all cost support requests</h2>
-<div *ngFor="let costSupport of costSupports">
-  <div class="list-group">
-    <a href="#" class="list-group-item list-group-item-action">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">
-          Date request: {{ costSupport.dateRequest }} - Amount: {{ costSupport.amount }}€
-        </h5>
-      </div>
-      <p class="mb-1">{{ costSupport.description }}</p>
-    </a>
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+<div class="container"> 
+  <h2 class="title">List of all cost support requests</h2>
+  <div *ngFor="let costSupport of costSupports">
+    <div class="list-group">
+      <a href="#" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">
+            Date request: {{ costSupport.dateRequest }} - Amount: {{ costSupport.amount }}€
+          </h5>
+        </div>
+        <p class="mb-1">
+          Description: {{ costSupport.description }}</p>
+      </a>
+    </div>
   </div>
+</div>
+</div>
+</div>
+
+  <p></p> 
+  <app-back-button></app-back-button>
 </div>
