@@ -55,7 +55,7 @@ const routes: Routes = [
   { path: RouterPaths.ViewAdmin, component: ViewAdminComponent },
   
   // Refugee views:
-  { path: RouterPaths.ViewRefugeeHome, component: RefugeeHomeComponent },
+  { path: RouterPaths.ViewRefugeeHome, component: ViewHomeComponent },
   { path: RouterPaths.ViewRefugeeSearch, component: RefugeeSearchComponent },
   { path: RouterPaths.ViewRefugeeAppointments, component: RefugeeAppointmentsComponent },
   { path: RouterPaths.ViewRefugeeHelpRequest, component: RefugeeHelpRequestComponent },
