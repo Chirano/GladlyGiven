@@ -24,23 +24,7 @@
                </div>
              </div>
           </div>
-
-          <div class="status-selector">
-            <div style="max-width: 200px">
-             <div style="margin-bottom:  10%;">
-             <label for="status-select">Select Status:</label>
-                <select [(ngModel)]="serviceRequest.status" name="status" type="number">
-                  <option value='0'>PENDING</option>
-                  <option value='1'>APPROVAL</option>
-                  <option value='2'>REJECTED</option>
-                </select>
-              </div>
-            </div>
-          </div>
-     
-          <p></p>
-
-
+         
           <div class="input-group mb-2">
             <span class="input-group-text">Description</span>
               <input type="text" id="description" placeholder="Enter your description of the type of service you would like to offer" name="Description" class="form-control" [(ngModel)]="serviceRequest.description" required>
@@ -48,7 +32,7 @@
 
           <div class="mb-2 d-flex justify-content-between">
             <app-back-button></app-back-button>
-            <button type="button" (click)="toListServiceRequest()" class="btn btn-light">List of new service type requests</button>
+            <!--<button type="button" (click)="toListServiceRequest()" class="btn btn-light">List of new service type requests</button>-->
             <button 
               type="submit" 
               class="btn btn-primary"
@@ -59,9 +43,9 @@
                 serviceRequest.description,
                 serviceRequest.status
 
-              )
-              "
+              )"
+               (click)="submitForm()"
               >submit</button>
           </div>
- 
+          <div class="message-container" *ngIf="message">{{ message }}</div>
      

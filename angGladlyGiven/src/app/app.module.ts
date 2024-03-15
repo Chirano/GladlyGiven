@@ -55,6 +55,7 @@ import { AvailabilityInputComponent } from './components/viewComponents/availabi
 import { ServiceProviderDetailsComponent } from './components/viewComponents/serviceProviderComponents/service-provider-details/service-provider-details.component';
 import { ServiceProviderDetailsSimpleComponent } from './components/viewComponents/serviceProviderComponents/service-provider-details-simple/service-provider-details-simple.component';
 import { GlobalDetailsComponent } from './components/viewComponents/global-details/global-details.component';
+import { ViewListServicerequestAllComponent } from './components/views/view-list-servicerequest-all/view-list-servicerequest-all.component';
 
 
 @NgModule({
@@ -111,6 +112,7 @@ import { GlobalDetailsComponent } from './components/viewComponents/global-detai
     ServiceProviderDetailsComponent,
     ServiceProviderDetailsSimpleComponent,
     GlobalDetailsComponent,
+    ViewListServicerequestAllComponent,
   ],
   imports: [
     BrowserModule,

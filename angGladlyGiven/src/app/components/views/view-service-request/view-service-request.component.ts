@@ -75,4 +75,12 @@ ngOnInit(): void {
     EventManagerService.OnRouteEvent.emit(RouterPaths.ViewListServiceRequest);
   }
 
+  message: string = '';
+  submitForm() {
+    this.message = 'New service request successful!';
+    setTimeout(() => {
+    location.reload();
+    }, 3000);
+  }
+
 }

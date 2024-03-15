@@ -1,7 +1,7 @@
 <div class="container">
   <div class="card">
     <div class="card-body">
-    <h5 class="card-title">List of all new service type requests</h5>
+    <h5 class="card-title">List of all new service type requests (status: pending)</h5>
       <div *ngFor="let serviceRequest of serviceRequests">
         <div class="list-group">
           <a class="list-group-item list-group-item-action">
@@ -27,17 +27,7 @@
         <span class="input-group-text">Id Request</span>
         <input type="text" id="Id" placeholder="Fill in the ID Request you want to change" name="Id" class="form-control" [(ngModel)]="serviceRequest.id" required>
       </div>
-
-      <div class="input-group mb-2">
-        <span class="input-group-text">Serviço</span>
-        <input type="text" id="service" placeholder="Fill in the service type." name="Description" class="form-control" [(ngModel)]="serviceRequest.description" required>
-      </div>
-
-      <div class="input-group mb-2">
-        <span class="input-group-text">Date Change: </span>
-        <input type="text" id="dateRequest" placeholder="dd/mm/aaaa" name="Date" class="form-control" [(ngModel)]="serviceRequest.dateRequest" required>
-      </div>
-
+      
       <div class="category-selector">
         <div style="max-width: 200px">
          <div style="margin-bottom:  10%;">
@@ -52,6 +42,17 @@
           </div>
         </div>
       </div>
+
+      <div class="input-group mb-2">
+        <span class="input-group-text">Serviço</span>
+        <input type="text" id="service" placeholder="Fill in the service type." name="Description" class="form-control" [(ngModel)]="serviceRequest.description" required>
+      </div>
+
+      <div class="input-group mb-2">
+        <span class="input-group-text">Date Change: </span>
+        <input type="text" id="dateRequest" placeholder="dd/mm/aaaa" name="Date" class="form-control" [(ngModel)]="serviceRequest.dateRequest" required>
+      </div>
+
 
       <div class="status-selector">
         <div style="max-width: 200px">
@@ -79,9 +80,7 @@
               serviceRequest.description,
               serviceRequest.status
             )"
-             type="submit" 
-             class="btn btn-primary"
-             (click)="submitForm()"
+            (click)="submitForm()"
           >submit</button>
 </div>
          <div class="message-container" *ngIf="message">{{ message }}</div>
