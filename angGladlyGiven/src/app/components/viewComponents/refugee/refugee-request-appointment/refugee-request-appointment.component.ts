@@ -27,7 +27,6 @@ export class RefugeeRequestAppointmentComponent {
   }
 
   private OnServiceProviderClicked(clickedServiceProvider: ServiceProviderDTO) {
-    console.log("Old:", this.serviceProvider);
     console.log("Clicked:", clickedServiceProvider);
     this.serviceProvider = clickedServiceProvider;
     this.changeDetector.detectChanges();
