@@ -15,7 +15,7 @@ export class RefugeeHeaderComponent {
   ToRefugeeHome() {
     this.targetPage = RefugeePage.Home;
     this.pageChanged();
-    EventManagerService.OnRouteEvent.emit(RouterPaths.ViewRefugeeHome);
+    EventManagerService.OnRouteEvent.emit(RouterPaths.Home);
   }
   
   ToRefugeeSearch() {

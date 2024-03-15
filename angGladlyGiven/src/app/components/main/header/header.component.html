@@ -1,1 +1,28 @@
-<p>header works!</p>
+<nav class="navbar bg-body-tertiary d-flex justify-content-center">
+    <div class="container-fluid">
+      <img
+        src="assets/logo.png"
+        alt="Logo"
+        style="max-height: 64px; width: auto"
+        (click)="toHome()"
+      />
+  
+      <div class="d-flex align-items-center justify-content-center flex-grow-1">
+        <!-- User Navigation -->
+        <app-refugee-header *ngIf="isRefugee()"></app-refugee-header>
+      </div>
+  
+      <!-- Login / Logout buttons -->
+      <div class="d-flex align-items-center justify-content-center">
+        <div *ngIf="isGuest()">
+          <button class="btn btn-outline-info me-2" (click)="toSignUp()">Register</button>
+          <button class="btn btn-primary" (click)="toSignIn()">Log In</button>
+        </div>
+  
+        <div *ngIf="isNotGuest()">
+          <button class="btn btn-outline-info me-2" (click)="toLogOut()">Logout</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  

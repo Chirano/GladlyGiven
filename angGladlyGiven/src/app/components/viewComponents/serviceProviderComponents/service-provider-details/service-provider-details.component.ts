@@ -22,6 +22,7 @@ export class ServiceProviderDetailsComponent {
 
   SetServiceProvider(serviceProvider: ServiceProviderDTO) {
     if (serviceProvider == null) {
+      console.log("TESTE serviceproviderdetails")
       return;
     }
 

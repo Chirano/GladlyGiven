@@ -51,5 +51,7 @@ export const RouterPaths = {
     ViewAvailability: "view-availability",
 
     ViewCategory: "view-category",
+
+    ViewPageNotFound: "view-pagenotfound"
     
 }

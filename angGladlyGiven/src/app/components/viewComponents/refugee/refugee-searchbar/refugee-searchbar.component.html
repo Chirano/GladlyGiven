@@ -1,6 +1,23 @@
 <div>
-    <form #searchForm="ngForm" class="input-group mb-3" (ngSubmit)="onSearchSubmit(searchForm.value.search)">
-        <input type="text" class="form-control"  aria-label="Small" placeholder="search" name="search" ngModel>
+    <form #searchForm="ngForm" class="input-group mb-3" (ngSubmit)="onSearchSubmit(searchForm.value.serviceDescription, searchForm.value.cityName)">
+        <input type="text" class="form-control"  aria-label="Small" placeholder="What service are you looking for?" name="serviceDescription" ngModel>
+        <input type="text" class="form-control"  aria-label="Small" placeholder="City name" name="cityName" ngModel>
         <button type="submit" class="btn btn-primary">Search</button>
     </form>
+
+    <!--
+        <nav class="navbar bg-body">
+          <div class="container-fluid">
+            <form class="d-flex" role="search">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search for a service"
+                aria-label="Search"
+              />
+              <button class="btn btn-outline-info" type="submit">Search</button>
+            </form>
+          </div>
+        </nav>
+        -->
 </div>

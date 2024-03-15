@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+
 import { ServiceRequest } from 'src/app/classes/ServiceRequest';
 import { AuthService } from 'src/app/services/authentication/auth.service';
 import { ServiceRequestService } from 'src/app/services/service-request/service-request.service';
@@ -14,10 +14,10 @@ export class ViewListServicerequestComponent {
 
   serviceRequest: ServiceRequest = {
     id                 : 0,
-    dateRequest        : 'dd/mm/aaaa',
+    dateRequest        : '',
     idCategory         : 0,
     description        : '',
-    status             : 2,
+    status             : 0,
  };  
 
   serviceRequests: ServiceRequest[] = [];
@@ -31,7 +31,7 @@ export class ViewListServicerequestComponent {
     }
 
 
-    //GET: returns all costs supports saved in database.
+    //GET: returns all Service Requests saved in database.
     getServiceRequests() : void {
       console.log(AuthService.SessionContext.userId);
       this.serviceRequestService.getServiceRequest().subscribe(serviceRequests => this.serviceRequests = serviceRequests)
@@ -39,7 +39,7 @@ export class ViewListServicerequestComponent {
 
     
 
-    //GET: returns all costs supports saved in database.
+    //GET: returns all Service Reques tBy Status saved in database.
     getServiceRequestByStatus() : void {
       console.log(AuthService.SessionContext.userId);
       this.serviceRequestService.getServiceRequestByStatus(AuthService.SessionContext.userId).subscribe(serviceRequests => this.serviceRequests = serviceRequests)
@@ -78,13 +78,10 @@ export class ViewListServicerequestComponent {
       }
       message: string = '';
       submitForm() {
-        this.message = 'Status atualizado com sucesso';
+        this.message = 'Status successfully updated!';
         setTimeout(() => {
         location.reload();
-        }, 1000);
-        // Seu código para enviar os dados e realizar as operações necessárias
-        // Depois de fazer o envio e atualização, você pode recarregar a página assim:
-        
+        }, 3000);
       }
 
 }

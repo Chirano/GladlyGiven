@@ -32,6 +32,7 @@ import { RefugeeHelpRequestComponent } from './components/viewComponents/refugee
 import { RefugeeProfileComponent } from './components/viewComponents/refugee/refugee-profile/refugee-profile.component';
 import { RefugeeSearchComponent } from './components/viewComponents/refugee/refugee-search/refugee-search.component';
 import { ViewCategoryComponent } from './components/views/view-category/view-category.component';
+import { ViewPagenotfoundComponent } from './components/views/view-pagenotfound/view-pagenotfound.component';
 
 
 
@@ -55,7 +56,7 @@ const routes: Routes = [
   { path: RouterPaths.ViewAdmin, component: ViewAdminComponent },
   
   // Refugee views:
-  { path: RouterPaths.ViewRefugeeHome, component: RefugeeHomeComponent },
+  { path: RouterPaths.ViewRefugeeHome, component: ViewHomeComponent },
   { path: RouterPaths.ViewRefugeeSearch, component: RefugeeSearchComponent },
   { path: RouterPaths.ViewRefugeeAppointments, component: RefugeeAppointmentsComponent },
   { path: RouterPaths.ViewRefugeeHelpRequest, component: RefugeeHelpRequestComponent },
@@ -97,8 +98,8 @@ const routes: Routes = [
   //Category
   { path: RouterPaths.ViewCategory, component: ViewCategoryComponent, canActivate: [RefreshSignUpGuard] },
 
-
-  //{ path: '**', redirectTo: RouterPaths.Home },
+  //PageNotFound
+  { path: '**', component: ViewPagenotfoundComponent },
   //{ path: '', redirectTo: RouterPaths.Home, pathMatch: 'full' },
 ];
 

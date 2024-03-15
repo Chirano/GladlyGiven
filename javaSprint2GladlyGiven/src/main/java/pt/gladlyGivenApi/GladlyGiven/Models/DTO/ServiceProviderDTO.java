@@ -3,6 +3,7 @@ package pt.gladlyGivenApi.GladlyGiven.Models.DTO;
 import pt.gladlyGivenApi.GladlyGiven.Models.Users.ServiceProvider;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class ServiceProviderDTO extends AppUserDTO {
 
@@ -37,14 +38,25 @@ public class ServiceProviderDTO extends AppUserDTO {
         this.invoiceInfoId = serviceProvider.invoiceInfoId;
         this.licenseNumber = serviceProvider.licenseNumber;
         this.categoryId = serviceProvider.categoryId;
-        ///modificar o metodo
-        this.servicesIds = serviceProvider.healthServices != null ? serviceProvider.healthServices.toArray(new Long[0]) : null;
+        ///modificar este metodo!!
+        //this.servicesIds = serviceProvider.healthServices != null ? serviceProvider.healthServices.toArray(new Long[0]) : null;
+        if (serviceProvider.healthServices != null) {
+            this.servicesIds = serviceProvider.healthServices.stream()
+                    .map(healthService -> healthService.id)
+                    .toList()
+                    .toArray(new Long[0]);
+        } else {
+            this.servicesIds = null;
+        }
+
         this.reviewIds = serviceProvider.reviewIds != null ? serviceProvider.reviewIds.toArray(new Long[0]) : null;
         this.reviewAverage = serviceProvider.reviewAverage;
         this.streetName = serviceProvider.streetName;
         this.doorNumber = serviceProvider.doorNumber;
         this.cityName = serviceProvider.cityName;
         this.postalCode = serviceProvider.postalCode;
+
+
     }
 
     public ServiceProviderDTO(long id, String firstName, String lastName, String email, String gender, String language, String phoneNumber,

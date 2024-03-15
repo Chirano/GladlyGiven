@@ -14,6 +14,8 @@ import { DonorService } from '../data/javaSpring/donor/donor.service';
 import { Contact } from 'src/app/classes/userProfiles/Contact';
 import { ServiceRequest } from 'src/app/classes/ServiceRequest';
 import { RefugeePage } from 'src/app/components/viewComponents/refugee/RefugeePage';
+import { RefugeeSearch } from 'src/app/classes/RefugeeSearch';
+
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +32,7 @@ export class EventManagerService {
   static OnBackEvent: EventEmitter<void> = new EventEmitter<void>();
 
   // Auth Events
+  static OnLogout: EventEmitter<void> = new EventEmitter<void>();
   static OnSignInEvent: EventEmitter<SignInDetails> = new EventEmitter<SignInDetails>();
   static OnSingUpEvent: EventEmitter<SignUpDetails> = new EventEmitter<SignUpDetails>();
   
@@ -44,7 +47,9 @@ export class EventManagerService {
   // Refugee View events
   static OnSelectedRefugee: EventEmitter<RefugeeDTO> = new EventEmitter<RefugeeDTO>();
   static OnRefugeeViewChanged: EventEmitter<RefugeePage> = new EventEmitter<RefugeePage>();
-  static OnRefugeeSearched: EventEmitter<string> = new EventEmitter<string>();
+  static OnRefugeeSearchedHomePage: EventEmitter<string> = new EventEmitter<string>();
+  static OnRefugeeSearched: EventEmitter<RefugeeSearch> = new EventEmitter<RefugeeSearch>();
+
 
   // Service Provider events
   static OnSelectedServiceProvider: EventEmitter<ServiceProviderDTO> = new EventEmitter<ServiceProviderDTO>();
