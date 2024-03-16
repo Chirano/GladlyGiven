@@ -5,7 +5,6 @@
 
     <!-- List all availabilities -->
     <div>
-        <app-availability></app-availability>
         <h2>Availabilities</h2>
         <div *ngFor="let availability of availabilities">
             <app-availability [availability]="availability"></app-availability> <!-- *ngIf="isAvailabilityFree(availability)" -->
