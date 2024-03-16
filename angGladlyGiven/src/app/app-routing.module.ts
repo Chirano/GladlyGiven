@@ -33,6 +33,7 @@ import { RefugeeSearchComponent } from './components/viewComponents/refugee/refu
 import { ViewCategoryComponent } from './components/views/view-category/view-category.component';
 import { ViewPagenotfoundComponent } from './components/views/view-pagenotfound/view-pagenotfound.component';
 import { RefugeeRequestAppointmentComponent } from './components/viewComponents/refugee/refugee-request-appointment/refugee-request-appointment.component';
+import { ViewListServicerequestAllComponent } from './components/views/view-list-servicerequest-all/view-list-servicerequest-all.component';
 
 
 
