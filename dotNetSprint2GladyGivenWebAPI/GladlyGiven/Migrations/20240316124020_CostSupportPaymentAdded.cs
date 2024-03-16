@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GladlyGiven.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstMigration : Migration
+    public partial class CostSupportPaymentAdded : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -50,7 +50,7 @@ namespace GladlyGiven.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     DonorId = table.Column<long>(type: "bigint", nullable: false),
-                    Amount = table.Column<double>(type: "double precision", nullable: false),
+                    Amount = table.Column<double>(type: "double precision", nullable: true),
                     DonationType = table.Column<int>(type: "integer", nullable: false),
                     FiscalIdentity = table.Column<int>(type: "integer", nullable: false),
                     Date = table.Column<string>(type: "text", nullable: true)
@@ -69,7 +69,7 @@ namespace GladlyGiven.Migrations
                     DateRequest = table.Column<string>(type: "text", nullable: false),
                     IdCategory = table.Column<long>(type: "bigint", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
-                    Status = table.Column<int>(type: "integer", nullable: false)
+                    Status = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -96,6 +96,32 @@ namespace GladlyGiven.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "CostSupportPayment",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    CostSupportId = table.Column<long>(type: "bigint", nullable: false),
+                    Amount = table.Column<double>(type: "double precision", nullable: false),
+                    PaymentDate = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CostSupportPayment", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CostSupportPayment_CostSupports_CostSupportId",
+                        column: x => x.CostSupportId,
+                        principalTable: "CostSupports",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CostSupportPayment_CostSupportId",
+                table: "CostSupportPayment",
+                column: "CostSupportId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_Service_CategoryId",
                 table: "Service",
@@ -106,7 +132,7 @@ namespace GladlyGiven.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CostSupports");
+                name: "CostSupportPayment");
 
             migrationBuilder.DropTable(
                 name: "Donations");
@@ -116,6 +142,9 @@ namespace GladlyGiven.Migrations
 
             migrationBuilder.DropTable(
                 name: "ServiceRequest");
+
+            migrationBuilder.DropTable(
+                name: "CostSupports");
 
             migrationBuilder.DropTable(
                 name: "Category");

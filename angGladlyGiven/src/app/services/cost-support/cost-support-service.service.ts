@@ -70,4 +70,18 @@ export class CostSupportServiceService {
     return date.toLocaleDateString('pt-BR', dateOfAppointment);
   }
 
+  getPendingCostSupports() : Observable<CostSupport[]> {
+    let page = 1;
+    let size = 5;
+
+    return this.http.get<CostSupport[]>(this.dotNet + "/CostSupport/status/0?page="+page+"&pageSize="+size);
+  }
+  
+  addCostSupportPayment(costSupportId: number) : Observable<string> {
+    return this.http.post<any>(this.dotNet+"/costsupport/payment/"+costSupportId, null, this.httpOptions)
+  }
+
+  rejectCostSupport(costSupportId: number) : Observable<string> {
+    return this.http.put<any>(this.dotNet+"/costsupport/reject/"+costSupportId, null, this.httpOptions)
+  }
 }

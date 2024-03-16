@@ -28,5 +28,4 @@ export class ViewListCostsupportComponent {
       AuthService.SessionContext.userId).subscribe(
         costSupports => this.costSupports = costSupports);
   }
-
 }

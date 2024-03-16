@@ -12,13 +12,9 @@ namespace GladlyGiven
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            string connectionstring = NeonStaticConnectionStringBuilder.GetNpgsqlConnectionString();
             builder.Services.AddDbContext<ApplicationContextDb>(options =>
-                options.UseOracle(builder.Configuration.GetConnectionString("CarStandDb")
-                )
-              );
-            //string connectionString = NeonStaticConnectionStringBuilder.GetNpgsqlConnectionString();
-            //builder.Services.AddDbContext<ApplicationContextDb>(options =>
-            //    options.UseNpgsql(connectionString));
+                options.UseNpgsql(connectionstring));
 
             // Add CORS services
             builder.Services.AddCors(options =>

@@ -185,7 +185,7 @@ namespace GladlyGiven.Services
         {
             var costSupport = await context.CostSupports.FirstOrDefaultAsync(cs => cs.Id == costSupportDTO.Id);
                 
-            if (costSupport.Status != Enums.CostSupportStatus.PENDING)
+            if (costSupport.Status != Enums.CostSupportStatus.PENDING || costSupport == null)
             {
                 return null; 
             }
@@ -201,7 +201,21 @@ namespace GladlyGiven.Services
                 await context.SaveChangesAsync();
 
                 return payment;
-        
+        }
+
+        public async Task<CostSupport> RejectCostSupport(int id)
+        {
+            var costsupport = await context.CostSupports.FirstOrDefaultAsync(c => c.Id == id);
+            
+            if(costsupport == null)
+            {
+                throw new EntityDoesntExistException("CostSupport was not found", "CostSupport", "RejectCostSupport()");
+            }
+
+            costsupport.Status = Enums.CostSupportStatus.REJECTED;
+            context.SaveChanges();
+
+            return costsupport;
         }
     }
 }

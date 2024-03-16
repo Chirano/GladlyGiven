@@ -163,21 +163,38 @@ namespace GladlyGiven.Controllers
             return Ok();
         }
 
-        [HttpPost("/costsupport/payment")]
-        public async Task<ActionResult<CostSupportPayment>> AddCostSupportPayment(int costSupportId)
+        [HttpPost("/costsupport/payment/{id}")]
+        public async Task<ActionResult<string>> AddCostSupportPayment(int id)
         {
-            CostSupportDTO costSupport = await costSupportService.FindCostSupport(costSupportId);
+            CostSupportDTO costSupport = await costSupportService.FindCostSupport(id);
 
             if(costSupport == null)
             {
-                return BadRequest(costSupport);
+                return BadRequest("Invalid data");
             }
 
             string date = DateTime.Now.Date.ToString();
 
             CostSupportPayment costSupportPayment = costSupportService.createCostSupportPayment(costSupport, date).Result;
+            if (costSupportPayment == null) return BadRequest("Cost Support Payment could not be processed");
+            string accepted = "Cost Support Accepted";
+            return Ok(accepted);
+        }
 
-            return Ok(costSupportPayment);
+        [HttpPut("/costsupport/reject/{id}")]
+        public async Task<ActionResult<string>> RejectCostSupport(int id)
+        {
+            CostSupportDTO costSupportDTO = await costSupportService.FindCostSupport(id);
+
+            if (costSupportDTO == null)
+            {
+                return BadRequest("Invalid data");
+            }
+
+            CostSupport costSupport = costSupportService.RejectCostSupport(id).Result;
+            if (costSupport == null) return BadRequest("Operation could not be processed");
+            string res = "Cost Support Rejected";
+            return Ok(res);
         }
     }
 }
