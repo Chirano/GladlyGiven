@@ -20,7 +20,7 @@ namespace GladyGivenWebAPI.Services
 
         public async Task<List<ServiceRequestDTO>> FindAllServiceRequest()
         {
-            List<ServiceRequest> serviceRequests = await context.ServiceRequest.ToListAsync();
+            List<ServiceRequest> serviceRequests = await context.ServiceRequest.OrderBy(sr =>sr.Status).ToListAsync();
 
             if (serviceRequests == null)
             {

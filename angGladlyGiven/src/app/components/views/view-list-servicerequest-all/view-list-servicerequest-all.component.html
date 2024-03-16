@@ -1,15 +1,14 @@
 <div class="container">
     <div class="card">
       <div class="card-body">
-      <h5 class="card-title">List of all new service type requests (status: pending)</h5>
+      <h5 class="card-title">List of All Service Type Requests</h5>
         <div *ngFor="let serviceRequest of serviceRequests">
           <div class="list-group">
             <a class="list-group-item list-group-item-action">
-              <p class="mb-1"> Id request: {{ serviceRequest.id }}</p>
-              <p class="mb-1"> Date request: {{ serviceRequest.dateRequest }}</p>
+              <p class="mb-1"> Id request: {{ serviceRequest.id }} -  Date request: {{ serviceRequest.dateRequest }}</p>
+              <p class="mb-1">Category requested: {{ serviceRequest.idCategory }}</p>
+              <p class="mb-1">Status request: {{ getStatusString(serviceRequest.status) }}</p>
               <p class="mb-1">Description of the service requested: {{ serviceRequest.description }}</p>
-              <p class="mb-1">Probable category requested: {{ serviceRequest.idCategory }}</p>
-              <p class="mb-1">Status request: {{ serviceRequest.status }}</p>
               </a>
           </div>
         </div>

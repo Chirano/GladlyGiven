@@ -42,10 +42,12 @@ export class ServiceRequestService {
     return this.http.get<ServiceRequest[]>(this.dotNet + "/servicerequests");
     }
 
-   /* GET all pending service request status  */
+   /* GET all pending service request status 0  */
   getServiceRequestByStatus(status : number): Observable<ServiceRequest[]> {
     return this.http.get<ServiceRequest[]>(this.dotNet + "/servicerequest/status/"+0);
   }
+
+
 
   message: string = '';
     /* PUT: add a new Service request to the database */

@@ -95,7 +95,7 @@ const routes: Routes = [
 
   //Service Request
   { path: RouterPaths.ViewListServiceRequest, component: ViewListServicerequestComponent, canActivate: [RefreshSignUpGuard] },
-
+  { path: RouterPaths.ViewListServiceRequestAll, component: ViewListServicerequestAllComponent, canActivate: [RefreshSignUpGuard] },
   //Category
   { path: RouterPaths.ViewCategory, component: ViewCategoryComponent, canActivate: [RefreshSignUpGuard] },
   { path: '', redirectTo: RouterPaths.Home, pathMatch: 'full' },
