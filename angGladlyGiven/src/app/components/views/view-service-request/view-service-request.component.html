@@ -7,27 +7,27 @@
 
         <div class="input-group mb-2">
           <span class="input-group-text">Date of request new Service Type: </span>
-            <input type="text" id="dateRequest" placeholder={{currentDate}} name="Date" class="form-control" [(ngModel)]="serviceRequest.dateRequest" required>
+            <input type="date" id="dateRequest" placeholder={{currentDate}} name="Date" class="form-control" [(ngModel)]="serviceRequest.dateRequest" required>
         </div>
                  
           <div class="category-selector">
             <div style="max-width: 200px">
               <div style="margin-bottom: 20px;">
             <label for="category-select">Select Category:</label>
-              <select [(ngModel)]="serviceRequest.idCategory" name="idCategory">
+              <select [(ngModel)]="serviceRequest.idCategory" name="idCategory" >
                 <option value=0>select an option</option>
-                <option value=1>MEDICAL</option>
-                <option value=2>PSYCHOLOGIST</option>
-                <option value=3>NURSE</option>
-                <option value=4>OTHER</option>
+                <option value=1>Medicine</option>
+                <option value=2>Nurse</option>
+                <option value=3>Dentist</option>
+                <option value=4>Psychology</option>
               </select>
                </div>
              </div>
           </div>
          
           <div class="input-group mb-2">
-            <span class="input-group-text">Description</span>
-              <input type="text" id="description" placeholder="Enter your description of the type of service you would like to offer" name="Description" class="form-control" [(ngModel)]="serviceRequest.description" required>
+            <span class="input-group-text">Health Service</span>
+              <input type="text" id="description" placeholder="Enter your description of the type of service  to offer" name="Description" class="form-control" [(ngModel)]="serviceRequest.description" required>
           </div>
 
           <div class="mb-2 d-flex justify-content-between">

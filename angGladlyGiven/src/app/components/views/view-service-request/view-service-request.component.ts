@@ -80,7 +80,7 @@ ngOnInit(): void {
     this.message = 'New service request successful!';
     setTimeout(() => {
     location.reload();
-    }, 3000);
+    }, 2000);
   }
 
 }

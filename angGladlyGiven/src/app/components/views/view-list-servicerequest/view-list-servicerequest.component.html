@@ -7,7 +7,7 @@
           <a class="list-group-item list-group-item-action">
             <p class="mb-1"> Date request: {{ serviceRequest.dateRequest }} - Id request: {{ serviceRequest.id }}</p>
             <!--<p class="mb-1"> Date request: {{ serviceRequest.dateRequest }}</p> -->
-            <p class="mb-1">Description of the service requested: {{ serviceRequest.description }}</p>
+            <p class="mb-1">Description of the service requested: {{ getIdCategoryString(serviceRequest.idCategory) }} - {{ serviceRequest.description }}</p>
             <!-- <p class="mb-1">Probable category requested: {{ serviceRequest.idCategory }}</p> --> 
             <!-- <p class="mb-1">Status request: {{ serviceRequest.status }}</p> -->
             </a>
@@ -34,23 +34,23 @@
          <label for="category-select">Select Category:</label>
             <select [(ngModel)]="serviceRequest.idCategory" name="idCategory" type="number">
               <option value=0>select an option</option>
-              <option value=1>MEDICAL</option>
-              <option value=2>PSYCHOLOGIST</option>
-              <option value=3>NURSE</option>
-              <option value=4>OTHER</option>
+              <option value=1>Medicine</option>
+              <option value=2>Nurse</option>
+              <option value=3>Dentist</option>
+              <option value=4>Psychology</option>
             </select>
           </div>
         </div>
       </div>
 
       <div class="input-group mb-2">
-        <span class="input-group-text">Serviço</span>
+        <span class="input-group-text">Health Service</span>
         <input type="text" id="service" placeholder="Fill in the service type." name="Description" class="form-control" [(ngModel)]="serviceRequest.description" required>
       </div>
 
       <div class="input-group mb-2">
         <span class="input-group-text">Date Change: </span>
-        <input type="text" id="dateRequest" placeholder="dd/mm/aaaa" name="date" type="date" class="form-control" [(ngModel)]="serviceRequest.dateRequest" required>
+        <input id="dateRequest" placeholder="dd/mm/aaaa" name="date" type="date" class="form-control" [(ngModel)]="serviceRequest.dateRequest" required>
       </div>
 
 

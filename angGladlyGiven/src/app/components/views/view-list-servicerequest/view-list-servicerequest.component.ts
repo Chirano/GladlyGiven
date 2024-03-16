@@ -30,6 +30,33 @@ export class ViewListServicerequestComponent {
       //this.getServiceRequests();
     }
 
+    getIdCategoryString(idCategory: number): string {
+      switch (idCategory) {
+        case 1:
+          return 'Medicine';
+        case 2:
+          return 'Nurse';
+        case 3:
+          return 'Dentist';
+        case 4:
+          return 'Psychology';
+        default:
+          return 'unknonw';
+      }
+    }
+
+    getStatusString(status: number): string {
+      switch (status) {
+        case 0:
+          return 'Pending';
+        case 1:
+          return 'Approval';
+        case 2:
+          return 'Reject';
+        default:
+          return 'Unknown';
+      }
+    }
 
     //GET: returns all Service Requests saved in database.
     getServiceRequests() : void {
@@ -81,7 +108,7 @@ export class ViewListServicerequestComponent {
         this.message = 'Status successfully updated!';
         setTimeout(() => {
         location.reload();
-        }, 3000);
+        }, 2000);
       }
 
 }

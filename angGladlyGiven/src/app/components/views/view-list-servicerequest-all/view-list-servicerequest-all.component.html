@@ -6,13 +6,14 @@
           <div class="list-group">
             <a class="list-group-item list-group-item-action">
               <p class="mb-1"> Id request: {{ serviceRequest.id }} -  Date request: {{ serviceRequest.dateRequest }}</p>
-              <p class="mb-1">Category requested: {{ serviceRequest.idCategory }}</p>
+              <p class="mb-1">Category requested: {{ getIdCategoryString(serviceRequest.idCategory) }}</p>
               <p class="mb-1">Status request: {{ getStatusString(serviceRequest.status) }}</p>
               <p class="mb-1">Description of the service requested: {{ serviceRequest.description }}</p>
               </a>
           </div>
         </div>
+        <p></p><app-back-button></app-back-button>
       </div>
     </div>
-  </div>
-  <p></p>
+</div>
+<p></p>

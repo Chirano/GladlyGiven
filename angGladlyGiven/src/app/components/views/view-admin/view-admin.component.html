@@ -1,35 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Mobile Homepage</title>
-    </head>
-<body>
-
-
-    <style>
+<div class="container">
+      <style>
         img {
         background-color: transparent; /* Define o fundo como transparente */
         width: 300px; /* Define a largura da imagem como 30% do tamanho original */
         display: block; /* Faz com que a imagem se comporte como um bloco */
-        margin:  auto; /* Centraliza a imagem horizontalmente */
+        
         background-image: url('assets/refugees01.png'); /* Adiciona o fundo ao contêiner */
         background-size: cover; /* Ajusta o tamanho do fundo para cobrir todo o contêiner */
-        background-position: center; /* Centraliza o fundo horizontalmente e verticalmente */
+        
         padding: 50px; /* Adiciona um espaçamento interno ao contêiner */
         box-sizing: border-box; /* Faz com que o padding não afete a largura total do contêiner */
 
         }
       </style>
 
-<nav class="navbar bg-body-tertiary">
-  <div class="container-fluid">
-    <img src="assets/logo.png" alt="Logo">
-  </div>
-</nav>
+  <nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+      <img src="assets/logo.png" alt="Logo">
+    </div>
+  </nav>
 
-<div class="row p-3">
+  <div class="row p-3">
     <div class="col-sm-6 mb-3 mb-sm-0">
       <div class="card">
         <div class="card-body">
@@ -39,19 +30,47 @@
         </div>
       </div>
     </div>
+
     <p></p>
+
     <div class="col-sm-6 mb-3 mb-sm-0">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">List of all new cost supports requested by approval</h5>
-          <p class="card-text">Lists all requests from healthcare providers who have requested new cost supports (awaiting validation)</p>
+          <p class="card-text">Lists all requests from healthcare providers who have requested new cost supports (awaiting validation).</p>
           <a href="#" class="btn btn-primary" [routerLink]="'/view-admin/costsupportlist'">submit</a>
         </div>
       </div>
     </div>
+
     <p></p>
+
+    <div class="row p-3">
+      <div class="col-sm-6 mb-3 mb-sm-0">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">List of all service types already requested</h5>
+            <p class="card-text">Lists all types of service already requested by healthcare providers (all status types).</p>
+            <a href="#" class="btn btn-primary" [routerLink]="'/view-list-servicerequest-all'">submit</a>
+          </div>
+        </div>
+      </div>
+
+      <p></p>
+
+      <div class="row p-3">
+        <div class="col-sm-6 mb-3 mb-sm-0">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">List of all cost supports already requested</h5>
+              <p class="card-text">Lists all cost supports already requested by healthcare providers (all status types).</p>
+              <a href="#" class="btn btn-primary" [routerLink]="'/view-list-servicerequest'">submit</a>
+            </div>
+          </div>
+        </div>
+
 </div>
 
-  </body>
 
+</div>
 

@@ -28,6 +28,22 @@ export class ViewListServicerequestAllComponent {
     this.getServiceRequests(); // Chama o método ao iniciar o componente
     //this.getServiceRequests();
   }
+
+  getIdCategoryString(idCategory: number): string {
+    switch (idCategory) {
+      case 1:
+        return 'Medicine';
+      case 2:
+        return 'Nurse';
+      case 3:
+        return 'Dentist';
+      case 4:
+        return 'Psychology';
+      default:
+        return 'unknonw';
+    }
+  }
+
   // Método para retornar a string correspondente ao valor do status
   getStatusString(status: number): string {
     switch (status) {
@@ -37,7 +53,6 @@ export class ViewListServicerequestAllComponent {
         return 'Approval';
       case 2:
         return 'Reject';
-      // Adicione mais casos conforme necessário
       default:
         return 'Unknown';
     }
