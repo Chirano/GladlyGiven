@@ -39,7 +39,9 @@ export class ServiceProviderDetailsSimpleComponent {
 
     this.serviceProviderService.getHealthServicesStringByIds(serviceProvider.servicesIds)
     .subscribe(services => {
-      this.services = services; // Set the services value inside the subscription callback
+      const serviceArray = services.split(', ');
+      const firstThreeServices = serviceArray.slice(0, 3);
+      this.services = `${firstThreeServices.join(', ')}, ...`;
     });
 
     this.location = serviceProvider.cityName;
