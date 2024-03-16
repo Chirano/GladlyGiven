@@ -1,12 +1,12 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { ServiceProviderDTO } from 'src/app/classes/userProfiles/ServiceProviderDTO';
-import { MockServiceProviders } from 'src/app/classes/userProfiles/mockUsers/MockServiceProviders';
 import { EventManagerService } from 'src/app/services/events/event-manager.service';
 import { RefugeePage } from '../RefugeePage';
 import { RefugeeService } from 'src/app/services/data/javaSpring/refugee/refugee.service';
 import { RouterPaths } from 'src/app/classes/routing/RoutePaths';
 import { ServiceProviderService } from 'src/app/services/data/javaSpring/serviceProvider/service-provider.service';
 import { AppointmentRequestStep } from 'src/app/classes/AppointmentRequestStep';
+import { Availability } from 'src/app/classes/Availability';
 
 @Component({
   selector: 'app-refugee-request-appointment',
@@ -15,30 +15,47 @@ import { AppointmentRequestStep } from 'src/app/classes/AppointmentRequestStep';
 })
 
 export class RefugeeRequestAppointmentComponent {
-  serviceProvider: ServiceProviderDTO | undefined;
+  // Variables
+  // --------------------------------------------
+  serviceProvider: ServiceProviderDTO | null = null;
+  availabilities: Availability[] = [];
+
   requestStep : AppointmentRequestStep = AppointmentRequestStep.View;
 
-  constructor(private changeDetector: ChangeDetectorRef) {
-    EventManagerService.OnSelectedServiceProvider.subscribe(this.OnServiceProviderClicked.bind(this));
+
+
+  // Constructor & Initialization
+  // --------------------------------------------
+  constructor(private serviceProviderService : ServiceProviderService) {
+
   }
 
   ngOnInit() {
     RefugeeService.currentRefugeePage = RefugeePage.RequestAppointment;
+    this.serviceProvider = ServiceProviderService.selectedServiceProvider;
+  
+    if (this.serviceProvider != null) {
+      console.log("Searching for availabilities");
+
+      this.serviceProviderService.getAvailabilitiesByServiceProvider(this.serviceProvider).subscribe({
+        next: (availabilities: Availability[]) => {
+          this.availabilities = availabilities;
+          console.log("Availabilities:", this.availabilities);
+        },
+        error: (error) => {
+          console.error('Error fetching availabilities:', error);
+        }
+      });
+    }
   }
 
-  private OnServiceProviderClicked(clickedServiceProvider: ServiceProviderDTO) {
-    console.log("Clicked:", clickedServiceProvider);
-    this.serviceProvider = clickedServiceProvider;
-    this.changeDetector.detectChanges();
-  }
 
+
+  // Methods
+  // --------------------------------------------
   GetServiceProvider() : ServiceProviderDTO {
-    return ServiceProviderService.selectedServiceProvider;
-  }
-
-  ToRefugeeHome() {
-    //EventManagerService.OnRefugeeViewChanged.emit(RefugeePage.Search);
-    EventManagerService.OnRouteEvent.emit(RouterPaths.Home);
+    this.serviceProvider = ServiceProviderService.selectedServiceProvider
+    return this.serviceProvider;
   }
 
   CanShowAppointmentRequestInput() : boolean {
@@ -51,5 +68,13 @@ export class RefugeeRequestAppointmentComponent {
 
   HideAppointmentInput() {
     this.requestStep = AppointmentRequestStep.View;
+  }
+
+
+
+  // Redirection
+  // --------------------------------------------
+  ToRefugeeHome() {
+    EventManagerService.OnRouteEvent.emit(RouterPaths.Home);
   }
 }

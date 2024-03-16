@@ -5,6 +5,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../authentication/auth.service';
 import { Observable } from 'rxjs';
 import { HealthService } from 'src/app/classes/HealthServices';
+import { Category } from 'src/app/classes/Category';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,6 @@ import { HealthService } from 'src/app/classes/HealthServices';
 export class HealthserviceService {
 
   private url = 'http://localhost:8080/api';
-
-  userId: number | null = null;
-  sessionContext: SessionContext | null = AuthService.SessionContext;
-  serviceId: number | null = null; 
-
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json',
@@ -27,6 +23,10 @@ export class HealthserviceService {
     private http: HttpClient,
     private authService: AuthService
   ) { }
+
+  getAllCategories() : Observable<Category[]> {
+    return this.http.get<Category[]>(this.url + "/categories");
+  }
 
   getAllServices() : Observable<HealthService[]>{
     return this.http.get<HealthService[]>(this.url+"/healthservices");

@@ -35,6 +35,7 @@ export class ViewSignUpServiceProviderComponent {
         licenseNumber: form.value.licenseNumber,
         categoryId: form.value.categoryId,
         servicesIds: [],
+        healthServices: [],
         reviewIds: [],
         reviewAverage: form.value.reviewAverage,
         streetName: form.value.streetName,

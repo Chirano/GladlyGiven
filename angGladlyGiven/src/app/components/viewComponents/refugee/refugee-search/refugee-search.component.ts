@@ -54,7 +54,7 @@ export class RefugeeSearchComponent implements OnChanges {
       .searchServiceProvidersByServiceDescriptionAndCityName(refugeeSearchQuery.serviceDescription, refugeeSearchQuery.cityName)
       .subscribe((serviceProviders: ServiceProviderDTO[]) => {
         this.serviceProviders = serviceProviders;
-        console.log("Services providers:", this.serviceProviders);
+        console.log("Services providers:", serviceProviders);
       });
   }
 

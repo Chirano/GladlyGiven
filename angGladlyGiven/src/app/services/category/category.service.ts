@@ -25,8 +25,7 @@ export class CategoryService {
   registerNewCategory(category: Category): Observable<Category> {
     const newCategory: Category = {
       id : category.id,
-      name : category.name,
-
+      description : category.description,
     };
     console.log(newCategory);
     

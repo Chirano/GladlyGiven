@@ -11,7 +11,7 @@ export class ViewCategoryComponent {
 
   category: Category = {
     id    :0,
-    name  :""
+    description  :""
   };
 
   categories: Category[]=[];
@@ -19,10 +19,10 @@ export class ViewCategoryComponent {
 constructor(
   private categoryService : CategoryService){}
 
-  registerNewCategory(id: number, name: string) : void {
+  registerNewCategory(id: number, description: string) : void {
     this.categoryService.registerNewCategory({
       id,
-      name,
+      description,
     } as Category)
     .subscribe({
       next: (registerNewCategory) => {

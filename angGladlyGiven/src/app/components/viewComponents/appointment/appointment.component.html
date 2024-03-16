@@ -1,1 +1,34 @@
-<p>appointment works!</p>
+<div class="container">
+    <div class="card mb-3">
+      <div class="card-body">
+
+        <!-- Service Provider Information -->
+        <div class="row">
+          <div class="col-md-12">
+            <app-service-provider-details-simple [serviceProvider]="serviceProvider"></app-service-provider-details-simple>
+          </div>
+        </div>
+
+        <!-- Start Date and Start Time -->
+        <div class="row">
+          <div class="col-md-6">
+            <p><strong>Start Date:</strong> {{ availability.startDate }}</p>
+          </div>
+          <div class="col-md-6">
+            <p><strong>Start Time:</strong> {{ availability.startTime }}</p>
+          </div>
+        </div>
+
+        <!-- End Date and End Time -->
+        <div class="row">
+          <div class="col-md-6">
+            <p><strong>End Date:</strong> {{ availability.endDate }}</p>
+          </div>
+          <div class="col-md-6">
+            <p><strong>End Time:</strong> {{ availability.endTime }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -56,9 +56,6 @@ export class AuthService {
   
   constructor(
     private http: HttpClient,
-    private refugeeService: RefugeeService,
-    private serviceProviderService: ServiceProviderService,
-    private donorService: DonorService
   ) {
     EventManagerService.OnLogout.subscribe(() => this.logout());
     EventManagerService.OnSignInEvent.subscribe(this.SignInFilter.bind(this));

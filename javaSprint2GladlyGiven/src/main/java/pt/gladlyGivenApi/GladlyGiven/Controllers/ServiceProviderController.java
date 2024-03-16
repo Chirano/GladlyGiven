@@ -208,7 +208,7 @@ public class ServiceProviderController {
      * @param size   Number of items per page (optional, defaults to 10).
      * @return ResponseEntity with a list of availabilities if found.
      */
-    @GetMapping("/availabilities/{userId}")
+    //@GetMapping("/availabilities/{userId}")
     public ResponseEntity<List<Availability>> findAllAvailabilitiesByUserId(@PathVariable ("userId") Long userId, @RequestParam Optional<Integer> page,
                                                                     @RequestParam Optional<Integer> size) {
         int _page = page.orElse(0);
@@ -220,6 +220,11 @@ public class ServiceProviderController {
         List<Availability> availabilityList = PageUtils.pageToList(availabilityPage);
 
         return new ResponseEntity<>(availabilityList, HttpStatus.OK);
+    }
+
+    @GetMapping("/availabilities/{serviceProviderId}")
+    public List<Availability> GetAllAvailabilitiesByServiceProviderId(@PathVariable("serviceProviderId") Long serviceProviderId) {
+        return serviceProviderService.findAllAvailitiesByServiceProviderId(serviceProviderId);
     }
 
     @GetMapping("/availabilities/status/{availabilityStatus}")

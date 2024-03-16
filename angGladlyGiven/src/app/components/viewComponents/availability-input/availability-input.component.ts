@@ -29,6 +29,7 @@ export class AvailabilityInputComponent {
 
   addAvailability(
     id: number,
+    serviceProviderId: number,
     startDate: string,
     endDate: string,
     startTime: string,

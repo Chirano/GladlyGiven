@@ -4,7 +4,7 @@
 
     <div class="input-group mb-2">
         <span class="input-group-text">Category</span>
-          <input type="text" id="category" placeholder="Enter your category of the type of service" name="Category" class="form-control" [(ngModel)]="category.name" required>
+          <input type="text" id="category" placeholder="Enter your category of the type of service" name="Category" class="form-control" [(ngModel)]="category.description" required>
     </div>
 
     <div class="mb-2 d-flex justify-content-between">
@@ -15,7 +15,7 @@
         (click)="registerNewCategory
         (
             category.id,
-            category.name
+            category.description
         )"
         >submit</button>
     </div>

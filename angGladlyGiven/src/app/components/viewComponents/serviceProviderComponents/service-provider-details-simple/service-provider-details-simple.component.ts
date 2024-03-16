@@ -1,5 +1,6 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { ServiceProviderDTO } from 'src/app/classes/userProfiles/ServiceProviderDTO';
+import { ServiceProviderService } from 'src/app/services/data/javaSpring/serviceProvider/service-provider.service';
 import { EventManagerService } from 'src/app/services/events/event-manager.service';
 
 @Component({
@@ -8,12 +9,16 @@ import { EventManagerService } from 'src/app/services/events/event-manager.servi
   styleUrls: ['./service-provider-details-simple.component.scss']
 })
 export class ServiceProviderDetailsSimpleComponent {
-@Input() serviceProvider: ServiceProviderDTO | undefined;
+  @Input() serviceProvider: ServiceProviderDTO | null = null;
 
   name: string = 'John Doe';
   category: string = 'Category';
   services: string = 'Service 1, Service 2';
   location: string = 'New York, USA';
+
+  constructor(private serviceProviderService: ServiceProviderService) {
+
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.updateServiceProvider();
@@ -24,10 +29,20 @@ export class ServiceProviderDetailsSimpleComponent {
       return;
     }
 
-    this.name = serviceProvider.firstName + " " + serviceProvider.lastName;
-    this.category = serviceProvider.categoryId.toString();
-    this.services = serviceProvider.servicesIds?.toString() || "No services found";
-    this.location = serviceProvider.email;
+    this.name = `${serviceProvider.firstName} ${serviceProvider.lastName}`;
+    
+    this.serviceProviderService.getCategoryById(serviceProvider.categoryId)
+    .subscribe(category => {
+      console.log("Category:", category);
+      this.category = category?.description || "category not found"; // Set the category value inside the subscription callback
+    });
+
+    this.serviceProviderService.getHealthServicesStringByIds(serviceProvider.servicesIds)
+    .subscribe(services => {
+      this.services = services; // Set the services value inside the subscription callback
+    });
+
+    this.location = serviceProvider.cityName;
   }
 
   private updateServiceProvider() {
@@ -37,6 +52,8 @@ export class ServiceProviderDetailsSimpleComponent {
   }
 
   OnClickedServiceProvider() {
-    EventManagerService.OnSelectedServiceProvider.emit(this.serviceProvider);
+    if (this.serviceProvider != null) {
+      EventManagerService.OnSelectedServiceProvider.emit(this.serviceProvider);
+    }
   }
 }

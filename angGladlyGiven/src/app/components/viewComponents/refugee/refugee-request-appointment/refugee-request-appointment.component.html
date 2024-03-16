@@ -1,29 +1,14 @@
 <app-header></app-header>
 
 <div class="container">
-    <div class="mb-3">
-        <div class="row">
-            <!-- Image Column -->
-            <div class="col-md-6">
-                <div>
-                    <!-- Placeholder for image -->
-                    <img src="https://via.placeholder.com/192" alt="Image" class="img-fluid">
-                </div>
-            </div>
-    
-            <!-- Details Column -->
-            <div class="col-md-6">
-                <div class="container">
-                    <h1>{{ GetServiceProvider().firstName }} {{ GetServiceProvider().lastName }}</h1>
-                    <div>{{ GetServiceProvider().categoryId }}</div>
-                    <div>{{ GetServiceProvider().servicesIds }}</div>
-                    <div>{{ GetServiceProvider().cityName }}</div>
-                </div>
-            </div>
-        </div>
+    <app-service-provider-details [serviceProvider]="serviceProvider"></app-service-provider-details>
+
+    <!-- List all availabilities -->
+    <div *ngFor="let availability of availabilities">
+        <app-availability [availability]="availability"></app-availability>
     </div>
 
-    <app-availability-input *ngIf="CanShowAppointmentRequestInput()"></app-availability-input>
+    <app-appointment-request *ngIf="CanShowAppointmentRequestInput()"></app-appointment-request>
 
     <div class="mb-3 d-flex justify-content-between container">
         <app-back-button></app-back-button>

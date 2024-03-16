@@ -343,6 +343,8 @@ public class ServiceProviderService extends AppUserService {
         return serviceProvider;
     }
 
+
+
     // Service Provider Availability
     // ---------------------------------------------------------------------
 
@@ -380,6 +382,10 @@ public class ServiceProviderService extends AppUserService {
         }
 
         return avPage;
+    }
+
+    public List<Availability> findAllAvailitiesByServiceProviderId(Long serviceProviderId) {
+        return availabilityRepository.findAllByServiceProviderId(serviceProviderId);
     }
 
     /**

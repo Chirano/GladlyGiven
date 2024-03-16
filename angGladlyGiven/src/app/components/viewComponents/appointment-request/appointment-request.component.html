@@ -1,47 +1,58 @@
 <div class="container">
     <div class="card mb-3">
         <div class="container mb-3">
+            <!-- Service Provider Information -->
+            <div class="row">
+                <div class="col-md-12">
+                    <app-service-provider-details-simple [serviceProvider]="serviceProvider"></app-service-provider-details-simple>
+                </div>
+            </div>
+
             <div class="row">
                 <!-- Start Date and Time Column -->
                 <div class="col-md-6">
                     <div class="mb-3 mb-3"> <!-- Added mb-3 class for margin -->
                         <label for="inputStartDate" class="form-label"><strong>Start date:</strong></label>
-                        <input type="date" [(ngModel)]="availability.startDate" class="form-control" id="inputStartDate" required>
+                        <input type="date" [(ngModel)]="availability.startDate" class="form-control" id="inputStartDate"
+                            required>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="mb-3 mb-3"> <!-- Added mb-3 class for margin -->
                         <label for="inputStartTime" class="form-label"><strong>Start time:</strong></label>
-                        <input type="time" [(ngModel)]="availability.startTime" class="form-control" id="inputStartTime" required>
+                        <input type="time" [(ngModel)]="availability.startTime" class="form-control" id="inputStartTime"
+                            required>
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <!-- End Date and Time Column -->
                 <div class="col-md-6">
                     <div class="mb-3 mb-3"> <!-- Added mb-3 class for margin -->
                         <label for="inputEndDate" class="form-label"><strong>End date:</strong></label>
-                        <input type="date" [(ngModel)]="availability.endDate" class="form-control" id="inputEndDate" (ngModelChange)="validateDate()" required>
+                        <input type="date" [(ngModel)]="availability.endDate" class="form-control" id="inputEndDate"
+                            (ngModelChange)="validateDate()" required>
                         <div *ngIf="startDateError" class="text-danger">{{ startDateError }}</div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="mb-3 mb-3"> <!-- Added mb-3 class for margin -->
                         <label for="inputEndTime" class="form-label"><strong>End time:</strong></label>
-                        <input type="time"  [(ngModel)]="availability.endTime" class="form-control" id="inputEndTime" (ngModelChange)="validateTime()" required>
+                        <input type="time" [(ngModel)]="availability.endTime" class="form-control" id="inputEndTime"
+                            (ngModelChange)="validateTime()" required>
                         <div *ngIf="startTimeError" class="text-danger">{{ startTimeError }}</div>
                     </div>
                 </div>
             </div>
         </div>
-        
-    
+
+
         <!-- Submit Button -->
         <div class="container mb-3">
             <div class="row">
                 <div class="col-md-12 d-flex justify-content-end">
-                  <button type="button" class="btn btn-primary" (click)="addAvailability(
+                    <button type="button" class="btn btn-primary" (click)="requestAppointment(
                     0,
                     availability.serviceProviderId,
                     availability.startDate,
@@ -52,6 +63,6 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 </div>
