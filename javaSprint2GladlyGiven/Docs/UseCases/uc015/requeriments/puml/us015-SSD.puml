@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) US015 - View previous medical information registered about the refugee
+title System Sequence Diagram (SSD) US015 - Service Provider requests service-related cost support
 
 autonumber
 
@@ -11,13 +11,12 @@ actor Professional
 participant ":System" as System
 
 activate Professional
-    Professional -> System : starts the process of requesting a previous medical information registered about the refugee report.
+    Professional -> System : starts the process of creating a new solicitation with amount spent and the justification in the system.
     activate System
-        System --> Professional : asks for the options to filter and sort reviews based on different criteria, such as date, rating, or type of service of the reviews the professional wants to see.
+        System --> Professional : shows the fields available to fill in and their rules.
     deactivate System
 
-    Professional -> System : fills different criteria available.
-
+    Professional -> System : fills  with amount spent and the justification.
     activate System
         System --> Professional : validates and asks for confirmation
     deactivate System

@@ -1,62 +1,40 @@
 
-A FAZER!!!
-
 @startuml
 skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title Create a new date and time slot
+title Display of the donation report
 
 autonumber
 
-actor Professional
-participant ":CreateSlotDateTimeUI" as ui
-participant ":CreateSlotDateTimeController" as ctrl
+actor Administrator
+participant ":DisplayDonationReportUI" as ui
+participant ":DisplayDonationReportController" as ctrl
 participant Repositories
-participant "slotDataTimeRepo : SlotDataTimeRepository" as SlotDataTimeRepo
+participant "donationRepo : DonationRepository" as DonationRepo
 
 
-activate Professional
+activate Administrator
 
-    Professional -> ui : starts the process of creating a new date and time slot in the system.
+    Administrator -> ui : requests to view donation report
     activate ui
         ui -> ctrl** : create()
-        ui -> ctrl : GetCalendarDateTime()
-        activate ctrl
-                        ctrl --> ui : CalendarDateTimeList
-            deactivate ctrl
-            ui --> Professional : shows the Vaccine Technologies available and requests data
-    deactivate ui
-
-    Professional -> ui : fills in the date and time when he is available.
-    activate ui
-        ui -> ctrl : createSlotDataTime(idSlotDateTime, dateSlotAvailable, timeSlotAvailable, idProfAvailable, typeServiceProfAvailable)
+        ui -> ctrl : GetDonationReport()
         activate ctrl
             ctrl -> Repositories : create()
             activate Repositories
                 Repositories -> Repositories : localValidation()
-                Repositories --> ctrl : SlotDataTime
+                Repositories --> ctrl : DonationData
             deactivate Repositories
-            ctrl --> ui : SlotDataTime
+            ctrl --> ui : DonationData
         deactivate ctrl
-        ui --> Professional : validates and asks for confirmation
+        ui --> Administrator : displays the donation report
     deactivate ui
 
-    Professional -> ui : confirms
-    activate ui
-        ui -> ctrl : save()
-        activate ctrl
-            ctrl -> SlotDataTimeRepo : save(SlotDataTime)
-            activate SlotDataTimeRepo
-                SlotDataTimeRepo -> SlotDataTimeRepo : globalValidation(SlotDataTime)
-                SlotDataTimeRepo -> SlotDataTimeRepo : add(SlotDataTime)
-                SlotDataTimeRepo --> ctrl : success
-            deactivate SlotDataTimeRepo
-            ctrl --> ui : success
-        deactivate ctrl
-        ui --> Professional : records the information and notifies the success of the operation
-    deactivate ui
-deactivate Professional
+deactivate Administrator
+
+@enduml
+
 
 @enduml

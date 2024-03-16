@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title UC010 - View FAQ - System Sequence Diagram (SSD)
+title UC010 -  Display a FAQ page - System Sequence Diagram (SSD)
 
 autonumber
 

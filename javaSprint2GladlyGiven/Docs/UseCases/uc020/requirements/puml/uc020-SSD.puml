@@ -3,21 +3,21 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - US020 - View monthly reports
+title System Sequence Diagram (SSD) - UC020 - Donor views a list of donations
+
+
 
 autonumber
 
-actor Donor
-participant ":System" as System
+actor Donor as donor
+participant ":System" as system
 
-activate Donor
-    Donor -> System : starts the process of requesting a financial report
-    activate System
-        System --> Donor : requests data
-        Donor -> System : fills requested data (month)
-        System --> Donor : displays the month report.
-    deactivate System
-deactivate Donor
+activate donor
+    donor -> system : starts the process of requesting the donation's list
+    activate system
+        system --> donor : displays the list
+    deactivate system
+deactivate donor
 
 
 @enduml

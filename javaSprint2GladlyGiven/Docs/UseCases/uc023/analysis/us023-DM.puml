@@ -8,7 +8,7 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-title US023 - Request registration for a new service.
+title US023 - Admin Validates Service-Provider Requests (Category, Service)
 
 class ServiceRequest {
     Id

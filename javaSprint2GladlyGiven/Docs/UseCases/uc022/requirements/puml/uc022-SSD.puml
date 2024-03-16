@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title system Sequence Diagram (SSD) - US022 - Accept the request for an appointment
+title system Sequence Diagram (SSD) - US022 - Service Provider views a list of his requests (cost support and new service)
 
 
 

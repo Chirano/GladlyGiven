@@ -1,12 +1,10 @@
 
-A FAZER!!!
-
 @startuml
 skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title Sequence Diagram (SD) - US014 - Check my reviews
+title Sequence Diagram (SD) - US014 - Service Provider checks his reviews
 
 autonumber
 

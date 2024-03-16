@@ -8,7 +8,7 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-title US018 - Choose the amount of money
+title US018 - Service Provider Requests administrator for a new service type
 
 class Donation {
     Id

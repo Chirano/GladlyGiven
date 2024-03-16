@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title UC010 - Ask a question to Program Administrators
+title UC010 -  Display a FAQ page
 
 autonumber
 

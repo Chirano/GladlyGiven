@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title UC012 - Register offered services
+title UC012 - Service Provider Updates Offered Services
 
 autonumber
 

@@ -8,7 +8,7 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-title US022 - Accept the request for an appointment
+title US022 - Service Provider views a list of his requests (cost support and new service)
 
 class Professional {
     Id

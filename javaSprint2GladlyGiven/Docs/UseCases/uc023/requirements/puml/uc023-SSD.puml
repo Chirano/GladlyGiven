@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - US023 - Request registration for a new service
+title System Sequence Diagram (SSD) - US023 - Admin Validates Service-Provider Requests (Category, Service)
 
 
 autonumber

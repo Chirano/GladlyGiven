@@ -3,85 +3,66 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title US021 - Validate the registration of a professional/refugee
+title UC021 - Admin validates the request for service-related cost support
 
 autonumber
 
 actor Administrator as admin
-participant ":RegisterRequestUI" as ui
-participant ":RegisterRequestController" as ctrl
+participant ":CostSupportRequestUI" as ui
+participant ":CostSupRequestController" as ctrl
 participant Repositories as repo
-participant "registerRequestRepo : RegisterRequestRepo" as registerReqRepo
-participant "registerRepo : RegisterRepo" as registerRepo
-participant "userRepo : UserRepo" as userRepo
-participant "registerRequest : RegisterRequest" as registerReq
-participant "user : User" as user
+participant "costSupRequestRepo : CostSupportRequest" as costRepo
+participant "costSupport : CostSupport" as costSupport
 
 activate admin
-    admin -> ui : starts the process of accepting/rejecting a request for a register
+    admin -> ui : starts the process of validation a new request for service-related cost support
     activate ui
-        ui -> ctrl : getRegisterRequest( )
+        ui -> ctrl : getCostSupportRequest( )
         activate ctrl
-            ctrl -> repo : getRegisterRequestRepo( )
+            ctrl -> repo : getCostSupportRequestRepo( )
             activate repo
-                repo -> repo : getRegisterRequestRepo( )
-                repo --> ctrl : registerRequestRepo
+                repo -> repo : costSupportRequestRepo( )
+                repo --> ctrl : costSuportRequestRepo
             deactivate repo
-            ctrl -> registerReqRepo : getRegisterRequest( )
-            activate registerReqRepo
-                registerReqRepo -> registerReqRepo : getRegisterRequest( )
-                registerReqRepo --> ctrl : registerRequestList
-            deactivate registerReqRepo
-            ctrl --> ui : registerRequestList
+            ctrl -> costRepo : getCostSupportRequest( )
+            activate costRepo
+                costRepo -> costRepo : getCostSupportRequest( )
+                costRepo --> ctrl : costSupportRequest
+            deactivate costRepo
+            ctrl --> ui : costSupportRequest
         deactivate ctrl
-        ui --> admin : shows a list of register requests and request data
+        ui --> admin : shows request information registered
     deactivate ui
-    admin -> ui : selects the register request
+    admin -> ui : analyzes and accepts request
     activate ui
-        ui -> ctrl : getUserRepo( )
+        ui -> ctrl : createCostSupport( )
         activate ctrl
-            ctrl -> repo : getUserRepo( )
-            activate repo
-                 repo -> repo : getUserRepo( )
-                 repo --> ctrl : userRepo
-            deactivate repo
-            ctrl -> userRepo : getUser( )
-            activate userRepo
-                userRepo -> userRepo : getUser( )
-                userRepo --> ctrl : user
-            deactivate userRepo
-            ctrl --> ui : user
+            ctrl -> costRepo : createCostSupport(date, description, value, status)
+            activate costRepo
+                costRepo -> costSupport** : create( )
+                activate costSupport
+                    costSupport -> costSupport : localValidation( )
+                    costSupport -> costRepo : costSupport
+                deactivate costSupport
+                costRepo -> costRepo : globalValidation(costSupport)
+                costRepo --> ctrl : costSupport
+            deactivate costRepo
+            ctrl --> ui : costSupport
         deactivate ctrl
-        ui --> admin : user
+        ui --> admin : validates and asks for confirmation
     deactivate ui
-    admin -> ui : analyzes users information and accepts/rejects a register request
+    admin -> ui : confirms
     activate ui
-        ui -> ctrl : updateRegisterRequestStatus(registerRequest)
+        ui -> ctrl : save( )
         activate ctrl
-            ctrl -> registerReqRepo : updateRegisterRequestStatus(registerRequest)
-            activate registerReqRepo
-                registerReqRepo -> registerReq** : update( )
-                activate registerReq
-                    registerReq -> registerReq : localValidation( )
-                    registerReq -> registerReqRepo : registerRequest
-                    deactivate registerReq
-                registerReqRepo -> registerReqRepo : globalValidation(registerRequest)
-                registerReqRepo --> ctrl : registerRequest
-            deactivate registerReqRepo
-            ctrl -> userRepo : save(register)
-            activate userRepo
-                userRepo -> user** : save( )
-                activate user
-                    user -> user : add( )
-                    user --> userRepo : user
-                deactivate user
-                userRepo -> userRepo : save(user)
-                userRepo --> ctrl : success
-            deactivate userRepo
+            ctrl -> costRepo : save(costSupport)
+            activate costRepo
+                costRepo -> costRepo : add(costSupport)
+                costRepo --> ctrl : success
+            deactivate costRepo
             ctrl --> ui : success
         deactivate ctrl
         ui --> admin : records the information and notifies the success of the operation
-    deactivate ui
 deactivate admin
 
 @enduml

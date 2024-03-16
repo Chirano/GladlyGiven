@@ -8,25 +8,21 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-title US021 - Validate the registration of a professional/refugee
+title US021 - Admin validates the request for service-related cost support
 
-class RegisterRequest {
+class CostSupportRequest {
     Id
-    Request Date
-    Refugee/Professional
+    Date Request
+    Date of Service
+    Value
+    Description
     Status
 }
 
-class Refugee {
-    Refugee Number Protocol
-    First Name
-    Last Name
-    Address
-    Email
-    Phone Number
-    Nationality
-    Country of Origin
-    Native Language
+class Service {
+    Id
+    Name
+    Category
 }
 
 class Professional {
@@ -40,14 +36,7 @@ class Professional {
     Category
 }
 
-class Administrator {
-    Id
-    Name
-}
-
-
-Refugee "1   " - "   1" RegisterRequest : makes a >
-Professional "1   " - "   1" RegisterRequest : makes a >
-Administrator "1   " - "   *" RegisterRequest : accepts/rejects a >
+Professional "1   " - "   *" Service : performs a >
+Service "1   " - "   1" CostSupportRequest : generates a >
 
 @enduml
