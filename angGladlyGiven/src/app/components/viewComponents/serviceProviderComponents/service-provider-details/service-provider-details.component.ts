@@ -40,11 +40,8 @@ export class ServiceProviderDetailsComponent {
 
     this.serviceProviderService.getHealthServicesStringByIds(serviceProvider.servicesIds)
     .subscribe(services => {
-      // Split the string into an array of services
       const serviceArray = services.split(', ');
-      // Take the first three services
       const firstThreeServices = serviceArray.slice(0, 3);
-      // Join the first three services back into a string
       this.services = `${firstThreeServices.join(', ')}, ...`;
     });
 
