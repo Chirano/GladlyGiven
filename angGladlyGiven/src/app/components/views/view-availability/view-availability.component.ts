@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Availability } from 'src/app/classes/Availability';
+import { Availability, AvailabilityStatus } from 'src/app/classes/Availability';
 import { AvailabilityService } from 'src/app/services/availability/availability.service';
 import { format } from 'date-fns';
 
@@ -20,7 +20,8 @@ export class ViewAvailabilityComponent {
     startDate : '',
     endDate: '',
     startTime: '',
-    endTime: ''
+    endTime: '',
+    availabilityStatus: AvailabilityStatus.Free, 
   }
 
   availabilities: Availability[] = [];

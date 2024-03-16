@@ -4,15 +4,23 @@
     <app-service-provider-details [serviceProvider]="serviceProvider"></app-service-provider-details>
 
     <!-- List all availabilities -->
-    <div *ngFor="let availability of availabilities">
-        <app-availability [availability]="availability"></app-availability>
+    <div>
+        <app-availability></app-availability>
+        <h2>Availabilities</h2>
+        <div *ngFor="let availability of availabilities">
+            <app-availability [availability]="availability"></app-availability> <!-- *ngIf="isAvailabilityFree(availability)" -->
+        </div>
     </div>
 
-    <app-appointment-request *ngIf="CanShowAppointmentRequestInput()"></app-appointment-request>
+    <div>
+        <app-appointment-request *ngIf="CanShowAppointmentRequestInput()"></app-appointment-request>
+    </div>
 
     <div class="mb-3 d-flex justify-content-between container">
         <app-back-button></app-back-button>
+        <!--         
         <button class="btn btn-primary" *ngIf="CanShowAppointmentRequestInput() == false" (click)="ShowAppointmentInput()">Request Appointment</button>
+         -->
         <button class="btn btn-danger" *ngIf="CanShowAppointmentRequestInput()" (click)="HideAppointmentInput()">Close Request</button>
     </div>
 </div>

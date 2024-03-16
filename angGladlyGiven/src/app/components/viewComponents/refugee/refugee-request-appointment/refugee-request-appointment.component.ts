@@ -6,7 +6,7 @@ import { RefugeeService } from 'src/app/services/data/javaSpring/refugee/refugee
 import { RouterPaths } from 'src/app/classes/routing/RoutePaths';
 import { ServiceProviderService } from 'src/app/services/data/javaSpring/serviceProvider/service-provider.service';
 import { AppointmentRequestStep } from 'src/app/classes/AppointmentRequestStep';
-import { Availability } from 'src/app/classes/Availability';
+import { Availability, AvailabilityStatus } from 'src/app/classes/Availability';
 
 @Component({
   selector: 'app-refugee-request-appointment',
@@ -47,6 +47,10 @@ export class RefugeeRequestAppointmentComponent {
         }
       });
     }
+  }
+
+  isAvailabilityFree(availability : Availability) : boolean {
+    return availability.availabilityStatus == AvailabilityStatus.Free;
   }
 
 

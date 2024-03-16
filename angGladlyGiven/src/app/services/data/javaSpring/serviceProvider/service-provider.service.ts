@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/authentication/auth.service';
 import { HealthService } from 'src/app/classes/HealthServices';
 import { Category } from 'src/app/classes/Category';
 import { HealthserviceService } from 'src/app/services/healthservices/healthservice.service';
+import { AppointmentDTO } from 'src/app/classes/AppoitmentDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -204,6 +205,7 @@ export class ServiceProviderService  {
       endDate : availability.endDate,
       startTime: availability.startTime,
       endTime : availability.endTime,
+      availabilityStatus: availability.availabilityStatus, 
     };
 
     return this.http.post<any>(
@@ -223,8 +225,8 @@ export class ServiceProviderService  {
 
   // Appointments
   // ---------------------------------------------
-  createAppointment(serviceProvider : ServiceProviderDTO, appointment : Appointment) : Observable<any> {
-    var url : string = `${this.baseUrl}/appointments/serviceprovider/${serviceProvider.id}`;
+  createAppointment(appointment : AppointmentDTO) : Observable<any> {
+    var url : string = `${this.baseUrl}/appointment`;
     return this.http.post(url, appointment);
   }
 

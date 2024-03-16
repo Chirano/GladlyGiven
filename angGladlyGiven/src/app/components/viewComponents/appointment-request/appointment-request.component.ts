@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Availability } from 'src/app/classes/Availability';
+import { Availability, AvailabilityStatus } from 'src/app/classes/Availability';
 import { ServiceProviderDTO } from 'src/app/classes/userProfiles/ServiceProviderDTO';
 import { ServiceProviderService } from 'src/app/services/data/javaSpring/serviceProvider/service-provider.service';
 
@@ -19,6 +19,7 @@ export class AppointmentRequestComponent {
     endDate: '',
     startTime: '',
     endTime: '',
+    availabilityStatus: AvailabilityStatus.Free, 
   };
 
   serviceProvider : ServiceProviderDTO | null = null;

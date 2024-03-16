@@ -28,6 +28,21 @@
             <p><strong>End Time:</strong> {{ availability.endTime }}</p>
           </div>
         </div>
+
+        <div class="row align-items-center"> <!-- Center the row vertically -->
+          <div class="col-md-6">
+            <h5>{{ availability.availabilityStatus }}</h5>
+          </div>
+          <div class="col-md-6 d-flex justify-content-end">
+            <div *ngIf="isRefugee()">
+              <button class="btn btn-primary" (click)="RefugeeRequestsAppointment()">Request Appointment</button>
+              <!-- Show depending on availability status               
+              <button class="btn btn-primary" *ngIf="isFree()" (click)="RefugeeRequestsAppointment()">Request Appointment</button>
+              <button class="btn btn-danger" *ngIf="isFree() === false" (click)="RefugeeCancelsAppointment()">Cancel Appointment</button>
+               -->
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

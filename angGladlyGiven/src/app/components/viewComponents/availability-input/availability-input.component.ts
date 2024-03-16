@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { format } from 'date-fns';
-import { Availability } from 'src/app/classes/Availability';
+import { Availability, AvailabilityStatus } from 'src/app/classes/Availability';
 import { ServiceProviderDTO } from 'src/app/classes/userProfiles/ServiceProviderDTO';
 import { AvailabilityService } from 'src/app/services/availability/availability.service';
 import { ServiceProviderService } from 'src/app/services/data/javaSpring/serviceProvider/service-provider.service';
@@ -21,6 +21,7 @@ export class AvailabilityInputComponent {
     endDate: '',
     startTime: '',
     endTime: '',
+    availabilityStatus: AvailabilityStatus.Free, 
   };
 
   availabilities: Availability[] = [];

@@ -35,6 +35,7 @@ export class AvailabilityService {
       endDate : availability.endDate,
       startTime: availability.startTime,
       endTime : availability.endTime,
+      availabilityStatus: availability.availabilityStatus, 
     };
 
     return this.http.post<any>(
