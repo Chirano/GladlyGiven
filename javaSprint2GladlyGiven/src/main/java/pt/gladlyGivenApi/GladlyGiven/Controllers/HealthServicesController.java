@@ -51,6 +51,16 @@ public class HealthServicesController {
         return new ResponseEntity<>(healthServices, HttpStatus.OK);
     }
 
+    @GetMapping("/healthservices/category/{id}")
+    public ResponseEntity<List<HealthService>> getHealthServicesByCategory(@PathVariable("id") long id){
+        List<HealthService> healthServices = service.findHealthServiceByCategory(id);
+        if(healthServices == null){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return new ResponseEntity<>(healthServices, HttpStatus.OK);
+    }
+
 
     /**
      * Retrieves all health services provided by a service provider identified by the given ID.

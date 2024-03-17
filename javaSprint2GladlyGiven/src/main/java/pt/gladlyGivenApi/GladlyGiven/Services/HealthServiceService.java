@@ -58,6 +58,11 @@ public class HealthServiceService {
         return healthServiceRepository.findByServiceProviderId(serviceProviderId);
     }
 
+    public List<HealthService> findHealthServiceByCategory(long categoryId){
+        return healthServiceRepository.findAllByCategoryId(categoryId);
+
+    }
+
     /**
      * Creates a new health service with the provided description and category.
      *

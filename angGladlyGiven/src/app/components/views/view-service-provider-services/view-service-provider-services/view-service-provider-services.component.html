@@ -7,20 +7,27 @@
       <li *ngFor="let item of healthServices">
         <div class="card-body">
           {{ item.id }} - {{ item.description }}
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
           <button type="button" (click)="removeService(item.id)" class="btn btn-outline-danger">Remove</button>
+          </div>
         </div>
       </li>
   </div>
 
-</ul>
-   </div>
- </div>
  <div class="mx-auto p-3">
  <div class="card-body">
-   <h2>Add Service</h2>
+   <h2>Add a Service</h2>
    <div class="row pt-3">
      <div class="col-4">
-       <label for ="">Select a service</label>
+      <label for="category-select">Category:</label>
+      <select id="category-select" [(ngModel)]="category.id" (change)="loadAllServices(category.id)" class="form-select">
+        <option value="0">select a category</option>
+        <option value="1">Medicine</option>
+        <option value="2">Nurse</option>
+        <option value="3">Dentist</option>
+        <option value="4">Psychology</option>
+      </select>
+       <label for ="">Service</label>
          <select class="form-select" [(ngModel)]="toaddhealthService.id">
            <option *ngFor="let item of allHealthServices" [value]="item.id">{{item.description}}</option>
          </select><br>

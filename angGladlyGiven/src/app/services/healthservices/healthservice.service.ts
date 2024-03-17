@@ -35,6 +35,10 @@ export class HealthserviceService {
   getAllServicesByServiceId(userId: number) : Observable<HealthService[]>{
     return this.http.get<HealthService[]>(this.url+"/healthservices/serviceProvider/"+userId);
   }
+
+  getAllServicesByCategoryId(cateoryId: number) : Observable<HealthService[]>{
+    return this.http.get<HealthService[]>(this.url+"/healthservices/category/"+cateoryId);
+  }
   
   removeService(userId: number, serviceId: number) : Observable<HealthService[]>{
     return this.http.put<HealthService[]>(this.url+"/serviceProvider/"+userId+"/removeservice/"+serviceId, this.httpOptions);

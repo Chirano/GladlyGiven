@@ -23,10 +23,14 @@ export class ViewServiceProviderServicesComponent implements OnInit{
     description: " ",
   }
 
+  category : any = {
+    id : 0
+  };
+
 
   ngOnInit(): void {
     this.loadServices();
-    this.loadAllServices();
+    this.loadAllServices(this.category.id);
   }
 
   loadServices(): void{
@@ -45,7 +49,8 @@ export class ViewServiceProviderServicesComponent implements OnInit{
     this.service.addService(AuthService.SessionContext.userId, serviceId).subscribe(healthServices => this.healthServices = healthServices);
   }
 
-  loadAllServices(){
-    this.service.getAllServices().subscribe(allHealthServices => this.allHealthServices = allHealthServices);
-  }
+  loadAllServices(categoryId: number){
+    this.service.getAllServicesByCategoryId(this.category.id).subscribe(allHealthServices => this.allHealthServices = allHealthServices);
+  } 
+
 }
