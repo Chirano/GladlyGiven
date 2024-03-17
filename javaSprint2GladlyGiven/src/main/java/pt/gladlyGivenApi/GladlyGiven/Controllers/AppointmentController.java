@@ -96,15 +96,14 @@ public class AppointmentController {
         return new ResponseEntity<>(newAppointment, HttpStatus.CREATED);
     }
 
-    @PutMapping(value = "/appointment/{id}", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Appointment> cancelAppointment(@PathVariable("id") long id, @RequestBody Appointment ap) {
-        if(ap.getId() != id) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+    @PutMapping(value = "/appointment/cancel/{appointmentId}", produces = "application/json")
+    public ResponseEntity<Appointment> cancelAppointment(@PathVariable("appointmentId") long appointmentId) {
 
-        Appointment canceledAppointment = this.appointmentService.cancelAppointment(ap);
+        Appointment canceledAppointment = this.appointmentService.cancelAppointment(appointmentId);
+
         return new ResponseEntity<>(canceledAppointment, HttpStatus.OK);
     }
+
 
     @GetMapping(value = "/appointments/total", produces = "application/json")
     public ResponseEntity<Integer> totalAppointments(){

@@ -131,15 +131,19 @@ public class AppointmentService {
 
     /**
      * Cancels an existing appointment by updating its status to canceled and saving the changes to the repository.
-     * @param appointment The appointment object to be canceled.
+     * @param id The appointment id object to be canceled.
      * @return The updated appointment object reflecting the cancellation status, saved in the repository.
      */
-    public Appointment cancelAppointment(Appointment appointment) {
-        appointment.setStatus(AppointmentStatus.CANCELED);
-        Appointment a = this.appointmentRepository.save(appointment);
-
+    public Appointment cancelAppointment(long id) {
+        Appointment a = appointmentRepository.findById(id).orElse(null);
+        if(a == null){
+            return null;
+        }
+        a.setStatus(AppointmentStatus.CANCELED);
+        a = this.appointmentRepository.save(a);
         return a;
     }
+
 
     /**
      * Retrieves the total number of appointments.

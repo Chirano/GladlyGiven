@@ -7,6 +7,7 @@ import { RefugeePage } from 'src/app/classes/RefugeePage';
 import { EventManagerService } from 'src/app/services/events/event-manager.service';
 import { ServiceProviderDTO } from 'src/app/classes/userProfiles/ServiceProviderDTO';
 import { RouterPaths } from 'src/app/classes/routing/RoutePaths';
+import { AppointmentDTO } from 'src/app/classes/AppoitmentDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -62,6 +63,16 @@ export class RefugeeService  {
   getRefugeeByEmail(email: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/refugee/${email}`);
   }
+
+  getAppointmentsByRefugeeId(refugeeId: number): Observable<AppointmentDTO[]>
+  {
+    return this.http.get<AppointmentDTO[]>(`${this.baseUrl}/appointments/refugee/${refugeeId}`);
+  }
+
+  cancelAppointment(appointmentId: number): Observable<any>{
+    return this.http.put<any>(`${this.baseUrl}/appointment/cancel/${appointmentId}`, null);
+  }
+
 
 
   static MapToRefugee(data: any): RefugeeDTO | null {

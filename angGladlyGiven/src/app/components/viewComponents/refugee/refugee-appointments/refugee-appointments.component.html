@@ -1,3 +1,26 @@
 <app-header></app-header>
-
-<p>refugee-appointments works!</p>
+<div class="Services list">
+    <div class="mx-auto p-3">
+        <h2>Check your Appointments</h2>
+        <div class="card">
+            <ul style="list-style-type: none;">
+                <div class="card-body">
+                    <li *ngFor="let item of appointments">
+                        <div class="card-body">
+                            <div>Service Provider ID: {{ item.serviceProviderId }}</div>
+                            <div>Appointment Date: {{ item.appointmentDate }}</div>
+                            <div>Address: {{ item.address }}</div>
+                            <div>Status: {{ item.status }}</div>
+                            <div>Start Date: {{ item.startDate }}</div>
+                            <div>Start Time: {{ item.startTime }}</div>
+                            <div>End Time: {{ item.endTime }}</div>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button type="button" (click)="cancelAppointment(item.id)" class="btn btn-outline-danger">Cancel</button>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </div>
+</div>
