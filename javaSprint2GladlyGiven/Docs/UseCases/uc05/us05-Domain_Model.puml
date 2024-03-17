@@ -11,23 +11,27 @@ hide methods
 title UC05 - Service Provider visualize a list of services available
 
 class ServiceProvider {
-    id
-    firstName
-    lastName
-    email
-    gender
-    password
-    language
-    phoneNumber
-    nif
-    licenseNumber
+   id
+   firstName
+   lastName
+   email
+   gender
+   mainLanguage
+   secondLanguage
+   mainPhoneNumber
+   nif
+   paymentInfoId
+   invoiceInfoId
+   licenseNumber
+   categoryId
 }
 
 class HealthService {
     id
     description
+    category
 }
 
-ServiceProvider "1   " - "   *" HealthService : sees >
+ServiceProvider "1   " - "   *" HealthService : views >
 
 @enduml

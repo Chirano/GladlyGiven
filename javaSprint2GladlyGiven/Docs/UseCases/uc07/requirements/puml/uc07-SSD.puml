@@ -15,17 +15,11 @@ participant ":System" as System
 activate Refugee
     Refugee -> System : starts the evaluation process
     activate System
-        System --> Refugee : shows the attributes used to evaluate the service provider (rating and description)
+        System --> Refugee : shows the attributes used to evaluate the service provider(rating and description)
     deactivate System
 
-    Refugee -> System : fills the requested data
+    Refugee -> System : fills the requested data and selects a rating option(1,2,3,4,5)
     activate System
-        System --> Refugee : validates and asks for confirmation
+        System --> Refugee : validates, records the information and notifies the success of the operation
     deactivate System
-
-    Refugee -> System : confirms
-    activate System
-        System --> Refugee : records the information and notifies the success of the operation
-    deactivate System
-deactivate Refugee
 @enduml
