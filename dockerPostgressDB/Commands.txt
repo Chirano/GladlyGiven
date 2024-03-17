@@ -1,0 +1,12 @@
+open cmd in folder where the docker-compose.yml is
+
+type: docker-compose up
+
+add the "application.properties" file to javaSpring GladlyGiven project
+start: java spring GladlyGiven project
+
+open one more cmd to view data
+type: docker exec -it dockerpostgressdb-postgres-1 psql -U gladlyGiven -d gladlyGiven
+type: SELECT * FROM health_service;
+
+to exit type: \q
