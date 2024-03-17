@@ -8,7 +8,7 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-title US024 - Refugee cancels or reschedules an appointment
+title US018 - Refugee cancels or reschedules an appointment
 
 class Appointment {
     Id
@@ -38,7 +38,8 @@ class Refugee {
     Phone Number
     Nationality
     Country of Origin
-    Native Language
+    Main Language
+    Second language
 }
 
 

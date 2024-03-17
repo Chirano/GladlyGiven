@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title US024 - Refugee cancels or reschedules an appointment
+title US018 - Refugee cancels or reschedules an appointment
 
 autonumber
 
@@ -73,7 +73,7 @@ activate refugee
         activate ctrl
             ctrl -> appRepo : save(updatedAppointment)
             activate appRepo
-                appRepo -> appRepo : savesave(updatedAppointment)
+                appRepo -> appRepo : save(updatedAppointment)
                 appRepo --> ctrl : success
             deactivate appRepo
             ctrl --> ui : success

@@ -8,7 +8,7 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-title UC025 - Donor views a list of donations
+title UC019 - Donor views a list of donations
 
 class Donation {
     id

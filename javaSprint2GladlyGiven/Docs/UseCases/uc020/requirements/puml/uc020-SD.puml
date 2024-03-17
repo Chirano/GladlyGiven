@@ -3,9 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - UC021 - Admin validates the request for service-related cost support
-
-
+title UC020 - Admin validates the request for service-related cost support
 
 
 autonumber
