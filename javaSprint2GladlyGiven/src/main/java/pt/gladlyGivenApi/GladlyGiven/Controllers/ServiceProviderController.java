@@ -182,12 +182,10 @@ public class ServiceProviderController {
     
     /**
      * Retrieves a paginated list of all availabilities for all service providers.
-     * @param size Number of items per page (optional, defaults to 10).
      *
      * @return ResponseEntity with a list of availabilities if found.
      */
     @GetMapping("/availabilities")
-        int _page = page.orElse(0);
     public ResponseEntity<List<Availability>> findAllAvailabilities() {
 
         List<Availability> availabilityList = this.serviceProviderService.findAllAvailabilities();
