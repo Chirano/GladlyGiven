@@ -1,0 +1,39 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+title UC015 - Donor makes a donation
+
+class Donation {
+    id
+    amount
+    donationType
+    fiscalIdentity
+    date
+}
+
+class Donor {
+    id
+    firstName
+    lastName
+    email
+    gender
+    photoURL
+    mainLanguage
+    secondLanguage
+    mainPhoneNumber
+    nif
+    paymentInfoId
+    invoiceInfoId
+    fiscalIdentity
+}
+
+Donor "1   " - "   *" Donation : makes a >
+
+@enduml

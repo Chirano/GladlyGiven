@@ -1,0 +1,28 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title US014 - Service Provider requests service-related cost support
+
+autonumber
+
+actor ServiceProvider
+participant ":System" as System
+
+activate ServiceProvider
+    ServiceProvider -> System : starts the process of registering a cost support request
+    activate System
+        System --> ServiceProvider : requests data (appointment id, amount, type and description)
+    deactivate System
+    ServiceProvider -> System : fills requested data
+    activate System
+        System --> ServiceProvider : validates and asks for confirmation
+    deactivate System
+    ServiceProvider -> System : confirms
+    activate System
+        System --> ServiceProvider : records the information and notifies the success of the operation
+    deactivate System
+deactivate ServiceProvider
+
+@enduml

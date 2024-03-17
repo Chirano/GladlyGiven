@@ -1,0 +1,39 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+title UC14 - Service Provider requests service-related cost support
+
+class ServiceProvider {
+    id
+    firstName
+    lastName
+    email
+    gender
+    photoURL
+    mainLanguage
+    mainPhoneNumber
+    licenseNumber
+    categoryId
+}
+
+class CostSupport {
+    id
+    amount
+    type
+    description
+    dateRequest
+    status
+}
+
+
+ServiceProvider "1   " - "   *" CostSupport : registers a >
+
+
+@enduml

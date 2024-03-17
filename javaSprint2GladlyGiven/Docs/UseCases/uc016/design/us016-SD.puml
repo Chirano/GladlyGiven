@@ -1,0 +1,38 @@
+
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title UC016 - Display of the donation report
+
+autonumber
+
+actor Administrator
+participant ":DisplayDonationReportUI" as ui
+participant ":DisplayDonationReportController" as ctrl
+participant Repositories
+participant "donationRepo : DonationRepository" as DonationRepo
+
+
+activate Administrator
+    Administrator -> ui : requests to view donation report
+    activate ui
+        ui -> ctrl** : create()
+        ui -> ctrl : GetDonationReport()
+        activate ctrl
+            ctrl -> Repositories : create()
+            activate Repositories
+                Repositories -> Repositories : localValidation()
+                Repositories --> ctrl : DonationData
+            deactivate Repositories
+            ctrl --> ui : DonationData
+        deactivate ctrl
+        ui --> Administrator : displays the donation report
+    deactivate ui
+deactivate Administrator
+
+@enduml
+
+
+@enduml

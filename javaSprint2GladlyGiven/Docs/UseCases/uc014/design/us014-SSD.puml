@@ -1,0 +1,62 @@
+
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title UC14 - Service provider requests service-related cost support
+
+autonumber
+
+actor ServiceProvider as sp
+participant ":CostSupportRequestUI" as ui
+participant ":CostSupportController" as ctrl
+participant Repositories
+participant "costSupportRepo : CostSupportRepository" as costRepo
+participant "costSupport : CostSupport" as costSupport
+
+activate sp
+    sp -> ui : starts the process of registering a cost support request
+    activate ui
+        ui --> sp : requests data (appointmentId, amount, type and description)
+    deactivate ui
+    sp -> ui : fills requested data
+    activate ui
+        ui -> ctrl** : createServiceRequest(name, service category)
+        activate ctrl
+            ctrl -> Repositories : getCostSupportRepository( )
+            activate Repositories
+                Repositories -> Repositories : getCostSupportRepository( )
+                Repositories --> ctrl : costSupportRepository
+            deactivate Repositories
+            ctrl -> costRepo : createCostSupport(appointmentId, amount, type and description
+            activate costRepo
+                costRepo -> costSupport** : create( )
+                activate costSupport
+                    costSupport -> costSupport : localValidation( )
+                    costSupport --> costRepo : costSupport
+                deactivate costSupport
+                costRepo -> costRepo : globalValidation(costSupport)
+                costRepo --> ctrl : costSupport
+            deactivate costRepo
+            ctrl --> ui : costSupport
+        deactivate ctrl
+        ui --> sp : validates and asks for confirmation
+    deactivate ui
+    sp -> ui : confirms
+    activate ui
+        ui -> ctrl : save( )
+        activate ctrl
+            ctrl -> costRepo : save(costSupport)
+            activate costRepo
+                costRepo -> costRepo : add(costSupport)
+                costRepo --> ctrl : success
+            deactivate costRepo
+            ctrl --> ui : success
+        deactivate ctrl
+        ui --> sp : records the information and notifies the success of the operation
+    deactivate ui
+deactivate sp
+
+
+@enduml
