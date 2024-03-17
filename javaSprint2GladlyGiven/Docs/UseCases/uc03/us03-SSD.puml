@@ -1,42 +1,42 @@
 @startuml
-'https://plantuml.com/sequence-diagram
-
 skinparam monochrome true
-skinparam packageStyle rectangle
 skinparam shadowing false
 
-title Register a Donor on the application (SSD)
-
-autonumber
+title Donor Registration Sequence
 
 actor Donor
-participant ":System" as System
+participant "DonorRegistrationUI" as UI
+participant "DonorRegistrationController" as Controller
+participant "System" as System
 
 activate Donor
-    Donor -> System : starts the registration process
-    activate System
-        System --> Donor : shows the attributes used to describe the donor
-        note right of System
-                                     Attributes to provide:
-                                     - First name
-                                     - Last name
-                                     - Phone number
-                                     - Email address
-                                     - Address (Street name, postal code, city, country)
-                                     - NIF
-                                     - Nationality
-                                     - Bank account informations (Bank name, IBAN, Bank account holder name)
-        end note
-    deactivate System
-
-    Donor -> System : fills the requested data
-    activate System
-        System --> Donor : validates and asks for confirmation
-    deactivate System
-
-    Donor -> System : confirms
-    activate System
-        System --> Donor : records the information and notifies the success of the operation
-    deactivate System
+Donor -> UI: Initiate registration process
+activate UI
+UI -> Controller: Provide personal information
+activate Controller
+Controller -> System: Validate provided data
+System --> Controller: Validation result
+alt Data is valid
+    Controller -> UI: Display confirmation prompt
+else Data is invalid
+    Controller -> UI: Display error message
+    UI -> Donor: Correct data
+    activate Donor
+    Donor -> UI: Provide corrected data
+    deactivate Donor
+    deactivate UI
+    loop until valid data provided
+        UI -> Controller: Provide corrected data
+        activate Controller
+        Controller -> System: Validate corrected data
+        System --> Controller: Validation result
+    end
+end
+UI -> Donor: Confirm registration
+Controller -> System: Register donor
+System --> Controller: Registration result
+Controller -> UI: Display registration result
+UI --> Donor: Display registration result
+deactivate UI
 deactivate Donor
 @enduml

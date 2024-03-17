@@ -1,51 +1,42 @@
 @startuml
 skinparam monochrome true
-skinparam packageStyle rectangle
 skinparam shadowing false
 
-title Register Refugee on the application (SSD)
-
-autonumber
+title Refugee Registration Sequence
 
 actor Refugee
-participant ":System" as System
+participant "RefugeeRegistrationUI" as UI
+participant "RefugeeRegistrationController" as Controller
+participant "System" as System
 
 activate Refugee
-    Refugee -> System : starts the registration process
-    activate System
-        System --> Refugee : shows the attributes used to describe the refugee
-         note right of System
-                     Attributes to provide:
-                     - Refugee protocol number
-                     - First name
-                     - Last name
-                     - Birth date
-                     - Gender
-                     - Phone number
-                     - Email address
-                     - Address (Street name, postal code, city, country)
-                     - NIF
-                     - NISS
-                     - SNS number
-                     - Nationality
-                     - Country of origin
-                     - Native language
-                     - Other languages
-                     - Marital status
-                     - Emergency contact (first name, last name, phone number, email address)
-                     - Medical history
-         end note
-    deactivate System
-
-    Refugee -> System : fills the requested data
-    activate System
-        System --> Refugee : validates and asks for confirmation
-    deactivate System
-
-    Refugee -> System : confirms
-    activate System
-        System --> Refugee : records the information and notifies the success of the operation
-    deactivate System
+Refugee -> UI: Initiate registration process
+activate UI
+UI -> Controller: Provide personal information
+activate Controller
+Controller -> System: Validate provided data
+System --> Controller: Validation result
+alt Data is valid
+    Controller -> UI: Display confirmation prompt
+else Data is invalid
+    Controller -> UI: Display error message
+    UI -> Refugee: Correct data
+    activate Refugee
+    Refugee -> UI: Provide corrected data
+    deactivate Refugee
+    deactivate UI
+    loop until valid data provided
+        UI -> Controller: Provide corrected data
+        activate Controller
+        Controller -> System: Validate corrected data
+        System --> Controller: Validation result
+    end
+end
+UI -> Refugee: Confirm registration
+Controller -> System: Register refugee
+System --> Controller: Registration result
+Controller -> UI: Display registration result
+UI --> Refugee: Display registration result
+deactivate UI
 deactivate Refugee
-
 @enduml

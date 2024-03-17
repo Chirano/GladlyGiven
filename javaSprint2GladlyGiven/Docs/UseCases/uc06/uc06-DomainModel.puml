@@ -1,0 +1,56 @@
+// Domain Model
+
+// Interface representing a refugee
+export interface Refugee {
+    id: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    gender: string;
+    photoURL: string;
+    mainLanguage: string;
+    secondLanguage: string;
+    mainPhoneNumber: string;
+    protocolId: string;
+    snsNumber: string;
+    nationality: string;
+    country: string;
+}
+
+// Interface representing an appointment
+export interface Appointment {
+    id: number;
+    serviceProviderId: number;
+    refugeeId: number;
+    healthServiceId: number;
+    appointmentDate: string;
+    address: string;
+    status: AppointmentStatus;
+    observations: string;
+    startDate: string;
+    startTime: string;
+    endTime: string;
+}
+
+// Enum representing the status of an appointment
+export enum AppointmentStatus {
+    WAITING_VALIDATION,
+    VALIDATED,
+    IN_PROGRESS,
+    COMPLETED,
+    CANCELED
+}
+
+// DTO representing data to create an appointment
+export interface AppointmentDTO {
+    serviceProviderId: number;
+    refugeeId: number;
+    healthServiceId: number;
+    appointmentDate: string;
+    address: string;
+    status: AppointmentStatus;
+    observations: string;
+    startDate: string;
+    startTime: string;
+    endTime: string;
+}

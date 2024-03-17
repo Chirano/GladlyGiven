@@ -1,0 +1,24 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Domain Model - Refugee Registration
+
+class RefugeeDTO {
+    + id: number
+    + firstName: string
+    + lastName: string
+    + email: string
+    + gender: string
+    + photoURL: string
+    + mainLanguage: string
+    + secondLanguage: string
+    + mainPhoneNumber: string
+    + protocolId: string
+    + snsNumber: string
+    + nationality: string
+    + country: string
+}
+
+@enduml

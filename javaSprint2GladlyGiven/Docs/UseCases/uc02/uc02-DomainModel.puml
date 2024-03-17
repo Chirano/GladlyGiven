@@ -1,0 +1,39 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Domain Model - Service Provider Registration
+
+class ServiceProviderDTO {
+    + id: number
+    + firstName: string
+    + lastName: string
+    + email: string
+    + gender: string
+    + photoURL: string
+    + mainLanguage: string
+    + secondLanguage: string
+    + mainPhoneNumber: string
+    + nif: string
+    + paymentInfoId: string
+    + invoiceInfoId: string
+    + licenseNumber: string
+    + categoryId: number
+    + servicesIds: number[] | null
+    + healthServices: HealthService[]
+    + reviewIds: number[] | null
+    + reviewAverage: number
+    + streetName: string
+    + doorNumber: string
+    + cityName: string
+    + postalCode: string
+}
+
+class HealthService {
+    + id: number
+    + name: string
+    + description: string
+}
+
+@enduml

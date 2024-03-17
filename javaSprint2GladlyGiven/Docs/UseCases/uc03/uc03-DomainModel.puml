@@ -1,0 +1,25 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Domain Model - Donor Registration
+
+class DonorDTO {
+    + id: number
+    + firstName: string
+    + lastName: string
+    + email: string
+    + gender: string
+    + photoURL: string
+    + mainLanguage: string
+    + secondLanguage: string
+    + mainPhoneNumber: string
+    + nif: string
+    + paymentInfoId: string
+    + invoiceInfoId: string
+    + fiscalIdentity: number
+    + donationIds: number[] | null
+}
+
+@enduml
