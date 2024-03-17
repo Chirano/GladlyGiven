@@ -1,0 +1,39 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+title US021 - Service Provider views a list of his requests (cost support and new service)
+
+class ServiceProvider {
+    Id
+    First Name
+    Last Name
+    License Number
+    Address
+    Phone Number
+    Email
+    Category
+}
+
+class CostSupportRequest {
+    Id
+    DateRequest
+    Amount
+    Type
+    Status
+    Description
+}
+
+
+
+
+ServiceProvider "1   " -- "   *" CostSupportRequest : views all >
+
+
+@enduml

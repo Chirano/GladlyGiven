@@ -1,0 +1,38 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title US022 - The service provider views a list of his new service inclusion requests.
+
+autonumber
+
+actor ServiceProvider as sp
+participant ":ServiceProviderUI" as ui
+participant ":ServiceRequestController" as ctrl
+participant Repositories as repo
+participant "serviceRequestRepo : ServiceRequestRepo" as srRepo
+
+
+activate sp
+    sp -> ui : starts the process of visualizing a list of all new service inclusion requests
+    activate ui
+        ui -> ctrl : getServiceRequestRepo( )
+        activate ctrl
+            ctrl -> repo : getServiceRequestRepo( )
+            activate repo
+                repo -> repo : getServiceRequestRepo( )
+                repo --> ctrl : serviceRequestRepo
+            deactivate repo
+            ctrl -> srRepo : getAllServiceRequestById(serviceProviderId)
+            activate srRepo
+                srRepo -> srRepo : getAllServiceRequestById(serviceProviderId)
+                srRepo --> ctrl : serviceRequestList
+            deactivate srRepo
+            ctrl --> ui : serviceRequestList
+        deactivate ctrl
+        ui --> sp : shows a list of all service requests
+    deactivate ui
+deactivate sp
+
+@enduml

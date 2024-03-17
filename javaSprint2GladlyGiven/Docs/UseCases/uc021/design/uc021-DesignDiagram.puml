@@ -1,0 +1,38 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title US021 - Service Provider views a list of his cost support requests
+
+autonumber
+
+actor ServiceProvider as sp
+participant ":ServiceProviderUI" as ui
+participant ":CostSupportController" as ctrl
+participant Repositories as repo
+participant "costSupportRepo : CostSupportRepo" as costRepo
+
+
+activate sp
+    sp -> ui : starts the process of visualizing a list of all cost supports opened by him
+    activate ui
+        ui -> ctrl : getCostSupportRepository( )
+        activate ctrl
+            ctrl -> repo : getCostSupportRepository( )
+            activate repo
+                repo -> repo : getCostSupportRepository( )
+                repo --> ctrl : costRepo
+            deactivate repo
+            ctrl -> costRepo : getAllCostSupportById(serviceProviderId)
+            activate costRepo
+                costRepo -> costRepo : getAllCostSupportById(serviceProviderId)
+                costRepo --> ctrl : costSupportList
+            deactivate costRepo
+            ctrl --> ui : costSupportList
+        deactivate ctrl
+        ui --> sp : shows a list of all cost supports
+    deactivate ui
+deactivate sp
+
+@enduml

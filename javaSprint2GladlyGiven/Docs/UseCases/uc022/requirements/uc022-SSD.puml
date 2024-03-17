@@ -1,0 +1,21 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title US022 - Service Provider views a list of his new service inclusion requests
+
+autonumber
+
+actor ServiceProvider as sp
+participant ":System" as system
+
+activate sp
+    sp -> system : initiates the process of visualizing service requests opened by him
+    activate system
+        system --> sp : shows all service requests registered according to his identifier.
+    deactivate system
+deactivate sp
+
+
+@enduml
