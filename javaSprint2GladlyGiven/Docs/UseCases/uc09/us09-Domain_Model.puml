@@ -1,0 +1,26 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+title UC09 - Display a FAQ page (Only Angular)
+
+
+class FAQ {
+    question
+    answer
+}
+
+class translations {
+   translations
+
+}
+
+translations "1   " - "   *" FAQ : views >
+
+@enduml
