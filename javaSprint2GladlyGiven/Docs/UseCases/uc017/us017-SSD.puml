@@ -1,0 +1,27 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title UC017 - Service Provider Requests admin for a new service type
+
+autonumber
+
+actor SystemUser
+participant ":System" as System
+
+activate SystemUser
+    SystemUser -> System : starts the process of request new service type
+    activate System
+        System --> SystemUser : request data (DateRequest, Category, Description)
+    deactivate System
+
+    SystemUser -> System :fills requested data and confirm
+
+    activate System
+        System --> SystemUser :displays a confirmation message and finishes the process
+    deactivate System
+
+deactivate SystemUser
+
+@enduml

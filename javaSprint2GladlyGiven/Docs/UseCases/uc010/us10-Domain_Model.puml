@@ -8,7 +8,7 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-title UC09 - Display a FAQ page
+title UC010 - User asks a question to Administrator
 
 class Contact {
    id
@@ -16,13 +16,5 @@ class Contact {
    contactEmail: string,
    contactDescription: string,
 }
-
-class HealthService {
-    id
-    description
-    category
-}
-
-ServiceProvider "1   " - "   *" HealthService : views >
 
 @enduml

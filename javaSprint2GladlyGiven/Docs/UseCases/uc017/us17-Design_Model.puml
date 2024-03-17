@@ -1,0 +1,49 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title UC017 - Service Provider Requests admin for a new service type
+
+autonumber
+
+actor SystemUser
+
+participant "ServiceRequestUI" as ui
+participant ":ServiceRequestController" as ctrl
+participant Repositories
+participant "serviceRequestRepo : ServiceRequestsRepository" as serviceRequestRepo
+participant "serviceRequest : ServiceRequest" as serviceRequest
+
+activate SystemUser
+    SystemUser -> ui : starts the process of request new service type
+    activate ui
+        ui --> SystemUser: request data (DateRequest, Category, Description)
+    deactivate ui
+
+    SystemUser -> ui : fills requested data and confirm
+    activate ui
+        ui -> ctrl** : create()
+        ui -> ctrl : serviceRequest()
+        activate ctrl
+            ctrl -> Repositories : getServiceRequestRepository()
+            activate Repositories
+                Repositories -> Repositories : serviceRequestRepository()
+                Repositories-->ctrl : serviceRequestRepo
+            deactivate Repositories
+            ctrl -> serviceRequestRepo : createServiceRequest()
+            activate serviceRequestRepo
+                serviceRequestRepo -> serviceRequest** : createServiceRequest()
+                activate serviceRequest
+                serviceRequest -> serviceRequest : localValidation
+                serviceRequest -> serviceRequestRepo : serviceRequest
+                deactivate serviceRequest
+             serviceRequestRepo --> ctrl : success
+            deactivate serviceRequestRepo
+            ctrl --> ui : success
+            deactivate ctrl
+            ui --> SystemUser : displays a confirmation message and finishes the process
+    deactivate ui
+deactivate SystemUser
+
+@enduml

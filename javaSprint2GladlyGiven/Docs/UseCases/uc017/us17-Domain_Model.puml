@@ -1,0 +1,28 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+title UC017 - Service Provider Requests admin for a new service type
+
+class ServiceRequest {
+    id
+    dateRequest
+    idCategory
+    description
+    status
+}
+
+class Category {
+    id
+    description
+}
+
+Category "1   " - "   *" ServiceRequest : views >
+
+@enduml
