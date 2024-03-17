@@ -351,19 +351,17 @@ public class ServiceProviderService extends AppUserService {
     /**
      * Retrieves a paginated list of availabilities from the Availability repository.
      *
-     * @param page Page number for pagination.
-     * @param size Number of items per page.
      * @return Page of Availability objects representing the retrieved availabilities.
      * @throws NotImplementedException if the table 'Availability' is null.
      */
-    public Page<Availability> findAllAvailabilities(int page, int size) {
-        Page<Availability> avPage =  this.availabilityRepository.findAll(PageRequest.of(page, size));
+    public List<Availability> findAllAvailabilities() {
+        List<Availability> availabilityList =  this.availabilityRepository.findAll();
 
-        if(!avPage.hasContent()) {
+        if(availabilityList == null) {
             throw new IllegalArgumentException("Table Availabity is null!");
         }
 
-        return avPage;
+        return availabilityList;
     }
 
     /**
@@ -402,24 +400,6 @@ public class ServiceProviderService extends AppUserService {
         }
 
         return availabilityRepository.findById(id).orElse(null);
-    }
-
-
-    /**
-     * Retrieves a page of availabilities based on the given availability status.
-     *
-     * @param availabilityStatus The availability status to filter by.
-     * @param page               The page number to retrieve.
-     * @param size               The number of items per page.
-     * @return A Page object containing the availabilities with the specified status,
-     *         paginated according to the given page and size parameters.
-     */
-    public Page<Availability> findAvailabilitiesByStatus(int availabilityStatus, int page, int size) {
-        if(availabilityStatus == 0) {
-            return this.availabilityRepository.findByAvailabilityStatus(availabilityStatus, PageRequest.of(page, size));
-        } else {
-            return this.availabilityRepository.findByAvailabilityStatus(availabilityStatus, PageRequest.of(page, size));
-        }
     }
 
 
@@ -525,31 +505,6 @@ public class ServiceProviderService extends AppUserService {
         return addServiceReview(serviceProvider, reviewId);
     }
 
-    //TODO: NÃO ESTÁ SENDO USADO. RETIRAR!
-    /**
-     * Finds service providers offering a specific service in a given city.
-     *
-     * @param serviceId The ID of the service offered by the service providers.
-     * @param cityName The name of the city where the service providers are located.
-     * @return A list of ServiceProviderDTO objects representing the service providers offering the specified service
-     *         in the given city, or an empty list if no service providers are found.
-     */
-    public List<ServiceProviderDTO> findByHealthServiceIdAndCityName(Long serviceId, String cityName) {
-        List<ServiceProvider> serviceProviderList = this.serviceProviderRepository
-                .findByHealthServiceIdAndCityName(serviceId, cityName);
-
-        if(serviceProviderList == null) {
-            throw new IllegalArgumentException("There's no service providers for this service and this location");
-        }
-
-        List<ServiceProviderDTO> serviceProviderDTOS = new ArrayList<>();
-
-        for(ServiceProvider sp : serviceProviderList) {
-            serviceProviderDTOS.add(new ServiceProviderDTO(sp));
-        }
-
-        return serviceProviderDTOS;
-    }
 
     /**
      * Finds service providers by the description of a health service and the city name.

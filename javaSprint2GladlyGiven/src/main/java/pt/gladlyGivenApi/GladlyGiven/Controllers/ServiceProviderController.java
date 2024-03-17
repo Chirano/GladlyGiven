@@ -182,20 +182,15 @@ public class ServiceProviderController {
     
     /**
      * Retrieves a paginated list of all availabilities for all service providers.
-     * @param page Page number for pagination (optional, defaults to 0).
      * @param size Number of items per page (optional, defaults to 10).
+     *
      * @return ResponseEntity with a list of availabilities if found.
      */
     @GetMapping("/availabilities")
-    public ResponseEntity<List<Availability>> findAllAvailabilities(@RequestParam Optional<Integer> page,
-                                                 @RequestParam Optional<Integer> size) {
         int _page = page.orElse(0);
-        int _size = size.orElse(10);
+    public ResponseEntity<List<Availability>> findAllAvailabilities() {
 
-        Page<Availability> availabilityPage = this.serviceProviderService.findAllAvailabilities(_page, _size);
-
-        //Converter page em list.
-        List<Availability> availabilityList = PageUtils.pageToList(availabilityPage);
+        List<Availability> availabilityList = this.serviceProviderService.findAllAvailabilities();
 
         return new ResponseEntity<>(availabilityList, HttpStatus.OK);
     }
@@ -227,20 +222,6 @@ public class ServiceProviderController {
         return serviceProviderService.findAllAvailitiesByServiceProviderId(serviceProviderId);
     }
 
-    @GetMapping("/availabilities/status/{availabilityStatus}")
-    public ResponseEntity<List<Availability>> findAvailabilitiesByStatus(@PathVariable ("availabilityStatus") int availabilityStatus,
-                                                                         @RequestParam Optional<Integer> page,
-                                                                         @RequestParam Optional<Integer> size) {
-        int _page = page.orElse(0);
-        int _size = size.orElse(10);
-
-        Page<Availability> availabilityPage = this.serviceProviderService.findAvailabilitiesByStatus(availabilityStatus, _page, _size);
-
-        //Converter page em list.
-        List<Availability> availabilityList = PageUtils.pageToList(availabilityPage);
-
-        return new ResponseEntity<>(availabilityList, HttpStatus.OK);
-    }
 
     /**
      * Creates a new availability entry for a service provider.
