@@ -27,4 +27,8 @@ export class ViewServiceProviderComponent {
   toRegisterAvailability() {
     EventManagerService.OnRouteEvent.emit(RouterPaths.ViewAvailability);
   }
+
+  toReviewsList(){
+    EventManagerService.OnRouteEvent.emit(RouterPaths.ViewReviewServiceProvider);
+  }
 }

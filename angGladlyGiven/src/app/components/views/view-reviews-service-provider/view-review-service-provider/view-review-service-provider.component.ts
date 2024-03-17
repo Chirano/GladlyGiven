@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Review } from 'src/app/classes/Review';
+import { AuthService } from 'src/app/services/authentication/auth.service';
 import { ReviewService } from 'src/app/services/review/review.service';
 
 
@@ -19,6 +20,6 @@ export class ViewReviewServiceProviderComponent implements OnInit{
   }
 
   loadReviews() : void{
-    this.reviewService.getReviewsByServiceProviderId().subscribe(reviews => this.reviews = reviews)
+    this.reviewService.getReviewsByServiceProviderId(AuthService.SessionContext.userId).subscribe(reviews => this.reviews = reviews)
   }
 }

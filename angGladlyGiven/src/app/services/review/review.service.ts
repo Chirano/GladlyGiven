@@ -69,8 +69,8 @@ export class ReviewService {
    * @returns An observable of the reviews.
    */
 
-  getReviewsByServiceProviderId(): Observable<Review[]>{
-    return this.http.get<Review[]>(this.url+"/review/serviceprovider/1");
+  getReviewsByServiceProviderId(userId: number): Observable<Review[]>{
+    return this.http.get<Review[]>(this.url+"/review/serviceprovider/"+userId);
   }
 
 }
