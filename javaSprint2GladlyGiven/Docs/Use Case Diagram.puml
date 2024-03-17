@@ -18,21 +18,21 @@ usecase "UC05 - Search for a specific professional" as UC05
 usecase "UC06 - Service Provider visualizes a list of services available" as UC06
 usecase "UC07 - Refugee schedules an appointment" as UC07
 usecase "UC08 - Refugee evaluates the service provider" as UC08
-usecase "UC09 - Refugee chooses a language " as UC09
+usecase "UC09 - Refugee chooses a language" as UC09
 usecase "UC010 - Display a FAQ page" as UC010
-usecase "UC011 - User asks a question to Program Admins" as UC011
-usecase "UC012 - Service Provider Updates Offered Services " as UC012
-usecase "UC013 - Service provider registers date and time for scheduling" as UC013
+usecase "UC011 - User asks a question to administrator" as UC011
+usecase "UC012 - Service Provider updates offered services " as UC012
+usecase "UC013 - Service provider registers his availability" as UC013
 usecase "UC014 - Service Provider checks his reviews" as UC014
 usecase "UC015 - Service provider requests service-related cost support" as UC015
 usecase "UC016 - Donor makes a donation" as UC016
 usecase "UC017 - Administrator displays the donation report" as UC017
-usecase "UC018 - Service Provider Requests admin for a new service type" as UC018
+usecase "UC018 - Service Provider requests admin for a new service" as UC018
 usecase "UC019 - Refugee cancels or reschedules an appointment" as UC019
-usecase "UC020 - Donor Views a list of donations" as UC020
-usecase "UC021 - Admin Validates the request for service-related cost support " as UC021
+usecase "UC020 - Donor views a list of donations" as UC020
+usecase "UC021 - Admin validates the request for service-related cost support" as UC021
 usecase "UC022 - Service Provider views a list of his requests (cost support and new service)" as UC022
-usecase "UC023 - Admin Validates Service-Provider Requests (Category, Service)" as UC023
+usecase "UC023 - Admin validates the request for a new service" as UC023
 
 
 

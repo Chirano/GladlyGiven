@@ -8,7 +8,7 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-title UC06 - Service Provider visualize a list of services available
+title UC05 - Service Provider visualize a list of services available
 
 class ServiceProvider {
     id

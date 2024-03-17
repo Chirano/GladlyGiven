@@ -4,7 +4,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title UC08 - Refugee evaluates service provider
+title UC07 - Refugee evaluates service provider
 autonumber
 
 actor Refugee

@@ -1,0 +1,39 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title UC05 - Service Provider visualize a list of services available (SSD)
+
+autonumber
+
+actor ServiceProvider
+participant ":ServiceListUI" as ui
+participant ":ServiceController" as ctrl
+participant Repositories
+participant "serviceRepo : ServiceRepository" as serviceRepo
+
+activate ServiceProvider
+    ServiceProvider -> ui : access the system to visualize the list of services available
+    activate ui
+        ui -> ctrl** : view()
+        ui -> ctrl : displayServiceList()
+        activate ctrl
+            ctrl -> Repositories : getServiceRepository( )
+        deactivate ctrl
+        activate Repositories
+            Repositories -> Repositories : getServiceRepository( )
+            Repositories--> ctrl : serviceRepo
+        deactivate Repositories
+        activate serviceRepo
+            serviceRepo -> serviceRepo : getAllServices( )
+            serviceRepo --> ctrl : servicesList
+        deactivate serviceRepo
+        activate ctrl
+        ctrl --> ui : servicesList
+        deactivate ctrl
+        ui --> ServiceProvider : presents the list of services
+    deactivate ui
+deactivate ServiceProvider
+
+@enduml

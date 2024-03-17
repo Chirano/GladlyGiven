@@ -1,31 +1,25 @@
 @startuml
-'https://plantuml.com/sequence-diagram
-
 skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title UC08 - Refugee evaluates service provider (SSD)
+title System Sequence Diagram (SSD) - UC08  Refugee chooses a language
+
+
 
 autonumber
 
-actor Refugee
-participant ":System" as System
+actor Refugee as refugee
+participant ":System" as system
 
-activate Refugee
-    Refugee -> System : starts the evaluation process
-    activate System
-        System --> Refugee : shows the attributes used to evaluate the service provider(rating and description)
-    deactivate System
+activate refugee
+    refugee -> system : starts the process of selecting the language
+    activate system
+        system --> refugee : displays the list of the available languages
+    refugee -> system : selects a language
+    system --> refugee : translates the information according to the selected language
+    deactivate system
+deactivate refugee
 
-    Refugee -> System : fills the requested data
-    activate System
-        System --> Refugee : validates and asks for confirmation
-    deactivate System
 
-    Refugee -> System : confirms
-    activate System
-        System --> Refugee : records the information and notifies the success of the operation
-    deactivate System
-deactivate Refugee
 @enduml

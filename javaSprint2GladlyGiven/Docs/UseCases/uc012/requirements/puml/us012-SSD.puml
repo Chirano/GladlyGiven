@@ -1,0 +1,30 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - US012 - Service Provider registers date and time for scheduling
+
+autonumber
+
+actor ServiceProvider
+participant ":System" as System
+
+activate ServiceProvider
+    ServiceProvider -> System : starts the process of creating a new date and time slot in the system.
+    activate System
+        System --> ServiceProvider : shows a table with times and dates that the service provider can select to say that they are available.
+    deactivate System
+
+    ServiceProvider -> System : fills in the date and time when he is available.
+    activate System
+        System --> ServiceProvider : validates and asks for confirmation
+    deactivate System
+
+    ServiceProvider -> System : confirms
+    activate System
+        System --> ServiceProvider : records the information and notifies the success of the operation
+    deactivate System
+deactivate ServiceProvider
+
+@enduml

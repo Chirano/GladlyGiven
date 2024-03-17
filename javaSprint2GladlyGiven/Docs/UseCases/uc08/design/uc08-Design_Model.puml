@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title UC09 - Design Model - Refugee chooses a language
+title UC08 - Design Model - Refugee chooses a language
 
 actor Refugee as refugee
 participant ":RefugeeUI" as ui
@@ -15,16 +15,20 @@ activate refugee
     refugee -> ui : initiates language selection
     activate ui
         ui -> ctrl : getLanguages()
-        activate ctrl
-            ctrl -> languageService : getLanguages()
-            activate languageService
-                languageService -> languageService : retrieve languages
-                languageService --> ctrl : languages
-            deactivate languageService
-            ctrl --> ui : languages
-        deactivate ctrl
+    deactivate ui
+    activate ctrl
+        ctrl -> languageService : getLanguages()
+        activate languageService
+            languageService -> languageService : retrieve languages
+            languageService --> ctrl : languages
+        deactivate languageService
+        ctrl --> ui : languages
+    deactivate ctrl
+    activate ui
         ui --> refugee : displays language selection options
-        refugee -> ui : selects language
+    deactivate ui
+    refugee -> ui : selects language
+    activate ui
         ui -> ctrl : translatePage(language)
         activate ctrl
             ctrl -> translationService : translatePage(language)
@@ -34,11 +38,8 @@ activate refugee
             deactivate translationService
             ctrl --> ui : translated content
         deactivate ctrl
+        ui --> refugee : translated content
     deactivate ui
 deactivate refugee
-
-
-
-
 
 @enduml

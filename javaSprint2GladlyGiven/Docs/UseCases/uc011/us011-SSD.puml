@@ -3,25 +3,27 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title UC011 - System Sequence Diagram (SSD)
+title US011 - Service Provider registers offered services - System Sequence Diagram (SSD)
 
 autonumber
 
-actor SystemUser
+actor "Service Provider" as SP
 participant ":System" as System
 
-activate SystemUser
-    SystemUser -> System : starts the process of making a question
+activate SP
+    SP -> System : starts the process of register a service
     activate System
-        System --> SystemUser : request data (name, email, subject and message)
+        System --> SP :displays a list of service provider categories
     deactivate System
-
-    SystemUser -> System :fills requested data and confirm
+    SP -> System: selects a service provider category
 
     activate System
-        System --> SystemUser :displays a confirmation message and finishes the process
+        System --> SP : displays a list of services of the chosen category
     deactivate System
+    SP -> System : selects one or more services and confirm
 
-deactivate SystemUser
-
+    activate System
+        System --> SP : system records the information
+   deactivate System
+deactivate SP
 @enduml

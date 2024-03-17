@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title UC07 - Refugee evaluates service provider (SSD)
+
+autonumber
+
+actor Refugee
+participant ":System" as System
+
+activate Refugee
+    Refugee -> System : starts the evaluation process
+    activate System
+        System --> Refugee : shows the attributes used to evaluate the service provider (rating and description)
+    deactivate System
+
+    Refugee -> System : fills the requested data
+    activate System
+        System --> Refugee : validates and asks for confirmation
+    deactivate System
+
+    Refugee -> System : confirms
+    activate System
+        System --> Refugee : records the information and notifies the success of the operation
+    deactivate System
+deactivate Refugee
+@enduml

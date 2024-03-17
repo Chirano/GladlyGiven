@@ -1,0 +1,56 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+title UC07 - Refugee evaluates service provider
+
+class Refugee {
+    id
+    firstName
+    lastName
+    email
+    gender
+    photoURL
+    mainLanguage
+    mainPhoneNumber
+    protocolId
+    snsNumber
+    nationality
+    country
+}
+
+class Review {
+    reviewId
+    appointmentId
+    rating
+    description
+    date
+}
+
+class Appointment{
+    id
+    refugeeId
+    serviceProviderId
+    healthServiceId
+    appointmentDate
+    address
+    status
+    observations
+    startDate
+    startTime
+    endTime
+}
+
+Refugee "1   " - "   *" Review : makes a >
+Refugee "1   " - "   *" Appointment : has >
+Appointment "1   " - "   1" Review : has >
+
+
+
+@enduml

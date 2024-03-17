@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title Sequence Diagram (SD) - US013 - Service Provider registers date and time for scheduling
+title Sequence Diagram (SD) - US012 - Service Provider registers date and time for scheduling
 
 
 autonumber
@@ -19,9 +19,9 @@ participant "availability : Availability" as av
 activate sp
     sp -> ui : starts the process of registering a new date and time for scheduling
     activate ui
-        ui --> sp : requests data (start datetime and end datetime)
+        ui --> sp : requests data (start date, end date, start time and end time)
     deactivate ui
-    sp -> ui : fills requested data (start datetime and end datetime)
+    sp -> ui : fills requested data
     activate ui
         ui -> ctrl** : create()
         activate ctrl
@@ -30,7 +30,7 @@ activate sp
                 Repositories -> Repositories : getAvailabilityRepo( )
                 Repositories --> ctrl : availabilityRepo
             deactivate Repositories
-            ctrl --> avRepo : createAvailability(serviceProviderId, start dateTime, endDateTime)
+            ctrl -> avRepo : createAvailability(serviceProviderId, startDate, endDate, startTime, endTime)
         deactivate ctrl
         activate avRepo
             avRepo -> av** : create( )

@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title Search for a service by location and its name
+title UC04 - Search for a service by location and its name
 
 autonumber
 
@@ -12,53 +12,45 @@ participant ":SearchServiceUI" as ui
 participant ":SearchServiceController" as ctrl
 participant Repositories
 participant "serviceProviderRepo : ServiceProviderRepository" as serviceProviderRepo
-
-autonumber
-
-actor Refugee
-participant ":SearchServiceUI" as ui
-participant ":SearchServiceController" as ctrl
-participant Repositories
-participant "serviceProviderRepo : ServiceProviderRepository" as serviceProviderRepo
-
-autonumber
-
-actor Refugee
-participant ":SearchServiceUI" as ui
-participant ":SearchServiceController" as ctrl
-participant Repositories
-participant "serviceProviderRepo : ServiceProviderRepository" as serviceProviderRepo
+participant "healthServiceRepo : HealthServiceRepository" as serviceRepo
 
 activate Refugee
-
     Refugee -> ui : initiates search for a service by location and type of service
     activate ui
-        ui -> ctrl** : create()
-        ui -> ctrl : getAllServiceTypes()
+        ui --> Refugee : requests data (service description and city name)
+    deactivate ui
+    Refugee -> ui : fills requested data
+    activate ui
+        ui -> ctrl** : search(serviceDescription, cityName)
         activate ctrl
-            ctrl -> Repositories : getServiceProviderRepository()
+            ctrl -> Repositories : getHealthServiceRepository()
             activate Repositories
-                Repositories -> Repositories : serviceProviderRepository()
-                Repositories-->ctrl : serviceProviderRepo
+                Repositories -> Repositories : healthServiceRepository()
+                Repositories --> ctrl : healthServiceRepo
             deactivate Repositories
-            ctrl --> ui : provides list of all service types
+            ctrl -> serviceRepo : findServiceByServiceDescription(serviceDescription)
         deactivate ctrl
-            ui --> Refugee : shows list of all service types
-            Refugee -> ui : selects desired service type
-            ui -> Refugee : requests to input desired location
-            Refugee -> ui : provides desired location
+        activate serviceRepo
+            serviceRepo -> serviceRepo : findServiceByServiceDescription(serviceDescription)
+            serviceRepo --> ctrl : service
+        deactivate serviceRepo
         activate ctrl
-            ui -> ctrl : searchService(type, location)
-            activate serviceProviderRepo
-                serviceProviderRepo -> serviceProviderRepo : searchByTypeAndLocation(type, location)
-                serviceProviderRepo --> serviceProviderRepo : serviceProviders
-            deactivate serviceProviderRepo
-            ctrl --> ui : displays list of service providers offering the desired service in the specified location
-            ui --> Refugee : shows search results
+            ctrl -> Repositories : getServiceProviderRepo()
         deactivate ctrl
+        activate Repositories
+                Repositories -> Repositories : serviceProviderRepository()
+                Repositories --> ctrl : serviceProviderRepo
+        deactivate Repositories
+        activate ctrl
+            ctrl -> serviceProviderRepo : findServiceProviderByServiceDescriptionAndCityName(serviceDescription, cityName)
+            activate serviceProviderRepo
+                serviceProviderRepo -> serviceProviderRepo : findServiceProviderByServiceDescriptionAndCityName(serviceDescription, cityName)
+                serviceProviderRepo --> serviceProviderRepo : serviceProvidersList
+            deactivate serviceProviderRepo
+            ctrl --> ui : listOfServiceProviders
+        deactivate ctrl
+        ui --> Refugee : displays list of service providers offering the desired service in the specified location
     deactivate ui
 deactivate Refugee
-
-
 
 @enduml

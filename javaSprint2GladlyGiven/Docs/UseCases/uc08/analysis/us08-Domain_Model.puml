@@ -8,7 +8,7 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-title UC08 - Refugee evaluates service provider
+title UC08 - Refugee chooces a language
 
 class Refugee {
     id
@@ -25,32 +25,9 @@ class Refugee {
     country
 }
 
-class Review {
-    reviewId
-    appointmentId
-    rating
-    description
-    date
+class Language {
 }
 
-class Appointment{
-    id
-    refugeeId
-    serviceProviderId
-    healthServiceId
-    appointmentDate
-    address
-    status
-    observations
-    startDate
-    startTime
-    endTime
-}
-
-Refugee "1   " - "   *" Review : makes a >
-Refugee "1   " - "   *" Appointment : has >
-Appointment "1   " - "   1" Review : has >
-
-
+Refugee "1   " - "   *" Language : selects >
 
 @enduml

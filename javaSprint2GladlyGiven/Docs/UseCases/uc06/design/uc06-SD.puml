@@ -3,12 +3,13 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title UC07 - Refugee schedules an appointment
-autonumber
-actor Refugee
+title UC06 - Refugee schedules an appointment
 
+autonumber
+
+actor Refugee
 participant "ScheduleAppointmentUI" as ui
-participant "ScheduleAppointmentController" as ctrl
+participant "AppointmentController" as ctrl
 participant "Repositories"
 participant "servicesRepo : ServicesRepository" as serviceRepo
 participant "serviceProviderRepo : ServiceProvidersRepository" as serviceProvidersRepo

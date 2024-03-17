@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title UC010 -  Display a FAQ page - System Sequence Diagram (SSD)
+title UC010 - User asks a question to Administrator - System Sequence Diagram (SSD)
 
 autonumber
 
@@ -11,10 +11,17 @@ actor SystemUser
 participant ":System" as System
 
 activate SystemUser
-    SystemUser -> System : select FAQ page
+    SystemUser -> System : starts the process of making a question
     activate System
-        System --> SystemUser : shows a list of frequently asked questions
+        System --> SystemUser : request data (name, email, subject and message)
     deactivate System
+
+    SystemUser -> System :fills requested data and confirm
+
+    activate System
+        System --> SystemUser :displays a confirmation message and finishes the process
+    deactivate System
+
 deactivate SystemUser
 
 @enduml

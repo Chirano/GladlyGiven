@@ -1,0 +1,19 @@
+@startuml
+
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title UC05 - Service Provider visualize a list of services available (SSD)
+
+autonumber
+
+actor ServiceProvider
+participant ":System" as System
+
+activate ServiceProvider
+    ServiceProvider -> System : starts the process of looking for all the services available
+    activate System
+        System --> ServiceProvider : shows all the services available
+    deactivate System
+@enduml
