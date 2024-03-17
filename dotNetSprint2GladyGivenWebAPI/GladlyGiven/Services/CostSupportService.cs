@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Author: Lia Araruna
+
+using System;
 using GladlyGiven.Exceptions;
 using GladlyGiven.Models;
 using GladyGivenWebAPI.Data;
@@ -7,10 +9,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GladlyGiven.Services
 {
-   public class CostSupportService
+    /// <summary>
+    /// Service class responsible for managing cost supports.
+    /// </summary>
+    public class CostSupportService
    {
        private readonly ApplicationContextDb context;
 
+       /// <summary>
+       /// Initializes a new instance of the <see cref="CostSupportService"/> class.
+       /// </summary>
+       /// <param name="context">The application database context.</param>
        public CostSupportService(ApplicationContextDb context)
        {
            this.context = context;
@@ -181,6 +190,12 @@ namespace GladlyGiven.Services
             return dTO;
         }
 
+        /// <summary>
+        /// Creates a cost support payment record.
+        /// </summary>
+        /// <param name="costSupportDTO">The cost support DTO containing information about the cost support.</param>
+        /// <param name="date">The date of the payment.</param>
+        /// <returns>The created cost support payment record.</returns>
         public async Task<CostSupportPayment> createCostSupportPayment(CostSupportDTO costSupportDTO, string date)
         {
             var costSupport = await context.CostSupports.FirstOrDefaultAsync(cs => cs.Id == costSupportDTO.Id);
@@ -203,6 +218,11 @@ namespace GladlyGiven.Services
                 return payment;
         }
 
+        /// <summary>
+        /// Rejects a cost support request.
+        /// </summary>
+        /// <param name="id">The ID of the cost support to be rejected.</param>
+        /// <returns>The rejected cost support object.</returns>
         public async Task<CostSupport> RejectCostSupport(int id)
         {
             var costsupport = await context.CostSupports.FirstOrDefaultAsync(c => c.Id == id);

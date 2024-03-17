@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Author: Lia Araruna and Clarissa Chirano
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,22 +28,18 @@ namespace GladlyGiven.Controllers
         /// <summary>
         /// Retrieves a paginated list of all cost support records.
         /// </summary>
-        /// <param name="page">The page number (one-based) of the result set to retrieve (default is 1).</param>
-        /// <param name="pageSize">The number of elements per page (default is 5).</param>
         /// <returns>
         /// Returns an ActionResult<IEnumerable<CostSupportDTO>> representing the HTTP response.
-        /// If cost supports are found, it returns a response with HTTP 200 (OK) status code and the paginated list of cost supports.
+        /// If cost supports are found, it returns a response with HTTP 200 (OK) status code and the list of cost supports.
         /// If no cost supports are found, it returns a response with HTTP 204 (No Content) status code.
         /// </returns>
         [HttpGet("/costsupports")]
-        public async Task<ActionResult<IEnumerable<CostSupportDTO>>> GetAllCostSupports(int page = 1, int pageSize = 5)
+        public async Task<ActionResult<IEnumerable<CostSupportDTO>>> GetAllCostSupports()
         {
             List<CostSupportDTO> costSupports = await costSupportService.FindAllCostSupports();
 
             if (costSupports != null && costSupports.Count > 0)
-                return Ok(costSupports.Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .ToList());
+                return Ok(costSupports);
 
             return NoContent();
         }
@@ -50,22 +48,18 @@ namespace GladlyGiven.Controllers
         /// Retrieves a paginated list of cost supports associated with a specific user based on their <paramref name="userId"/>.
         /// </summary>
         /// <param name="userId">The unique identifier of the user for whom cost supports are to be retrieved.</param>
-        /// <param name="page">The page number (one-based) of the result set to retrieve (default is 1).</param>
-        /// <param name="pageSize">The number of elements per page (default is 5).</param>
         /// <returns>
         /// Returns an ActionResult<IEnumerable<CostSupportDTO>> representing the HTTP response.
-        /// If cost supports are found, it returns a response with HTTP 200 (OK) status code and the paginated list of cost supports.
+        /// If cost supports are found, it returns a response with HTTP 200 (OK) status code and the list of cost supports.
         /// If no cost supports are found, it returns a response with HTTP 204 (No Content) status code.
         /// </returns>
         [HttpGet("mycostsupports/{userId}")]
-        public async Task<ActionResult<IEnumerable<CostSupportDTO>>> GetAllCostSupportsByUserId(int userId, int page = 1, int pageSize = 5)
+        public async Task<ActionResult<IEnumerable<CostSupportDTO>>> GetAllCostSupportsByUserId(int userId)
         {
             List<CostSupportDTO> costSupports = await costSupportService.FindAllCostSupportsByUserId(userId);
 
             if (costSupports != null && costSupports.Count > 0)
-                return Ok(costSupports.Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .ToList());
+                return Ok(costSupports);
 
             return NoContent();
         }
@@ -74,22 +68,18 @@ namespace GladlyGiven.Controllers
         /// Retrieves a paginated list of cost supports with the specified <paramref name="costSupportStatus"/>.
         /// </summary>
         /// <param name="costSupportStatus">The status of the cost supports to be retrieved.</param>
-        /// <param name="page">The page number (one-based) of the result set to retrieve (default is 1).</param>
-        /// <param name="pageSize">The number of elements per page (default is 5).</param>
         /// <returns>
         /// Returns an ActionResult<IEnumerable<CostSupportDTO>> representing the HTTP response.
-        /// If cost supports are found, it returns a response with HTTP 200 (OK) status code and the paginated list of cost supports.
+        /// If cost supports are found, it returns a response with HTTP 200 (OK) status code and the list of cost supports.
         /// If no cost supports are found, it returns a response with HTTP 204 (No Content) status code.
         /// </returns>
         [HttpGet("status/{costSupportStatus}")]
-        public async Task<ActionResult<IEnumerable<CostSupportDTO>>> GetAllCostSupportsByStatus(int costSupportStatus, int page = 1, int pageSize = 5)
+        public async Task<ActionResult<IEnumerable<CostSupportDTO>>> GetAllCostSupportsByStatus(int costSupportStatus)
         {
             List<CostSupportDTO> costSupports = await costSupportService.FindAllCostSupportsByStatus(costSupportStatus);
 
             if (costSupports != null && costSupports.Count > 0)
-                return Ok(costSupports.Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .ToList());
+                return Ok(costSupports);
 
             return NoContent();
         }
@@ -163,6 +153,11 @@ namespace GladlyGiven.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Adds a payment for a cost support request.
+        /// </summary>
+        /// <param name="id">The ID of the cost support.</param>
+        /// <returns>An action result indicating success or failure of the payment process.</returns>
         [HttpPost("/costsupport/payment/{id}")]
         public async Task<ActionResult<string>> AddCostSupportPayment(int id)
         {
@@ -181,6 +176,11 @@ namespace GladlyGiven.Controllers
             return Ok(accepted);
         }
 
+        /// <summary>
+        /// Rejects a cost support request.
+        /// </summary>
+        /// <param name="id">The ID of the cost support to be rejected.</param>
+        /// <returns>An action result indicating success or failure of the rejection process.</returns>
         [HttpPut("/costsupport/reject/{id}")]
         public async Task<ActionResult<string>> RejectCostSupport(int id)
         {
