@@ -126,15 +126,24 @@ export class AuthService {
       console.log("Not mock SignIn. Trying to fetch user with email: ", signInDetails.email);
       this.http.post<any>(this.signInURL + "/" + signInDetails.email, signInDetails).subscribe({
         next: (response: any) => {
-          console.log("SignIn attempted: ", response);
+          //console.log("SignIn attempted: ", response);
   
           if (response.userId >= 1) {
             console.log("SignIn successful: ", response);
+            const context : SessionContext = {
+              email: response.email,
+              name: response.name,
+              userId: response.userId,
+              userType: AuthService.mapUserType(response.userType),
+            }
+
+            this.SetSessionContextByObject(context);
             this.RedirectToSessionContextView(AuthService.mapUserType(response.userType));
           }
           
         },
         error: (error: any) => {
+          console.log("SignIn attempted: ", signInDetails.email);
           console.error("Error during signin: ", error);
         }
       });
