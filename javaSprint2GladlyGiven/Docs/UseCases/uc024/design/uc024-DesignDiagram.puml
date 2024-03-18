@@ -1,0 +1,63 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title US024 - Service Provider manages his services
+
+autonumber
+actor Professional as prof
+participant ":ServiceRequestUI" as ui
+participant ":ServiceRequestController" as ctrl
+participant Repositories as repo
+participant "serviceCategoryRepo : ServiceCategoryRepo" as serviceCatRepo
+participant "serviceRequestRepo : ServiceRequestRepo" as serviceReqRepo
+
+
+activate prof
+    prof -> ui : start checking services
+    activate ui
+        ui -> ctrl : createServRequest()
+        activate ctrl
+            ctrl -> repo : getServCategoryRepo()
+            activate repo
+                repo -> repo : getServCategoryRepo()
+                repo --> ctrl : serviceCategoryRepo
+            deactivate repo
+            ctrl -> serviceCatRepo : getAllServicesCategoryByName()
+            activate serviceCatRepo
+                serviceCatRepo -> serviceCatRepo : getAllServicesCategoryByName()
+                serviceCatRepo --> ctrl : servicesCategoryList
+            deactivate serviceCatRepo
+            ctrl --> ui : servicesCategoryList
+        deactivate ctrl
+        ui --> prof : shows a list of services category and request data
+    deactivate ui
+    prof -> ui : chooses a category
+    activate ui
+        ui -> ctrl : createServiceRequest(category)
+        activate ctrl
+            ctrl -> serviceReqRepo : createServiceRequest(category)
+            activate serviceReqRepo
+                serviceReqRepo -> serviceReqRepo : serviceList(category)
+                serviceReqRepo --> ctrl : servicesList
+            deactivate serviceReqRepo
+            ctrl --> ui : servicesList
+        deactivate ctrl
+        ui --> prof : displays services list
+    deactivate ui
+    prof -> ui : chooses a service to add to his list
+    activate ui
+        ui -> ctrl : addService(service)
+        activate ctrl
+            ctrl -> serviceReqRepo : addService(service)
+            activate serviceReqRepo
+                serviceReqRepo -> serviceReqRepo : add(service)
+                serviceReqRepo --> ctrl : success
+            deactivate serviceReqRepo
+            ctrl --> ui : success
+        deactivate ctrl
+        ui --> prof : records the information and notifies the success of the operation
+    deactivate ui
+deactivate prof
+@enduml

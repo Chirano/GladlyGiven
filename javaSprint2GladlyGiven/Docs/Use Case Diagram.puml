@@ -33,6 +33,7 @@ usecase "UC020 - Admin validates the request for service-related cost support" a
 usecase "UC021 - Service Provider views a list of his cost support requests" as UC021
 usecase "UC022 - Service Provider views a list of hisnew service inclusion requests" as UC022
 usecase "UC023 - Admin validates the request for a new service" as UC023
+usecase "UC024 - Service Provider adds or deletes services from his list" as UC024
 
 
 
@@ -60,5 +61,6 @@ Adm -down-> UC020
 Pro -down-> UC021
 Pro -down-> UC022
 Adm -down-> UC023
+Pro -down-> UC024
 
 @enduml

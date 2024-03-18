@@ -7,24 +7,19 @@ title US016 - Administrator displays the donation report
 
 autonumber
 
-actor Professional
+actor UserSystem
 participant ":System" as System
 
-activate Professional
-    Professional -> System : starts the process of requesting a receiving report.
+activate UserSystem
+    UserSystem -> System : request home page
     activate System
-        System --> Professional : asks for the options to filter and classify the data received based on different criteria, such as the date or type of service the professional wants to see.
+        System --> UserSystem : displays donation amount, total donors and appointments registered
     deactivate System
 
-    Professional -> System : fills different criteria available.
+    UserSystem -> System : produces some action that implies in updates report (donations, appointments)
     activate System
-        System --> Professional : validates and asks for confirmation
+        System --> UserSystem : updates data and displays in home page
     deactivate System
-
-    Professional -> System : confirms
-    activate System
-        System --> Professional : shows the report for the selected criteria
-    deactivate System
-deactivate Professional
+deactivate UserSystem
 
 @enduml

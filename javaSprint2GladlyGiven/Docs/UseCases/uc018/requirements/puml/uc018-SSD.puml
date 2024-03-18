@@ -15,14 +15,12 @@ participant ":System" as system
 activate refugee
     refugee -> system : starts the process of canceling or rescheduling the appointment
     activate system
-        system --> refugee : requests data
-        refugee -> system : fills the requested data (cancellation or rescheduling)
-        system --> refugee : requests more data
-        refugee -> system : fills the requested data (appointment date and time)
-        system --> refugee : validates and asks for confirmation
-        refugee -> system : confirms
-        system --> refugee : records the information and notifies the success of operation
-    deactivate system
+             system --> refugee : requests data (refugee id)
+             refugee -> system : fills the requested data
+             system --> refugee : shows appointments list
+             refugee -> system : selects appointment to cancel
+             system --> refugee : shows appointment with canceled status and finishes the process
+             deactivate system
 deactivate refugee
 
 

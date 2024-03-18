@@ -8,53 +8,36 @@ title Sequence Diagram (SD) - US013 - Service Provider checks his reviews
 
 autonumber
 
-actor Professional
-participant ":CreateSlotDateTimeUI" as ui
-participant ":CreateSlotDateTimeController" as ctrl
-participant Repositoriesx
-participant "slotDataTimeRepo : SlotDataTimeRepository" as SlotDataTimeRepo
+actor ServiceProvider
+participant ":ServiceProviderReviewsUI" as ui
+participant ":ServiceProviderReviewsController" as ctrl
+participant Repositories
+participant "reviewRepo : reviewRepository" as reviewRepo
 
 
-activate Professional
-
-    Professional -> ui : starts the process of requesting a reviews report.
+activate ServiceProvider
+    ServiceProvider -> ui : starts the process of requesting reviews.
     activate ui
-        ui -> ctrl** : create()
-        ui -> ctrl : GetCalendarDateTime()
+        ui --> ServiceProvider : requests data (service provider id).
+    deactivate ui
+    ServiceProvider -> ui : fills request data (service provider id)
+    activate ui
+        ui -> ctrl : getReviewByServiceProviderId(id)
         activate ctrl
-                        ctrl --> ui : CalendarDateTimeList
+            ctrl -> Repositories : getReviewsRepository()
+                activate Repositories
+                    Repositories -> Repositories : reviewsRepo()
+                    Repositories --> ctrl : reviewRepo
+                deactivate Repositories
+            ctrl -> reviewRepo : getReviewByServiceProviderId(id)
+                activate reviewRepo
+                reviewRepo -> reviewRepo : getReviewByServiceProviderId(id)
+                reviewRepo --> ctrl : reviewsList
+                deactivate reviewRepo
+            ctrl --> ui : reviewsList
             deactivate ctrl
-            ui --> Professional : shows the Vaccine Technologies available and requests data
+        ui --> ServiceProvider : displays list of all service provider reviews
     deactivate ui
-
-    Professional -> ui : fills in the date and time when he is available.
-    activate ui
-        ui -> ctrl : createSlotDataTime(idSlotDateTime, dateSlotAvailable, timeSlotAvailable, idProfAvailable, typeServiceProfAvailable)
-        activate ctrl
-            ctrl -> Repositories : create()
-            activate Repositories
-                Repositories -> Repositories : localValidation()
-                Repositories --> ctrl : SlotDataTime
-            deactivate Repositories
-            ctrl --> ui : SlotDataTime
-        deactivate ctrl
-        ui --> Professional : validates and asks for confirmation
-    deactivate ui
-
-    Professional -> ui : confirms
-    activate ui
-        ui -> ctrl : save()
-        activate ctrl
-            ctrl -> SlotDataTimeRepo : save(SlotDataTime)
-            activate SlotDataTimeRepo
-                SlotDataTimeRepo -> SlotDataTimeRepo : globalValidation(SlotDataTime)
-                SlotDataTimeRepo -> SlotDataTimeRepo : add(SlotDataTime)
-                SlotDataTimeRepo --> ctrl : success
-            deactivate SlotDataTimeRepo
-            ctrl --> ui : success
-        deactivate ctrl
-        ui --> Professional : Shows reports with the information and notifies the success of the operation
-    deactivate ui
-deactivate Professional
+deactivate ServiceProvider
 
 @enduml

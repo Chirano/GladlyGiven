@@ -1,0 +1,63 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+title US018 - Service Provider checks his reviews
+
+class Appointment {
+    Id
+    Date
+    Time
+    Place
+    Status
+}
+
+class Review {
+    Id
+    Rating
+    Description
+    Date
+}
+
+class Refugee {
+    Refugee Number Protocol
+    First Name
+    Last Name
+    Address
+    Email
+    Phone Number
+    Nationality
+    Country of Origin
+    Main Language
+    Second language
+}
+
+class ServiceProvider{
+    id:
+    firstName:
+     lastName:
+     email:
+    gender:
+    photoURL:
+    mainLanguage:
+    mainPhoneNumber:
+    nif:
+    paymentInfoId:
+    invoiceInfoId:
+    licenseNumber:
+    reviewAverage:
+    address
+}
+
+
+Appointment "1   " -- "*" Refugee : has a >
+Appointment " * " - "*" ServiceProvider : has a >
+Appointment " *   " - "   1" Review : receives a >
+Refugee "*  " - " * "Review : creates a >
+@enduml

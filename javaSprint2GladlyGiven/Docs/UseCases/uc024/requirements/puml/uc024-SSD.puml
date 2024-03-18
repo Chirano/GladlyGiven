@@ -1,0 +1,23 @@
+@startuml
+title US024 - Service Provider Manage Services
+actor UserSystem
+participant ":System" as System
+
+actor UserSystem
+participant ":System" as System
+
+activate UserSystem
+    UserSystem -> System : start checking services
+    activate System
+        System --> UserSystem : display all services and options to add/remove
+    deactivate System
+
+    UserSystem -> System : choose service to add/remove
+    activate System
+        System --> UserSystem : validates and saves the information
+    deactivate System
+deactivate UserSystem
+
+
+
+@enduml

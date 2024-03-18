@@ -17,9 +17,9 @@ participant "appointment : Appointment" as app
 activate refugee
     refugee -> ui : starts the process of canceling/rescheduling an appointment
     activate ui
-        ui --> refugee : requests data
+        ui --> refugee : requests data(refugee id)
     deactivate ui
-    refugee -> ui : fills requested data (date)
+    refugee -> ui : fills requested data
     activate ui
         ui -> ctrl : getAppointmentsRepo( )
         activate ctrl
@@ -28,16 +28,16 @@ activate refugee
                 repo -> repo : appointmentRepo( )
                 repo --> ctrl : appointmentRepo
             deactivate repo
-            ctrl -> appRepo : getAllAppointmentsByDate(date)
+            ctrl -> appRepo : getAllAppointmentsByDRefugeeId(id)
             activate appRepo
                 appRepo -> appRepo : getAllAppointmentsByDate(date)
                 appRepo --> ctrl : appointmentList
             deactivate appRepo
             ctrl --> ui : appointmentList
         deactivate ctrl
-        ui --> refugee : shows the list of appointments for the date
+        ui --> refugee : shows appointments list
     deactivate ui
-    refugee -> ui : selects the chosen appointment
+    refugee -> ui : chooses an appointment to cancel
     activate ui
         ui -> ctrl : getAppointmentById(id)
         activate ctrl
@@ -46,15 +46,7 @@ activate refugee
                 appRepo -> appRepo : getAppointmentById(id)
                 appRepo --> ctrl : appointment
             deactivate appRepo
-            ctrl --> ui : appointment
-        deactivate ctrl
-        ui --> refugee : shows the selected appointment and asks for the action: cancel or reschedule
-    deactivate ui
-    refugee -> ui : selects the chosen option
-    activate ui
-        ui -> ctrl : updateAppointmentStatus(appointment)
-        activate ctrl
-            ctrl -> appRepo : updateStatus(appointment)
+            ctrl -> appRepo : updateStatus(canceled)
             activate appRepo
                 appRepo -> app** : updateStatus( )
                 activate app
@@ -65,20 +57,7 @@ activate refugee
             deactivate appRepo
             ctrl --> ui : updatedAppointment
         deactivate ctrl
-        ui --> refugee : updatedAppointment and asks for confirmation
-    deactivate ui
-    refugee -> ui : confirms
-    activate ui
-        ui -> ctrl : save(updatedAppointment)
-        activate ctrl
-            ctrl -> appRepo : save(updatedAppointment)
-            activate appRepo
-                appRepo -> appRepo : save(updatedAppointment)
-                appRepo --> ctrl : success
-            deactivate appRepo
-            ctrl --> ui : success
-        deactivate ctrl
-        ui --> refugee : records the information and notifies the success of the operation
+         ui --> refugee : displays appointment with canceled status
     deactivate ui
 deactivate refugee
 

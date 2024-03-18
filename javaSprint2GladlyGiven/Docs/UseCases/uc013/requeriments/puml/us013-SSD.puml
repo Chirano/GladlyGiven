@@ -13,15 +13,11 @@ participant ":System" as System
 activate ServiceProvider
     ServiceProvider -> System : starts the process of requesting a reviews report.
     activate System
-        System --> ServiceProvider : asks for the options to filter and sort reviews based on different criteria, such as date, rating, or type of service of the reviews the professional wants to see.
+        System --> ServiceProvider : requests data (service provider id).
     deactivate System
-    ServiceProvider -> System : fills different criteria available
+    ServiceProvider -> System : fills request data (service provider id)
     activate System
-        System --> ServiceProvider : validates and asks for confirmation
-    deactivate System
-    ServiceProvider -> System : confirms
-    activate System
-        System --> ServiceProvider : Shows reports with the information and notifies the success of the operation
+        System --> ServiceProvider : displays a list with all reviews
     deactivate System
 deactivate ServiceProvider
 
